@@ -23,9 +23,9 @@ function browsersync() {
 //Обрабатываем скрипты
 function scripts() {
 	return src([ //Берем файлы из источников 
-		'src/js/app.js'  //Пользовательские скрипты
+		'src/front/js/app.js'  //Пользовательские скрипты
 	])
-	.pipe(concat('app.min.js'))  //Конкатенируем в один файл
+	.pipe(concat('index.min.js'))  //Конкатенируем в один файл
 	.pipe(uglify())  //Сжимаем JS
 	.pipe(dest('src/js/')) //Выгружаем готовый файл в папку назначения
 	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
@@ -34,12 +34,12 @@ function scripts() {
 
 //Обрабатываем стили
 function styles() {
-	return src('src/scss/main.scss')
+	return src('src/front/styles/**/*.scss')
 	.pipe(sass())
-	.pipe(concat('app.min.css'))
+	.pipe(concat('style.min.css'))
 	.pipe(autoprefixer({ overrideBrowserslist: ['last 10 versions'], grid: true }))
 	.pipe(cleancss(( { level: { 1: {specialComments: 0} } } )))
-	.pipe(dest('src/css/'))
+	.pipe(dest('src/front/css/'))
 	.pipe(browserSync.stream())
 }
 
@@ -47,8 +47,8 @@ function styles() {
 //Обрабатываем изображения
 async function images() {
 	imagecomp(
-		"src/images/src/**/*", // Берём все изображения из папки источника
-		"src/images/dest/", // Выгружаем оптимизированные изображения в папку назначения
+		"src/front/images/src/**/*", // Берём все изображения из папки источника
+		"src/front/images/dest/", // Выгружаем оптимизированные изображения в папку назначения
 		{ compress_force: false, statistic: true, autoupdate: true }, false, // Настраиваем основные параметры
 		{ jpg: { engine: "mozjpeg", command: ["-quality", "75"] } }, // Сжимаем и оптимизируем изображеня
 		{ png: { engine: "pngquant", command: ["--quality=75-100", "-o"] } },
@@ -66,11 +66,11 @@ async function images() {
 //Билдим проект
 function buildcopy() {
 	return src([ // Выбираем нужные файлы
-		'src/css/**/*.min.css',
-		'src/js/**/*.min.js',
-		'src/images/dest/**/*',
-		'src/**/*.html',
-		'src/**/*.php',
+		'src/front/css/**/*.min.css',
+		'src/front/js/**/*.min.js',
+		'src/front/images/dest/**/*',
+		'src/front/**/*.html',
+		'src/front/**/*.php',
 		], { base: 'src' }) // Параметр "base" сохраняет структуру проекта при копировании
 	.pipe(dest('dist')) // Выгружаем в папку с финальной сборкой
 }
@@ -78,7 +78,7 @@ function buildcopy() {
 
 //Очищаем папку изображений
 function cleanimg() {
-	return src('src/images/dest/', {allowEmpty: true}).pipe(clean()) // Удаляем папку "app/images/dest/"
+	return src('src/front/images/dest/', {allowEmpty: true}).pipe(clean()) // Удаляем папку "app/images/dest/"
 }
 
 
@@ -90,11 +90,11 @@ function cleandist() {
 
 //Следим за изменениями
 function startwatch() {
-	watch('src/**/*.scss', styles);
-	watch(['src/**/*.js', '!src/**/*.min.js'], scripts);
-	watch('src/**/*.html').on('change', browserSync.reload);
-	watch('src/**/*.php').on('change', browserSync.reload);
-	watch('src/images/src/**/*', images);
+	watch('src/front/**/*.scss', styles);
+	watch(['src/front/**/*.js', '!src/**/*.min.js'], scripts);
+	watch('src/front/**/*.html').on('change', browserSync.reload);
+	watch('src/front/**/*.php').on('change', browserSync.reload);
+	watch('src/front/images/src/**/*', images);
 }
 
 

@@ -1,0 +1,260 @@
+body{
+	font-family: 'Montserrat', sans-serif;
+   font-style: normal;
+   font-size: 16px;
+   line-height: 24px;
+   font-weight: 400;
+	color: #FFFFFF;
+}
+
+.container{
+	margin: 0 auto;
+	max-width: 1300px;
+	padding: 0 15px;
+	box-sizing: border-box;
+}
+
+p, h1, h2, h3, ul{
+	margin: 0;
+	padding: 0;
+}
+
+a{
+	text-decoration: none;
+	color: #FFFFFF;
+}
+
+li{
+	list-style-type: none;
+}
+
+.red{
+	color: red;
+}
+
+.blue{
+	color: rgb(95, 95, 249);
+}
+
+.button{
+	color: #FFFFFF;
+	padding: 12px 0;
+	border: 2px solid rgb(65, 65, 250);
+	border-radius: 10px;
+	background-color: rgb(127, 127, 244);
+	width: 380px;
+	transition: all 0.5s ease-in-out;
+	font-size: 18px;
+	font-weight: 400;
+	text-align: center;
+	&:hover{
+		background-color:rgb(95, 95, 249);
+		cursor: pointer;
+	}
+}
+
+.logo-bmw:hover{
+	transform: scale(1.1);
+	transition: all 0.3s ease-in-out;
+}
+
+.logo-M2{
+	width: 120px;
+	height: 50px;
+}
+
+.title-pages{
+	font-size: 32px;
+	font-weight: 400;
+	letter-spacing: 12px;
+	padding-bottom: 30px;
+	text-indent: 30px;
+}
+
+img{
+	max-width: 100%;
+}
+
+
+/*---------Header start*/
+.header-blue{
+	background-color: rgb(33, 33, 53);
+}
+
+.header-blue__container{
+ 	border-bottom: none !important;
+}
+
+.header-blue__logout{
+	padding: 15px 10px;
+	background-color: rgb(33, 33, 53);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+.header{
+	position: fixed;
+	z-index: 2;
+	width: 100%;
+	top: 0;
+	left: 0;
+	font-size: 18px;
+	font-weight: 700;
+	&__container{
+		padding: 30px 0 0 0;
+		border-bottom: 1px solid #FFFFFF;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
+.header__list{
+	display: flex;
+	column-gap: 70px;
+	.header__item{
+		border-bottom: 1px solid transparent;
+		&:hover{
+			border-bottom: 1px solid aqua;
+			cursor: pointer;
+			transition: all 0.5s ease-in-out;
+			a{
+				color: aqua;
+			}
+		}
+	}
+}
+
+.header__active{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	column-gap: 30px;
+	.header__logout{
+		display: none;
+		position: absolute;
+		top: 82px;
+		z-index: 2;
+	}
+	.header__cab{
+		display: block;
+		font-size: 1.2rem;
+		padding: 16px 10px;
+		li{
+			display: block;
+			font-size: 1.2rem;
+			padding: 16px 10px;
+		}
+		i{
+			margin-right: 12px;
+		}
+		&:hover .header__logout{
+			display: block;
+			cursor: pointer;
+		}
+	}
+}
+
+.header__item:hover{
+	border-bottom: 1px solid rgb(22, 118, 118);
+	a{
+		color: aqua;
+	}
+}
+
+.header__scroll{
+	transition: all 0.5s ease-in-out;
+	background-color: rgb(33, 33, 53);
+}
+
+.header__container__scrool{
+	transition: all 0.5s ease-in-out;
+	border-bottom: none;
+}
+
+.header__logout__scroll{
+	padding: 15px 10px;
+	background-color: rgb(33, 33, 53);
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+/*-------Header end--------*/
+
+
+
+/*--------Footer start----------------*/
+.footer{
+	background-color: rgb(33, 33, 53);
+	font-weight: 700;
+	&__container{
+		flex-direction: column;
+		row-gap: 12px;
+		padding: 12px 0 8px 0;
+	}
+}
+
+.footer__container,
+.footer__content,
+.footer__author{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.footer__content{
+	border-bottom: 1px solid #FFFFFF;
+	padding-bottom: 6px;
+}
+
+.footer__items{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	column-gap: 60px;
+	.footer__item{
+		border-bottom: 1px solid transparent;
+		&:hover{
+			border-bottom: 1px solid aqua;
+			cursor: pointer;
+			transition: all 0.5s ease-in-out;
+			a{
+				color: aqua;
+			}
+		}
+	}
+}
+
+.footer__socials{
+	display: flex;
+	column-gap: 20px;
+	.social__icon{
+		font-size: 28px;
+		color:  rgb(5, 215, 215);
+		transition: all 0.5s ease-in-out;
+		&:hover{
+			color: aqua;
+			transform: scale(1.1);
+		}
+	}
+}
+
+.footer__author{
+	font-size: 14px;
+	font-weight: 300;
+	justify-content: flex-end;
+	column-gap: 20px;
+	span{
+		font-weight: 700;
+	}	
+	.author__mail{
+		color: rgb(5, 215, 215);
+		border-bottom: 1px solid transparent;
+		&:hover{
+			color: aqua;
+			border-bottom: 1px solid aqua;
+			transition: all 0.5s ease-in-out;
+		}
+	}
+}
+/*-------Footer end-------------------*/

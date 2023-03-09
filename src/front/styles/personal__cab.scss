@@ -1,0 +1,134 @@
+/*-------Personal data start--------------*/
+.personal__container{
+	padding-top: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	row-gap: 30px;
+}
+
+.personal__title{
+   font-size: 32px;
+	line-height: 36px;
+}
+
+.personal__body{
+	display: flex;
+	column-gap: 100px;
+	width: 100%;
+}
+
+.personal__image{
+	position: relative;	
+	flex: 0 0 30%;
+	min-height: 330px;
+	img{
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+}
+
+.presonal__data{
+	display: flex;
+	flex-direction: column;
+	row-gap: 12px;
+}
+
+.personal__subtitle{
+	font-size: 28px;
+   font-weight: 400;
+	font-style: italic;
+	text-decoration: underline;
+	padding-bottom: 20px;
+}
+
+.personal__data{
+	h3{
+		font-size: 18px;
+		font-weight: 700;
+	}
+	span{
+		font-size: 18px;
+	}
+}
+/*-------Personal data end----------------*/
+
+
+
+/*------Personal orders start--------------*/
+.orders__container{
+	padding-top: 80px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	row-gap: 30px;
+}
+
+.orders__body{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	row-gap: 16px;
+	width: 100%;
+}
+
+.orders__subtitle{
+	margin: auto auto auto 0;
+}
+
+.order__titles,
+.order{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+}
+
+.order__titles h2{
+	font-size: 22px;
+	width: 25%;
+}
+
+.order{
+	padding-bottom: 6px;
+	border-bottom: 1px solid grey;
+	span{
+		font-size: 20px;
+		width: 25%;
+		padding: 10px;
+	}
+}
+/*------Personal orders end---------------*/
+
+
+
+/*-------Buttons start------------*/
+.buttons__container{
+	padding: 80px 0 50px 0;
+	display: flex;
+	flex-direction: column;
+	row-gap: 16px;
+}
+
+.button__personal{
+	width: auto;
+	color: rgb(247, 91, 91);
+	border: 2px solid rgb(151, 2, 2);
+	width: 220px;
+	padding: 12px;
+	background: transparent;
+	font-weight: 700;
+	margin: auto 0 auto auto;
+	&:hover{
+		background: rgb(151, 2, 2);
+		cursor: pointer;
+	}
+}
+/*-------Buttons end--------------*/
