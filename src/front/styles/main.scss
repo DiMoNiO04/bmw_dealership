@@ -47,7 +47,7 @@ li{
 	border: 2px solid rgb(65, 65, 250);
 	border-radius: 10px;
 	background-color: rgb(127, 127, 244);
-	width: 380px;
+	max-width: 380px;
 	transition: all 0.5s ease-in-out;
 	font-size: 18px;
 	font-weight: 400;
@@ -303,9 +303,8 @@ img{
 		width: 100%;
 	}
 
-	
 	.button{
-		width: 260px;
+		max-width: 260px;
 	}
 
 	.logo-M2 {
@@ -331,6 +330,11 @@ img{
 		padding-top: 20px;
 	}
 
+	.header__active .header__logout {
+		top: 70px;
+		right: 10px;
+	}
+
 	.logo-bmw img{
 		width: 46px;
 	}
@@ -341,7 +345,7 @@ img{
   }
 
   .button{
-		width: 220px;
+		max-width: 220px;
 		padding: 8px 0;
 		font-size: 18px;
   }

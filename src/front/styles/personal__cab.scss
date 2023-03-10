@@ -132,3 +132,97 @@
 	}
 }
 /*-------Buttons end--------------*/
+
+
+
+//----------------Media queries start---------
+@media screen and (max-width: 1200px) {
+	.presonal__data{
+		width: auto;
+		row-gap: 8px;
+		margin: 0 auto;
+	}
+
+	.personal__body{
+		flex-direction: column;
+		row-gap: 40px;
+	}
+
+	.personal__image img{
+		height: 100%;
+		width: auto;
+		left: 25%;
+	}
+
+	.personal__body{
+		column-gap: 60px;
+	}
+
+	.personal__container{
+		padding-top: 130px;
+	}
+
+	.personal__title {
+    	font-size: 28px;
+   	 line-height: 32px;
+	}
+
+	.personal__subtitle {
+    	font-size: 24px;
+		padding-bottom: 12px;
+	}
+
+	.orders__container {
+		padding-top: 60px;
+	}
+
+	.order__titles h2 {
+		font-size: 18px;
+	}
+
+	.order span {
+		font-size: 16px;
+		padding: 6px;
+	}
+
+	.buttons__container {
+		padding: 50px 0 40px 0;
+	}
+
+	.button__personal {
+		width: 200px;
+		padding: 8px;
+	}
+
+	.order__titles h2 {
+		width: 20%;
+  	}
+
+	.order span{
+		width: 20%;
+	}
+}
+
+@media screen and (max-width: 500px){
+	.personal__image img {
+		height: 100%;
+		width: 100%;
+		left: 0;
+	}
+
+	.order__titles h2 {
+		font-size: 12px;
+		line-height: 12px;
+  	}
+
+	.order span {
+		font-size: 14px;
+	}
+
+	.personal__subtitle {
+		font-size: 20px;	
+	}
+}
+
+
+//----------------Media queries end----------

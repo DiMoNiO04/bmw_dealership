@@ -102,3 +102,77 @@
 	cursor: pointer;
 }
 /*--------Panel body end------------*/
+
+
+//----------Media queries start---------
+@media screen and (max-width: 1070px) {
+	.company__container {
+		padding: 180px 0 80px 0;
+	}
+
+	.company__links{
+		flex-direction: column;
+		row-gap: 40px;
+		.company__link{
+			margin: 0 auto;
+		}
+  	}
+
+	.link__title{
+		min-height: 40px;
+	}
+
+	.company__data {
+		row-gap: 12px;
+  	}
+}
+
+
+@media screen and (max-width: 600px) {
+	.company__container {
+		padding: 140px 0 70px 0;
+		row-gap: 50px;
+  }
+
+  .company__title, .shop__title {
+		font-size: 28px;
+		letter-spacing: 4px;
+		text-indent: 40px;
+		line-height: 30px;
+	}
+
+	.company__shop {
+		row-gap: 12px;
+  	}
+
+	.company__shop p,
+	.company__data p {
+		text-indent: 16px;
+		font-size: 14px;
+		line-height: 18px;
+  	}
+
+	.shop__list li{
+		font-size: 14px;
+		line-height: 18px;
+	}
+
+	.company__links{
+		row-gap: 30px;
+	}
+
+	.company__links .company__link {
+		width: 50%;
+  }
+
+  	.company__data {
+		row-gap: 8px;
+	}
+}
+
+@media screen and (max-width: 450px) {
+	.company__links .company__link {
+		width: 100%;
+  }
+}
+//----------Media queries end-----------
