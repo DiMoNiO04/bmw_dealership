@@ -24,7 +24,7 @@
 }
 
 .contact{
-	background: url('../images/dest/contacts.jpg') no-repeat center;
+	background: url('../images/dest/contacts.jpg') no-repeat right;
 }
 
 .about{
@@ -155,7 +155,8 @@
 .service__items{
 	display: flex;
 	column-gap: 60px;
-	justify-content: space-between;
+	row-gap: 30px;
+	justify-content: center;
 	flex-wrap: wrap;
 	align-items: center;
 	.service__item{
@@ -205,3 +206,146 @@
 	margin: 0 auto;
 }
 /*--------Section service end----------*/
+
+
+//------------Media queries start----------------
+@media screen and (max-width: 900px) {
+
+	.start{
+		padding: 180px 0 350px 0;
+		&__title{
+			font-size: 30px;
+			line-height: 32px;
+		}
+	}
+
+	.cars__title, .service__title{
+		font-size: 36px;
+		line-height: 36px;
+	}
+
+	.about, .contact {
+		padding: 100px 0 300px 0;
+	}
+
+	.about__title, .contact__title {
+		font-size: 24px;
+		line-height: 28px;
+  	}
+
+	.about, .contact, .service {
+		margin-top: 90px;
+  	}
+
+	.about__desc, .contact__desc, .start__desc {
+		font-size: 16px;
+  	}
+
+	.about__desc span, .contact__desc span, .start__desc span {
+		font-size: 24px;
+  	}
+}
+
+@media screen and (max-width: 768px) {
+	.start {
+		padding: 150px 0 280px 0;
+  }
+
+  .start__title {
+		font-size: 28px;
+		line-height: 26px;
+	}
+
+	.about__desc span, .contact__desc span, .start__desc span {
+		font-size: 20px;
+  	}
+
+	.cars, .about, .contact, .service {
+		margin-top: 80px;
+	}
+
+	.about, .contact {
+		padding: 90px 0 220px 0;
+  }
+}
+
+@media screen and (max-width: 600px) {
+	.start__container,
+	.about__container,
+	.contact__container{
+		flex-direction: column;
+		row-gap: 40px;
+	}
+
+	.about__desc, .contact__desc, .start__desc {
+		font-size: 20px;
+		display: block;
+		margin: auto 0 auto auto;
+  	}
+
+	.about__desc span, .contact__desc span, .start__desc span {
+		font-size: 24px;
+  	}
+
+	.start__title {
+		font-size: 24px;
+		line-height: 24px;
+  	}
+
+	.start {
+		padding: 140px 0 160px 0;
+  	}
+
+	.about, .contact {
+		padding: 80px 0 150px 0;
+  	}
+}
+
+@media screen and (max-width: 440px) {
+	.start{
+		padding: 100px 0;
+	}
+
+	.start__item{
+		flex-direction: column;
+		row-gap: 20px;
+	}
+
+	.start__title{
+		letter-spacing: 3px;
+	}
+
+	.about__desc span, .contact__desc span, .start__desc span {
+		font-size: 20px;
+  }
+
+  .about__desc, .contact__desc, .start__desc {
+		font-size: 16px;
+		letter-spacing: 2px;
+		font-weight: 900;
+	}
+
+	.about__title, .contact__title {
+		font-size: 20px;
+		line-height: 24px;
+  }
+
+  	.about, .cars, .contact, .service {
+		margin-top: 60px;
+	}
+
+	.about, .contact {
+		padding: 60px 0 70px 0;
+  }
+
+  .cars__title, .service__title {
+		font-size: 30px;
+		line-height: 30px;
+		letter-spacing: 4px;
+	}
+
+	.service__title{
+		padding: 0;
+	}
+}
+//------------Media queries end----------------

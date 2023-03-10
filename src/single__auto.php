@@ -236,7 +236,7 @@
 			</div>
 		</div>
 	</footer>
-
+	<script src="./front/js/index.min.js"></script>
 </body>
 
 </html>

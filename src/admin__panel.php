@@ -155,6 +155,7 @@
 	</footer>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
+	<script src="./front/js/index.min.js"></script>
 </body>
 
 </html>

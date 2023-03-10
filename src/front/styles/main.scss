@@ -1,3 +1,8 @@
+main{
+	background-color:  #e1e1e1;
+	color: black;
+}
+
 body{
 	font-family: 'Montserrat', sans-serif;
    font-style: normal;
@@ -258,3 +263,96 @@ img{
 	}
 }
 /*-------Footer end-------------------*/
+
+
+
+//----------Media queries start--------
+@media screen and (max-width: 900px) {
+	.header__list{
+		column-gap: 36px;
+	}
+
+	.button{
+		width: 320px;
+	}
+
+	.logo-M2 {
+		width: 110px;
+		height: 45px;
+  	}
+
+	.footer__items{
+		column-gap: 36px;
+	}
+
+	.footer__socials{
+		column-gap: 16px;
+	}
+}
+
+@media screen and (max-width: 768px) {
+	.header__container{
+		nav{
+			display: none;
+		}
+	}
+
+	.header__active{
+		flex-direction: row-reverse;
+		justify-content: space-between;
+		width: 100%;
+	}
+
+	
+	.button{
+		width: 260px;
+	}
+
+	.logo-M2 {
+		width: 100px;
+		height: 40px;
+  	}
+
+	.footer__content{
+		display: contents;
+	}
+
+	.footer__items{
+		column-gap: 44px;
+	}
+
+	.footer__socials{
+		column-gap: 24px;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.header__container{
+		padding-top: 20px;
+	}
+
+	.logo-bmw img{
+		width: 46px;
+	}
+
+	.logo-M2 {
+		width: 90px;
+		height: 30px;
+  }
+
+  .button{
+		width: 220px;
+		padding: 8px 0;
+		font-size: 18px;
+  }
+
+  .footer__items{
+		column-gap: 30px;
+		display: contents;
+	}
+}
+
+@media screen and (max-width: 440px) {
+
+}
+//---------Media queries end-----------
