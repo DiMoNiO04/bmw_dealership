@@ -1,4 +1,4 @@
-/*-------Personal data start--------------*/
+//------Personal data start--------------
 .personal__container{
 	padding-top: 150px;
 	display: flex;
@@ -56,11 +56,11 @@
 		font-size: 18px;
 	}
 }
-/*-------Personal data end----------------*/
+//-------Personal data end----------------
 
 
 
-/*------Personal orders start--------------*/
+//-----Personal orders start--------------
 .orders__container{
 	padding-top: 80px;
 	display: flex;
@@ -105,11 +105,11 @@
 		padding: 10px;
 	}
 }
-/*------Personal orders end---------------*/
+//----Personal orders end---------------
 
 
 
-/*-------Buttons start------------*/
+//-------Buttons start------------
 .buttons__container{
 	padding: 80px 0 50px 0;
 	display: flex;
@@ -131,7 +131,7 @@
 		cursor: pointer;
 	}
 }
-/*-------Buttons end--------------*/
+//-------Buttons end--------------
 
 
 
@@ -223,6 +223,4 @@
 		font-size: 20px;	
 	}
 }
-
-
 //----------------Media queries end----------

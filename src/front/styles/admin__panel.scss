@@ -1,14 +1,14 @@
-/*-------Panel start------------*/
+//-------Panel start------------
 .panel__container{
 	padding: 180px 0 100px 0;
 	display: flex;
 	column-gap: 50px;
 }
-/*------Panel end---------------*/
+//------Panel end---------------
 
 
 
-/*-------Sidebar start------------*/
+//-------Sidebar start------------
 .sidebar{
 	background: rgb(96, 96, 146);
 	height: 400px;
@@ -28,11 +28,11 @@
 		}
 	}
 }
-/*-------Sidebar end--------------*/
+//-------Sidebar end--------------
 
 
 
-/*--------Panel body start----------*/
+//--------Panel body start----------
 .panel__button{
 	background:  #198754 !important;
 	border: 2px solid green !important;
@@ -101,7 +101,7 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
-/*--------Panel body end------------*/
+//--------Panel body end------------
 
 
 //----------Media queries start--------

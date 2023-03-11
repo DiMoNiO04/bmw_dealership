@@ -1,4 +1,4 @@
-/*------Section start, about, contact----------*/
+//-----Section start, about, contact----------
 .start{
 	background: url(../images/dest/main.jpg) no-repeat center;
 	background-size: cover;
@@ -93,11 +93,11 @@
 	column-gap: 20px;
 	align-items: center;
 }
-/*--------Section start, about, contact end----------------*/
+//--------Section start, about, contact end----------------
 
 
 
-/*--------Section cars start-----------*/
+//------Section cars start-----------
 .cars{
 	margin-top: 100px;
 	color: black;
@@ -136,10 +136,10 @@
 .cars__button{
 	margin: auto 0 auto auto;
 }
-/*--------Section cars end-------------*/
+//--------Section cars end-------------
 
 
-/*--------Section service start--------*/
+//--------Section service start--------
 .service__title{
 	text-align: center;
 	color: black;
@@ -205,7 +205,7 @@
 .service__button{
 	margin: 0 auto;
 }
-/*--------Section service end----------*/
+//--------Section service end----------
 
 
 //------------Media queries start----------------
