@@ -267,6 +267,15 @@ img{
 
 
 //----------Media queries start--------
+@media screen and (max-width: 1020px) {
+	.title-pages {
+		font-size: 28px;
+		letter-spacing: 8px;
+		padding-bottom: 24px;
+	}
+}
+
+
 @media screen and (max-width: 900px) {
 	.header__list{
 		column-gap: 36px;
@@ -357,6 +366,11 @@ img{
 }
 
 @media screen and (max-width: 440px) {
-
+	.title-pages {
+		font-size: 22px;
+		letter-spacing: 4px;
+		padding-bottom: 16px;
+	}
 }
+
 //---------Media queries end-----------
