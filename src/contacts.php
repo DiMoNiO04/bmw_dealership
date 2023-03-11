@@ -158,7 +158,7 @@
 								<p>Пн-Вс: 8:00 - 20:00</p>
 							</div>
 						</div>
-						<div style="position:relative;overflow:hidden;border-radius: 20px;"><a
+						<div class="contact__map" style="position:relative;overflow:hidden;border-radius: 20px;"><a
 								href="https://yandex.by/maps/org/avtodom_bmw_mkad_ofitsialny_diler/1063235852/?utm_medium=mapframe&utm_source=maps"
 								style="color:#eee;font-size:12px;position:absolute;top:0px;">Автодом BMW МКАД Официальный
 								дилер</a><a
@@ -169,7 +169,7 @@
 								style="color:#eee;font-size:12px;position:absolute;top:28px;">Продажа автомобилей с пробегом в
 								Москве и Московской области</a><iframe
 								src="https://yandex.by/map-widget/v1/?ll=37.412433%2C55.688127&mode=search&oid=1063235852&ol=biz&z=17.02"
-								width="560" height="400" frameborder="1" allowfullscreen="true"
+								 frameborder="1" allowfullscreen="true"
 								style="position:relative;"></iframe></div>
 					</div>
 				</div>
