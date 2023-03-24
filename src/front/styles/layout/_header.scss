@@ -1,0 +1,112 @@
+//Для темного хедера
+.header-blue{
+	background-color: $backgroundHeaderFooter;
+}
+
+.header-blue__container{
+ 	border-bottom: none !important;
+}
+
+.header-blue__logout{
+	padding: 15px 10px;
+	background-color: $backgroundHeaderFooter;
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+}
+
+
+.header{
+	position: fixed;
+	z-index: 2;
+	width: 100%;
+	top: 0;
+	left: 0;
+	&__container{
+		padding-top: 30px;
+		border-bottom: 1px solid #FFFFFF;
+		@include flexContainer($justify: space-between, $items: center);
+		@media screen and (max-width: 768px) {
+			padding-top: 20px;
+			nav{
+				display: none;
+			}
+		}
+	}
+}
+
+.header__list{
+	@include flexContainer;
+	column-gap: 70px;
+	@media screen and (max-width: 900px) {
+		column-gap: 36px;
+	}
+}
+
+.header__item-link{
+	@include fontSizeWeight(18px, 500);
+	&:hover{
+		color: aqua;
+		transition: $transitionHeaderFooter;
+	}
+}
+
+.header__active{
+	@include flexContainer($justify: space-between, $items: center);
+	column-gap: 30px;
+	@media screen and (max-width: 768px) {
+		flex-direction: row-reverse;
+		justify-content: space-between;
+		width: 100%;
+	}
+}
+
+.header__logout{
+	display: none;
+	position: absolute;
+	top: 88px;
+	z-index: 2;
+	@media screen and (max-width: 768px) {
+		top: 78px;
+		right: 10px;
+	}
+}
+
+.header__cab-button{
+	@include fontSizeWeight(20px, 700);
+	background: transparent;
+	border: none;
+	color: #FFFFFF;
+	cursor: pointer;
+}
+
+.header__cab{
+	display: block;
+	padding: 16px;
+	i{
+		margin-right: 12px;
+	}
+	.header__item{
+		@include fontSizeWeight(20px, 500);
+		padding: 16px;
+		&:hover a{
+			display: block;
+			color: aqua;
+			transition: $transitionHeaderFooter;
+		}
+	}
+	&:hover .header__logout{
+		display: block;
+		background: $backgroundHeaderFooter;
+		border-radius: 10px;
+	}
+}
+
+.header__scroll{
+	transition: $transitionHeaderFooter;
+	background-color: $backgroundHeaderFooter;
+}
+
+.header__container__scrool{
+	transition: $transitionHeaderFooter;
+	border-bottom: none;
+}

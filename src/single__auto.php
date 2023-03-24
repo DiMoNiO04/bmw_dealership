@@ -147,16 +147,17 @@
 	<main>
 		<section class="single-auto">
 			<div class="single-auto__bg-fon"></div>
-			<img src="./front/images/dest/cars/I7.jpg" alt="I7">
 			<div class="container">
 				<div class="single-auto__container">
 					<div class="single-auto__desc">
-						<img src="./front/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
-						<h1 class="single-auto__title">BMW i7</h1>
+						<div class="single-auto__logo">
+							<img src="./front/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
+							<h1 class="single-auto__title">BMW i7</h1>
+						</div>
+						<button class="button button__order__auto">Оформить авто</button>
 					</div>
 					<p class="single-auto__p">С удовольствием за рулем!</p>
 				</div>
-				<button class="button button__order__auto">Оформить авто</button>
 			</div>
 		</section>
 

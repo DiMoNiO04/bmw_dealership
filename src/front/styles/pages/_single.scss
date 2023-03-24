@@ -1,15 +1,7 @@
 //-------Auto start------------
 .single-auto{
-	position: relative;
-}
-
-.single-auto__bg-fon{
-	background-color:rgba(0,0,0,.2);
-	height: 99%;
-	position:absolute;
-	width:100%;
-	top:0;
-	left:0;
+	background: url('../images/dest/cars/I7.jpg') no-repeat right;
+	@include backgroundFirstSectionPage;
 }
 
 .single-auto__container{
@@ -17,18 +9,20 @@
 	align-items: center;
 	justify-content: space-between;
 	color: #ffffff;
-	position: absolute;
-	top: 25%;
-	left: 12%;
-	width: 75%;
 }
 
 .single-auto__desc{
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	column-gap: 30px;
 	position: relative;
 	z-index: 2;
+	row-gap: 30px;
+}
+
+.single-auto__logo{
+	display: flex;
+	column-gap: 20px;
 }
 
 .single-auto__title{
@@ -104,10 +98,6 @@
 
 .button__order{
 	margin: auto 0 auto auto;
-	&__auto{
-		position: absolute;
-		bottom: 10%;
-	}
 }
 
 
@@ -264,3 +254,68 @@
 	transition: all 0.3s ease-in-out;
 }
 //--------Popup end-----------
+
+
+@media screen and (max-width: 1100px) {
+
+	.popup__content{
+		width: 600px;
+	}
+
+	.order-form{
+		height: 660px;
+		overflow: scroll;
+	}
+
+	.single-auto__container{
+		flex-direction: column;
+		row-gap: 20px;
+	}
+}
+
+@media screen and (max-width: 900px) {
+
+	.single-auto__desc{
+		z-index: 1;
+	}
+}
+
+@media screen and (max-width: 660px) {
+
+	.single-auto__title{
+		font-size: 28px;
+		line-height: 32px;
+	}
+
+	.single-auto__p{
+		font-size: 16px;
+	}
+
+	.popup__content{
+		width: 400px;
+	}
+
+	.order-form{
+		height: 460px;
+	}
+
+	.order__title{
+		max-width: 320px;
+		margin: 0 auto;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	.popup__content{
+		width: 300px;
+	}
+
+	.order-form{
+		height: 340px;
+	}
+
+	.characteristic__container{
+		padding: 60px 0;
+	}
+
+}

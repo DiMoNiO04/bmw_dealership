@@ -27,10 +27,10 @@
 						<li class="header__cab">
 							<a href="#"><i class="fa-solid fa-user"></i>Кабинет</a>
 							<ul class="header__logout header-blue__logout">
-								<li class="header__item"><a href="./auth.php">Вход</a></li>
-								<li class="header__item"><a href="./reg.php">Регистрация</a></li>
-								<li class="header__item"><a href="./personal__cab-user.php">Личный кабинет</a></li>
-								<li class="header__item"><a href="./admin__panel.php">Админ панель</a></li>
+								<li class="header__item"><a class="header__item-link" href="./auth.php">Вход</a></li>
+								<li class="header__item"><a class="header__item-link" href="./reg.php">Регистрация</a></li>
+								<li class="header__item"><a class="header__item-link" href="./personal__cab-user.php">Личный кабинет</a></li>
+								<li class="header__item"><a class="header__item-link" href="./admin__panel.php">Админ панель</a></li>
 							</ul>
 						</li>
 					</ul>

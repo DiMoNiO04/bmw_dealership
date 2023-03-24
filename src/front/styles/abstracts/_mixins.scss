@@ -1,0 +1,19 @@
+@mixin backgroundFirstSectionPage($padding: $paddingFirstSectionPage) {
+	position: relative;
+	background-size: cover;
+	height: auto;
+	width: 100%;
+	padding: $paddingFirstSectionPage;
+}
+
+@mixin fontSizeWeight($size, $weight) {
+	font-size: $size;
+	font-weight: $weight;
+}
+
+@mixin flexContainer($display: flex ,$direction: row, $justify: flex-start, $items: stretch) {
+	display: $display;
+	flex-direction: $direction;
+	justify-content: $justify;
+	align-items: $items;
+}

@@ -34,7 +34,7 @@ function scripts() {
 
 //Обрабатываем стили
 function styles() {
-	return src('src/front/styles/**/*.scss')
+	return src('src/front/styles/index.scss')
 	.pipe(sass())
 	.pipe(concat('style.min.css'))
 	.pipe(autoprefixer({ overrideBrowserslist: ['last 10 versions'], grid: true }))
