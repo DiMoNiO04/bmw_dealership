@@ -4,11 +4,14 @@
 	@include sizes($width: 50%);
 	color: $black;
 	row-gap: 28px;
-	margin: 80px auto 0 auto;
+	margin: 90px auto 0 auto;
 	padding: 130px 0;
 	@media screen and (max-width: 900px) {
 		@include sizes($width: 80%);
 		padding: 100px 0;
+	}
+	@media screen and (max-width: 768px) {
+		margin-top: 80px;
 	}
 	@media screen and (max-width: 600px) {
 		@include sizes;
