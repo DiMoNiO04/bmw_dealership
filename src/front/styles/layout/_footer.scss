@@ -40,7 +40,7 @@
 	@include fontSizes(18px, 500);
 	&:hover{
 		color: aqua;
-		transition: $transitionHeaderFooter;
+		transition: $transition;
 	}
 }
 
@@ -52,7 +52,7 @@
 		color:  aqua;
 		&:hover{
 			color: #FFFFFF;
-			transition: $transitionHeaderFooter;
+			transition: $transition;
 		}
 	}
 	@media screen and (max-width: 900px) {
@@ -71,7 +71,7 @@
 		color: aqua;
 		&:hover{
 			color: #FFFFFF;
-			transition: $transitionHeaderFooter;
+			transition: $transition;
 		}
 	}
 	@media screen and (max-width: 900px) {

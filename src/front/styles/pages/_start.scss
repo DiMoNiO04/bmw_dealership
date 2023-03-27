@@ -27,7 +27,7 @@
 	@include fontSizes(36px, 700, 40px, italic);
 	letter-spacing: 8px;
 	text-transform: uppercase;
-	color: #FFFFFF;
+	color: $white;
 	@media screen and (max-width: 900px) {
 		@include fontSizes(28px, 700, 36px, italic);
 	}
@@ -83,7 +83,7 @@
 	@include fontSizes(20px, 700, $style: italic);
 	text-align: right;
 	letter-spacing: 4px;
-	color: #FFFFFF;
+	color: $white;
 	span{
 		@include fontSizes(28px, 500);
 		@media screen and (max-width: 900px) {
@@ -106,7 +106,7 @@
 	@include fontSizes(28px, 700, 28px, italic);
 	text-transform: uppercase;
 	letter-spacing: 4px;
-	color: #FFFFFF;
+	color: $white;
 	@media screen and (max-width: 900px) {
 		font-size: 24px;
 	}
@@ -125,8 +125,8 @@
 .contact__item,
 .about__item,
 .start__item{
-	column-gap: 20px;
 	@include flexContainer($items: center);
+	column-gap: 20px;
 }
 //--------Section start, about, contact end----------------
 
@@ -134,7 +134,7 @@
 
 //------Section cars start-----------
 .cars{
-	color: black;
+	color: $black;
 	&__container{
 		@include flexContainer($direction: column);
 		row-gap: 30px;
@@ -177,7 +177,7 @@
 //--------Section service start--------
 .service__title{
 	text-align: center;
-	color: black;
+	color: $black;
 	padding-bottom: 30px;
 }
 
@@ -198,19 +198,19 @@
 		}
 		&:hover{
 			transform: scale(1.1);
-			transition: all 1s ease-in-out;
+			transition: $transition;
 			cursor: pointer;
 		}
 	}
 }
 
 .service__desc{
+	@include flexContainer($direction: column);
 	position: absolute;
 	left: 5%;
 	top: 5%;
-	@include flexContainer($direction: column);
 	row-gap: 10px;
-	color: #FFFFFF;
+	color: $white;
 	span{
 		@include fontSizes(22px, 400, $style: italic);
 	}
@@ -222,9 +222,9 @@
 }
 
 .bg-fon{
-	background-color:rgba(0,0,0,.4);
-	position:absolute;
 	@include sizes($height: 98%);
+	background-color:rgba(0,0,0, 0.4);
+	position:absolute;
 	top:0;
 	left:0;
 	border-radius: 10px;

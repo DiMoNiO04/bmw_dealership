@@ -6,7 +6,6 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BMW i7</title>
-	<link rel="stylesheet" href="./front/css/normalize.min.css">
 	<link rel="stylesheet" href="./front/css/style.min.css">
 </head>
 

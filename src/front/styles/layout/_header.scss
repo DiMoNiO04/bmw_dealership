@@ -46,7 +46,7 @@
 	@include fontSizes(18px, 500);
 	&:hover{
 		color: aqua;
-		transition: $transitionHeaderFooter;
+		transition: $transition;
 	}
 }
 
@@ -91,7 +91,7 @@
 		&:hover a{
 			display: block;
 			color: aqua;
-			transition: $transitionHeaderFooter;
+			transition: $transition;
 		}
 	}
 	&:hover .header__logout{
@@ -102,11 +102,11 @@
 }
 
 .header__scroll{
-	transition: $transitionHeaderFooter;
+	transition: $transition;
 	background-color: $backgroundHeaderFooter;
 }
 
 .header__container__scrool{
-	transition: $transitionHeaderFooter;
+	transition: $transition;
 	border-bottom: none;
 }
