@@ -1,106 +1,115 @@
 //--------Auto preview start------------
 .auto__preview{
 	background: url('../images/dest/preview__autos.jpg') no-repeat center;
-	background-size: cover;
-	width: 100%;
-	height: auto;
-	padding: 210px 0 450px 0;
-	position: relative;
+	@include backgroundFirstSectionPage;
+	@media screen and (max-width: 600px) {
+		padding: 22% 0 22%;
+	}	
+	@media screen and (max-width: 440px) {
+		padding: 30% 0 10%;
+	}	
 }
 
 .auto__container{
-	display: flex;
-	flex-direction: column;
+	@include flexContainer($direction: column);
 	row-gap: 60px;
 	padding: 120px 0;
-	color: black;
+	color: $black;
+	@media screen and (max-width: 1070px) {
+		row-gap: 40px;
+		padding: 80px 0;
+	}
+	@media screen and (max-width: 768px) {
+		row-gap: 30px;
+	 	padding: 60px 0;
+	}
 }
 
 .preview__desc{
-	display: flex;
-	align-items: center;
+	@include flexContainer($items: center);
 	column-gap: 30px;
 	position: relative;
 	z-index: 2;
 }
 
 .preview__title{
-	font-weight: 600;
+	@include fontSizes(36px, 600, 40px, italic);
 	letter-spacing: 8px;
-	font-style: italic;
 	text-transform: uppercase;
-	font-size: 36px;
-	line-height: 40px;
-	color: #fff;
+	color: $white;
+	@media screen and (max-width: 1070px) {
+		@include fontSizes(28px, 600, 32px, italic);
+		letter-spacing: 5px;
+	}
+	@media screen and (max-width: 768px) {
+		@include fontSizes(18px, 600, 24px, italic);
+	}
 }
 
 .auto__bg-fon{
-	background-color:rgba(0,0,0,.4);
-	height: 100%;
-	position:absolute;
-	width:100%;
-	top:0;
-	left:0;
+	@include background-fon;
 }
-//---------Auto preview end---------
 
-
-//--------Search start-----------
 .auto__filtr{
-	border: 1px solid black;
+	border: 1px solid $black;
 	padding: 20px;
 	border-radius: 10px;
 }
 
 .form__search{
-	display: flex;
-	flex-direction: column;
+	@include flexContainer($direction: column);
 	row-gap: 20px;
 }
 
 .search__title{
-	font-size: 20px;
-	font-weight: 500;
+	@include fontSizes($size: 20px, $weight: 500, $style: italic);
 	letter-spacing: 4px;
-	font-style: italic;
 	text-decoration: underline;
+	@media screen and (max-width: 768px) {
+		font-size: 18px;
+	}
 }
 
 .search__container{
-	display: flex;
+	@include flexContainer($justify: flex-start);
 	flex-wrap: wrap;
-	justify-content: space-between;
 	column-gap: 30px;
 	row-gap: 16px;
+	@media screen and (max-width: 1070px) {
+		justify-content: flex-start;
+	}
 }
 
 .search__block{
-	display: flex;
-	flex-direction: column;
+	@include flexContainer($direction: column);
 	row-gap: 10px;
 	font-style: italic;
+	h3{
+		@media screen and (max-width: 768px) {
+			font-size: 16px;
+		}
+	}
 }
 
 .search__select{
+	@include fontSizes($size: 16px, $weight: 700, $style: italic);
 	padding: 7px 14px;
-	font-size: 16px;
-	font-weight: bold;
-	font-style: italic;
-	background: gray;
-	color: #ffffff;
+	background: $gray;
+	color: $white;
 	border-radius: 5px;
 }
 
 .search__input{
+	@include fontSizes($size: 16px, $weight: 700, $style: italic);
 	padding: 3px 6px;
 	border-radius: 5px;
-	font-size: 16px;
-	font-weight: bold;
-	font-style: italic;
+	@media screen and (max-width: 768px) {
+		font-size: 14px;
+	}
 }
 
 .button__search{
-	color: #ffffff;
+	color: $white;
 	margin: auto 0 auto auto;
 }
 
@@ -115,8 +124,7 @@
  }
  
  .custom-checkbox>span {
-	display: inline-flex;
-	align-items: center;
+	@include flexContainer($display: inline-flex, $items: center);
 	user-select: none;
  }
  
@@ -149,44 +157,51 @@
  .custom-checkbox>input:disabled+span::before {
 	background-color: #e9ecef;
  }
-//--------Search end-------------
 
+@media screen and (max-width: 768px) {
+ 	.custom-checkbox span{
+		font-size: 14px;
+	}
+}
 
-//--------Sidebar start--------
 .sidebar__list{
-	display: flex;
+	@include flexContainer;
 	flex-wrap: wrap;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid $black;
+	padding-bottom: 16px;
+	row-gap: 24px;
+	@media screen and (max-width: 768px) {
+		justify-content: space-between;
+	}
 }
 
 .sidebar__item{
+	@include fontSizes($size: 18px, $weight: 700);
 	padding: 16px;
 	border-bottom: 3px solid transparent;
-	color: black;
-	font-size: 18px;
-	font-weight: 700;
+	color: $black;
 	&:hover{
-		border-bottom: 3px solid grey;
+		border-bottom: 3px solid $gray;
 		cursor: pointer;
 	}
 	&-active{
-		border-bottom: 3px solid black;
+		border-bottom: 3px solid $black;
 		font-weight: 900;
+	}
+	@media screen and (max-width: 768px) {
+		padding: 12px;
+		font-size: 16px;
 	}
 }
 
 .button__search{
-	width: 30%;
+	@include sizes($width: 30%);
 }
-//----------Sidebar end-----------
 
-
-//---------Auto content start---------
 .auto__content, 
 .model__container,
 .model__car{
-	display: flex;
-	flex-direction: column;
+	@include flexContainer($direction: column);
 }
 
 .auto__content{
@@ -194,121 +209,39 @@
 }
 
 .model__cars{
-	display: flex;
-	justify-content: space-around;
+	@include flexContainer($justify: space-between);
 	padding-bottom: 30px;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid $gray;
 	flex-wrap: wrap;
 	row-gap: 20px;
+	@media screen and (max-width: 600px) {
+		justify-content: center;
+	}
 }
 
 .model__title{
-	font-size: 22px;
-	font-style: italic;
-	font-weight: 700;
+	@include fontSizes($size: 22px, $weight: 700, $style: italic);
 	text-decoration: underline;
+	@media screen and (max-width: 768px) {
+		font-size: 18px;
+	}
 }
 
 .model__car{
-	width: 280px;
-	color: black;
+	@include sizes($width: 280px);
+	color: $black;
 	img{
-		width: 100%;
+		@include sizes;
 	}
 	&:hover{
 		cursor: pointer;
 		img{
 			transform: scale(1.15);
 			cursor: pointer;
-			transition: all 0.3s ease-in-out;
+			transition: $transition;
 		}
 	}
 	span{
-		font-size: 16px;
-		font-style: italic;
+		@include fontSizes($size: 16px, $weight: 400, $style: italic);
 	}
 }
-//--------Auto content end-----------
-
-
-//----------Media queries start------------
-@media screen and (max-width: 1220px) {
-	.auto__preview{
-		padding: 180px 0 300px 0;
-	}
-}
-
-@media screen and (max-width: 1020px) {
-	.preview__title{
-		font-size: 28px;
-		letter-spacing: 6px;
-		line-height: 32px;
-	}
-
-	.auto__preview{
-		padding: 150px 0 260px 0;
-	}
-
-	.auto__container{
-		row-gap: 40px;
-		padding: 80px 0 ;
-	}
-}
-
-@media screen and (max-width: 680px) {
-	.preview__title {
-		font-size: 22px;
-		letter-spacing: 4px;
-		line-height: 26px;
-  	}
-
-	.auto__preview {
-		padding: 130px 0 150px 0;
- 	}
-
-	.auto__container {
-		row-gap: 30px;
-		padding: 60px 0;
-  	}
-
-	.search__title{
-		font-size: 18px;
-	}
-
-	.search__block h3{
-		font-size: 16px;
-	}
-
-	.custom-checkbox span{
-		font-size: 14px;
-	}
-
-	.search__input{
-		font-size: 14px;
-	}
-
-	.sidebar__list{
-		justify-content: space-between;
-	}
-
-	.sidebar__item{
-		padding: 12px;
-		font-size: 18px;
-	}
-
-	.model__title{
-		font-size: 18px;
-	}
-}
-
-@media screen and (max-width: 440px) {
-	.preview__title{
-		font-size: 18px;
-		line-height: 24px;
-	}
-
-	.auto__preview {
-		padding: 120px 0 120px 0;
-  }
-}
-//----------Media queries end-------------

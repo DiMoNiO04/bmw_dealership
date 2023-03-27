@@ -1,6 +1,6 @@
 .contacts__container{
 	@include flexContainer($direction: column);
-	color: black;
+	color: $black;
 	row-gap: 80px;
 	margin-top: 80px;
 	padding: 130px 0;
