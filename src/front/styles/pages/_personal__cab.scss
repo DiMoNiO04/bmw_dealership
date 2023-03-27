@@ -1,82 +1,94 @@
-//------Personal data start--------------
 .personal__container{
-	padding-top: 150px;
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	@include flexContainer(flex, column, center, center);
+	padding-top: 130px;
+	margin-top: 90px;
 	row-gap: 30px;
+	@media screen and (max-width: 1070px) {
+		padding-top: 100px;
+	}
+	@media screen and (max-width: 768px) {
+		margin-top: 80px;
+		padding-top: 80px;
+	}
 }
 
 .personal__title{
-   font-size: 32px;
-	line-height: 36px;
+	@include fontSizes(32px, 700, 36px, normal);
+	@media screen and (max-width: 1220px) {
+		@include fontSizes(28px, 700, 30px, normal);
+	}
 }
 
 .personal__body{
 	display: flex;
 	column-gap: 100px;
 	width: 100%;
+	@media screen and (max-width: 1220px) {
+		flex-direction: column;
+		row-gap: 40px;
+		column-gap: 60px;
+	}
 }
 
 .personal__image{
+	@include flexContainer($justify: center);
 	position: relative;	
 	flex: 0 0 30%;
 	min-height: 330px;
 	img{
-		width: 100%;
-		height: 100%;
+		@include sizes($height: 100%); 
 		object-fit: cover;
 		position: absolute;
-		top: 0;
-		left: 0;
+		@media screen and (max-width: 1220px) {
+			@include sizes(auto, 100%);
+		}
 	}
 }
 
 .presonal__data{
-	display: flex;
-	flex-direction: column;
+	@include flexContainer($direction: column);
 	row-gap: 12px;
+	width: auto;
+	@media screen and (max-width: 1220px) {
+		margin: 0 auto;
+	}
 }
 
 .personal__subtitle{
-	font-size: 28px;
-   font-weight: 400;
-	font-style: italic;
+	@include fontSizes(28px, 400, 36px, italic);
 	text-decoration: underline;
 	padding-bottom: 20px;
+	@media screen and (max-width: 1220px) {
+		font-size: 24px;
+		padding-bottom: 12px;
+	}
+	@media screen and (max-width: 600px) {
+		font-size: 20px;
+	}
 }
 
 .personal__data{
 	h3{
-		font-size: 18px;
-		font-weight: 700;
+		@include fontSizes($size: 18px, $weight: 700);
 	}
 	span{
-		font-size: 18px;
+		@include fontSizes($size: 18px, $weight: 400);
 	}
 }
-//-------Personal data end----------------
 
-
-
-//-----Personal orders start--------------
 .orders__container{
+	@include flexContainer(flex, column, space-between, center);
 	padding-top: 80px;
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
 	row-gap: 30px;
+	@media screen and (max-width: 1220px) {
+		padding-top: 60px;
+	}
 }
 
 .orders__body{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
+	@include flexContainer(flex, column, space-between, center);
+	@include sizes($width: 100%);
 	row-gap: 16px;
-	width: 100%;
 }
 
 .orders__subtitle{
@@ -85,142 +97,63 @@
 
 .order__titles,
 .order{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	width: 100%;
+	@include flexContainer($justify: space-between, $items: center);
+	@include sizes($width: 100%);
 }
 
 .order__titles h2{
 	font-size: 22px;
-	width: 25%;
+	@include sizes($width: 25%);
+	@media screen and (max-width: 1220px) {
+		font-size: 18px;
+		@include sizes($width: 20%);
+	}
+	@media screen and (max-width: 600px) {
+		@include fontSizes($size: 12px, $weight: 700, $line: 12px);
+	}
 }
 
 .order{
 	padding-bottom: 6px;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid $gray;
 	span{
 		font-size: 20px;
-		width: 25%;
+		@include sizes($width: 25%);
 		padding: 10px;
+		@media screen and (max-width: 1220px) {
+			font-size: 16px;
+			padding: 6px;
+			@include sizes($width: 20%);
+		}
+		@media screen and (max-width: 600px) {
+			font-size: 14px;
+		}
 	}
 }
-//----Personal orders end---------------
 
-
-
-//-------Buttons start------------
 .buttons__container{
+	@include flexContainer($direction: column);
 	padding: 80px 0 50px 0;
-	display: flex;
-	flex-direction: column;
 	row-gap: 16px;
+	@media screen and (max-width: 1220px) {
+		padding: 50px 0;
+	}
 }
 
 .button__personal{
-	width: auto;
-	color: rgb(247, 91, 91);
-	border: 2px solid rgb(151, 2, 2);
-	width: 220px;
+	@include sizes($width: 220px);
+	color: $red;
+	border: 2px solid $darkRed;
 	padding: 12px;
 	background: transparent;
 	font-weight: 700;
 	margin: auto 0 auto auto;
 	&:hover{
-		background: rgb(151, 2, 2);
+		background: $darkRed;
 		cursor: pointer;
 	}
-}
-//-------Buttons end--------------
-
-
-
-//----------------Media queries start---------
-@media screen and (max-width: 1200px) {
-	.presonal__data{
-		width: auto;
-		row-gap: 8px;
-		margin: 0 auto;
-	}
-
-	.personal__body{
-		flex-direction: column;
-		row-gap: 40px;
-	}
-
-	.personal__image img{
-		height: 100%;
-		width: auto;
-		left: 25%;
-	}
-
-	.personal__body{
-		column-gap: 60px;
-	}
-
-	.personal__container{
-		padding-top: 130px;
-	}
-
-	.personal__title {
-    	font-size: 28px;
-   	 line-height: 32px;
-	}
-
-	.personal__subtitle {
-    	font-size: 24px;
-		padding-bottom: 12px;
-	}
-
-	.orders__container {
-		padding-top: 60px;
-	}
-
-	.order__titles h2 {
-		font-size: 18px;
-	}
-
-	.order span {
-		font-size: 16px;
-		padding: 6px;
-	}
-
-	.buttons__container {
-		padding: 50px 0 40px 0;
-	}
-
-	.button__personal {
-		width: 200px;
+	@media screen and (max-width: 1220px) {
+		@include sizes($width: 190px);
 		padding: 8px;
 	}
-
-	.order__titles h2 {
-		width: 20%;
-  	}
-
-	.order span{
-		width: 20%;
-	}
 }
-
-@media screen and (max-width: 500px){
-	.personal__image img {
-		height: 100%;
-		width: 100%;
-		left: 0;
-	}
-
-	.order__titles h2 {
-		font-size: 12px;
-		line-height: 12px;
-  	}
-
-	.order span {
-		font-size: 14px;
-	}
-
-	.personal__subtitle {
-		font-size: 20px;	
-	}
-}
-//----------------Media queries end----------
