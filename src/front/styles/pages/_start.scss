@@ -19,7 +19,7 @@
 		padding: 22% 0 22%;
 	}	
 	@media screen and (max-width: 440px) {
-		padding: 22% 0 10%;
+		padding: 30% 0 10%;
 	}	
 }
 
@@ -29,7 +29,7 @@
 	text-transform: uppercase;
 	color: $white;
 	@media screen and (max-width: 900px) {
-		@include fontSizes(28px, 700, 36px, italic);
+		@include fontSizes(28px, 700, 28px, italic);
 	}
 	@media screen and (max-width: 600px) {
 		font-size: 24px;
