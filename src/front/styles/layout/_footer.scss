@@ -1,6 +1,6 @@
 .footer{
 	background-color: $backgroundHeaderFooter;
-	@include fontSizeWeight(18px, 700);
+	@include fontSizes(18px, 700);
 	&__container{
 		@include flexContainer(flex, column, space-between, center);
 		row-gap: 12px;
@@ -18,7 +18,7 @@
 	border-bottom: 1px solid #FFFFFF;
 	padding-bottom: 6px;
 	@media screen and (max-width: 900px) {
-		@include flexContainer($direction: column);
+		@include flexContainer($direction: column, $items: center);
     	row-gap: 12px;
 		padding-bottom: 12px;
 	}
@@ -37,7 +37,7 @@
 }
 
 .footer__items-link{
-	@include fontSizeWeight(18px, 500);
+	@include fontSizes(18px, 500);
 	&:hover{
 		color: aqua;
 		transition: $transitionHeaderFooter;
@@ -48,7 +48,7 @@
 	@include flexContainer;
 	column-gap: 20px;
 	&-icon{
-		@include fontSizeWeight(28px, 300);
+		@include fontSizes(28px, 300);
 		color:  aqua;
 		&:hover{
 			color: #FFFFFF;
@@ -61,11 +61,11 @@
 }
 
 .footer__author{
-	@include fontSizeWeight(14px, 300);
+	@include fontSizes(14px, 300);
 	justify-content: flex-end;
 	column-gap: 20px;
 	span{
-		@include fontSizeWeight(14px, 700);
+		@include fontSizes(14px, 700);
 	}	
 	&-mail{
 		color: aqua;

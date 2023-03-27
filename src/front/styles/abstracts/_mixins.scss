@@ -6,9 +6,11 @@
 	padding: $paddingFirstSectionPage;
 }
 
-@mixin fontSizeWeight($size, $weight) {
+@mixin fontSizes($size, $weight, $line: 130%, $style: normal) {
 	font-size: $size;
 	font-weight: $weight;
+	line-height: $line;
+	font-style: $style;
 }
 
 @mixin flexContainer($display: flex ,$direction: row, $justify: flex-start, $items: stretch) {
@@ -16,4 +18,9 @@
 	flex-direction: $direction;
 	justify-content: $justify;
 	align-items: $items;
+}
+
+@mixin sizes($width: 100%, $height: auto) {
+	width: $width;
+	height: $height;
 }

@@ -43,7 +43,7 @@
 }
 
 .header__item-link{
-	@include fontSizeWeight(18px, 500);
+	@include fontSizes(18px, 500);
 	&:hover{
 		color: aqua;
 		transition: $transitionHeaderFooter;
@@ -72,7 +72,7 @@
 }
 
 .header__cab-button{
-	@include fontSizeWeight(20px, 700);
+	@include fontSizes(20px, 700);
 	background: transparent;
 	border: none;
 	color: #FFFFFF;
@@ -86,7 +86,7 @@
 		margin-right: 12px;
 	}
 	.header__item{
-		@include fontSizeWeight(20px, 500);
+		@include fontSizes(20px, 500);
 		padding: 16px;
 		&:hover a{
 			display: block;

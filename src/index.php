@@ -110,8 +110,7 @@
 					<div class="about__newcar">
 						<div class="about__item">
 							<img src="./front/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
-							<h2 class="about__title">Подробнее узнать о компании <span class="blue">B</span><span
-									class="red">M</span><span class="blue">V</span></h2>
+							<h2 class="about__title">Подробнее о компании</h2>
 						</div>
 						<a href="./about.php" class="button" title="О нас">Подробнее</a>
 					</div>
@@ -157,7 +156,7 @@
 					<div class="contact__content">
 						<div class="contact__item">
 							<img src="./front/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
-							<h2 class="contact__title">Все контакты и связь с нами</h2>
+							<h2 class="contact__title">Контакты и связь</h2>
 						</div>
 						<a href="./contacts.php" class="button" title="Контакты">Подробнее</a>
 					</div>
