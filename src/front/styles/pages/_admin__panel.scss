@@ -146,22 +146,20 @@
 
 .panel__edit{
 	color: $darkGreen;
-	font-size: 18px;
-	@media screen and (max-width: 600px) {
-		font-size: 14px;
-	}
 }
 
 .panel__del{
-	font-size: 18px;
 	color: $red;
+}
+
+.panel__del,
+.panel_edit{
+	font-size: 18px;
 	@media screen and (max-width: 600px) {
 		font-size: 14px;
 	}
-}
-
-.panel__del:hover,
-.panel__edit:hover{
-	text-decoration: underline;
-	cursor: pointer;
+	&:hover{
+		text-decoration: underline;
+		cursor: pointer;
+	}
 }

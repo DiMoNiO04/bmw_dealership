@@ -117,25 +117,23 @@
 			<div class="header__container">
 				<nav>
 					<ul class="header__list">
-						<li class="header__item"><a href="./autos.php">Автомобили</a></li>
-						<li class="header__item"><a href="./about.php">О компании</a></li>
-						<li class="header__item"><a href="./service.php">Услуги</a></li>
-						<li class="header__item"><a href="./contacts.php">Контакты</a></li>
+						<li class="header__item"><a class="header__item-link" href="autos.php">Автомобили</a></li>
+						<li class="header__item"><a class="header__item-link" href="about.php">О компании</a></li>
+						<li class="header__item"><a class="header__item-link" href="service.php">Услуги</a></li>
+						<li class="header__item"><a class="header__item-link" href="contacts.php">Контакты</a></li>
 					</ul>
 				</nav>
 				<div class="header__active">
-					<ul>
-						<li class="header__cab">
-							<a href="#"><i class="fa-solid fa-user"></i>Кабинет</a>
-							<ul class="header__logout">
-								<li class="header__item"><a href="./auth.php">Вход</a></li>
-								<li class="header__item"><a href="./reg.php">Регистрация</a></li>
-								<li class="header__item"><a href="./personal__cab-user.php">Личный кабинет</a></li>
-								<li class="header__item"><a href="./admin__panel.php">Админ панель</a></li>
-							</ul>
-						</li>
-					</ul>
-					<a href="index.php">
+					<div class="header__cab">
+						<button class="header__cab-button" href="#"><i class="fa-solid fa-user"></i>Кабинет</button>
+						<ul class="header__logout">
+							<li class="header__item"><a class="header__logout-link" href="auth.php">Вход</a></li>
+							<li class="header__item"><a class="header__logout-link" href="reg.php">Регистрация</a></li>
+							<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
+							<li class="header__item"><a class="header__logout-link" href="admin__panel.php">Админ панель</a></li>
+						</ul>
+					</div>
+					<a href="index.php" class="logo-bmw">
 						<img src="./front/images/dest/svg/bmw_logo.svg" alt="Logo_BMW">
 					</a>
 				</div>
@@ -145,7 +143,7 @@
 
 	<main>
 		<section class="single-auto">
-			<div class="single-auto__bg-fon"></div>
+			<div class="auto__bg-fon"></div>
 			<div class="container">
 				<div class="single-auto__container">
 					<div class="single-auto__desc">
@@ -164,16 +162,16 @@
 			<div class="container">
 				<div class="characteristic__container">
 					<h2 class="characteristic__title">BMW i7</h2>
-					<div class="characteristic__content">
-						<p><strong>Модель:</strong>i7</p>
-						<p><strong>Коробка передач:</strong> Автомат</p>
-						<p><strong>Цвет:</strong> Серый</p>
-						<p><strong>Двигатель:</strong> Электрический</p>
-						<p><strong>Запас хода:</strong>до 625 км</p>
-						<p><strong>Год выпуска:</strong> 2020</p>
-						<p><strong>Стоимость:</strong> 210000 $</p>
-						<p><strong>Наличе:</strong><span class="green">есть в наличии</span></p>
-					</div>
+					<ul class="characteristic__content">
+						<li><strong>Модель:</strong>i7</li>
+						<li><strong>Коробка передач:</strong> Автомат</li>
+						<li><strong>Цвет:</strong> Серый</li>
+						<li><strong>Двигатель:</strong> Электрический</li>
+						<li><strong>Запас хода:</strong>до 625 км</li>
+						<li><strong>Год выпуска:</strong> 2020</li>
+						<li><strong>Стоимость:</strong> 210000 $</li>
+						<li><strong>Наличе:</strong><span class="green">есть в наличии</span></li>
+					</ul>
 				</div>
 				<img class="single-auto__image" src="./front/images/dest/cars/I-7.webp" alt="salon BMW i7">
 			</div>
@@ -210,32 +208,34 @@
 		<div class="container">
 			<div class="footer__container">
 				<div class="footer__content">
-					<a href="./index.php" class="footer__logo-bmw">
+					<a href="index.php" class="logo-bmw">
 						<img src="./front/images/dest/svg/bmw_logo.svg" alt="bmw-logo">
 					</a>
 					<ul class="footer__items">
-						<li class="footer__item"><a href="./autos.php">Автомобили</a></li>
-						<li class="footer__item"><a href="./about.php">О компании</a></li>
-						<li class="footer__item"><a href="./service.php">Услуги и сервис</a></li>
-						<li class="footer__item"><a href="./contacts.php">Контакты</a></li>
+						<li><a class="footer__items-link" href="./autos.php">Автомобили</a></li>
+						<li><a class="footer__items-link" href="./about.php">О компании</a></li>
+						<li><a class="footer__items-link" href="./service.php">Услуги и сервис</a></li>
+						<li><a class="footer__items-link" href="./contacts.php">Контакты</a></li>
 					</ul>
 					<div class="footer__socials">
-						<a href="https://vk.com/bmw" target="_blank" class="social__icon"><i class="fa-brands fa-vk"></i></a>
-						<a href="https://www.youtube.com/user/BMWinRussia" target="_blank" class="social__icon"><i
+						<a href="https://vk.com/bmw" target="_blank" class="footer__socials-icon"><i class="fa-brands fa-vk"></i></a>
+						<a href="https://www.youtube.com/user/BMWinRussia" target="_blank" class="footer__socials-icon"><i
 								class="fa-brands fa-youtube"></i></a>
-						<a href="https://t.me/bmw_russia_official" target="_blank" class="social__icon"><i
+						<a href="https://t.me/bmw_russia_official" target="_blank" class="footer__socials-icon"><i
 								class="fa-brands fa-telegram"></i></a>
-						<a href="https://www.tiktok.com/@bmwrussia?" target="_blank" class="social__icon"><i
+						<a href="https://www.tiktok.com/@bmwrussia?" target="_blank" class="footer__socials-icon"><i
 								class="fa-brands fa-tiktok"></i></a>
 					</div>
 				</div>
 				<div class="footer__author">
 					<p>Разработка сайта <span>© 2023</span></p>
-					<a href="mailto:dima.razumov.940@mail.ru" class="author__mail">dima.razumov.940@mail.ru</a>
+					<a href="mailto:dima.razumov.940@mail.ru" class="footer__author-mail">dima.razumov.940@mail.ru</a>
 				</div>
 			</div>
 		</div>
 	</footer>
+
+	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
 	<script src="./front/js/index.min.js"></script>
 </body>
 
