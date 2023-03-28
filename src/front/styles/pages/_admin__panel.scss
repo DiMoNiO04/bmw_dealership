@@ -1,44 +1,85 @@
-//-------Panel start------------
 .panel__container{
-	padding: 180px 0 100px 0;
-	display: flex;
+	@include flexContainer;
+	padding: 130px 0;
+	margin-top: 90px;
 	column-gap: 50px;
+	@media screen and (max-width: 1070px) {
+		padding: 100px 0;
+	}
+	@media screen and (max-width: 900px) {
+		@include flexContainer($direction: column, $items: center);
+		row-gap: 30px;
+	}
+	@media screen and (max-width: 768px) {
+		margin-top: 80px;
+		padding: 80px 0;
+	}
 }
-//------Panel end---------------
 
-
-
-//-------Sidebar start------------
 .sidebar{
-	background: rgb(96, 96, 146);
-	height: 400px;
+	@include sizes(20%, 400px);
+	background: $fiolet;
 	padding: 16px 10px;
-	width: 20%;
-	ul a{
+	@media screen and (max-width: 900px) {
+		padding: 12px 8px;
+		justify-content: center;
+		@include sizes(90%, 70px);
+	}
+	@media screen and (max-width: 768px) {
+		min-height: 110px;
+	}
+	@media screen and (max-width: 440px) {
+		min-height: 130px;
+	}
+}
+
+.sidebar__items{
+	@media screen and (max-width: 900px) {
+		@include flexContainer($justify: space-between);
+		border-bottom: none;
+	}
+	@media screen and (max-width: 768px) {
+		gap: 14px;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	li{
+		width: 100%;
+		@media screen and (max-width: 900px) {
+			width: auto;
+		}
+	}
+	a{
+		@include fontSizes($size: 18px, $weight: 700, $style: italic);
 		padding: 18px;
 		display: block;
-		border-bottom: 1px solid rgb(33, 33, 53);
-		font-size: 18px;
-		font-weight: 700;
-		font-style: italic;
+		border-bottom: 1px solid $backgroundHeaderFooter;
 		&:hover{
 			margin-left: -10px;
 			cursor: pointer;
-			transition: all 0.25s ease-in-out;
+			transition: $transition;
+			@media screen and (max-width: 900px) {
+				margin-left: 0;
+				background: $black;
+				cursor: pointer;
+				transition: all 0.25s ease-in-out;
+			}
+		}
+		@media screen and (max-width: 900px) {
+			padding: 10px;;
+		}
+		@media screen and (max-width: 768px) {
+			font-size: 16px;
 		}
 	}
 }
-//-------Sidebar end--------------
 
-
-
-//--------Panel body start----------
 .panel__button{
-	background:  #198754 !important;
-	border: 2px solid green !important;
+	background: $darkGreen !important;
+	border: 2px solid $green !important;
 	margin-bottom: 30px;
 	&:hover{
-		background: green;
+		background: $green;
 	}
 }
 
@@ -47,53 +88,76 @@
 }
 
 .panel__body{
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
+	@include flexContainer($direction: column, $justify: space-between);
+	@include sizes($width: 70%);
 	row-gap: 16px;
-	width: 70%;
+	@media screen and (max-width: 900px) {
+		@include sizes;
+	}
 }
 
 .panel__titles,
 .panel__block{
-	display: flex;
-	align-items: center;
-	width: 100%;
+	@include flexContainer($items: center);
+	@include sizes;
 }
 
 .panel__titles h2:first-child,
 .panel__block span:first-child{
-	width: 10%;
+	@include sizes($width: 10%);
 }
 
 .panel__titles h2{
+	@include sizes($width: 22%);
 	font-size: 22px;
-	width: 22%;
+	@media screen and (max-width: 768px) {
+		font-size: 18px;
+	}
+	@media screen and (max-width: 440px) {
+		font-size: 14px;
+	}
 }
 
 .panel__block{
 	padding-bottom: 6px;
-	border-bottom: 1px solid grey;
+	border-bottom: 1px solid $gray;
 	span{
+		@include sizes($width: 22%);
 		font-size: 20px;
-		width: 22%;
 		padding: 10px 0;
+		@media screen and (max-width: 768px) {
+			font-size: 16px;
+			padding: 5px 0;
+		}
+		@media screen and (max-width: 440px) {
+			font-size: 12px;
+		}
 	}
 }
 
 .panel__buttons{
 	display: flex;
 	column-gap: 20px;
+	@media screen and (max-width: 768px) {
+		row-gap: 8px;
+		flex-direction: column;
+	}
 }
 
 .panel__edit{
-	color: #198754;
+	color: $darkGreen;
 	font-size: 18px;
+	@media screen and (max-width: 600px) {
+		font-size: 14px;
+	}
 }
 
 .panel__del{
 	font-size: 18px;
-	color: red;
+	color: $red;
+	@media screen and (max-width: 600px) {
+		font-size: 14px;
+	}
 }
 
 .panel__del:hover,
@@ -101,90 +165,3 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
-//--------Panel body end------------
-
-
-//----------Media queries start--------
-@media screen and (max-width: 900px) {
-	.panel__container{
-		flex-direction: column;
-		align-items: center;
-		padding: 140px 0 80px 0;
-		row-gap: 30px;
-	}
-
-	.sidebar {
-		height: 70px;
-		padding: 12px 8px;
-		width: 90%;
-		justify-content: center;
-		ul{
-			display: flex;
-			justify-content: space-between;
-			a{
-				padding: 10px;
-				&:hover{
-					margin-left: 0;
-					background: #212135;
-					cursor: pointer;
-					transition: all 0.25s ease-in-out;
-				}
-			}
-		}
-	}
-
-	.panel__body{
-		width: 100%;
-	}
-}
-
-
-@media screen and (max-width: 768px) {
-	.sidebar{
-		min-height: 110px;
-		ul {
-			flex-wrap: wrap;
-			row-gap: 16px;
-			column-gap: 12px;
-			justify-content: center;
-			a{
-				font-size: 16px;
-			}
-		}
-	}
-
-	.panel__titles h2 {
-		font-size: 18px;
-  	}
-
-	.panel__block span {
-		font-size: 16px;
-		padding: 6px 0;
-  	}
-
-	.panel__buttons{
-		row-gap: 8px;
-		flex-direction: column;
-	}
-}
-
-@media screen and (max-width: 460px) {
-	.panel__titles h2 {
-		font-size: 14px;
-  	}
-
-	.panel__block span {
-		font-size: 12px;
-		padding: 4px 0;
-  	}
-
-	.sidebar{
-		min-height: 140px;
-	}
-
-	.sidebar ul a {
-		padding: 4px;
-		font-size: 16px;
-	}
-}
-//---------Media queries end-----------
