@@ -27,7 +27,7 @@
 		@include flexContainer($justify: space-between, $items: center);
 		@media screen and (max-width: 768px) {
 			padding-top: 20px;
-			nav{
+			.header__menu{
 				display: none;
 			}
 		}
@@ -57,6 +57,7 @@
 		flex-direction: row-reverse;
 		justify-content: space-between;
 		width: 100%;
+		align-items: flex-start;
 	}
 }
 
@@ -109,4 +110,72 @@
 .header__container__scrool{
 	transition: $transition;
 	border-bottom: none;
+}
+
+.header__burger {
+	@include sizes(30px, 24px);
+	@include flexContainer($direction: column, $justify: space-between);
+	order: -1;
+	display: none;
+	&-line {
+		display: block;
+		background-color: $white;
+		@include sizes (30px, 2px);
+		position: relative;
+		z-index: 10;
+	}
+	@media screen and (max-width: 768px) {
+		display: flex;
+	}
+}
+
+.burger__menu{
+	display: none;
+	@media screen and (max-width: 768px) {
+		width: 400px;
+		height: 500px;
+		background-color: $darkBlue;
+		border-bottom-left-radius: 10px;
+		position: absolute;
+		right: 0;
+		top: 0;
+		display: flex;
+		flex-direction: column-reverse;
+		justify-content: flex-end;
+		row-gap: 60px;
+		padding: 20px;
+	}
+	.burger__menu-nav{
+		display: block;
+		.header__list{
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			row-gap: 20px;
+		}
+		.header__item-link{
+			font-size: 22px;
+		}
+	}
+	.header__cab {
+		display: flex;
+		flex-direction: column;
+		row-gap: 12px;
+		.header__logout {
+			background-color: #212135;;
+			row-gap: 8px;
+			display: flex;
+			flex-direction: column;
+			row-gap: 4px;
+			position: relative;
+			top: 0;
+			right: 0;
+			border-radius: 10px;
+			.header__item{
+				padding: 10px;
+				font-size: 18px;
+			}
+		}
+	}
 }
