@@ -63,7 +63,7 @@
 	font-weight: 900;
 	column-gap: 30px;
 	button{
-		@include sizes($width: 40%);
+		@include sizes($width: 46%);
 		@include fontSizes($size: 16px, $weight: 900);
 		border: 2px solid black;
 		border-radius: 10px;

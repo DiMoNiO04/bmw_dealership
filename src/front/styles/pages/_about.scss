@@ -45,6 +45,7 @@
 		@include sizes($width: 30%);
 		row-gap: 12px;
 		margin: 0 auto;
+		width: 50%;
 		@media screen and (max-width: 900px) {
 			@include sizes($width: 100%);
 		}
@@ -94,7 +95,7 @@
 	text-indent: 60px;
 	line-height: 36px;
 	@media screen and (max-width: 600px) {
-		@include fontSizes($size: 24px, $weight: 400, $line: 30px);
+		@include fontSizes($size: 22px, $weight: 400, $line: 30px);
 		letter-spacing: 4px;
 		text-indent: 40px;
 	}
@@ -103,6 +104,7 @@
 .link__title{
 	@include fontSizes($size: 24px, $weight: 300, $style: italic);
 	min-height: 60px;
+	text-align: center;
 	padding-bottom: 10px;
 	border-bottom: 1px solid $black;
 	@media screen and (max-width: 1070px) {

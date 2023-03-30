@@ -20,7 +20,7 @@
 }
 
 .personal__body{
-	display: flex;
+	@include flexContainer($justify: center);
 	column-gap: 100px;
 	width: 100%;
 	@media screen and (max-width: 1220px) {

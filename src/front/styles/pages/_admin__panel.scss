@@ -18,6 +18,7 @@
 
 .sidebar{
 	@include sizes(20%, 400px);
+	@include flexContainer($items: center);
 	background: $fiolet;
 	padding: 16px 10px;
 	@media screen and (max-width: 900px) {
@@ -29,7 +30,7 @@
 		min-height: 110px;
 	}
 	@media screen and (max-width: 440px) {
-		min-height: 130px;
+		min-height: 150px;
 	}
 }
 

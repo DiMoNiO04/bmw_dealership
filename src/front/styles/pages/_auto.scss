@@ -29,7 +29,7 @@
 	@include flexContainer($items: center);
 	column-gap: 30px;
 	position: relative;
-	z-index: 2;
+	z-index: 1;
 }
 
 .preview__title{
@@ -209,7 +209,7 @@
 }
 
 .model__cars{
-	@include flexContainer($justify: space-between);
+	@include flexContainer($justify: space-around);
 	padding-bottom: 30px;
 	border-bottom: 1px solid $gray;
 	flex-wrap: wrap;
