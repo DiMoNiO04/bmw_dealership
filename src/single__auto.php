@@ -111,6 +111,7 @@
 
 	<?php include('./front/includes/header.php') ?>
 
+	<div class="dark-wrapper"></div>
 	<main>
 		<section class="single-auto">
 			<div class="auto__bg-fon"></div>

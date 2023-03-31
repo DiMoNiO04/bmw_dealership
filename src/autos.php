@@ -10,6 +10,7 @@
 	
 	<?php include('./front/includes/header.php') ?>
 
+	<div class="dark-wrapper"></div>
 	<main>
 		<section class="auto__preview">
 			<div class="container">

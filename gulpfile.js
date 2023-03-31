@@ -23,7 +23,7 @@ function browsersync() {
 //Обрабатываем скрипты
 function scripts() {
 	return src([ //Берем файлы из источников 
-		'src/front/js/**/*.js'  //Пользовательские скрипты
+		'src/front/scripts/**/*.js'  //Пользовательские скрипты
 	])
 	.pipe(concat('index.min.js'))  //Конкатенируем в один файл
 	.pipe(uglify())  //Сжимаем JS

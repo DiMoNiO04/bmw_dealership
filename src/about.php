@@ -10,6 +10,7 @@
 	
 	<?php include('./front/includes/header-blue.php') ?>
 
+	<div class="dark-wrapper"></div>
 	<main>
 		<section class="company">
 			<div class="container">

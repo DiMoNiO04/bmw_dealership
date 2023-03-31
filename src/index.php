@@ -10,6 +10,7 @@
 
 	<?php include('./front/includes/header.php') ?>
 
+	<div class="dark-wrapper"></div>
 	<main>
 		<section class="start">
 			<div class="container">

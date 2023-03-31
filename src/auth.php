@@ -10,6 +10,7 @@
 
 	<?php include('./front/includes/header-blue.php') ?>
 
+	<div class="dark-wrapper"></div>
 	<main>
 		<div class="container">
 			<form method="post" action="" class="form-auth">
