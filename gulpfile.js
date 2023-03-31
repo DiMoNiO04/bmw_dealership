@@ -21,11 +21,41 @@ function browsersync() {
 
 
 //Обрабатываем скрипты
-function scripts() {
+function jsHeader() {
 	return src([ //Берем файлы из источников 
-		'src/front/scripts/**/*.js'  //Пользовательские скрипты
+		'src/front/scripts/header.js'  //Пользовательские скрипты
 	])
-	.pipe(concat('index.min.js'))  //Конкатенируем в один файл
+	.pipe(concat('header.min.js'))  //Конкатенируем в один файл
+	.pipe(uglify())  //Сжимаем JS
+	.pipe(dest('src/front/js/')) //Выгружаем готовый файл в папку назначения
+	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
+}
+
+function jsPopup() {
+	return src([ //Берем файлы из источников 
+		'src/front/scripts/popup.js'  //Пользовательские скрипты
+	])
+	.pipe(concat('popup.min.js'))  //Конкатенируем в один файл
+	.pipe(uglify())  //Сжимаем JS
+	.pipe(dest('src/front/js/')) //Выгружаем готовый файл в папку назначения
+	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
+}
+
+function jsService() {
+	return src([ //Берем файлы из источников 
+		'src/front/scripts/service.js'  //Пользовательские скрипты
+	])
+	.pipe(concat('service.min.js'))  //Конкатенируем в один файл
+	.pipe(uglify())  //Сжимаем JS
+	.pipe(dest('src/front/js/')) //Выгружаем готовый файл в папку назначения
+	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
+}
+
+function jsSidebar() {
+	return src([ //Берем файлы из источников 
+		'src/front/scripts/sidebar.js'  //Пользовательские скрипты
+	])
+	.pipe(concat('sidebar.min.js'))  //Конкатенируем в один файл
 	.pipe(uglify())  //Сжимаем JS
 	.pipe(dest('src/front/js/')) //Выгружаем готовый файл в папку назначения
 	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
@@ -91,7 +121,10 @@ function cleandist() {
 //Следим за изменениями
 function startwatch() {
 	watch('src/front/**/*.scss', styles);
-	watch(['src/front/**/*.js', '!src/**/*.min.js'], scripts);
+	watch(['src/front/scripts/header.js', '!src/front/scripts/header.min.js'], jsHeader);
+	watch(['src/front/scripts/popup.js', '!src/front/scripts/popup.min.js'], jsPopup);
+	watch(['src/front/scripts/service.js', '!src/front/scripts/service.min.js'], jsService);
+	watch(['src/front/scripts/sidebar.js', '!src/front/scripts/sidebar.min.js'], jsSidebar);
 	watch('src/front/**/*.html').on('change', browserSync.reload);
 	watch('src/front/**/*.php').on('change', browserSync.reload);
 	watch('src/front/images/src/**/*', images);
@@ -100,12 +133,15 @@ function startwatch() {
 
 //Экспортируем функции
 exports.browsersync = browsersync;
-exports.scripts = scripts;
+exports.jsHeader = jsHeader;
+exports.jsPopup = jsPopup;
+exports.jsService = jsService;
+exports.jsSidebar = jsSidebar;
 exports.styles = styles;
 exports.images = images;
 exports.cleanimg = cleanimg;
-exports.build = series(cleandist, styles, scripts, images, buildcopy);
+exports.build = series(cleandist, styles, jsHeader, jsPopup, jsService, jsSidebar, images, buildcopy);
 
 
 //Экспортируем дефолтный таск с нужным набором функций
-exports.default = parallel(styles, scripts, browsersync, startwatch);
+exports.default = parallel(styles, jsHeader, jsPopup, jsService, jsSidebar, browsersync, startwatch);

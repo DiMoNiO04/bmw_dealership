@@ -10,12 +10,14 @@ const togglePopupDark = () => {
 	DARK_CONTAINER.classList.toggle('dark__container__noactive')
 }
 
+const isContainsPopup = () =>  event.target.classList.contains('popup');
+
 BUTTON_ORDER_MAIN.addEventListener('click', togglePopupDark);
 BUTTON_ORDER.addEventListener('click', togglePopupDark);
 CLOSE_BUTTON.addEventListener('click', togglePopupDark);
 
 POPUP.addEventListener('click', (event) => {
-	if( event.target.classList.contains('popup') ){
+	if(isContainsPopup()){
 		togglePopupDark();
 	}
 })

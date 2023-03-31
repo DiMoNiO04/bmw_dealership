@@ -1,3 +1,8 @@
+
+document.addEventListener('click', (event) => {
+	console.log(event.target.classList.value)
+})
+
 //На странице услуги и сервис изменение значков плюс и минус
 const coll = document.querySelectorAll('.services__collapsible')
 const icon = document.querySelectorAll('.fa-plus')
