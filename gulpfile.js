@@ -101,6 +101,7 @@ function buildcopy() {
 		'src/front/images/dest/**/*',
 		'src/front/**/*.html',
 		'src/front/**/*.php',
+		'src/back/**/*.php',
 		], { base: 'src' }) // Параметр "base" сохраняет структуру проекта при копировании
 	.pipe(dest('dist')) // Выгружаем в папку с финальной сборкой
 }
@@ -127,6 +128,7 @@ function startwatch() {
 	watch(['src/front/scripts/sidebar.js', '!src/front/scripts/sidebar.min.js'], jsSidebar);
 	watch('src/front/**/*.html').on('change', browserSync.reload);
 	watch('src/front/**/*.php').on('change', browserSync.reload);
+	watch('src/back/**/*.php').on('change', browserSync.reload);
 	watch('src/front/images/src/**/*', images);
 }
 
