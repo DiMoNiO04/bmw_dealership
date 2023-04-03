@@ -39,6 +39,10 @@
 			text-decoration: underline;
 		}
 	}
+	span{
+		color: $darkRed;
+		@include fontSizes($size: 18px, $weight: 400);
+	}
 }
 
 .form-auth__item,
@@ -47,6 +51,9 @@
 	row-gap: 8px;
 	label{
 		@include fontSizes($size: 20px, $weight: 600,  $style: italic);
+		span{
+			color: $darkRed;
+		}
 	}
 	input{
 		@include fontSizes($size: 16px, $weight: 700);
@@ -95,4 +102,29 @@
 			text-align: center;
 		}
 	}
+}
+
+.form-reg__block{
+	@include flexContainer($direction: column);
+	row-gap: 16px;
+	padding: 20px;
+	border: 2px solid black;
+	border-radius: 40px;
+	margin-bottom: 24px;
+	h2{
+		@include fontSizes($size: 20px, $weight: 900);
+		text-align: center;
+	}
+}
+
+.form-reg__obligatory{
+	@include fontSizes($size: 16px, $weight: 300);
+	span{
+		color: $darkRed;
+	}
+}
+
+.form-error{
+	color: $red;
+	@include fontSizes($size: 20px, $weight: 500, $style: italic);
 }

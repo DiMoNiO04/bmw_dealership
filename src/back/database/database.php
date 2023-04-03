@@ -7,6 +7,7 @@ function tt($value) {
 	echo '<pre>';
 	print_r($value);
 	echo '</pre>';
+	exit();
 }
 
 
@@ -106,6 +107,7 @@ function insert($table, $params) {
 	$query = $pdo->prepare($sql);
 	$query->execute($params);
 	dbCheckErr($query); //Проверка запроса на ошибки
+	return $pdo->lastInsertId();
 }
 
 
