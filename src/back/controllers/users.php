@@ -2,7 +2,6 @@
 include("./back/database/database.php");
 
 
-//Регистрация
 $errMsg = '';
 
 //Константы
@@ -10,7 +9,23 @@ $ACCESS = 1;
 $NO_ACCESS = 0;
 $CLIENT = 0;
 
-if($_SERVER['REQUEST_METHOD'] === 'POST') {
+//Создаем сессию для авторизации
+function userAuth($arr) {
+	$_SESSION['id'] = $arr['id'];
+	$_SESSION['login'] = $arr['login'];
+	$_SESSION['role'] = $arr['role'];
+	$_SESSION['access'] = $arr['access'];
+
+	if($_SESSION['admin']) {
+		header('location: ' . BASE_URL . admin__panel.php);
+	} else {
+		header('location: ' . BASE_URL);
+	}
+}
+
+
+//Код для формы регистрации
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 
 	//Забираем данные из формы в переменные
 	$lastName = trim($_POST['last_name']);
@@ -64,15 +79,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 			insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
 			$user = selectOne('authorization', ['id' => $id]);
 
-			$_SESSION['id'] = $user['id'];
-			$_SESSION['login'] = $user['login'];
-			$_SESSION['role'] = $user['role'];
-
-			if($_SESSION['admin']) {
-				header('location: ' . BASE_URL . admin__panel.php);
-			} else {
-				header('location: ' . BASE_URL);
-			}
+			userAuth($user); //Создаем сессию для авторизации
 		}
 	}
 } else {
@@ -80,5 +87,33 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 	$firstName = '';
 	$email = '';
 	$login = '';
+}
+
+
+//Код для формы авторизации
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
+	
+	//Забираем данные из формы в переменные
+	$email = trim($_POST['email']);
+	$password = $_POST['password'];
+
+	//Проверка валидности формы
+	if($email === '' || $password === '') {
+		$errMsg = "Не все поля заполнены!";
+	} else {
+		$existence = selectOne('authorization', ['email' => $email]);
+		
+		if($existence['access'] == 0) {
+			$errMsg = "Данный аккаунт не имеет доступа (заблокирован)!";
+		} else {
+			if($existence && password_verify($password, $existence['password'])) {
+				userAuth($existence); //Создаем сессию для авторизации
+			} else {
+				$errMsg = "Неправильный логин или пароль!";
+			}
+		}
+	}
+} else {
+	$email = '';
 }
 ?>

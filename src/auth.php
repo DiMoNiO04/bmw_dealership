@@ -1,6 +1,6 @@
 <?php 
 	include ('path.php'); 
-	include ('./back/database/database.php');
+	include("./back/controllers/users.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -21,9 +21,14 @@
 			<form method="post" action="" class="form-auth">
 				<h1 class="form-auth__title">Авторизация</h1>
 				<p class="form-auth__desc">У вас еще нет аккаунта? Вы можете зарегистрироваться <a href="./reg.php">здесь</a></p>
+				
+				<div class="form-error">
+					<p><?=$errMsg ?></p>
+				</div>
+				
 				<div class="form-auth__item">
-					<label for="email">Ваша почта (при регистрации)</label>
-					<input type="email" name="email" id="email" placeholder="Введите почту...">
+					<label for="email">Email (при регистрации)</label>
+					<input type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email...">
 				</div>
 				<div class="form-auth__item">
 					<label for="password">Пароль</label>

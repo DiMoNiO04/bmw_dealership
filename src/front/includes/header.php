@@ -17,13 +17,18 @@
 						<?php else: ?>
 							<button class="header__cab-button" href="#"><i class="fa-solid fa-user"></i>Кабинет</button>
 						<?php endif; ?>
+
 						<ul class="header__logout">
+
 							<?php if(isset($_SESSION['id'])):?>
 								<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
-								<?php if($_SESSION['admin']): ?>
+								<?php if($_SESSION['role']): ?>
 									<li class="header__item"><a class="header__logout-link" href="admin__panel.php">Админ панель</a></li>
 								<?php endif; ?>
-								<li class="header__item"><a class="header__logout-link" href="№">Выход</a></li>
+								<li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
+							<?php else: ?>
+								<li class="header__item"><a class="header__logout-link" href="auth.php">Войти</a></li>
+								<li class="header__item"><a class="header__logout-link" href="reg.php">Зарегистрироваться</a></li>
 							<?php endif; ?>
 						</ul>
 
@@ -48,19 +53,26 @@
 						</ul>
 					</nav>
 					<div class="header__cab">	
-						<?php if(isset($_SESSION['id'])):?>
+						
+					<?php if(isset($_SESSION['id'])):?>
 							<button class="header__cab-button" href="#"><i class="fa-solid fa-user"></i><?php echo $_SESSION['login']; ?></button>
 						<?php else: ?>
 							<button class="header__cab-button" href="#"><i class="fa-solid fa-user"></i>Кабинет</button>
 						<?php endif; ?>
+						
 						<ul class="header__logout">
+						
 							<?php if(isset($_SESSION['id'])):?>
 								<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
-								<?php if($_SESSION['admin']): ?>
+								<?php if($_SESSION['role']): ?>
 									<li class="header__item"><a class="header__logout-link" href="admin__panel.php">Админ панель</a></li>
 								<?php endif; ?>
-								<li class="header__item"><a class="header__logout-link" href="№">Выход</a></li>
+								<li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
+							<?php else: ?>
+								<li class="header__item"><a class="header__logout-link" href="auth.php">Войти</a></li>
+								<li class="header__item"><a class="header__logout-link" href="reg.php">Зарегистрироваться</a></li>
 							<?php endif; ?>
+						
 						</ul>
 					</div>
 				</div>
