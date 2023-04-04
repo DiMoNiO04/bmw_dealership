@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 		//Проверка на уникальность логина и email
 		$existenceLogin = selectOne('authorization', ['login' => $login]);
 		$existenceEmail = selectOne('authorization', ['email' => $email]);
-		
+
 		if($existenceLogin['login'] === $login) {
 			$errMsg = 'Пользователь с таким логином уже зарегистрирован!';
 		} elseif($existenceEmail['email'] === $email) {
@@ -62,8 +62,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 			];
 
 			insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
+			$user = selectOne('authorization', ['id' => $id]);
 
-			$errMsg = "Пользователь " . "<strong>" . $login . "</strong>" . " успешно зарегистрирован!";
+			$_SESSION['id'] = $user['id'];
+			$_SESSION['login'] = $user['login'];
+			$_SESSION['role'] = $user['role'];
+
+			if($_SESSION['admin']) {
+				header('location: ' . BASE_URL . admin__panel.php);
+			} else {
+				header('location: ' . BASE_URL);
+			}
 		}
 	}
 } else {

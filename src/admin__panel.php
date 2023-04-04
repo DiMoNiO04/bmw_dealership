@@ -1,3 +1,8 @@
+<?php 
+	include ('path.php'); 
+	include ('./back/database/database.php');
+?>
+
 <!DOCTYPE html>
 <html lang="ru">
 
