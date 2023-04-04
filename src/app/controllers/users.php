@@ -1,5 +1,5 @@
 <?php 
-include("./back/database/database.php");
+include("./app/database/database.php");
 
 
 $errMsg = '';

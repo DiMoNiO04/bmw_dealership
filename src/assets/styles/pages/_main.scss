@@ -115,11 +115,10 @@ img{
 	height: 100%;
 	position: fixed;
 	display: none;
-}
-
-.dark-wrapper-active{
-	display: block;
-	background: rgba(0,0,0,.5);
-	transition: $transition;
-	z-index: 1;
+	&.active{
+		display: block;
+		background: rgba(0,0,0,.5);
+		transition: $transition;
+		z-index: 1;
+	}
 }

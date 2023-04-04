@@ -3,7 +3,7 @@
 			<div class="footer__container">
 				<div class="footer__content">
 					<a href="index.php" class="logo-bmw">
-						<img src="./front/images/dest/svg/bmw_logo.svg" alt="bmw-logo">
+						<img src="./assets/images/dest/svg/bmw_logo.svg" alt="bmw-logo">
 					</a>
 					<ul class="footer__items">
 						<li><a class="footer__items-link" href="./autos.php">Автомобили</a></li>

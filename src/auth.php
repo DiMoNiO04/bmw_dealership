@@ -1,19 +1,19 @@
 <?php 
 	include ('path.php'); 
-	include("./back/controllers/users.php"); 
+	include("./app/controllers/users.php"); 
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('./app/includes/head.php') ?>
 	<title>Авторизация BMW</title>
 </head>
 
 <body>
 
-	<?php include('./front/includes/header-blue.php') ?>
+	<?php include('./app/includes/header-blue.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -42,10 +42,10 @@
 		</div>
 	</main>
 
-	<?php include('./front/includes/footer.php') ?>
+	<?php include('./app/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
+	<script src="./assets/js/header.min.js"></script>
 </body>
 
 </html>

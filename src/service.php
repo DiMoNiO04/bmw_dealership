@@ -1,19 +1,19 @@
 <?php 
 	include ('path.php'); 
-	include ('./back/database/database.php');
+	include ('./app/database/database.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('./app/includes/head.php') ?>
 	<title>Услуги и сервис-BMW</title>
 </head>
 
 <body>
 
-	<?php include('./front/includes/header-blue.php') ?>
+	<?php include('./app/includes/header-blue.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -365,11 +365,11 @@
 		</div>
 	</main>
 
-	<?php include('./front/includes/footer.php') ?>
+	<?php include('./app/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
-	<script src="./front/js/service.min.js"></script>
+	<script src="./assets/js/header.min.js"></script>
+	<script src="./assets/js/service.min.js"></script>
 </body>
 
 </html>

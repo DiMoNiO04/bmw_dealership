@@ -1,19 +1,19 @@
 <?php 
 	include ('path.php'); 
-	include ('./back/database/database.php');
+	include ('./app/database/database.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('./app/includes/head.php') ?>
 	<title>Контакты-BMW</title>
 </head>
 
 <body>
 
-	<?php include('./front/includes/header-blue.php') ?>
+	<?php include('./app/includes/header-blue.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -22,8 +22,8 @@
 				<div class="contacts__container">
 					<h1 class="title-pages">Контакты</h1>
 					<div class="contacts__images">
-						<img src="./front/images/dest/contacts-first.jpg" alt="contact__first">
-						<img src="./front/images/dest/contacts-second.jpg" alt="contact__second">
+						<img src="./assets/images/dest/contacts-first.jpg" alt="contact__first">
+						<img src="./assets/images/dest/contacts-second.jpg" alt="contact__second">
 					</div>
 					<ul class="contacts__list">
 						<li class="contacts__item">
@@ -151,10 +151,10 @@
 		</div>
 	</main>
 
-	<?php include('./front/includes/footer.php') ?>
+	<?php include('./app/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
+	<script src="./assets/js/header.min.js"></script>
 </body>
 
 </html>

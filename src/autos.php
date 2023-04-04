@@ -1,19 +1,19 @@
 <?php 
 	include ('path.php'); 
-	include ('./back/database/database.php');
+	include ('./app/database/database.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('./app/includes/head.php') ?>
 	<title>Автомобили-BMW</title>
 </head>
 
 <body>
 	
-	<?php include('./front/includes/header.php') ?>
+	<?php include('./app/includes/header.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -22,7 +22,7 @@
 				<div class="preview__container">
 					<div class="auto__bg-fon"></div>
 					<div class="preview__desc">
-						<img src="./front/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
+						<img src="./assets/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
 						<h1 class="preview__title">Выберите автомобиль своей мечты</h1>
 					</div>
 				</div>
@@ -136,22 +136,22 @@
 							<h2 class="model__title">M</h2>
 							<div class="model__cars">
 								<a href="./single__auto.php" class="model__car" title="Перейти BMW iX M60">
-									<img src="./front/images/dest/cars/ii7.webp" alt="BMW iX M60">
+									<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX M60">
-								<img src="./front/images/dest/cars/ii7.webp" alt="BMW iX M60">
+								<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX M60">
-								<img src="./front/images/dest/cars/ii7.webp" alt="BMW iX M60">
+								<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX M60">
-								<img src="./front/images/dest/cars/ii7.webp" alt="BMW iX M60">
+								<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
@@ -161,37 +161,37 @@
 							<h2 class="model__title">X</h2>
 							<div class="model__cars">
 								<a href="#" class="model__car" title="Перейти BMW iX">
-									<img src="./front/images/dest/cars/iX.webp" alt="iX">
+									<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./front/images/dest/cars/iX.webp" alt="iX">
+								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./front/images/dest/cars/iX.webp" alt="iX">
+								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./front/images/dest/cars/iX.webp" alt="iX">
+								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./front/images/dest/cars/iX.webp" alt="iX">
+								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./front/images/dest/cars/iX.webp" alt="iX">
+								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./front/images/dest/cars/iX.webp" alt="iX">
+								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
 									<h3>iX M60</h3>
 									<span>Электрический</span>
 								</a>
@@ -201,22 +201,22 @@
 							<h2 class="model__title">M</h2>
 							<div class="model__cars">
 								<a href="#" class="model__car" title="Перейти BMW I-7">
-									<img src="./front/images/dest/cars/I-7.webp" alt="I-7">
+									<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
 									<h3>I7</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW I-7">
-								<img src="./front/images/dest/cars/I-7.webp" alt="I-7">
+								<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
 									<h3>I7</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW I-7">
-								<img src="./front/images/dest/cars/I-7.webp" alt="I-7">
+								<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
 									<h3>I7</h3>
 									<span>Электрический</span>
 								</a>
 								<a href="#" class="model__car" title="Перейти BMW I-7">
-								<img src="./front/images/dest/cars/I-7.webp" alt="I-7">
+								<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
 									<h3>I7</h3>
 									<span>Электрический</span>
 								</a>
@@ -228,11 +228,11 @@
 		</section>
 	</main>
 
-	<?php include('./front/includes/footer.php') ?>
+	<?php include('./app/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
-	<script src="./front/js/sidebar.min.js"></script>
+	<script src="./assets/js/header.min.js"></script>
+	<script src="./assets/js/sidebar.min.js"></script>
 </body>
 
 </html>

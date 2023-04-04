@@ -23,8 +23,8 @@ const darkBody = document.querySelector('.dark-wrapper');
 
 const toggleClass = () => {
 	burgerMenu.classList.toggle('burger__menu-active');
-	burger.classList.toggle('header__burger-active');
-	darkBody.classList.toggle('dark-wrapper-active');
+	burger.classList.toggle('active');
+	darkBody.classList.toggle('active');
 }
 
 const isContainsDark = () => event.target.classList.contains('dark-wrapper');

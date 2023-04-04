@@ -34,7 +34,7 @@
 						</ul>
 					</div>
 					<a href="index.php" class="logo-bmw">
-						<img src="./front/images/dest/svg/bmw_logo.svg" alt="Logo_BMW">
+						<img src="./assets/images/dest/svg/bmw_logo.svg" alt="Logo_BMW">
 					</a>
 					<div class="header__burger">
 						<span class="header__burger-line"></span>

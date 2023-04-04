@@ -1,19 +1,19 @@
 <?php 
-	include ('path.php'); 
-	include ('./back/database/database.php');
+
+	include ('../../../back/database/database.php')
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('../../../front/includes/head.php') ?>
 	<title>Админ панель</title>
 </head>
 
 <body>
 	
-	<?php include('./front/includes/header-blue.php') ?>
+	<?php include('../../../front/includes/header-blue.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -100,7 +100,7 @@
 	<?php include('./front/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
+	<script src="../../../front/js/header.min.js"></script>
 </body>
 
 </html>

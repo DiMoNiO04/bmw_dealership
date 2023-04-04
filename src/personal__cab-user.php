@@ -1,19 +1,19 @@
 <?php 
 	include ('path.php'); 
-	include ('./back/database/database.php');
+	include ('./app/database/database.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('./app/includes/head.php') ?>
 	<title>Личный кабинет</title>
 </head>
 
 <body>
 
-	<?php include('./front/includes/header-blue.php') ?>
+	<?php include('./app/includes/header-blue.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -23,7 +23,7 @@
 					<h1 class="personal__title">Пользователь №<span>123</span></h1>
 					<div class="personal__body">
 						<div class="personal__image">
-							<img src="./front/images/dest/user.png" alt="personal__foto">
+							<img src="./assets/images/dest/user.png" alt="personal__foto">
 						</div>
 						<div class="presonal__data">
 							<h2 class="personal__subtitle">Ваши персональные данные:</h2>
@@ -112,10 +112,10 @@
 		</section>
 	</main>
 
-	<?php include('./front/includes/footer.php') ?>
+	<?php include('./app/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
+	<script src="./assets/js/header.min.js"></script>
 </body>
 
 </html>

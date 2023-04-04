@@ -1,13 +1,13 @@
 <?php 
 	include ('path.php'); 
-	include ('./back/database/database.php');
+	include ('./app/database/database.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-	<?php include('./front/includes/head.php') ?>
+	<?php include('./app/includes/head.php') ?>
 	<title>BMW i7</title>
 </head>
 
@@ -17,7 +17,7 @@
 		<div class="popup__content">
 
 			<div class="order__close">
-				<img src="./front/images/dest/svg/close.svg" alt="close">
+				<img src="./assets/images/dest/svg/close.svg" alt="close">
 			</div>
 			
 			<h2 class="order__title">Оформление заказа на автомобиль <span>BMW i7</span></h2>
@@ -114,7 +114,7 @@
 	</div>
 	<div class="dark__container dark__container__noactive"></div>
 
-	<?php include('./front/includes/header.php') ?>
+	<?php include('./app/includes/header.php') ?>
 
 	<div class="dark-wrapper"></div>
 	<main>
@@ -124,7 +124,7 @@
 				<div class="single-auto__container">
 					<div class="single-auto__desc">
 						<div class="single-auto__logo">
-							<img src="./front/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
+							<img src="./assets/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
 							<h1 class="single-auto__title">BMW i7</h1>
 						</div>
 						<button class="button button__order__auto">Оформить авто</button>
@@ -149,7 +149,7 @@
 						<li><strong>Наличе:</strong><span class="green">есть в наличии</span></li>
 					</ul>
 				</div>
-				<img class="single-auto__image" src="./front/images/dest/cars/I-7.webp" alt="salon BMW i7">
+				<img class="single-auto__image" src="./assets/images/dest/cars/I-7.webp" alt="salon BMW i7">
 			</div>
 		</section>
 
@@ -180,11 +180,11 @@
 		</section>
 	</main>
 
-	<?php include('./front/includes/footer.php') ?>
+	<?php include('./app/includes/footer.php') ?>
 
 	<script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-	<script src="./front/js/header.min.js"></script>
-	<script src="./front/js/popup.min.js"></script>
+	<script src="./assets/js/header.min.js"></script>
+	<script src="./assets/js/popup.min.js"></script>
 </body>
 
 </html>
