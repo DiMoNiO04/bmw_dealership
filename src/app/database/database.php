@@ -2,7 +2,6 @@
 
 session_start();
 require('connect.php');
-require ('path.php');
 
 //Тестовая функция вывода
 function tt($value) {

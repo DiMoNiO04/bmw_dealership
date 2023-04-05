@@ -1,0 +1,202 @@
+.panel__container{
+	@include flexContainer;
+	padding: 130px 0;
+	margin-top: 90px;
+	column-gap: 50px;
+	@media screen and (max-width: 1070px) {
+		padding: 100px 0;
+	}
+	@media screen and (max-width: 900px) {
+		@include flexContainer($direction: column, $items: center);
+		row-gap: 30px;
+	}
+	@media screen and (max-width: 768px) {
+		margin-top: 80px;
+		padding: 80px 0;
+	}
+}
+
+.sidebar{
+	@include sizes(20%, 400px);
+	@include flexContainer($items: center);
+	background: $fiolet;
+	padding: 16px 10px;
+	@media screen and (max-width: 900px) {
+		padding: 12px 8px;
+		justify-content: center;
+		@include sizes(90%, 70px);
+	}
+	@media screen and (max-width: 768px) {
+		min-height: 110px;
+	}
+	@media screen and (max-width: 440px) {
+		min-height: 150px;
+	}
+}
+
+.sidebar__items{
+	@media screen and (max-width: 900px) {
+		@include flexContainer($justify: space-between);
+		border-bottom: none;
+	}
+	@media screen and (max-width: 768px) {
+		gap: 14px;
+		flex-wrap: wrap;
+		justify-content: center;
+	}
+	li{
+		width: 100%;
+		border-bottom: 3px solid transparent;
+		@media screen and (max-width: 900px) {
+			width: auto;
+			&:hover{
+				border-bottom: 3px solid $black;
+			}
+		}
+	}
+	a{
+		@include fontSizes($size: 18px, $weight: 700, $style: italic);
+		padding: 18px;
+		display: block;
+		border-bottom: 1px solid $backgroundHeaderFooter;
+		&:hover{
+			margin-left: -10px;
+			cursor: pointer;
+			transition: $transition;
+			@media screen and (max-width: 900px) {
+				margin-left: 0;
+				cursor: pointer;
+				transition: all 0.25s ease-in-out;
+			}
+		}
+		@media screen and (max-width: 900px) {
+			padding: 10px;;
+		}
+		@media screen and (max-width: 768px) {
+			font-size: 16px;
+		}
+	}
+}
+
+.panel__body{
+	@include flexContainer($direction: column, $justify: space-between);
+	@include sizes($width: 70%);
+	row-gap: 16px;
+	@media screen and (max-width: 900px) {
+		@include sizes;
+	}
+}
+
+.panel__button{
+	background: $darkGreen !important;
+	border: 2px solid $green !important;
+	margin-bottom: 30px;
+	&:hover{
+		background: $green;
+	}
+}
+
+.panel__title{
+	text-align: center;
+}
+
+.panel__blocks {
+	@include flexContainer($direction: column);
+	row-gap: 50px;
+}
+
+.panel__block {
+	@include flexContainer($direction: column);
+	row-gap: 8px;
+	padding: 20px;
+	border: 2px solid $black;
+	border-radius: 10px
+}
+
+.panel__subtitle {
+	@include fontSizes(32px, 700, 30px, italic);
+	text-align: center;
+}
+
+.panel__img {
+	max-width: 100%;
+	border-radius: 10px;
+	&-sm {
+		width: 75%;
+		margin: 0 auto;
+		@media screen and (max-width: 600px){
+			width: 100%;
+		}
+	}
+	&-user{
+		width: 45%;
+		margin: 0 auto;
+		@media screen and (max-width: 600px){
+			width: 100%;
+		}
+	}
+}
+
+.panel__item {
+	@include flexContainer($items: center);
+	column-gap: 12px;
+	flex-wrap: wrap;
+	h3{
+		font-size: 20px;
+	}
+	p{
+		font-size: 18px;
+	}
+}
+
+.panel__buttons {
+	@include flexContainer($justify: flex-end);
+	column-gap: 30px;
+	.panel__button-red {
+		@include sizes($width: 200px);
+		color: $red;
+		border: 2px solid $darkRed;
+		padding: 12px;
+		background: 0 0;
+		font-weight: 700;
+		&:hover {
+			background: $darkRed;
+			transition: $transition;
+		}
+	}
+	.panel__button-edit {
+		@include sizes($width: 200px);
+		color: $black;
+		border: 2px solid $black;
+		padding: 12px;
+		background: 0 0;
+		font-weight: 700;
+		&:hover {
+			background: rgba(0, 0, 0, 0.5);
+			transition: $transition;
+		}
+	}
+}
+
+.admin-form {
+	display: flex;
+	flex-direction: column;
+	row-gap: 24px;
+	justify-content: center;
+	margin: 0 auto;
+}
+
+.admin__form-block {
+	display: flex;
+	flex-direction: column;
+	row-gap: 4px;
+	&-st {
+			align-items: center;
+		flex-direction: row;
+		column-gap: 12px;
+		input {
+			width: 20px;
+			height: 20px;
+		}
+	}
+}

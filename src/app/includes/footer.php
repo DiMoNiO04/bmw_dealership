@@ -2,14 +2,14 @@
 		<div class="container">
 			<div class="footer__container">
 				<div class="footer__content">
-					<a href="index.php" class="logo-bmw">
-						<img src="./assets/images/dest/svg/bmw_logo.svg" alt="bmw-logo">
+					<a href="../../index.php" class="logo-bmw">
+						<img src="../../assets/images/dest/svg/bmw_logo.svg" alt="bmw-logo">
 					</a>
 					<ul class="footer__items">
-						<li><a class="footer__items-link" href="./autos.php">Автомобили</a></li>
-						<li><a class="footer__items-link" href="./about.php">О компании</a></li>
-						<li><a class="footer__items-link" href="./service.php">Услуги и сервис</a></li>
-						<li><a class="footer__items-link" href="./contacts.php">Контакты</a></li>
+						<li><a class="footer__items-link" href="../../autos.php">Автомобили</a></li>
+						<li><a class="footer__items-link" href="../../about.php">О компании</a></li>
+						<li><a class="footer__items-link" href="../../service.php">Услуги и сервис</a></li>
+						<li><a class="footer__items-link" href="../../contacts.php">Контакты</a></li>
 					</ul>
 					<div class="footer__socials">
 						<a href="https://vk.com/bmw" target="_blank" class="footer__socials-icon"><i class="fa-brands fa-vk"></i></a>

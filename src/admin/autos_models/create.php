@@ -22,24 +22,20 @@
 				<div class="panel__container">
 					<?php include('../../app/includes/aside.php') ?>
 					<div class="panel__body">
-						<h1 class="title-pages panel__title">Добавление контактных данных</h1>
+						<h1 class="title-pages panel__title">Добавление модели авто</h1>
 						<div class="panel__blocks">
 							<form  class="admin-form" action="">
 								<div class="admin__form-block">
-									<label for="name">Название:</label>
-									<input type="text" id="name" placeholder="Название">
+									<label for="model">Модель:</label>
+									<input type="text" id="model" placeholder="Модель">
+								</div>
+								<div class="admin__form-block admin__form-block-st">
+									<label for="status">Наличие:</label>
+									<input type="checkbox" name="status">
 								</div>
 								<div class="admin__form-block">
-									<label for="phone">Телефон:</label>
-									<input type="text" id="phone" name="phone" placeholder="Номер телефона">
-								</div>
-								<div class="admin__form-block">
-									<label for="time">Время работы:</label>
-									<input type="text" id="time" placeholder="Время работы">
-								</div>
-								<div class="admin__form-block">
-									<label for="email">Email:</label>
-									<input type="email" id="email" placeholder="Email">
+									<label for="file">Выберите главное фото модели:</label>
+									<input type="file" id="file">
 								</div>
 								<button type="submit" class="button">Добавить</button>
 							</form>

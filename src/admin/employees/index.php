@@ -24,8 +24,8 @@
 					<?php include('../../app/includes/aside.php') ?>
 
 					<div class="panel__body">
-						<a class="button panel__button" href="<?= BASE_URL . "admin/users/create.php" ?>">Добавить</a>
-						<h1 class="title-pages panel__title">Клиенты</h1>
+						<a class="button panel__button" href="<?= BASE_URL . "admin/employees/create.php" ?>">Добавить</a>
+						<h1 class="title-pages panel__title">Сотрудники</h1>
 
 						<div class="panel__blocks">
 							<div class="panel__block">
@@ -52,6 +52,64 @@
 									<p>dima.razumov.04@mail.ru</p>
 								</div>
 								<div class="panel__item">
+									<h3>Должность:</h3>
+									<p>Менеджер</p>
+								</div>
+								<div class="panel__item">
+									<h3>Место жительство:</h3>
+									<p>г.Минск, ул.Волоха, д.27, кв.21</p>
+								</div>
+								<div class="panel__item">
+									<h3>Серия и номер паспорта:</h3>
+									<p>МС3045686</p>
+								</div>
+								<div class="panel__item">
+									<h3>Когда выдан:</h3>
+									<p>12.02.2008</p>
+								</div>
+								<div class="panel__item">
+									<h3>Срок действия:</h3>
+									<p>12.02.2018</p>
+								</div>
+								<div class="panel__item">
+									<h3>Кем выдан:</h3>
+									<p>Солигорским РОВД</p>
+								</div>
+								<div class="panel__buttons">
+									<button class="button panel__button-edit">Edit</button>
+									<button class="button panel__button-red">Delete</button>
+								</div>
+							</div>
+
+							
+							<div class="panel__block">
+								<h2 class="panel__subtitle">Разумов Дмитрий Александрович</h2>
+								<img src="../../assets/images/dest/user.png" alt="user" class="panel__img panel__img-user">
+								<div class="panel__item">
+									<h3>Логин:</h3>
+									<p>dimonio</p>
+								</div>
+								<div class="panel__item">
+									<h3>Дата рождения:</h3>
+									<p>02.06.2004</p>
+								</div>
+								<div class="panel__item">
+									<h3>Дата регистрации:</h3>
+									<p>22.03.2023</p>
+								</div>
+								<div class="panel__item">
+									<h3>Телефон:</h3>
+									<p>80447104585</p>
+								</div>
+								<div class="panel__item">
+									<h3>Email:</h3>
+									<p>dima.razumov.04@mail.ru</p>
+								</div>
+								<div class="panel__item">
+									<h3>Должность:</h3>
+									<p>Менеджер</p>
+								</div>
+								<div class="panel__item">
 									<h3>Место жительство:</h3>
 									<p>г.Минск, ул.Волоха, д.27, кв.21</p>
 								</div>
@@ -101,53 +159,8 @@
 									<p>dima.razumov.04@mail.ru</p>
 								</div>
 								<div class="panel__item">
-									<h3>Место жительство:</h3>
-									<p>г.Минск, ул.Волоха, д.27, кв.21</p>
-								</div>
-								<div class="panel__item">
-									<h3>Серия и номер паспорта:</h3>
-									<p>МС3045686</p>
-								</div>
-								<div class="panel__item">
-									<h3>Когда выдан:</h3>
-									<p>12.02.2008</p>
-								</div>
-								<div class="panel__item">
-									<h3>Срок действия:</h3>
-									<p>12.02.2018</p>
-								</div>
-								<div class="panel__item">
-									<h3>Кем выдан:</h3>
-									<p>Солигорским РОВД</p>
-								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
-
-							<div class="panel__block">
-								<h2 class="panel__subtitle">Разумов Дмитрий Александрович</h2>
-								<img src="../../assets/images/dest/user.png" alt="user" class="panel__img panel__img-user">
-								<div class="panel__item">
-									<h3>Логин:</h3>
-									<p>dimonio</p>
-								</div>
-								<div class="panel__item">
-									<h3>Дата рождения:</h3>
-									<p>02.06.2004</p>
-								</div>
-								<div class="panel__item">
-									<h3>Дата регистрации:</h3>
-									<p>22.03.2023</p>
-								</div>
-								<div class="panel__item">
-									<h3>Телефон:</h3>
-									<p>80447104585</p>
-								</div>
-								<div class="panel__item">
-									<h3>Email:</h3>
-									<p>dima.razumov.04@mail.ru</p>
+									<h3>Должность:</h3>
+									<p>Менеджер</p>
 								</div>
 								<div class="panel__item">
 									<h3>Место жительство:</h3>

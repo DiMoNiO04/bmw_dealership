@@ -38,6 +38,10 @@ li{
 	color: $blue;
 }
 
+.green {
+	color: $green;
+}
+
 .button{
 	@include fontSizes($size: 18px, $weight: 400);
 	@include sizes($width: 340px);

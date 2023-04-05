@@ -17,9 +17,9 @@ function userAuth($arr) {
 	$_SESSION['access'] = $arr['access'];
 
 	if($_SESSION['admin']) {
-		header('location: ' . BASE_URL . admin__panel.php);
+		header('location:/admin/users/index.php');
 	} else {
-		header('location: ' . BASE_URL);
+		header('location:/index.php');
 	}
 }
 

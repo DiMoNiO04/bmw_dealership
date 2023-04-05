@@ -1,5 +1,5 @@
 <?php 
-	include ('path.php'); 
+	include ('./path.php'); 
 	include ('./app/database/database.php');
 ?>
 
