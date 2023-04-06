@@ -141,7 +141,7 @@ function update($table, $id, $params) {
 function delete($table, $id) {
 	global $pdo;
 
-	$sql = "DELETE FROM $table WHERE id = $id"; //SQL-запрос на удаление
+	$sql = "DELETE FROM $table WHERE id =" . $id; //SQL-запрос на удаление
 
 	//Подготавливаем запрос
 	$query = $pdo->prepare($sql);

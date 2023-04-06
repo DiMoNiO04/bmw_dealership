@@ -113,7 +113,7 @@
 						</form>
 					</div>
 
-					<?php include('../../app/includes/sidebar.php') ?>
+					<?php include('./app/includes/sidebar.php') ?>
 
 					<div class="auto__content">
 						<div class="model__container">

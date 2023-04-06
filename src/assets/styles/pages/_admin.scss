@@ -154,11 +154,11 @@
 	column-gap: 30px;
 	.panel__button-red {
 		@include sizes($width: 200px);
-		color: $red;
 		border: 2px solid $darkRed;
 		padding: 12px;
 		background: 0 0;
 		font-weight: 700;
+		color: $red;
 		&:hover {
 			background: $darkRed;
 			transition: $transition;
@@ -166,11 +166,11 @@
 	}
 	.panel__button-edit {
 		@include sizes($width: 200px);
-		color: $black;
 		border: 2px solid $black;
 		padding: 12px;
 		background: 0 0;
 		font-weight: 700;
+		color: $black;
 		&:hover {
 			background: rgba(0, 0, 0, 0.5);
 			transition: $transition;
@@ -199,4 +199,10 @@
 			height: 20px;
 		}
 	}
+}
+
+.panel__status{
+	display: flex;
+	column-gap: 10px;
+	align-items: center;
 }

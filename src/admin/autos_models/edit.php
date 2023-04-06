@@ -22,27 +22,34 @@
 				<div class="panel__container">
 					<?php include('../../app/includes/aside.php') ?>
 					<div class="panel__body">
-						<h1 class="title-pages panel__title">Добавление модели авто</h1>
+						<h1 class="title-pages panel__title">Обновление модели авто</h1>
 						<div class="panel__blocks">
 
 						<div class="form-error">
 							<p><?=$errMsg ?></p>
 						</div>
 
-							<form  class="admin-form" method="post" action="create.php" enctype="multipart/form-data">
+							<form class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">
+							<input name="id" type="hidden" value="<?=$id ?>">
 								<div class="admin__form-block">
 									<label for="model">Модель:</label>
 									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель">
 								</div>
 								<div class="admin__form-block admin__form-block-st">
 									<label for="status">Наличие:</label>
-									<input value="1" name="status" type="checkbox">
+
+									<?php if($model['status'] == 0):?>
+										<input value="0" name="status" type="checkbox">
+									<?php else: ?>
+										<input value="1" name="status" type="checkbox" checked>
+									<?php endif; ?>
+									
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите главное фото модели:</label>
 									<input name="img" type="file" id="file">
 								</div>
-								<button name="model-create" type="submit" class="button">Добавить</button>
+								<button name="model-edit" type="submit" class="button">Обновить</button>
 							</form>
 
 						</div>		

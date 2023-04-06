@@ -1,6 +1,7 @@
 <?php 
-	include ('../../path.php');
-	include ('../../app/database/database.php');
+	session_start();
+   include "../../path.php";
+   include "../../app/controllers/models.php";
 ?>
 
 <!DOCTYPE html>
@@ -28,46 +29,32 @@
 						<h1 class="title-pages panel__title">Модели авто</h1>
 
 						<div class="panel__blocks">
-							<div class="panel__block">
-								<h2 class="panel__subtitle">I7</h2>
-								<img src="../../assets/images/dest/cars/I7.jpg" alt="i-7" class="panel__img">
-								<div class="panel__status green">
-									<h3>Наличие:</h3>
-									<p>Есть в наличии</p>
-								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
+							
+							<?php foreach($models as $key => $model): ?>
+								<div class="panel__block">
+									<h2 class="panel__subtitle"><?=$model['name']; ?></h2>
+									<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['name']; ?>" class="panel__img">
+									
+										<?php if($model['status']): ?>
+											<div class="panel__status green">
+												<h3>Наличие:</h3>
+												<p>Есть в наличии</p>
+											</div>
+										<?php else: ?>	
+											<div class="panel__status red">
+												<h3>Наличие:</h3>
+												<p>Нет в наличии</p>
+											</div>
+										<?php endif; ?>
 
-							<div class="panel__block">
-								<h2 class="panel__subtitle">I7</h2>
-								<img src="../../assets/images/dest/about.jpg" alt="i-7" class="panel__img">
-								<div class="panel__status green">
-									<h3>Наличие:</h3>
-									<p>Есть в наличии</p>
+										<div class="panel__buttons">
+											<a class="button panel__button-edit" href="edit.php?id=<?=$model['id']?>">Edit</a>
+											<a class="button panel__button-red" href="edit.php?del_id=<?=$model['id']?>">Delete</a>
+										</div>
 								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
+							<?php endforeach; ?>
 
-							<div class="panel__block">
-								<h2 class="panel__subtitle">I7</h2>
-								<img src="../../assets/images/dest/contacts.jpg" alt="i-7" class="panel__img">
-								<div class="panel__status green">
-									<h3>Наличие:</h3>
-									<p>Есть в наличии</p>
-								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
-						</div>
-						
+						</div>						
 					</div>
 				</div>
 			</div>
