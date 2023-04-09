@@ -34,13 +34,13 @@
 									<label for="model">Модель:</label>
 									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель">
 								</div>
-								<div class="admin__form-block admin__form-block-st">
-									<label for="status">Наличие:</label>
-									<input value="1" name="status" type="checkbox">
-								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите главное фото модели:</label>
 									<input name="img" type="file" id="file">
+								</div>
+								<div class="admin__form-block admin__form-block-st">
+									<label for="status">Наличие:</label>
+									<input value="1" name="status" type="checkbox">
 								</div>
 								<button name="model-create" type="submit" class="button">Добавить</button>
 							</form>

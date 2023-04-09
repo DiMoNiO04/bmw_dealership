@@ -22,65 +22,68 @@
 				<div class="panel__container">
 					<?php include('../../app/includes/aside.php') ?>
 					<div class="panel__body">
-						<h1 class="title-pages panel__title">Добавление авто</h1>
+						<h1 class="title-pages panel__title">Редактирование авто</h1>
 
 						<div class="form-error">
 							<p><?=$errMsg ?></p>
 						</div>
 
 						<div class="panel__blocks">
-							<form  class="admin-form" action="create.php" method="post" enctype="multipart/form-data">
+
+							<form  class="admin-form" action="edit.php" method="post" enctype="multipart/form-data">						
+								<input type="hidden" name="id" value="<?= $id ?>">
 								<div class="admin__form-block">
 									<label for="name">Название:</label>
-									<input value="<?= $name?>" name="name" type="text" id="name" placeholder="Название">
+									<input value="<?= $name?>" name="name" type="text" id="name">
 								</div>
-								<div class="admin__form-block">
-									<label for="date">Год выпуска:</label>
-									<input  value="<?= $year?>" name="year" type="number" min="2010" max="2023" name="date" placeholder="Год выпуска">
-								</div>
-								<div class="admin__form-block">
+								<div class="admin__form-block admin__form-block">
 									<label for="complexion">Комплектация:</label>
 									<select name="complexion" id="complexion">
-										<option>Выберите комплектацию</option>
 										<option value="Базовая">Базовая</option>
 										<option value="Средняя">Средняя</option>
 										<option value="Полная">Полная</option>
 									</select>
 								</div>
-								<div class="admin__form-block">
+								<div class="admin__form-block admin__form-block">
 									<label for="color">Цвет:</label>
-									<input  value="<?= $color?>" name="color" type="text" name="color" placeholder="Цвет">
+									<input  value="<?= $color?>" name="color" type="text" name="color">
 								</div>
-								<div class="admin__form-block">
+								<div class="admin__form-block admin__form-block">
+									<label for="date">Год выпуска:</label>
+									<input  value="<?= $year?>" name="year" type="number" max="2023" name="date">
+								</div>
+								<div class="admin__form-block admin__form-block">
 									<label for="engine">Двигатель:</label>
 									<select name="engine">
-										<option selected>Выберите двигатель</option>
 										<option value="Бензиновый">Бензиновый</option>
 										<option value="Электрический">Электрический</option>
 									</select>
 								</div>
-								<div class="admin__form-block">
-									<label for="price">Цена: &#36</label>
-									<input  value="<?= $price?>" name="price" type="number" min="50000" step="5000" name="price" placeholder="Цена &#36">
-								</div>
-								<div class="admin__form-block">
-									<label for="file">Модель</label>
-									<select name="model">
-										<option>Выберите модель:</option>
-										<?php foreach ($models as $key => $model): ?>
-											<option value="<?= $model['id']?>"><?=$model['model'] ?></option>
-										<?php endforeach; ?>
-									</select>
+								<div class="admin__form-block admin__form-block">
+									<label for="price">Цена:</label>
+									<input  value="<?= $price?>" name="price" type="number" name="price">
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите фото авто:</label>
 									<input name="img" type="file" id="file">
 								</div>
+								<div class="admin__form-block">
+									<label for="file">Модель</label>
+									<select name="model">
+										<?php foreach ($models as $key => $model): ?>
+											<option value="<?= $model['id']?>"><?=$model['model'] ?></option>
+										<?php endforeach; ?>
+									</select>
+								</div>
 								<div class="admin__form-block admin__form-block-st">
 									<label for="status">Наличие:</label>
-									<input name="status" type="checkbox" name="status">
+									<?php if($auto['status'] == 0):?>
+										<input value="0" name="status" type="checkbox">
+									<?php else: ?>
+										<input value="1" name="status" type="checkbox" checked>
+									<?php endif; ?>
 								</div>
-								<button name="auto-create" type="submit" class="button">Добавить</button>
+								<button name="auto-edit" type="submit" class="button">Сохранить</button>
 							</form>
 						</div>
 						
@@ -96,4 +99,4 @@
 	<script src="../../assets/js/header.min.js"></script>
 </body>
 
-</html>
+</html>М

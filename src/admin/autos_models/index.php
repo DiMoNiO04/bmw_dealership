@@ -32,8 +32,8 @@
 							
 							<?php foreach($models as $key => $model): ?>
 								<div class="panel__block">
-									<h2 class="panel__subtitle"><?=$model['name']; ?></h2>
-									<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['name']; ?>" class="panel__img">
+									<h2 class="panel__subtitle"><?=$model['model']; ?></h2>
+									<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
 									
 										<?php if($model['status']): ?>
 											<div class="panel__status green">
@@ -49,6 +49,13 @@
 
 										<div class="panel__buttons">
 											<a class="button panel__button-edit" href="edit.php?id=<?=$model['id']?>">Edit</a>
+
+											<?php if($model['status'] == 0): ?>
+												<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$model['id'];?>">Publish</a>
+											<?php else:?>
+												<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$model['id'];?>">Unpublish</a>
+											<?php endif; ?>
+
 											<a class="button panel__button-red" href="edit.php?del_id=<?=$model['id']?>">Delete</a>
 										</div>
 								</div>

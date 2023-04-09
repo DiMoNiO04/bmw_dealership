@@ -245,3 +245,42 @@
 		@include fontSizes($size: 16px, $weight: 400, $style: italic);
 	}
 }
+
+.admin-form{
+	@include flexContainer($direction: column);
+	@include sizes($width: 70%);
+	color: $black;
+	row-gap: 28px;
+	@media screen and (max-width: 900px) {
+		@include sizes($width: 80%);
+	}
+	@media screen and (max-width: 600px) {
+		@include sizes;
+	}
+	button {
+		margin: 0 auto;
+	}
+}
+
+.admin__form-block {
+	@include flexContainer($direction: column);
+	row-gap: 8px;
+	label{
+		@include fontSizes($size: 20px, $weight: 600,  $style: italic);
+		span{
+			color: $darkRed;
+		}
+	}
+	select, 
+	input{
+		@include fontSizes($size: 16px, $weight: 700);
+		background-color: $white;
+		padding: 10px;
+		border: 2px solid $black;
+		border-radius: 10px;
+	}
+	&-st {
+		flex-direction: row;
+		align-items: center;
+	}
+}

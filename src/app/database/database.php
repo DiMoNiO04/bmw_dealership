@@ -148,4 +148,25 @@ function delete($table, $id) {
 	$query->execute();
 	dbCheckErr($query); //Проверка запроса на ошибки
 }
+
+//Выборка записей с названием авто
+function getModelsName($table1, $table2) {
+	global $pdo;
+	$sql = "SELECT 
+		t1.id,
+		t1.name,
+		t1.engine,
+		t1.year,
+		t1.price,
+		t1.color,
+		t1.complexion,
+		t1.img,
+		t1.status,
+		t2.model 
+	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id"; 
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetchAll();
+}
 ?>

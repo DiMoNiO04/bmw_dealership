@@ -1,6 +1,7 @@
 <?php
 
 include "../../app/database/database.php";
+include('../../app/helps/treatmentImage.php');
 
 //Если сессия закончилась, то возврат на страницу авторизации
 if(!$_SESSION) {
@@ -15,30 +16,6 @@ $errMsg = '';
 $id = '';
 $modelName = '';
 
-//Работа с изображением
-function treatmentImg() {
-	if(!empty($_FILES['img']['name'])) {
-		$imgName = time() . '_' . $_FILES['img']['name'];
-		$fileTmpName = $_FILES['img']['tmp_name'];
-		$fileType = $_FILES['img']['type'];
-		$destination = ROOT_PATH . "\assets\images\dest\models\\" . $imgName;
-
-		if(strpos($fileType, 'image') === false) {
-			die("Можно загружать только изображения");
-		} else {
-			
-			$result = move_uploaded_file($fileTmpName, $destination);
-
-			if($result) {
-				$_POST['img'] = $imgName;
-			} else {
-				$errMsg = "Ошибка: загрузка изображения на сервер";
-			}
-		} 
-	} else {
-		$errMsg = "Ошибка: получения изображения на сервер";
-	}	
-}
 
 //Код для создания модели
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
@@ -49,16 +26,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
 	$status = trim($_POST['status']);
-
 	//Проверка валидность формы
 	if($modelName === '') {
 		$errMsg = 'Заполните все поля!';
 	} else {
 		//Проверка на уникальность названия модели
-		$existence = selectOne('models', ['name' => $modelName]);
+		$existence = selectOne('models', ['model' => $modelName]);
 
 		//Если данная модель существует
-		if($existence['name'] === $modelName) {
+		if($existence['model'] === $modelName) {
 			$errMsg = 'Данная модель авто уже существует!';
 		} else {
 
@@ -71,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 			
 			//Формируем массив для отправки
 			$model = [
-				'name' => $modelName,
+				'model' => $modelName,
 				'status' => $status,
 				'main_foto' => $_POST['img'],
 			];
@@ -94,7 +70,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 
 	//Получаем данные модели которую хотим изменить в переменные
 	$id = $model['id'];
-	$modelName = $model['name'];
+	$modelName = $model['model'];
 	$img = $model['main_foto'];
 	$status = $model['status'];
 }
@@ -121,7 +97,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 			
 			//Формируем массив для отправки данных
 			$model = [
-				'name' => $modelName,
+				'model' => $modelName,
 				'status' => $status,
 				'main_foto' => $_POST['img'],
 			];
@@ -133,6 +109,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 		}
 }
 
+
+//Изменение статуса модели
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
+	$id = $_GET['pub_id'];  //Получаем айди модели, статус которой хотим изменить
+	$status = $_GET['status']; //Получаем статус данной модели
+
+	$modelId = update('models', $id, ['status' => $status]); //Перезаписываем изменения
+
+	header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
+	exit();
+}
 
 //Удаление модели
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {

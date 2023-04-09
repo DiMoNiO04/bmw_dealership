@@ -150,8 +150,10 @@
 }
 
 .panel__buttons {
-	@include flexContainer($justify: flex-end);
+	@include flexContainer($justify: center);
 	column-gap: 30px;
+	flex-wrap: wrap;
+	row-gap: 20px;
 	.panel__button-red {
 		@include sizes($width: 200px);
 		border: 2px solid $darkRed;
@@ -173,6 +175,18 @@
 		color: $black;
 		&:hover {
 			background: rgba(0, 0, 0, 0.5);
+			transition: $transition;
+		}
+	}
+	.panel__button-publish {
+		@include sizes($width: 200px);
+		border: 2px solid $green;
+		padding: 12px;
+		background: 0 0;
+		font-weight: 700;
+		color: $darkGreen;
+		&:hover {
+			background: $green;
 			transition: $transition;
 		}
 	}
