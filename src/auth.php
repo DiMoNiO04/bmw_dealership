@@ -23,7 +23,7 @@
 				<p class="form-auth__desc">У вас еще нет аккаунта? Вы можете зарегистрироваться <a href="./reg.php">здесь</a></p>
 				
 				<div class="form-error">
-					<p><?=$errMsg ?></p>
+					<?php include("./app/helps/errInfo.php")?>
 				</div>
 				
 				<div class="form-auth__item">

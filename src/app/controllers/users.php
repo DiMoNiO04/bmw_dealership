@@ -2,7 +2,7 @@
 include("./app/database/database.php");
 
 
-$errMsg = '';
+$errMsg = [];
 
 //Константы
 $ACCESS = 1; 
@@ -39,20 +39,20 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 
 	//Проверка валидности формы
 	if($lastName === '' || $firstName === '' || $email === '' || $login === '' || $passwordF === '' || $passwordS === '') {
-		$errMsg = 'Заполните все поля!';
+		array_push($errMsg, 'Заполните все поля!');
 	} elseif(mb_strlen($login, 'UTF8') < 3) {
-		$errMsg = 'Логин должен быть более трех символов!';
+		array_push($errMsg, 'Логин должен быть более трех символов!');
 	} elseif($passwordF !== $passwordS) {
-		$errMsg = 'Пароли в обеих полях должны соотвествовать!';
+		array_push($errMsg, 'Пароли в обеих полях должны соотвествовать!');
 	} else {
 		//Проверка на уникальность логина и email
 		$existenceLogin = selectOne('authorization', ['login' => $login]);
 		$existenceEmail = selectOne('authorization', ['email' => $email]);
 
 		if($existenceLogin['login'] === $login) {
-			$errMsg = 'Пользователь с таким логином уже зарегистрирован!';
+			array_push($errMsg,  'Пользователь с таким логином уже зарегистрирован!');
 		} elseif($existenceEmail['email'] === $email) {
-			$errMsg = 'Пользователь с такой почтой уже зарегистрован!';
+			array_push($errMsg, 'Пользователь с такой почтой уже зарегистрован!');
 		}else {
 			$password = password_hash($passwordF, PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
 
@@ -99,17 +99,17 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
 
 	//Проверка валидности формы
 	if($email === '' || $password === '') {
-		$errMsg = "Не все поля заполнены!";
+		array_push($errMsg, "Не все поля заполнены!");
 	} else {
 		$existence = selectOne('authorization', ['email' => $email]);
 		
 		if($existence['access'] == 0) {
-			$errMsg = "Данный аккаунт не имеет доступа (заблокирован)!";
+			array_push($errMsg, "Данный аккаунт не имеет доступа (заблокирован)!");
 		} else {
 			if($existence && password_verify($password, $existence['password'])) {
 				userAuth($existence); //Создаем сессию для авторизации
 			} else {
-				$errMsg = "Неправильный логин или пароль!";
+				array_push($errMsg, "Неправильный логин или пароль!");
 			}
 		}
 	}

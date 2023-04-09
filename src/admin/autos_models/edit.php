@@ -26,7 +26,7 @@
 						<div class="panel__blocks">
 
 						<div class="form-error">
-							<p><?=$errMsg ?></p>
+							<?php include("../../app/helps/errInfo.php")?>
 						</div>
 
 							<form class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">

@@ -25,7 +25,7 @@
 						<h1 class="title-pages panel__title">Редактирование авто</h1>
 
 						<div class="form-error">
-							<p><?=$errMsg ?></p>
+							<?php include("../../app/helps/errInfo.php")?>
 						</div>
 
 						<div class="panel__blocks">

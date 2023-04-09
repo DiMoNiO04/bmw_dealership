@@ -13,7 +13,7 @@ $models = selectAll('models');
 $autoModelsName = getModelsName('auto', 'models');
 
 //Переменные
-$errMsg = '';
+$errMsg = [];
 $id = '';
 $modelName = '';
 $name = '';
@@ -45,7 +45,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-create']))) {
 
 	//Проверка валидность формы
 	if($name === '' || $complexion === '' || $color === '' || $year === '' || $engine === '' || $price === '' || $status === '' || $model === '') {
-			$errMsg = 'Заполните все поля!';
+		array_push($errMsg, 'Заполните все поля!');
 	} else {
 
 			//Проверяем статус: выбран или нет
@@ -120,7 +120,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-edit']))) {
 
 	//Проверка валидность формы
 	if($name === '' || $complexion === '' || $color === '' || $year === '' || $engine === '' || $price === '' || $status === '' || $model === '') {
-			$errMsg = 'Заполните все поля!';
+		array_push($errMsg, 'Заполните все поля!');
 	} else {
 
 			//Проверяем статус: выбран или нет

@@ -26,7 +26,7 @@
 				</div>
 
 				<div class="form-error">
-					<p><?=$errMsg ?></p>
+					<?php include("./app/helps/errInfo.php")?>
 				</div>
 
 				<section class="form-reg__block">

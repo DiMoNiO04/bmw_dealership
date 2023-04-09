@@ -12,7 +12,7 @@ if(!$_SESSION) {
 $models = selectAll('models');
 
 //Переменные
-$errMsg = '';
+$errMsg = [];
 $id = '';
 $modelName = '';
 
@@ -28,14 +28,14 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 	$status = trim($_POST['status']);
 	//Проверка валидность формы
 	if($modelName === '') {
-		$errMsg = 'Заполните все поля!';
+		array_push($errMsg, 'Заполните все поля!');
 	} else {
 		//Проверка на уникальность названия модели
 		$existence = selectOne('models', ['model' => $modelName]);
 
 		//Если данная модель существует
 		if($existence['model'] === $modelName) {
-			$errMsg = 'Данная модель авто уже существует!';
+			array_push($errMsg, 'Данная модель авто уже существует!');
 		} else {
 
 			//Проверяем статус: выбран или нет
@@ -86,7 +86,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 
 	//Проверка валидности формы
 	if($modelName === '') {
-		$errMsg = 'Заполните все поля!';
+		array_push($errMsg, 'Заполните все поля!');
 	} else {
 			//Проверям на статус
 			if(isset($_POST['status'])) {
