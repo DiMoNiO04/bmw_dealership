@@ -42,7 +42,7 @@
 
 						<ul class="header__logout">
 							<li class="header__item"><a class="header__logout-link" href="../../personal__cab-user.php">Личный кабинет</a></li>
-							<li class="header__item"><a class="header__logout-link" href="../../admin/users/index.php">Админ панель</a></li>
+							<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
 							<li class="header__item"><a class="header__logout-link" href="../../logout.php">Выход</a></li>
 						</ul>
 					</div>

@@ -1,6 +1,6 @@
 <?php 
 	include ('path.php'); 
-	include("./app/controllers/users.php"); 
+	include("./app/controllers/auth.php"); 
 ?>
 
 <!DOCTYPE html>

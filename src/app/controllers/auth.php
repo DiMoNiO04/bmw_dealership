@@ -1,5 +1,6 @@
 <?php 
-include("./app/database/database.php");
+include SITE_ROOT . "/app/database/database.php";
+include('../../app/helps/treatmentImage.php');
 
 
 $errMsg = [];
@@ -9,6 +10,7 @@ $ACCESS = 1;
 $NO_ACCESS = 0;
 $CLIENT = 0;
 
+
 //Создаем сессию для авторизации
 function userAuth($arr) {
 	$_SESSION['id'] = $arr['id'];
@@ -17,7 +19,7 @@ function userAuth($arr) {
 	$_SESSION['access'] = $arr['access'];
 
 	if($_SESSION['admin']) {
-		header('location:/admin/users/index.php');
+		header('location:/admin/clientss/index.php');
 	} else {
 		header('location:/index.php');
 	}
@@ -109,6 +111,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
 			if($existence && password_verify($password, $existence['password'])) {
 				userAuth($existence); //Создаем сессию для авторизации
 			} else {
+				tt(password_verify($password, $existence['password']));
 				array_push($errMsg, "Неправильный логин или пароль!");
 			}
 		}

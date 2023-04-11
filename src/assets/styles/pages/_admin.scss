@@ -17,10 +17,10 @@
 }
 
 .sidebar{
-	@include sizes(20%, 400px);
+	@include sizes(auto, 400px);
 	@include flexContainer($items: center);
 	background: $fiolet;
-	padding: 16px 10px;
+	padding: 20px;
 	@media screen and (max-width: 900px) {
 		padding: 12px 8px;
 		justify-content: center;

@@ -1,6 +1,6 @@
 <?php 
 	include "../../path.php";
-	include "../../app/controllers/employees.php";
+	include "../../app/controllers/clients.php";
 ?>
 
 <!DOCTYPE html>
@@ -22,7 +22,7 @@
 				<div class="panel__container">
 					<?php include('../../app/includes/aside.php') ?>
 					<div class="panel__body">
-						<h1 class="title-pages panel__title">Добавление сотрудника</h1>
+						<h1 class="title-pages panel__title">Добавление клиента</h1>
 						<div class="panel__blocks">
 
 						<div class="form-error">
@@ -51,14 +51,6 @@
 									<div class="form-reg__item">
 										<label for="phone">Номер телефона<span>*</span></label>
 										<input type="tel" value="<?=$phoneCreate ?>" name="phone" id="phone" placeholder="Введите номер телефона...">
-									</div>
-									<div class="admin__form-block">
-										<label for="job">Должность:</label>
-										<select name="job" id="job">
-											<option selected>Выберите должность:</option>
-											<option value="Менеджер">Менеджер</option>
-											<option value="Админ">Админ</option>
-										</select>
 									</div>
 									<div class="form-reg__item">
 										<label for="img">Фото<span>*</span></label>
@@ -130,7 +122,7 @@
 									</div>
 								</section>
 
-								<button name="employees-create" type="submit" class="button">Добавить</button>
+								<button name="client-create" type="submit" class="button">Добавить</button>
 							</form>
 
 						</div>	

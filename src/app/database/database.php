@@ -169,4 +169,72 @@ function getModelsName($table1, $table2) {
 	dbCheckErr($query); //Проверка запроса на ошибки
 	return $query->fetchAll();
 }
+
+//Выборка клиентов 
+function getClients($table1, $table2, $table3, $table4) {
+	global $pdo;
+	$sql = "SELECT 
+		t1.id,
+		t1.last_name,
+		t1.first_name,
+		t1.surname,
+		t1.date_birth,
+		t1.phone,
+		t1.img,
+		t2.city,
+		t2.street,
+		t2.house,
+		t2.apartment,
+		t3.series,
+		t3.number,
+		t3.issued_by,
+		t3.issued_when,
+		t3.validity,
+		t4.login,
+		t4.role,
+		t4.email,
+		t4.access,
+		t4.date_regist
+	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_address = t2.id
+							JOIN $table3 AS t3 ON t1.id_passport = t3.id
+							JOIN $table4 AS t4 ON t1.id_auth = t4.id"; 
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetchAll();
+}
+
+//Выборка сотрудников
+function getEmployees($table1, $table2, $table3, $table4) {
+	global $pdo;
+	$sql = "SELECT 
+		t1.last_name,
+		t1.first_name,
+		t1.surname,
+		t1.date_birth,
+		t1.phone,
+		t1.img,
+		t1.job,
+		t2.city,
+		t2.street,
+		t2.house,
+		t2.apartment,
+		t3.series,
+		t3.number,
+		t3.issued_by,
+		t3.issued_when,
+		t3.validity,
+		t4.login,
+		t4.role,
+		t4.email,
+		t4.access,
+		t4.date_regist
+	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_address = t2.id
+							JOIN $table3 AS t3 ON t1.id_passport = t3.id
+							JOIN $table4 AS t4 ON t1.id_auth = t4.id"; 
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetchAll();
+}
 ?>

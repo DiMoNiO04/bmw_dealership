@@ -23,7 +23,7 @@
 							<?php if(isset($_SESSION['id'])):?>
 								<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
 								<?php if($_SESSION['role']): ?>
-									<li class="header__item"><a class="header__logout-link" href="../../admin/users/index.php">Админ панель</a></li>
+									<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
 								<?php endif; ?>
 								<li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
 							<?php else: ?>
@@ -65,7 +65,7 @@
 							<?php if(isset($_SESSION['id'])):?>
 								<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
 								<?php if($_SESSION['role']): ?>
-									<li class="header__item"><a class="header__logout-link" href="../../admin/users/index.php">Админ панель</a></li>
+									<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
 								<?php endif; ?>
 								<li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
 							<?php else: ?>
