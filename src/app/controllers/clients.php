@@ -21,77 +21,77 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
 	treatmentImg();
 
 	//Забираем данные из формы в переменные
-	$lastNameCreate  = trim($_POST['last_name']);
-	$firstNameCreate  = trim($_POST['first_name']);
-	$surnameCreate  = trim($_POST['surname']);
-	$dateBirthCreate  = trim($_POST['date_birth']);
-	$phoneCreate  = trim($_POST['phone']);
+	$lastName  = trim($_POST['last_name']);
+	$firstName  = trim($_POST['first_name']);
+	$surname  = trim($_POST['surname']);
+	$dateBirth  = trim($_POST['date_birth']);
+	$phone  = trim($_POST['phone']);
 
-	$cityCreate  = trim($_POST['city']);
-	$streetCreate  = trim($_POST['street']);
-	$houseCreate  = trim($_POST['house']);
-	$apartmentCreate  = trim($_POST['apartment']);
+	$city  = trim($_POST['city']);
+	$streetC = trim($_POST['street']);
+	$house = trim($_POST['house']);
+	$apartment = trim($_POST['apartment']);
 
-	$seriesCreate  = trim($_POST['series']);
-	$numberCreate  = trim($_POST['number']);
-	$issuedByCreate  = trim($_POST['issued_by']);
-	$issuedWhenCreate  = trim($_POST['issued_when']);
-	$validityCreate  = trim($_POST['validity']);
+	$series = trim($_POST['series']);
+	$number = trim($_POST['number']);
+	$issuedBy = trim($_POST['issued_by']);
+	$issuedWhen = trim($_POST['issued_when']);
+	$validity = trim($_POST['validity']);
 
-	$loginCreate = trim($_POST['login']);
-	$passwordCreate = $_POST['password'];
-	$emailCreate = trim($_POST['email']);
-	$accessCreate = $ACCESS;
-	$roleCreate = $CLIENT;
+	$login = trim($_POST['login']);
+	$password = $_POST['password'];
+	$email = trim($_POST['email']);
+	$access = $ACCESS;
+	$role = $CLIENT;
 
 	//Проверка валидности формы
-	if($lastNameCreate  === '' || $firstNameCreate  === '' || $emailCreate  === '' || $loginCreate  === '' || $passwordCreate  === '' || $emailCreate  === '') {
+	if($lastName  === '' || $firstName  === '' || $email  === '' || $login === '' || $password === '') {
 		array_push($errMsg, 'Заполните все обяазтельные поля!');
-	} elseif(mb_strlen($loginCreate, 'UTF8') < 3) {
+	} elseif(mb_strlen($login, 'UTF8') < 3) {
 		array_push($errMsg, 'Логин должен быть более трех символов!');
 	} else {
 		//Проверка на уникальность логина и email
-		$existenceLogin = selectOne('authorization', ['login' => $loginCreate ]);
-		$existenceEmail = selectOne('authorization', ['email' => $emailCreate ]);
+		$existenceLogin = selectOne('authorization', ['login' => $login]);
+		$existenceEmail = selectOne('authorization', ['email' => $email]);
 
-		if($existenceLogin['login'] === $loginCreate) {
+		if($existenceLogin['login'] === $login) {
 			array_push($errMsg,  'Пользователь с таким логином уже зарегистрирован!');
-		} elseif($existenceEmail['email'] === $emailCreate) {
+		} elseif($existenceEmail['email'] === $email) {
 			array_push($errMsg, 'Пользователь с такой почтой уже зарегистрован!');
 		}else {
-			$passwordCreate  = password_hash($passwordCreate , PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+			$password  = password_hash($password , PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
 
 			//Проверка на доступ
 			if(isset($_POST['access'])) {
-				$accessCreate  = 1;
+				$access = 1;
 			} else {
-				$accessCreate  = 0;
+				$access = 0;
 			}
 			
 			//Формируем массив для таблицы авторизации
 			$dataAuth = [
-				'login' => $loginCreate ,
-				'password' => $passwordCreate ,
-				'access' => $accessCreate ,
-				'role' => $roleCreate ,
-				'email' => $emailCreate 
+				'login' => $login,
+				'password' => $password,
+				'access' => $access,
+				'role' => $role,
+				'email' => $email 
 			];
 
 			//Формируем массив паспорта
 			$dataPassport = [
-				'series' => $seriesCreate ,
-				'number' => $numberCreate ,
-				'issued_by' => $issuedByCreate ,
-				'issued_when' => $issuedWhenCreate ,
-				'validity' => $validityCreate 
+				'series' => $series,
+				'number' => $number,
+				'issued_by' => $issuedBy,
+				'issued_when' => $issuedWhen,
+				'validity' => $validity 
 			];
 
 			//Формируем массив адресса
 			$dataAddress = [
-				'city' => $cityCreate ,
-				'street' => $streetCreate ,
-				'house' => $houseCreate ,
-				'apartment' => $apartmentCreate 
+				'city' => $city,
+				'street' => $street,
+				'house' => $house,
+				'apartment' => $apartment 
 			];
 
 			//Добавляем данные в базу данных
@@ -102,11 +102,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
 
 			//Формируем данные в таблицу клиентов
 			$dataPersonal = [
-				'last_name' => $lastNameCreate ,
-				'first_name' => $firstNameCreate ,
-				'surname' => $surnameCreate ,
-				'date_birth' => $dateBirthCreate ,
-				'phone' => $phoneCreate ,
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
 				'img' => $_POST['img'] ,
 				'id_address' => $idAddress,
 				'id_auth' => $idAuth,
@@ -118,23 +118,158 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
 		}
 	}
 } else {
-	$lastNameCreate  = '';
-	$firstNameCreate  = '';
-	$surnameCreate  = '';
+	$lastName = '';
+	$firstName = '';
+	$surname = '';
 	$dateBirth = '';
-	$phoneCreate  = '';
-	$cityCreate  = '';
-	$streetCreate  = '';
-	$houseCreate  = '';
-	$apartmentCreate  = '';
-	$seriesCreate  = '';
-	$numberCreate  = '';
-	$issuedByCreate  = '';
-	$issuedWhenCreate  = '';
-	$validityCreate  = '';
-	$loginCreate  = '';
-	$passwordCreate  = '';
-	$emailCreate  = '';
+	$phone = '';
+	$city = '';
+	$street = '';
+	$house = '';
+	$apartment = '';
+	$series = '';
+	$number = '';
+	$issuedBy = '';
+	$issuedWhen = '';
+	$validity = '';
+	$login = '';
+	$password = '';
+	$email = '';
+}
+
+
+//Редактирование клиента через админку
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
+	
+	$id = $_GET['edit_id']; //Получаем айди клиента, того кого хотим изменить 
+	$client = selectOne('clients', ['id' => $id]); //Получаем все данные клиента, которого хотим изменить
+	
+	$idAuth = $client['id_auth']; //Получаем айди данных авторизации клиента
+	$idAddress = $client['id_address']; //Получаем айди данных адреса клиента
+	$idPassport = $client['id_passport']; //Получаем айди данных паспорта клиента
+
+	$clientAuth = selectOne('authorization', ['id' => $idAuth]); //Получаем данные авторизации данного клиента
+	$clientAddress = selectOne('clients_address', ['id' => $idAddress]); //Получаем данные адресса данного клиента
+	$clientPassport = selectOne('clients_passport', ['id' => $idPassport]); //Получаем данные паспорта данного клиента
+	
+	//Получаем данные клиента которого хотим изменить в переменные
+	$id = $client['id'];
+	$lastName = $client['last_name'];
+	$firstName = $client['first_name'];
+	$surname = $client['surname'];
+	$dateBirth = $client['date_birth'];
+	$phone = $client['phone'];
+	$img = $client['img'];
+	$city = $clientAddress['city'];
+	$street = $clientAddress['street'];
+	$house = $clientAddress['house'];
+	$apartment = $clientAddress['apartment'];
+	$series = $clientPassport['series'];
+	$number = $clientPassport['number'];
+	$issuedBy = $clientPassport['issued_by'];
+	$issuedWhen = $clientPassport['issued_when'];
+	$validity = $clientPassport['validity'];
+	$login = $clientAuth['login'];
+	$email = $clientAuth['email'];
+	$access = $clientAuth['access'];
+}
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
+
+	//Работа с изображением 
+	treatmentImg();
+
+	//Получаем данные клиента из формы
+	$id = $_POST['id'];
+	$lastName = trim($_POST['last_name']);
+	$firstName = trim($_POST['first_name']);
+	$surname = trim($_POST['surname']);
+	$dateBirth = $_POST['date_birth'];
+	$phone = trim($_POST['phone']);
+	$city = trim($_POST['city']);
+	$street = trim($_POST['street']);
+	$house = trim($_POST['house']);
+	$apartment = trim($_POST['apartment']);
+	$series = trim($_POST['series']);
+	$number = trim($_POST['number']);
+	$issuedBy = trim($_POST['issued_by']);
+	$issuedWhen = trim($_POST['issued_when']);
+	$validity = trim($_POST['validity']);
+	$access = $_POST['access'];
+
+
+	//Проверка валидности формы
+	if($lastName  === '' || $firstName  === '') {
+		array_push($errMsg, 'Заполните все обяазтельные поля!');
+	} else {
+
+		//Проверка на доступ
+		if(isset($_POST['access'])) {
+			$access = $ACCESS;
+		} else {
+			$access = $NO_ACCESS;
+		}
+			
+		//Формируем массив для таблицы авторизации
+		$dataAuth = [
+			'access' => $access,
+		];
+
+		//Формируем массив паспорта
+		$dataPassport = [
+			'series' => $series,
+			'number' => $number,
+			'issued_by' => $issuedBy,
+			'issued_when' => $issuedWhen,
+			'validity' => $validity 
+		];
+
+		//Формируем массив адресса
+		$dataAddress = [
+			'city' => $city,
+			'street' => $street,
+			'house' => $house,
+			'apartment' => $apartment 
+		];
+
+		//Формируем данные в таблицу клиентов
+		$dataPersonal = [
+			'last_name' => $lastName,
+			'first_name' => $firstName,
+			'surname' => $surname,
+			'date_birth' => $dateBirth,
+			'phone' => $phone,
+			'img' => $_POST['img'] ,
+		];
+
+		$idClient = selectOne('clients', ['id' => $id]); //Получаем данные клиента, которого хотим отредактировать
+		$idAuth = $idClient['id_auth']; //Получаем айди записи авторизации, которую хотим запись
+		$idAddress = $idClient['id_address']; //Получаем айди записи адресса, которую хотим запись
+		$idPas = $idClient['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+
+		//Обновляем данные клиента, которого отредактировали
+		update('clients', $id, $dataPersonal);
+		update('clients_passport', $idPas, $dataPassport);
+		update('clients_address', $idAddress, $dataAddress);
+		update('authorization', $idAuth, $dataAuth);
+
+		header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов
+	}
+} 
+
+
+//Изменение статуса входа клиента
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
+	$id = $_GET['pub_id'];  //Получаем айди клиента, доступ которого хотим измнить
+	$access = $_GET['access'];
+	
+	$сlient = selectOne('clients', ['id' => $id]); //Получаем данные клиента, которого хоти изменитьь
+	$clientAuth = selectOne('authorization', ['id' => $сlient['id_auth']]); //Получаем данные авторизации, которую хоти изменить
+	$idAuth = $clientAuth['id'];  //Получаем айди авторизации, которую хоти изменить
+
+	update('authorization', $idAuth, ['access' => $access]); //Перезаписываем полученную запись
+	header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов
+	exit();
 }
 
 
@@ -154,5 +289,4 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 
 	header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов
 }
-
 ?>

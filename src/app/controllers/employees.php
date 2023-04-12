@@ -10,7 +10,7 @@ $ACCESS = 1;
 $NO_ACCESS = 0;
 $ADMIN = 1;
 
-$employees = getClients('employees', 'employees_address', 'employees_passport', 'authorization');
+$employees = getEmployees('employees', 'employees_address', 'employees_passport', 'authorization');
 
 
 //Добавление сотрудника из админки
@@ -20,79 +20,79 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 	treatmentImg();
 
 	//Забираем данные из формы в переменные
-	$lastNameCreate  = trim($_POST['last_name']);
-	$firstNameCreate  = trim($_POST['first_name']);
-	$surnameCreate  = trim($_POST['surname']);
-	$dateBirthCreate  = trim($_POST['date_birth']);
-	$phoneCreate  = trim($_POST['phone']);
+	$lastName = trim($_POST['last_name']);
+	$firstName = trim($_POST['first_name']);
+	$surname = trim($_POST['surname']);
+	$dateBirth = trim($_POST['date_birth']);
+	$phone = trim($_POST['phone']);
 
-	$cityCreate  = trim($_POST['city']);
-	$streetCreate  = trim($_POST['street']);
-	$houseCreate  = trim($_POST['house']);
-	$apartmentCreate  = trim($_POST['apartment']);
+	$city = trim($_POST['city']);
+	$street = trim($_POST['street']);
+	$house = trim($_POST['house']);
+	$apartment = trim($_POST['apartment']);
 
-	$seriesCreate  = trim($_POST['series']);
-	$numberCreate  = trim($_POST['number']);
-	$issuedByCreate  = trim($_POST['issued_by']);
-	$issuedWhenCreate  = trim($_POST['issued_when']);
-	$validityCreate  = trim($_POST['validity']);
+	$series = trim($_POST['series']);
+	$number = trim($_POST['number']);
+	$issuedBy = trim($_POST['issued_by']);
+	$issuedWhen = trim($_POST['issued_when']);
+	$validity = trim($_POST['validity']);
 
-	$loginCreate = trim($_POST['login']);
-	$passwordCreate = $_POST['password'];
-	$emailCreate = trim($_POST['email']);
+	$login = trim($_POST['login']);
+	$password = $_POST['password'];
+	$email = trim($_POST['email']);
 	$jobTitle = $_POST['job'];
-	$accessCreate = $ACCESS;
-	$roleCreate = $ADMIN;
+	$access = $ACCESS;
+	$role = $ADMIN;
 
 
 	//Проверка валидности формы
-	if($lastNameCreate  === '' || $firstNameCreate  === '' || $emailCreate  === '' || $loginCreate  === '' || $passwordCreate  === '' || $emailCreate  === '' || $job === '') {
+	if($lastName  === '' || $firstName  === '' || $email  === '' || $login === '' || $password === '' || $email === '' || $job === '') {
 		array_push($errMsg, 'Заполните все обяазтельные поля!');
-	} elseif(mb_strlen($loginCreate, 'UTF8') < 3) {
+	} elseif(mb_strlen($login, 'UTF8') < 3) {
 		array_push($errMsg, 'Логин должен быть более трех символов!');
 	} else {
 		//Проверка на уникальность логина и email
-		$existenceLogin = selectOne('authorization', ['login' => $loginCreate ]);
-		$existenceEmail = selectOne('authorization', ['email' => $emailCreate ]);
+		$existenceLogin = selectOne('authorization', ['login' => $login]);
+		$existenceEmail = selectOne('authorization', ['email' => $email]);
 
-		if($existenceLogin['login'] === $loginCreate) {
+		if($existenceLogin['login'] === $login) {
 			array_push($errMsg,  'Пользователь с таким логином уже зарегистрирован!');
-		} elseif($existenceEmail['email'] === $emailCreate) {
+		} elseif($existenceEmail['email'] === $email) {
 			array_push($errMsg, 'Пользователь с такой почтой уже зарегистрован!');
 		}else {
-			$passwordCreate  = password_hash($passwordCreate , PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+			$password = password_hash($password , PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
 
 			//Проверка на доступ
 			if(isset($_POST['access'])) {
-				$accessCreate  = 1;
+				$access = 1;
 			} else {
-				$accessCreate  = 0;
+				$access = 0;
 			}
 			
 			//Формируем массив для таблицы авторизации
 			$dataAuth = [
-				'login' => $loginCreate ,
-				'password' => $passwordCreate ,
-				'access' => $accessCreate ,
-				'role' => $roleCreate ,
-				'email' => $emailCreate 
+				'login' => $login,
+				'password' => $password,
+				'access' => $access,
+				'role' => $role,
+				'email' => $email 
 			];
 
 			//Формируем массив для таблицы паспорта
 			$dataPassport = [
-				'series' => $seriesCreate ,
-				'number' => $numberCreate ,
-				'issued_by' => $issuedByCreate ,
-				'issued_when' => $issuedWhenCreate ,
-				'validity' => $validityCreate 
+				'series' => $series,
+				'number' => $number,
+				'issued_by' => $issuedBy,
+				'issued_when' => $issuedWhen,
+				'validity' => $validity 
 			];
 
 			//Формируем массив для таблицы аддресса
 			$dataAddress = [
-				'city' => $cityCreate ,
-				'street' => $streetCreate ,
-				'house' => $houseCreate ,
-				'apartment' => $apartmentCreate 
+				'city' => $city,
+				'street' => $street,
+				'house' => $house,
+				'apartment' => $apartment 
 			];
 
 			//Добавляем данные
@@ -103,11 +103,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 
 			//Формируем данные в таблицу сотрудников
 			$dataPersonal = [
-				'last_name' => $lastNameCreate ,
-				'first_name' => $firstNameCreate ,
-				'surname' => $surnameCreate ,
-				'date_birth' => $dateBirthCreate ,
-				'phone' => $phoneCreate ,
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
 				'job' => $jobTitle,
 				'img' => $_POST['img'] ,
 				'id_address' => $idAddress,
@@ -120,35 +120,158 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 		}
 	}
 } else {
-	$lastNameCreate  = '';
-	$firstNameCreate  = '';
-	$surnameCreate  = '';
+	$lastName = '';
+	$firstName = '';
+	$surname = '';
 	$dateBirth = '';
-	$phoneCreate  = '';
-	$cityCreate  = '';
-	$streetCreate  = '';
-	$houseCreate  = '';
+	$phone = '';
+	$city = '';
+	$street = '';
+	$house = '';
 	$jobTitle = '';
-	$apartmentCreate  = '';
-	$seriesCreate  = '';
-	$numberCreate  = '';
-	$issuedByCreate  = '';
-	$issuedWhenCreate  = '';
-	$validityCreate  = '';
-	$loginCreate  = '';
-	$passwordCreate  = '';
-	$emailCreate  = '';
+	$apartment = '';
+	$series = '';
+	$number = '';
+	$issuedBy = '';
+	$issuedWhen = '';
+	$validity = '';
+	$login = '';
+	$password = '';
+	$email = '';
 }
+
+//Редактирование сотрудника через админку
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
+
+	$id = $_GET['edit_id']; //Получаем айди сотрудника, того кого хотим изменить 
+	$employee = selectOne('employees', ['id' => $id]); //Получаем все данные сотрудника, которого хотим изменить
+
+	$idAuth = $employee['id_auth']; //Получаем айди данных авторизации сотрудника
+	$idAddress = $employee['id_address']; //Получаем айди данных адреса сотрудника
+	$idPassport = $employee['id_passport']; //Получаем айди данных паспорта сотрудника
+
+	$employeeAuth = selectOne('authorization', ['id' => $idAuth]); //Получаем данные авторизации данного сотрудника
+	$employeeAddress = selectOne('employees_address', ['id' => $idAddress]); //Получаем данные адресса данного сотрудника
+	$employeePassport = selectOne('employees_passport', ['id' => $idPassport]); //Получаем данные паспорта данного сотрудника
+	
+	//Получаем данные сотрудника которого хотим изменить в переменные
+	$id = $employee['id'];
+	$lastName = $employee['last_name'];
+	$firstName = $employee['first_name'];
+	$surname = $employee['surname'];
+	$dateBirth = $employee['date_birth'];
+	$phone = $employee['phone'];
+	$job = $employee['job'];
+	$img = $employee['img'];
+	$city = $employeeAddress['city'];
+	$street = $employeeAddress['street'];
+	$house = $employeeAddress['house'];
+	$apartment = $employeeAddress['apartment'];
+	$series = $employeePassport['series'];
+	$number = $employeePassport['number'];
+	$issuedBy = $employeePassport['issued_by'];
+	$issuedWhen = $employeePassport['issued_when'];
+	$validity = $employeePassport['validity'];
+	$login = $employeeAuth['login'];
+	$email = $employeeAuth['email'];
+	$access = $employeeAuth['access'];
+}
+
+
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
+
+	//Работа с изображением 
+	treatmentImg();
+
+	//Получаем данные сотрудника из формы
+	$id = $_POST['id'];
+	$lastName = trim($_POST['last_name']);
+	$firstName = trim($_POST['first_name']);
+	$surname = trim($_POST['surname']);
+	$job = $_POST['job'];
+	$dateBirth = $_POST['date_birth'];
+	$phone = trim($_POST['phone']);
+	$city = trim($_POST['city']);
+	$street = trim($_POST['street']);
+	$house = trim($_POST['house']);
+	$apartment = trim($_POST['apartment']);
+	$series = trim($_POST['series']);
+	$number = trim($_POST['number']);
+	$issuedBy = trim($_POST['issued_by']);
+	$issuedWhen = trim($_POST['issued_when']);
+	$validity = trim($_POST['validity']);
+	$access = $_POST['access'];
+
+
+	//Проверка валидности формы
+	if($lastName  === '' || $firstName  === '') {
+		array_push($errMsg, 'Заполните все обяазтельные поля!');
+	} else {
+
+		//Проверка на доступ
+		if(isset($_POST['access'])) {
+			$access = $ACCESS;
+		} else {
+			$access = $NO_ACCESS;
+		}
+			
+		//Формируем массив для таблицы авторизации
+		$dataAuth = [
+			'access' => $access,
+		];
+
+		//Формируем массив паспорта
+		$dataPassport = [
+			'series' => $series,
+			'number' => $number,
+			'issued_by' => $issuedBy,
+			'issued_when' => $issuedWhen,
+			'validity' => $validity 
+		];
+
+		//Формируем массив адресса
+		$dataAddress = [
+			'city' => $city,
+			'street' => $street,
+			'house' => $house,
+			'apartment' => $apartment 
+		];
+
+		//Формируем данные в таблицу клиентов
+		$dataPersonal = [
+			'last_name' => $lastName,
+			'first_name' => $firstName,
+			'surname' => $surname,
+			'date_birth' => $dateBirth,
+			'phone' => $phone,
+			'job' => $job,
+			'img' => $_POST['img'] ,
+		];
+
+		$idEmployee = selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
+		$idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись
+		$idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
+		$idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+
+		//Обновляем данные сотрудника, которого отредактировали
+		update('employees', $id, $dataPersonal);
+		update('employees_passport', $idPas, $dataPassport);
+		update('employees_address', $idAddress, $dataAddress);
+		update('authorization', $idAuth, $dataAuth);
+
+		header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
+	}
+} 
+
 
 //Удаление сотрудника
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди сотрудника, которого хотим удалить
-	$idClient = selectOne('employees', ['id' => $id]); 
+	$idEmployee = selectOne('employees', ['id' => $id]); 
 
-	$idAuth = $idClient['id_auth']; //Получаем айди авторизации для данного сотрудника
-	$idAddress = $idClient['id_address']; //Получаем айди адресса для данного сотрудника
-	$idPas = $idClient['id_passport']; //Получаем айди паспорта для данного сотрудника
-
+	$idAuth = $idEmployee['id_auth']; //Получаем айди авторизации для данного сотрудника
+	$idAddress = $idEmployee['id_address']; //Получаем айди адресса для данного сотрудника
+	$idPas = $idEmployee['id_passport']; //Получаем айди паспорта для данного сотрудника
 
 	delete('authorization', $idAuth); //Удаляем данные авторизации
 	delete('employees_address', $idAddress); //Удаляем данные адресса
@@ -156,5 +279,20 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	delete('employees', $id); //Удаляем сотрудника
 
 	header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
+}
+
+
+//Изменение статуса входа сотрудника
+if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
+	$id = $_GET['pub_id'];  //Получаем айди сотрудника, доступ которого хотим измнить
+	$access = $_GET['access'];
+	
+	$employee = selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хоти изменитьь
+	$employeeAuth = selectOne('authorization', ['id' => $employee['id_auth']]); //Получаем данные авторизации, которую хоти изменить
+	$idAuth = $employeeAuth['id'];  //Получаем айди авторизации, которую хоти изменить
+
+	update('authorization', $idAuth, ['access' => $access]); //Перезаписываем полученную запись
+	header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
+	exit();
 }
 ?>

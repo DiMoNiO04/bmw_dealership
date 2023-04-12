@@ -79,12 +79,17 @@
 }
 
 .panel__body{
-	@include flexContainer($direction: column, $justify: space-between);
+	@include flexContainer($direction: column);
 	@include sizes($width: 70%);
 	row-gap: 16px;
 	@media screen and (max-width: 900px) {
 		@include sizes;
 	}
+}
+
+.panel__empty {
+	@include fontSizes($size: 20px, $weight: 700, $style: italic);
+	margin: 0 auto;
 }
 
 .panel__button{
@@ -96,8 +101,19 @@
 	}
 }
 
+.panel__titles{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	row-gap: 12px;
+	p{
+		@include fontSizes(20px, 700, 24px, italic);
+	}
+}
+
 .panel__title{
 	text-align: center;
+	padding-bottom: 0;
 }
 
 .panel__blocks {

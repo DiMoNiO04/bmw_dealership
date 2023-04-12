@@ -30,37 +30,40 @@
 
 						<div class="panel__blocks">
 							
-							<?php foreach($models as $key => $model): ?>
-								<div class="panel__block">
-									<h2 class="panel__subtitle"><?=$model['model']; ?></h2>
-									<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
-									
-										<?php if($model['status']): ?>
-											<div class="panel__status green">
-												<h3>Наличие:</h3>
-												<p>Есть в наличии</p>
-											</div>
-										<?php else: ?>	
-											<div class="panel__status red">
-												<h3>Наличие:</h3>
-												<p>Нет в наличии</p>
-											</div>
-										<?php endif; ?>
-
-										<div class="panel__buttons">
-											<a class="button panel__button-edit" href="edit.php?id=<?=$model['id']?>">Edit</a>
-
-											<?php if($model['status'] == 0): ?>
-												<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$model['id'];?>">Publish</a>
-											<?php else:?>
-												<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$model['id'];?>">Unpublish</a>
+							<?php if(empty($models)):?>
+								<p class="panel__empty">Модели автомобилей в базе данных отсутствуют. Но вы можете добавить</p>
+							<?php else:?>
+								<?php foreach($models as $key => $model): ?>
+									<div class="panel__block">
+										<h2 class="panel__subtitle"><?=$model['model']; ?></h2>
+										<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
+										
+											<?php if($model['status']): ?>
+												<div class="panel__status green">
+													<h3>Наличие:</h3>
+													<p>Есть в наличии</p>
+												</div>
+											<?php else: ?>	
+												<div class="panel__status red">
+													<h3>Наличие:</h3>
+													<p>Нет в наличии</p>
+												</div>
 											<?php endif; ?>
 
-											<a class="button panel__button-red" href="edit.php?del_id=<?=$model['id']?>">Delete</a>
-										</div>
-								</div>
-							<?php endforeach; ?>
+											<div class="panel__buttons">
+												<a class="button panel__button-edit" href="edit.php?id=<?=$model['id']?>">Edit</a>
 
+												<?php if($model['status'] == 0): ?>
+													<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$model['id'];?>">Publish</a>
+												<?php else:?>
+													<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$model['id'];?>">Unpublish</a>
+												<?php endif; ?>
+
+												<a class="button panel__button-red" href="edit.php?del_id=<?=$model['id']?>">Delete</a>
+											</div>
+									</div>
+								<?php endforeach; ?>
+							<?php endif; ?>
 						</div>						
 					</div>
 				</div>

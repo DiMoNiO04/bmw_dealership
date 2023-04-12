@@ -34,27 +34,27 @@
 									<h2>Личные данные</h2>
 									<div class="form-reg__item">
 										<label for="last_name">Фамилия<span>*</span></label>
-										<input type="text" value="<?=$lastNameCreate ?>" name="last_name" id="last_name" placeholder="Введите фамилию...">
+										<input type="text" value="<?=$lastName ?>" name="last_name" id="last_name" placeholder="Введите фамилию...">
 									</div>
 									<div class="form-reg__item">
 										<label for="first_name">Имя<span>*</span></label>
-										<input type="text" value="<?=$firstNameCreate ?>" name="first_name" id="first_name" placeholder="Введите имя...">
+										<input type="text" value="<?=$firstName ?>" name="first_name" id="first_name" placeholder="Введите имя...">
 									</div>
 									<div class="form-reg__item">
 										<label for="surname">Отчество<span>*</span></label>
-										<input type="text" value="<?=$surnameCreate ?>" name="surname" id="surname" placeholder="Введите имя...">
+										<input type="text" value="<?=$surname ?>" name="surname" id="surname" placeholder="Введите имя...">
 									</div>
 									<div class="form-reg__item">
 										<label for="dateBirth">Дата рождения<span>*</span></label>
-										<input type="date" value="<?=$dateBirthCreate ?>" name="date_birth" id="dateBirth">
+										<input type="date" value="<?=$dateBirth ?>" name="date_birth" id="dateBirth">
 									</div>
 									<div class="form-reg__item">
 										<label for="phone">Номер телефона<span>*</span></label>
-										<input type="tel" value="<?=$phoneCreate ?>" name="phone" id="phone" placeholder="Введите номер телефона...">
+										<input type="tel" value="<?=$phone ?>" name="phone" id="phone" placeholder="Введите номер телефона...">
 									</div>
 									<div class="form-reg__item">
 										<label for="img">Фото<span>*</span></label>
-										<input type="file" value="<?=$imgCreate ?>" name="img" id="img">
+										<input type="file" value="<?=$img ?>" name="img" id="img">
 									</div>
 								</section>
 
@@ -62,19 +62,19 @@
 									<h2>Данные по месту жительства</h2>
 									<div class="form-reg__item">
 										<label for="city">Город<span>*</span></label>
-										<input type="text" value="<?=$cityCreate ?>" name="city" id="city" placeholder="Введите город...">
+										<input type="text" value="<?=$city ?>" name="city" id="city" placeholder="Введите город...">
 									</div>
 									<div class="form-reg__item">
 										<label for="street">Улица<span>*</span></label>
-										<input type="text" value="<?=$streetCreate ?>" name="street" id="street" placeholder="Введите улицу...">
+										<input type="text" value="<?=$street ?>" name="street" id="street" placeholder="Введите улицу...">
 									</div>
 									<div class="form-reg__item">
 										<label for="house">Номер дома<span>*</span></label>
-										<input type="text" value="<?=$houseCreate ?>" name="house" id="house" placeholder="Введите номер дома...">
+										<input type="text" value="<?=$house ?>" name="house" id="house" placeholder="Введите номер дома...">
 									</div>
 									<div class="form-reg__item">
 										<label for="apartment">Номер квартиры<span>*</span></label>
-										<input type="number" min="1" value="<?=$apartmentCreate ?>" name="apartment" id="apartment" placeholder="Введите номер квартиры...">
+										<input type="number" min="1" value="<?=$apartment ?>" name="apartment" id="apartment" placeholder="Введите номер квартиры...">
 									</div>
 								</section>
 
@@ -82,23 +82,23 @@
 									<h2>Паспортные данные</h2>
 									<div class="form-reg__item">
 										<label for="series">Серия<span>*</span></label>
-										<input type="text" value="<?=$seriesCreate ?>" name="series" id="series" placeholder="Введите серию паспорта...">
+										<input type="text" value="<?=$series ?>" name="series" id="series" placeholder="Введите серию паспорта...">
 									</div>
 									<div class="form-reg__item">
 										<label for="number">Номер<span>*</span></label>
-										<input type="text" value="<?=$numberCreate ?>" name="number" id="number" placeholder="Введите номер паспорта...">
+										<input type="text" value="<?=$number ?>" name="number" id="number" placeholder="Введите номер паспорта...">
 									</div>
 									<div class="form-reg__item">
 										<label for="issued_by">Кем выдан<span>*</span></label>
-										<input type="text" value="<?=$issuedByCreate ?>" name="issued_by" id="issued_by" placeholder="Введите кем выдан...">
+										<input type="text" value="<?=$issuedBy ?>" name="issued_by" id="issued_by" placeholder="Введите кем выдан...">
 									</div>
 									<div class="form-reg__item">
 										<label for="issued_when">Когда выдан<span>*</span></label>
-										<input type="date" value="<?=$issuedWhenCreate ?>" name="issued_when" id="issued_when">
+										<input type="date" value="<?=$issuedWhen ?>" name="issued_when" id="issued_when">
 									</div>
 									<div class="form-reg__item">
 										<label for="validity">Срок действия<span>*</span></label>
-										<input type="date" value="<?=$validityCreate ?>" name="validity" id="validity">
+										<input type="date" value="<?=$validity ?>" name="validity" id="validity">
 									</div>
 								</section>
 
@@ -106,7 +106,7 @@
 									<h2>Данные для входа</h2>
 									<div class="form-reg__item">
 										<label for="login">Логин<span>*</span></label>
-										<input type="text" value="<?=$loginCreate ?>" name="login" id="login" placeholder="Введите логин...">
+										<input type="text" value="<?=$login ?>" name="login" id="login" placeholder="Введите логин...">
 									</div>
 									<div class="form-reg__item">
 										<label for="password">Пароль<span>*</span></label>
@@ -114,7 +114,7 @@
 									</div>
 									<div class="form-reg__item">
 										<label for="email">Email<span>*</span></label>
-										<input type="email" value="<?=$emailCreate ?>" name="email" id="email" placeholder="Введите email...">
+										<input type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email...">
 									</div>
 									<div class="form-reg__item admin__form-block-st">
 										<label for="access">Доступ:</label>

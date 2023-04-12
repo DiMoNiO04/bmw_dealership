@@ -28,62 +28,65 @@
 						<a class="button panel__button" href="<?= BASE_URL . "admin/autos/create.php" ?>">Добавить</a>
 						<h1 class="title-pages panel__title">Автомобили</h1>
 					
-						<?php include('../../app/includes/sidebar.php') ?>
+						<?php if(empty($autoModelsName)):?>
+							<p class="panel__empty">Автомобили в базе данных отсутствуют. Но вы можете добавить</p>
+						<?php else:?>
 
-						<div class="panel__blocks">
-							<?php foreach ($autoModelsName as $key => $auto): ?>
-								<div class="panel__block">
-									<h2 class="panel__subtitle"><?= $auto['model']?><?= $auto['name']; ?></h2>
-									<img src="<?=BASE_URL . 'assets/images/dest/models/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
-									<div class="panel__item">
-										<h3>Комплектация:</h3>
-										<p><?= $auto['complexion'];?></p>
-									</div>
-									<div class="panel__item">
-										<h3>Цвет:</h3>
-										<p><?= $auto['color']; ?></p>
-									</div>
-									<div class="panel__item">
-										<h3>Год выпуска:</h3>
-										<p><?= $auto['year']; ?></p>
-									</div>
-									<div class="panel__item">
-										<h3>Двигатель:</h3>
-										<p><?= $auto['engine']; ?></p>
-									</div>
-									<div class="panel__item">
-										<h3>Цена:</h3>
-										<p><?= $auto['price']; ?> &#36 </p>
-									</div>
+							<?php include('../../app/includes/sidebar.php') ?>
 
-									<?php if($auto['status'] == 0):?>
-										<div class="panel__item red">
-											<h3>Наличие:</h3>
-											<p>Нет в наличии</p>
+							<div class="panel__blocks">
+								<?php foreach ($autoModelsName as $key => $auto): ?>
+									<div class="panel__block">
+										<h2 class="panel__subtitle"><?= $auto['model']?><?= $auto['name']; ?></h2>
+										<img src="<?=BASE_URL . 'assets/images/dest/models/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
+										<div class="panel__item">
+											<h3>Комплектация:</h3>
+											<p><?= $auto['complexion'];?></p>
 										</div>
-									<?php else: ?>
-										<div class="panel__item green">
-											<h3>Наличие:</h3>
-											<p>Есть в наличии</p>
+										<div class="panel__item">
+											<h3>Цвет:</h3>
+											<p><?= $auto['color']; ?></p>
 										</div>
-									<?php endif; ?>
+										<div class="panel__item">
+											<h3>Год выпуска:</h3>
+											<p><?= $auto['year']; ?></p>
+										</div>
+										<div class="panel__item">
+											<h3>Двигатель:</h3>
+											<p><?= $auto['engine']; ?></p>
+										</div>
+										<div class="panel__item">
+											<h3>Цена:</h3>
+											<p><?= $auto['price']; ?> &#36 </p>
+										</div>
 
-									<div class="panel__buttons">
-										<a class="button panel__button-edit" href="edit.php?id=<?=$auto['id'];?>">Edit</a>
-
-										<?php if($auto['status'] == 0): ?>
-											<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$auto['id'];?>">Publish</a>
-										<?php else:?>
-											<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$auto['id'];?>">Unpublish</a>
+										<?php if($auto['status'] == 0):?>
+											<div class="panel__item red">
+												<h3>Наличие:</h3>
+												<p>Нет в наличии</p>
+											</div>
+										<?php else: ?>
+											<div class="panel__item green">
+												<h3>Наличие:</h3>
+												<p>Есть в наличии</p>
+											</div>
 										<?php endif; ?>
 
-										<a class="button panel__button-red" href="edit.php?del_id=<?=$auto['id'];?>">Delete</a>
+										<div class="panel__buttons">
+											<a class="button panel__button-edit" href="edit.php?id=<?=$auto['id'];?>">Edit</a>
+
+											<?php if($auto['status'] == 0): ?>
+												<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$auto['id'];?>">Publish</a>
+											<?php else:?>
+												<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$auto['id'];?>">Unpublish</a>
+											<?php endif; ?>
+
+											<a class="button panel__button-red" href="edit.php?del_id=<?=$auto['id'];?>">Delete</a>
+										</div>
 									</div>
-								</div>
-							<?php endforeach; ?>
-							
+								<?php endforeach; ?>
+							<?php endif; ?>
 						</div>
-						
 					</div>
 				</div>
 			</div>

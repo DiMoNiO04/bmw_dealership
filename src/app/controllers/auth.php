@@ -1,6 +1,7 @@
 <?php 
+
 include SITE_ROOT . "/app/database/database.php";
-include('../../app/helps/treatmentImage.php');
+include SITE_ROOT . "/app/helps/treatmentImage.php";
 
 
 $errMsg = [];

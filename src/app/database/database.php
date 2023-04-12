@@ -208,6 +208,7 @@ function getClients($table1, $table2, $table3, $table4) {
 function getEmployees($table1, $table2, $table3, $table4) {
 	global $pdo;
 	$sql = "SELECT 
+		t1.id,
 		t1.last_name,
 		t1.first_name,
 		t1.surname,
