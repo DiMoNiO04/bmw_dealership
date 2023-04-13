@@ -8,7 +8,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Автомобили</title>
 </head>
 
 <body>
@@ -30,16 +30,17 @@
 
 						<div class="panel__blocks">
 							<form  class="admin-form" action="create.php" method="post" enctype="multipart/form-data">
+								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<div class="admin__form-block">
-									<label for="name">Название:</label>
+									<label for="name">Название<span>*</span></label>
 									<input value="<?= $name?>" name="name" type="text" id="name" placeholder="Название">
 								</div>
 								<div class="admin__form-block">
-									<label for="date">Год выпуска:</label>
+									<label for="date">Год выпуска<span>*</span></label>
 									<input  value="<?= $year?>" name="year" type="number" min="2010" max="2023" name="date" placeholder="Год выпуска">
 								</div>
 								<div class="admin__form-block">
-									<label for="complexion">Комплектация:</label>
+									<label for="complexion">Комплектация<span>*</span></label>
 									<select name="complexion" id="complexion">
 										<option>Выберите комплектацию</option>
 										<option value="Базовая">Базовая</option>
@@ -48,11 +49,11 @@
 									</select>
 								</div>
 								<div class="admin__form-block">
-									<label for="color">Цвет:</label>
+									<label for="color">Цвет<span>*</span></label>
 									<input  value="<?= $color?>" name="color" type="text" name="color" placeholder="Цвет">
 								</div>
 								<div class="admin__form-block">
-									<label for="engine">Двигатель:</label>
+									<label for="engine">Двигатель<span>*</span></label>
 									<select name="engine">
 										<option selected>Выберите двигатель</option>
 										<option value="Бензиновый">Бензиновый</option>
@@ -60,11 +61,11 @@
 									</select>
 								</div>
 								<div class="admin__form-block">
-									<label for="price">Цена: &#36</label>
+									<label for="price">Цена (&#36)<span>*</span></label>
 									<input  value="<?= $price?>" name="price" type="number" min="50000" step="5000" name="price" placeholder="Цена &#36">
 								</div>
 								<div class="admin__form-block">
-									<label for="file">Модель</label>
+									<label for="file">Модель<span>*</span></label>
 									<select name="model">
 										<option>Выберите модель:</option>
 										<?php foreach ($models as $key => $model): ?>
@@ -73,7 +74,7 @@
 									</select>
 								</div>
 								<div class="admin__form-block">
-									<label for="file">Выберите фото авто:</label>
+									<label for="file">Выберите фото авто<span>*</span></label>
 									<input name="img" type="file" id="file">
 								</div>
 								<div class="admin__form-block admin__form-block-st">

@@ -9,7 +9,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Автомобили</title>
 </head>
 
 <body>
@@ -38,7 +38,11 @@
 								<?php foreach ($autoModelsName as $key => $auto): ?>
 									<div class="panel__block">
 										<h2 class="panel__subtitle"><?= $auto['model']?><?= $auto['name']; ?></h2>
-										<img src="<?=BASE_URL . 'assets/images/dest/models/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
+										
+										<?php if(!empty($auto['img'])): ?>
+											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
+										<?php endif; ?>
+										
 										<div class="panel__item">
 											<h3>Комплектация:</h3>
 											<p><?= $auto['complexion'];?></p>

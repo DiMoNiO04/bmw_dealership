@@ -46,7 +46,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
 
 	//Проверка валидности формы
 	if($lastName  === '' || $firstName  === '' || $email  === '' || $login === '' || $password === '') {
-		array_push($errMsg, 'Заполните все обяазтельные поля!');
+		array_push($errMsg, 'Заполните все обязательные поля!');
 	} elseif(mb_strlen($login, 'UTF8') < 3) {
 		array_push($errMsg, 'Логин должен быть более трех символов!');
 	} else {
@@ -184,6 +184,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
 	$lastName = trim($_POST['last_name']);
 	$firstName = trim($_POST['first_name']);
 	$surname = trim($_POST['surname']);
+	$img = $_POST['img'];
 	$dateBirth = $_POST['date_birth'];
 	$phone = trim($_POST['phone']);
 	$city = trim($_POST['city']);
@@ -233,14 +234,24 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
 		];
 
 		//Формируем данные в таблицу клиентов
-		$dataPersonal = [
-			'last_name' => $lastName,
-			'first_name' => $firstName,
-			'surname' => $surname,
-			'date_birth' => $dateBirth,
-			'phone' => $phone,
-			'img' => $_POST['img'] ,
-		];
+		if(empty($img)) {
+			$dataPersonal = [
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
+			];
+		} else {
+			$dataPersonal = [
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
+				'img' => $_POST['img'] ,
+			];
+		}	
 
 		$idClient = selectOne('clients', ['id' => $id]); //Получаем данные клиента, которого хотим отредактировать
 		$idAuth = $idClient['id_auth']; //Получаем айди записи авторизации, которую хотим запись

@@ -188,6 +188,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
 	$lastName = trim($_POST['last_name']);
 	$firstName = trim($_POST['first_name']);
 	$surname = trim($_POST['surname']);
+	$img = $_POST['img'];
 	$job = $_POST['job'];
 	$dateBirth = $_POST['date_birth'];
 	$phone = trim($_POST['phone']);
@@ -238,15 +239,26 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
 		];
 
 		//Формируем данные в таблицу клиентов
-		$dataPersonal = [
-			'last_name' => $lastName,
-			'first_name' => $firstName,
-			'surname' => $surname,
-			'date_birth' => $dateBirth,
-			'phone' => $phone,
-			'job' => $job,
-			'img' => $_POST['img'] ,
-		];
+		if(empty($img)) {
+			$dataPersonal = [
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
+				'job' => $job,
+			];
+		} else {
+			$dataPersonal = [
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
+				'job' => $job,
+				'img' => $_POST['img'] ,
+			];
+		}
 
 		$idEmployee = selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
 		$idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись

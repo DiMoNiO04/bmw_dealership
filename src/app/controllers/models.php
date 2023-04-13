@@ -26,9 +26,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
 	$status = trim($_POST['status']);
+	
 	//Проверка валидность формы
 	if($modelName === '') {
-		array_push($errMsg, 'Заполните все поля!');
+		array_push($errMsg, 'Заполните все обязательные поля!');
 	} else {
 		//Проверка на уникальность названия модели
 		$existence = selectOne('models', ['model' => $modelName]);
@@ -83,10 +84,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
 	$status = trim($_POST['status']);
+	$img = $_POST['img'];
 
 	//Проверка валидности формы
 	if($modelName === '') {
-		array_push($errMsg, 'Заполните все поля!');
+		array_push($errMsg, 'Заполните все обязательные поля!');
 	} else {
 			//Проверям на статус
 			if(isset($_POST['status'])) {
@@ -96,11 +98,18 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 			}
 			
 			//Формируем массив для отправки данных
-			$model = [
-				'model' => $modelName,
-				'status' => $status,
-				'main_foto' => $_POST['img'],
-			];
+			if(empty($img)) {
+				$model = [
+					'model' => $modelName,
+					'status' => $status
+				];	
+			} else {
+				$model = [
+					'model' => $modelName,
+					'status' => $status,
+					'main_foto' => $_POST['img'],
+				];	
+			}
 
 			//Отправляем данные в таблицу модели
 			$id = $_POST['id'];

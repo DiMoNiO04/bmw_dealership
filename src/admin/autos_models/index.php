@@ -9,7 +9,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Модели</title>
 </head>
 
 <body>
@@ -36,8 +36,11 @@
 								<?php foreach($models as $key => $model): ?>
 									<div class="panel__block">
 										<h2 class="panel__subtitle"><?=$model['model']; ?></h2>
-										<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
 										
+										<?php if(!empty($model['main_foto'])): ?>
+											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
+										<?php endif; ?>
+
 											<?php if($model['status']): ?>
 												<div class="panel__status green">
 													<h3>Наличие:</h3>

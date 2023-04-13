@@ -9,7 +9,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Сотрудники</title>
 </head>
 
 <body>
@@ -35,7 +35,11 @@
 								<div class="panel__blocks">
 									<div class="panel__block">
 										<h2 class="panel__subtitle"><?= $employee['last_name']?> <?= $employee['first_name']; ?> <?= $employee['surname']; ?></h2>
-										<img src="<?=BASE_URL . 'assets/images/dest/models/' . $employee['img'] ?>" alt="<?= $employee['last_name']?>" class="panel__img panel__img-user">
+										
+										<?php if(!empty($employee['img'])): ?>
+											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $employee['img'] ?>" alt="<?= $employee['last_name']?>" class="panel__img panel__img-user">
+										<?php endif; ?>
+										
 										<div class="panel__item">
 											<h3>Дата рождения:</h3>
 											<p><?= $employee['date_birth']?></p>

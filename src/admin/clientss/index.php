@@ -9,7 +9,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Клиенты</title>
 </head>
 
 <body>
@@ -35,7 +35,11 @@
 								<div class="panel__blocks">
 									<div class="panel__block">
 										<h2 class="panel__subtitle"><?= $client['last_name']?> <?= $client['first_name']; ?> <?= $client['surname']; ?></h2>
-										<img src="<?=BASE_URL . 'assets/images/dest/models/' . $client['img'] ?>" alt="<?= $client['last_name']?>" class="panel__img panel__img-user">
+										
+										<?php if(!empty($client['img'])):?>
+											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $client['img'] ?>" alt="<?= $client['last_name']?>" class="panel__img panel__img-user">
+										<?php endif;?>
+										
 										<div class="panel__item">
 											<h3>Дата рождения:</h3>
 											<p><?= $client['date_birth']?></p>

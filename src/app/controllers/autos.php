@@ -44,8 +44,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-create']))) {
 	$model = trim($_POST['model']);
 
 	//Проверка валидность формы
-	if($name === '' || $complexion === '' || $color === '' || $year === '' || $engine === '' || $price === '' || $status === '' || $model === '') {
-		array_push($errMsg, 'Заполните все поля!');
+	if($name === '' || $complexion === '' || $color === '' || $year === '' || $engine === '' || $price === '' || $model === '') {
+		array_push($errMsg, 'Заполните все обязательные поля!');
 	} else {
 
 			//Проверяем статус: выбран или нет
@@ -117,10 +117,11 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-edit']))) {
 	$price = $_POST['price'];
 	$status = $_POST['status'];
 	$model = $_POST['model'];
+	$img = $_POST['img'];
 
 	//Проверка валидность формы
-	if($name === '' || $complexion === '' || $color === '' || $year === '' || $engine === '' || $price === '' || $status === '' || $model === '') {
-		array_push($errMsg, 'Заполните все поля!');
+	if($name === '' || $complexion === '' || $color === '' || $year === '' || $engine === '' || $price === '' || $model === '') {
+		array_push($errMsg, 'Заполните все обязательные поля!');
 	} else {
 
 			//Проверяем статус: выбран или нет
@@ -131,17 +132,30 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-edit']))) {
 			}
 			
 			//Формируем массив для отправки
-			$auto = [
-				'name' => $name,
-				'engine' => $engine,
-				'year' => $year,
-				'price' => $price,
-				'color' => $color,
-				'complexion' => $complexion,
-				'img' => $_POST['img'],
-				'status' => $status,
-				'id_model' => $model
-			];
+			if(empty($img)) {
+				$auto = [
+					'name' => $name,
+					'engine' => $engine,
+					'year' => $year,
+					'price' => $price,
+					'color' => $color,
+					'complexion' => $complexion,
+					'status' => $status,
+					'id_model' => $model
+				];
+			} else {
+				$auto = [
+					'name' => $name,
+					'engine' => $engine,
+					'year' => $year,
+					'price' => $price,
+					'color' => $color,
+					'complexion' => $complexion,
+					'img' => $_POST['img'],
+					'status' => $status,
+					'id_model' => $model
+				];
+			}
 
 			$auto = update('auto', $id, $auto);
 			header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу автомобилей

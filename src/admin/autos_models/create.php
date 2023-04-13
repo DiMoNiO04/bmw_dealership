@@ -8,7 +8,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Модели</title>
 </head>
 
 <body>
@@ -30,16 +30,17 @@
 						</div>
 
 							<form  class="admin-form" method="post" action="create.php" enctype="multipart/form-data">
+								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<div class="admin__form-block">
-									<label for="model">Модель:</label>
+									<label for="model">Модель<span>*</span></label>
 									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель">
 								</div>
 								<div class="admin__form-block">
-									<label for="file">Выберите главное фото модели:</label>
+									<label for="file">Выберите главное фото модели<span>*</span></label>
 									<input name="img" type="file" id="file">
 								</div>
 								<div class="admin__form-block admin__form-block-st">
-									<label for="status">Наличие:</label>
+									<label for="status">Наличие</label>
 									<input value="1" name="status" type="checkbox">
 								</div>
 								<button name="model-create" type="submit" class="button">Добавить</button>

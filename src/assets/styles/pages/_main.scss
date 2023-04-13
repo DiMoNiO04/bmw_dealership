@@ -126,3 +126,10 @@ img{
 		z-index: 1;
 	}
 }
+
+.obligatory {
+	@include fontSizes($size: 20px, $weight: 400);
+	span {
+		color: #970202;
+	}
+}

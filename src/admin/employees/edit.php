@@ -8,7 +8,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Сотрудники</title>
 </head>
 
 <body>
@@ -33,6 +33,7 @@
 							</div>
 
 							<form  class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">
+								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<input name="id" type="hidden" value="<?=$id ?>">
 								<section class="form-reg__block">	
 									<h2>Личные данные</h2>
@@ -45,15 +46,15 @@
 										<input type="text" value="<?=$firstName ?>" name="first_name" id="first_name" placeholder="Введите имя...">
 									</div>
 									<div class="form-reg__item">
-										<label for="surname">Отчество<span>*</span></label>
+										<label for="surname">Отчество</label>
 										<input type="text" value="<?=$surname ?>" name="surname" id="surname" placeholder="Введите имя...">
 									</div>
 									<div class="form-reg__item">
-										<label for="dateBirth">Дата рождения<span>*</span></label>
+										<label for="dateBirth">Дата рождения</label>
 										<input type="date" value="<?=$dateBirth ?>" name="date_birth" id="dateBirth">
 									</div>
 									<div class="form-reg__item">
-										<label for="phone">Номер телефона<span>*</span></label>
+										<label for="phone">Номер телефона</label>
 										<input type="tel" value="<?=$phone ?>" name="phone" id="phone" placeholder="Введите номер телефона...">
 									</div>
 									<div class="admin__form-block">
@@ -64,7 +65,7 @@
 										</select>
 									</div>
 									<div class="form-reg__item">
-										<label for="img">Фото<span>*</span></label>
+										<label for="img">Фото (выбрано по умолчанию)</label>
 										<input type="file" value="<?=$img ?>" name="img" id="img">
 									</div>
 								</section>
@@ -72,19 +73,19 @@
 								<section class="form-reg__block">	
 									<h2>Данные по месту жительства</h2>
 									<div class="form-reg__item">
-										<label for="city">Город<span>*</span></label>
+										<label for="city">Город</label>
 										<input type="text" value="<?=$city ?>" name="city" id="city" placeholder="Введите город...">
 									</div>
 									<div class="form-reg__item">
-										<label for="street">Улица<span>*</span></label>
+										<label for="street">Улица</label>
 										<input type="text" value="<?=$street ?>" name="street" id="street" placeholder="Введите улицу...">
 									</div>
 									<div class="form-reg__item">
-										<label for="house">Номер дома<span>*</span></label>
+										<label for="house">Номер дома</label>
 										<input type="text" value="<?=$house ?>" name="house" id="house" placeholder="Введите номер дома...">
 									</div>
 									<div class="form-reg__item">
-										<label for="apartment">Номер квартиры<span>*</span></label>
+										<label for="apartment">Номер квартиры</label>
 										<input type="number" min="1" value="<?=$apartment ?>" name="apartment" id="apartment" placeholder="Введите номер квартиры...">
 									</div>
 								</section>
@@ -92,23 +93,23 @@
 								<section class="form-reg__block">	
 									<h2>Паспортные данные</h2>
 									<div class="form-reg__item">
-										<label for="series">Серия<span>*</span></label>
+										<label for="series">Серия</label>
 										<input type="text" value="<?=$series ?>" name="series" id="series" placeholder="Введите серию паспорта...">
 									</div>
 									<div class="form-reg__item">
-										<label for="number">Номер<span>*</span></label>
+										<label for="number">Номер</label>
 										<input type="text" value="<?=$number ?>" name="number" id="number" placeholder="Введите номер паспорта...">
 									</div>
 									<div class="form-reg__item">
-										<label for="issued_by">Кем выдан<span>*</span></label>
+										<label for="issued_by">Кем выдан</label>
 										<input type="text" value="<?=$issuedBy ?>" name="issued_by" id="issued_by" placeholder="Введите кем выдан...">
 									</div>
 									<div class="form-reg__item">
-										<label for="issued_when">Когда выдан<span>*</span></label>
+										<label for="issued_when">Когда выдан</label>
 										<input type="date" value="<?=$issuedWhen ?>" name="issued_when" id="issued_when">
 									</div>
 									<div class="form-reg__item">
-										<label for="validity">Срок действия<span>*</span></label>
+										<label for="validity">Срок действия</label>
 										<input type="date" value="<?=$validity ?>" name="validity" id="validity">
 									</div>
 								</section>
