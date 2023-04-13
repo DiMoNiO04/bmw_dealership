@@ -35,11 +35,11 @@
 								<input type="hidden" name="id" value="<?= $id ?>">
 								<div class="admin__form-block">
 									<label for="name">Название<span>*</span></label>
-									<input value="<?= $name?>" name="name" type="text" id="name">
+									<input value="<?= $name?>" name="name" type="text" id="name" required>
 								</div>
 								<div class="admin__form-block admin__form-block">
 									<label for="complexion">Комплектация<span>*</span></label>
-									<select name="complexion" id="complexion">
+									<select name="complexion" id="complexion" required>
 										<option value="Базовая">Базовая</option>
 										<option value="Средняя">Средняя</option>
 										<option value="Полная">Полная</option>
@@ -47,22 +47,22 @@
 								</div>
 								<div class="admin__form-block admin__form-block">
 									<label for="color">Цвет<span>*</span></label>
-									<input  value="<?= $color?>" name="color" type="text" name="color">
+									<input  value="<?= $color?>" name="color" type="text" name="color" required>
 								</div>
 								<div class="admin__form-block admin__form-block">
 									<label for="date">Год выпуска<span>*</span></label>
-									<input  value="<?= $year?>" name="year" type="number" max="2023" name="date">
+									<input  value="<?= $year?>" name="year" type="number" max="2023" name="date" required>
 								</div>
 								<div class="admin__form-block admin__form-block">
 									<label for="engine">Двигатель<span>*</span></label>
-									<select name="engine">
+									<select name="engine" required>
 										<option value="Бензиновый">Бензиновый</option>
 										<option value="Электрический">Электрический</option>
 									</select>
 								</div>
 								<div class="admin__form-block admin__form-block">
 									<label for="price">Цена (&#36)<span>*</span></label>
-									<input  value="<?= $price?>" name="price" type="number" name="price">
+									<input  value="<?= $price?>" name="price" type="number" name="price" required>
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите фото авто (выбрано по умолчанию)</label>
@@ -70,7 +70,7 @@
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Модель<span>*</span></label>
-									<select name="model">
+									<select name="model" required>
 										<?php foreach ($models as $key => $model): ?>
 											<option value="<?= $model['id']?>"><?=$model['model'] ?></option>
 										<?php endforeach; ?>

@@ -35,11 +35,11 @@
 									<h2>Личные данные</h2>
 									<div class="form-reg__item">
 										<label for="last_name">Фамилия<span>*</span></label>
-										<input type="text" value="<?=$lastName ?>" name="last_name" id="last_name" placeholder="Введите фамилию...">
+										<input type="text" value="<?=$lastName ?>" name="last_name" id="last_name" placeholder="Введите фамилию..." required>
 									</div>
 									<div class="form-reg__item">
 										<label for="first_name">Имя<span>*</span></label>
-										<input type="text" value="<?=$firstName ?>" name="first_name" id="first_name" placeholder="Введите имя...">
+										<input type="text" value="<?=$firstName ?>" name="first_name" id="first_name" placeholder="Введите имя..." required>
 									</div>
 									<div class="form-reg__item">
 										<label for="surname">Отчество</label>
@@ -115,15 +115,15 @@
 									<h2>Данные для входа</h2>
 									<div class="form-reg__item">
 										<label for="login">Логин<span>*</span></label>
-										<input type="text" value="<?=$login ?>" name="login" id="login" placeholder="Введите логин...">
+										<input type="text" value="<?=$login ?>" name="login" id="login" placeholder="Введите логин..." required>
 									</div>
 									<div class="form-reg__item">
 										<label for="password">Пароль<span>*</span></label>
-										<input type="password" name="password" id="password" placeholder="Введите пароль...">
+										<input type="password" name="password" id="password" placeholder="Введите пароль..." required>
 									</div>
 									<div class="form-reg__item">
 										<label for="email">Email<span>*</span></label>
-										<input type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email...">
+										<input type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email..." required>
 									</div>
 									<div class="form-reg__item admin__form-block-st">
 										<label for="access">Доступ:</label>

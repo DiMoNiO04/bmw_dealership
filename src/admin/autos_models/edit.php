@@ -34,7 +34,7 @@
 								<input name="id" type="hidden" value="<?=$id ?>">
 								<div class="admin__form-block">
 									<label for="model">Модель<span>*</span></label>
-									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель">
+									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель" required>
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите главное фото модели (выбрано по умолчанию)</label>

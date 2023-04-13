@@ -1,6 +1,7 @@
 <?php 
-	include ('../../path.php');
-	include ('../../app/database/database.php');
+	session_start();
+   include "../../path.php";
+   include "../../app/controllers/contacts.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +9,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Контакты</title>
 </head>
 
 <body>
@@ -28,67 +29,32 @@
 						<h1 class="title-pages panel__title">Контакты</h1>
 
 						<div class="panel__blocks">
-							<div class="panel__block">
-								<h2 class="panel__subtitle">Отдел продаж автомобиля</h2>
-								<div class="panel__item">
-									<h3>Телефон:</h3>
-									<p>+375447104585</p>
+						<?php if(empty($contacts)):?>
+							<p class="panel__empty">Контакты в базе данных отсутствуют. Но вы можете добавить</p>
+						<?php else:?>
+							<?php foreach($contacts as $key => $contact): ?>
+								<div class="panel__block">
+									<h2 class="panel__subtitle"><?=$contact['name']?></h2>
+									<div class="panel__item">
+										<h3>Телефон:</h3>
+										<p><?= $contact['phone']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Время работы:</h3>
+										<p><?= $contact['work_time']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Email</h3>
+										<p><?= $contact['email']?></p>
+									</div>
+									<div class="panel__buttons">
+										<a class="button panel__button-edit" href="edit.php?id=<?=$contact['id']?>">Edit</a>
+										<a class="button panel__button-red" href="edit.php?del_id=<?=$contact['id']?>">Delete</a>
+									</div>
 								</div>
-								<div class="panel__item">
-									<h3>Время работы:</h3>
-									<p>Пн-Вс: 8:00 - 20:00</p>
-								</div>
-								<div class="panel__item">
-									<h3>Email</h3>
-									<p>info@autoidea.by</p>
-								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
-
-							
-							<div class="panel__block">
-								<h2 class="panel__subtitle">Отдел продаж автомобиля</h2>
-								<div class="panel__item">
-									<h3>Телефон:</h3>
-									<p>+375447104585</p>
-								</div>
-								<div class="panel__item">
-									<h3>Время работы:</h3>
-									<p>Пн-Вс: 8:00 - 20:00</p>
-								</div>
-								<div class="panel__item">
-									<h3>Email</h3>
-									<p>info@autoidea.by</p>
-								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
-
-							<div class="panel__block">
-								<h2 class="panel__subtitle">Отдел продаж автомобиля</h2>
-								<div class="panel__item">
-									<h3>Телефон:</h3>
-									<p>+375447104585</p>
-								</div>
-								<div class="panel__item">
-									<h3>Время работы:</h3>
-									<p>Пн-Вс: 8:00 - 20:00</p>
-								</div>
-								<div class="panel__item">
-									<h3>Email</h3>
-									<p>info@autoidea.by</p>
-								</div>
-								<div class="panel__buttons">
-									<button class="button panel__button-edit">Edit</button>
-									<button class="button panel__button-red">Delete</button>
-								</div>
-							</div>
-						</div>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</div>
 						
 					</div>
 				</div>

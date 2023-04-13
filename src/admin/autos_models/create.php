@@ -33,11 +33,11 @@
 								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<div class="admin__form-block">
 									<label for="model">Модель<span>*</span></label>
-									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель">
+									<input value="<?=$modelName ?>" name="modelName" type="text" id="model" placeholder="Модель" required>
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите главное фото модели<span>*</span></label>
-									<input name="img" type="file" id="file">
+									<input name="img" type="file" id="file" required>
 								</div>
 								<div class="admin__form-block admin__form-block-st">
 									<label for="status">Наличие</label>

@@ -1,6 +1,6 @@
 <?php 
-	include ('../../path.php');
-	include ('../../app/database/database.php');
+	include "../../path.php";
+	include "../../app/controllers/contacts.php";
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +8,7 @@
 
 <head>
 	<?php include('../../app/includes/head.php') ?>
-	<title>Админ панель</title>
+	<title>Админ панель: Контакты</title>
 </head>
 
 <body>
@@ -24,27 +24,33 @@
 					<div class="panel__body">
 						<h1 class="title-pages panel__title">Добавление контактных данных</h1>
 						<div class="panel__blocks">
-							<form  class="admin-form" action="">
+
+							<div class="form-error">
+								<?php include("../../app/helps/errInfo.php")?>
+							</div>
+
+							<form  class="admin-form" action="create.php" method="post">
+								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<div class="admin__form-block">
-									<label for="name">Название:</label>
-									<input type="text" id="name" placeholder="Название">
+									<label for="name">Название<span>*</span></label>
+									<input name="name" value="<?php $name?>" type="text" id="name" placeholder="Название" required>
 								</div>
 								<div class="admin__form-block">
-									<label for="phone">Телефон:</label>
-									<input type="text" id="phone" name="phone" placeholder="Номер телефона">
+									<label for="phone">Телефон<span>*</span></label>
+									<input type="text" value="<?php $phone?>" id="phone" name="phone" placeholder="Номер телефона" required>
 								</div>
 								<div class="admin__form-block">
-									<label for="time">Время работы:</label>
-									<input type="text" id="time" placeholder="Время работы">
+									<label for="time">Время работы<span>*</span></label>
+									<input  value="<?php $workTime?>" name="work_time" type="tel" id="time" placeholder="Время работы" required>
 								</div>
 								<div class="admin__form-block">
-									<label for="email">Email:</label>
-									<input type="email" id="email" placeholder="Email">
+									<label for="email">Email<span>*</span></label>
+									<input value="<?php $email?>" name="email" type="email" id="email" placeholder="Email" required>
 								</div>
-								<button type="submit" class="button">Добавить</button>
+								<button type="submit" name="contact-create" class="button">Добавить</button>
 							</form>
+
 						</div>
-						
 					</div>
 				</div>
 			</div>

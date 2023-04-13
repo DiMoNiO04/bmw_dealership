@@ -40,11 +40,11 @@
 									<h2>Личные данные</h2>
 									<div class="form-reg__item">
 										<label for="last_name">Фамилия<span>*</span></label>
-										<input type="text" value="<?=$lastName ?>" name="last_name" id="last_name" placeholder="Введите фамилию...">
+										<input type="text" value="<?=$lastName ?>" name="last_name" id="last_name" placeholder="Введите фамилию..." required>
 									</div>
 									<div class="form-reg__item">
 										<label for="first_name">Имя<span>*</span></label>
-										<input type="text" value="<?=$firstName ?>" name="first_name" id="first_name" placeholder="Введите имя...">
+										<input type="text" value="<?=$firstName ?>" name="first_name" id="first_name" placeholder="Введите имя..." required>
 									</div>
 									<div class="form-reg__item">
 										<label for="surname">Отчество</label>
@@ -112,11 +112,11 @@
 									<h2>Данные для входа</h2>
 									<div class="form-reg__item">
 										<label for="login">Логин (данное поле нельзя отредактировать)</label>
-										<input readonly type="text" value="<?=$login ?>" name="login" id="login" placeholder="Введите логин...">
+										<input readonly type="text" value="<?=$login ?>" id="login">
 									</div>
 									<div class="form-reg__item">
 										<label for="email">Email (данное поле нельзя отредактировать)</label>
-										<input readonly type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email...">
+										<input readonly type="email" value="<?=$email ?>" id="email">
 									</div>
 									<div class="form-reg__item admin__form-block-st">
 										<label for="access">Доступ:</label>
