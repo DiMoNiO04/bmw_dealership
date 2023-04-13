@@ -1,6 +1,7 @@
 <?php 
-	include "../../path.php";
-	include "../../app/controllers/contacts.php";
+	session_start();
+   include "../../path.php";
+   include "../../app/controllers/contacts.php";
 ?>
 
 <!DOCTYPE html>

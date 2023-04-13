@@ -1,6 +1,7 @@
 <?php 
-	include ('path.php'); 
-	include ('./app/database/database.php');
+	session_start();
+   include "./path.php";
+   include "./app/controllers/contacts.php";
 ?>
 
 <!DOCTYPE html>
@@ -26,97 +27,30 @@
 						<img src="./assets/images/dest/contacts-second.jpg" alt="contact__second">
 					</div>
 					<ul class="contacts__list">
-						<li class="contacts__item">
-							<h2 class="contacts__subtitle">Отдел продаж автомобиля</h2>
-							<div class="contacts__phone">
-								<h3>Телефон</h3>
-								<p>+375447104585</p>
-							</div>
-							<div class="contacts__time">
-								<h3>Время работы</h3>
-								<p>Пн-Вс: 8:00 - 20:00</p>
-							</div>
-							<div class="contacts__email">
-								<h3>Email</h3>
-								<p>info@autoidea.by</p>
-							</div>
-						</li>
-						<li class="contacts__item">
-							<h2 class="contacts__subtitle">Отдел продаж авто с пробегом</h2>
-							<div class="contacts__phone">
-								<h3>Телефон</h3>
-								<p>+375 17 232 00 00</p>
-							</div>
-							<div class="contacts__time">
-								<h3>Время работы</h3>
-								<p>Пн-Вс 10:00–19:00</p>
-							</div>
-							<div class="contacts__email">
-								<h3>Email</h3>
-								<p>info@autoidea.by</p>
-							</div>
-						</li>
-						<li class="contacts__item">
-							<h2 class="contacts__subtitle">Отдел BMW Motorrad</h2>
-							<div class="contacts__phone">
-								<h3>Телефон</h3>
-								<p>+375 29 607 11 77</p>
-							</div>
-							<div class="contacts__time">
-								<h3>Время работы</h3>
-								<p>Пн-Вс: 8:00–18:00</p>
-							</div>
-							<div class="contacts__email">
-								<h3>Email</h3>
-								<p>info@autoidea.by</p>
-							</div>
-						</li>
-						<li class="contacts__item">
-							<h2 class="contacts__subtitle">Отдел сервисного обслуживания</h2>
-							<div class="contacts__phone">
-								<h3>Телефон</h3>
-								<p>+375447104585</p>
-							</div>
-							<div class="contacts__time">
-								<h3>Время работы</h3>
-								<p>Пн-Вс: 8:00 - 20:00</p>
-							</div>
-							<div class="contacts__email">
-								<h3>Email</h3>
-								<p>service@autoidea.by</p>
-							</div>
-						</li>
-						<li class="contacts__item">
-							<h2 class="contacts__subtitle">Отдел маркетинга и клиентинга</h2>
-							<div class="contacts__phone">
-								<h3>Телефон</h3>
-								<p>+375447104585</p>
-							</div>
-							<div class="contacts__time">
-								<h3>Время работы</h3>
-								<p>Пн - Пт 09:00-18:00</p>
-							</div>
-							<div class="contacts__email">
-								<h3>Email</h3>
-								<p>marketing@autoidea.by</p>
-							</div>
-						</li>
-						<li class="contacts__item">
-							<h2 class="contacts__subtitle">Call-center</h2>
-							<div class="contacts__phone">
-								<h3>Телефон</h3>
-								<p>+375 17 232 00 00</p>
-							</div>
-							<div class="contacts__time">
-								<h3>Время работы</h3>
-								<p>Пн-Вс: 8:00 - 20:00</p>
-							</div>
-							<div class="contacts__email">
-								<h3>Email</h3>
-								<p>call@autoidea.by</p>
-							</div>
-						</li>
+						
+						<?php if(empty($contacts)):?>
+							<p class="panel__empty">Контакты в базе данных отсутствуют. Но вы можете добавить</p>
+						<?php else:?>
+							<?php foreach($contacts as $key => $contact): ?>
+								<li class="contacts__item">
+									<h2 class="contacts__subtitle"><?= $contact['name'] ?></h2>
+									<div class="contacts__phone">
+										<h3>Телефон</h3>
+										<p><?= $contact['phone'] ?></p>
+									</div>
+									<div class="contacts__time">
+										<h3>Время работы</h3>
+										<p><?= $contact['work_time']?></p>
+									</div>
+									<div class="contacts__email">
+										<h3>Email</h3>
+										<p><?= $contact['email'] ?></p>
+									</div>
+								</li>
+							<?php endforeach; ?>
+						<?php endif;?>
 					</ul>
+					
 					<div class="contacts__address">
 						<div class="address__content">
 							<h2 class="address__title">Адрес автоцентра</h2>
