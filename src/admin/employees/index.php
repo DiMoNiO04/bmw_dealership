@@ -37,7 +37,7 @@
 										<h2 class="panel__subtitle"><?= $employee['last_name']?> <?= $employee['first_name']; ?> <?= $employee['surname']; ?></h2>
 										
 										<?php if(!empty($employee['img'])): ?>
-											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $employee['img'] ?>" alt="<?= $employee['last_name']?>" class="panel__img panel__img-user">
+											<img src="<?=BASE_URL . 'assets/images/dest/employees/' . $employee['img'] ?>" alt="<?= $employee['last_name']?>" class="panel__img panel__img-user">
 										<?php endif; ?>
 										
 										<div class="panel__item">
@@ -101,15 +101,15 @@
 										<?php endif; ?>
 
 										<div class="panel__buttons">
-											<a class="button panel__button-edit" href="edit.php?edit_id=<?= $employee['id']?>">Edit</a>
+											<a class="button panel__button-edit" href="edit.php?edit_id=<?= $employee['id']?>">Редактировать</a>
 
 											<?php if($employee['access'] == 0):?>
-												<a class="button panel__button-publish" href="index.php?access=1&pub_id=<?=$employee['id'];?>">Access</a>
+												<a class="button panel__button-publish" href="index.php?access=1&pub_id=<?=$employee['id'];?>">Доступ</a>
 											<?php else: ?>
-												<a class="button panel__button-publish" href="index.php?access=0&pub_id=<?=$employee['id'];?>">No access</a>
+												<a class="button panel__button-publish" href="index.php?access=0&pub_id=<?=$employee['id'];?>">Заблокировать</a>
 											<?php endif; ?>
 
-											<a class="button panel__button-red" href="index.php?del_id=<?= $employee['id']?>">Delete</a>
+											<a class="button panel__button-red" href="index.php?del_id=<?= $employee['id']?>">Удалить</a>
 										</div>
 
 									</div>

@@ -126,8 +126,9 @@
 	row-gap: 8px;
 	padding: 20px;
 	border: 2px solid $black;
-	border-radius: 10px
+	border-radius: 10px;
 }
+
 
 .panel__subtitle {
 	@include fontSizes(32px, 700, 30px, italic);

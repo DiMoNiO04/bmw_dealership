@@ -48,8 +48,8 @@
 										<p><?= $contact['email']?></p>
 									</div>
 									<div class="panel__buttons">
-										<a class="button panel__button-edit" href="edit.php?id=<?=$contact['id']?>">Edit</a>
-										<a class="button panel__button-red" href="edit.php?del_id=<?=$contact['id']?>">Delete</a>
+										<a class="button panel__button-edit" href="edit.php?id=<?=$contact['id']?>">Редактировать</a>
+										<a class="button panel__button-red" href="edit.php?del_id=<?=$contact['id']?>">Удалить</a>
 									</div>
 								</div>
 							<?php endforeach; ?>

@@ -88,7 +88,6 @@
 		color: $gray;
 	}
 	 span{
-		color: $green;
 		text-decoration: underline;
 	}
 }
@@ -130,6 +129,7 @@
 
 .popup__content{
 	@include sizes($width: 650px);
+	max-height: 720px;
 	@include flexContainer($direction: column);
 	background: linear-gradient(177.09deg, #218496 6.15%, #031285 202.69%);
 	border-radius: 30px;
@@ -187,6 +187,11 @@
 	h3{
 		@include fontSizes($size: 14px, $weight: 700);
 	}
+	h4{
+		color: $red;
+		font-size: 20px;
+		margin-bottom: 0;
+	}
 	p{
 		font-size: 14px;
 		color: $lightGray;
@@ -207,7 +212,7 @@
 }
 
 .order-form{
-	overflow: scroll;
+	overflow: auto;
 	@media screen and (max-width: 1070px) {
 		@include sizes($height: 660px);
 	}

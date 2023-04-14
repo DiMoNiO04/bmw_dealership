@@ -1,12 +1,12 @@
 <?php 
 //Работа с изображением
-function treatmentImg() {
+function treatmentImg($folder) {
 	if(!empty($_FILES['img']['name'])) {
 		$imgName = time() . '_' . $_FILES['img']['name'];
 		$fileTmpName = $_FILES['img']['tmp_name'];
 		$fileType = $_FILES['img']['type'];
-		$destination = ROOT_PATH . "\assets\images\dest\models\\" . $imgName;
-
+		$destination = ROOT_PATH . $folder . $imgName;
+		echo $destination;
 		if(strpos($fileType, 'image') === false) {
 			die("Можно загружать только изображения");
 		} else {

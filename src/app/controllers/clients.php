@@ -18,7 +18,7 @@ $clients = getClients('clients', 'clients_address', 'clients_passport', 'authori
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
 
 	//Работа с изображением
-	treatmentImg();
+	treatmentImg("\assets\images\dest\clients\\");
 
 	//Забираем данные из формы в переменные
 	$lastName  = trim($_POST['last_name']);
@@ -177,7 +177,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
 
 	//Работа с изображением 
-	treatmentImg();
+	treatmentImg("\assets\images\dest\clients\\");
 
 	//Получаем данные клиента из формы
 	$id = $_POST['id'];

@@ -26,7 +26,7 @@
 					<p><span>*</span> - обязательное поле для заполнения</p>
 				</div>
 
-				<div class="form-error">
+				<div class="error">
 					<?php include("./app/helps/errInfo.php")?>
 				</div>
 

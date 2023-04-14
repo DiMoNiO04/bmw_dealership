@@ -37,7 +37,7 @@
 										<h2 class="panel__subtitle"><?= $client['last_name']?> <?= $client['first_name']; ?> <?= $client['surname']; ?></h2>
 										
 										<?php if(!empty($client['img'])):?>
-											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $client['img'] ?>" alt="<?= $client['last_name']?>" class="panel__img panel__img-user">
+											<img src="<?=BASE_URL . 'assets/images/dest/clients/' . $client['img'] ?>" alt="<?= $client['last_name']?>" class="panel__img panel__img-user">
 										<?php endif;?>
 										
 										<div class="panel__item">
@@ -97,15 +97,15 @@
 										<?php endif; ?>
 
 										<div class="panel__buttons">
-											<a class="button panel__button-edit" href="edit.php?edit_id=<?= $client['id']?>">Edit</a>
+											<a class="button panel__button-edit" href="edit.php?edit_id=<?= $client['id']?>">Редактировать</a>
 
 											<?php if($client['access'] == 0):?>
-												<a class="button panel__button-publish" href="index.php?access=1&pub_id=<?=$client['id'];?>">Access</a>
+												<a class="button panel__button-publish" href="index.php?access=1&pub_id=<?=$client['id'];?>">Доступ</a>
 											<?php else: ?>
-												<a class="button panel__button-publish" href="index.php?access=0&pub_id=<?=$client['id'];?>">No access</a>
+												<a class="button panel__button-publish" href="index.php?access=0&pub_id=<?=$client['id'];?>">Заблокировать</a>
 											<?php endif; ?>
 
-											<a class="button panel__button-red" href="index.php?del_id=<?= $client['id']?>">Delete</a>
+											<a class="button panel__button-red" href="index.php?del_id=<?= $client['id']?>">Удалить</a>
 										</div>
 									</div>
 								<?php endforeach; ?>

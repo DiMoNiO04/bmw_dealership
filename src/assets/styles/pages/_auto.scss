@@ -168,7 +168,6 @@
 	@include flexContainer;
 	flex-wrap: wrap;
 	border-bottom: 1px solid $black;
-	padding-bottom: 16px;
 	row-gap: 24px;
 	@media screen and (max-width: 768px) {
 		justify-content: space-between;

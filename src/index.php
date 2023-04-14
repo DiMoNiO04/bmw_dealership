@@ -26,7 +26,7 @@
 							<h1 class="start__title">Новый <span class="red">M</span><span class="blue">5</span> Competition
 							</h1>
 						</div>
-						<a href="#" class="button" title="Узнать подробнее">Подробнее</a>
+						<a href="./autos.php" class="button" title="Узнать подробнее">Подробнее</a>
 					</div>
 					<p class="start__desc"><span>BMW</span>- движение с комфортом</p>
 				</div>

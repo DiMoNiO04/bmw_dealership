@@ -1,6 +1,8 @@
 <?php 
 	include ('path.php'); 
 	include ('./app/database/database.php');
+	$autos = getModelsName('auto', 'models');
+	$models = selectAll('models');
 ?>
 
 <!DOCTYPE html>
@@ -117,94 +119,29 @@
 
 					<div class="auto__content">
 						<div class="model__container">
-							<h2 class="model__title">M</h2>
-							<div class="model__cars">
-								<a href="./single__auto.php" class="model__car" title="Перейти BMW iX M60">
-									<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX M60">
-								<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX M60">
-								<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX M60">
-								<img src="./assets/images/dest/cars/ii7.webp" alt="BMW iX M60">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-							</div>
-						</div>
-						<div class="model__container">
-							<h2 class="model__title">X</h2>
-							<div class="model__cars">
-								<a href="#" class="model__car" title="Перейти BMW iX">
-									<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW iX">
-								<img src="./assets/images/dest/cars/iX.webp" alt="iX">
-									<h3>iX M60</h3>
-									<span>Электрический</span>
-								</a>
-							</div>
-						</div>
-						<div class="model__container">
-							<h2 class="model__title">M</h2>
-							<div class="model__cars">
-								<a href="#" class="model__car" title="Перейти BMW I-7">
-									<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
-									<h3>I7</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW I-7">
-								<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
-									<h3>I7</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW I-7">
-								<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
-									<h3>I7</h3>
-									<span>Электрический</span>
-								</a>
-								<a href="#" class="model__car" title="Перейти BMW I-7">
-								<img src="./assets/images/dest/cars/I-7.webp" alt="I-7">
-									<h3>I7</h3>
-									<span>Электрический</span>
-								</a>
-							</div>
+
+						<div class="error"></div>
+							<?php foreach($models as $key => $model): ?>
+
+								<?php if(getCountModel($model['id'])[0]['count'] != 0): ?>
+								
+									<h2 class="model__title"><?= $model['model'] ?></h2>
+									<div class="model__cars model__cars-js" model="<?= $model['model'] ?>">
+
+									<?php foreach($autos as $auto): ?>
+										<?php if($auto['model'] === $model['model']): ?>
+											<a href="<?= BASE_URL . 'single__auto.php?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['name'] ?>">
+												<img src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
+												<h3>BMW <?= $auto['model']?> серии <?= $auto['name'] ?></h3>
+												<span><?= $auto['engine'] ?></span>
+											</a>
+										<?php endif; ?>
+									<?php endforeach; ?>
+
+								</div>
+								<?php endif; ?>
+							<?php endforeach; ?>
+
 						</div>
 					</div>
 				</div>

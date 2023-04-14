@@ -1,6 +1,8 @@
 <?php 
 	include ('path.php'); 
 	include ('./app/database/database.php');
+	$auto = selectAutoFromAutosWithModelsOnSingle('auto', 'models', $_GET['auto']);
+	$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +10,7 @@
 
 <head>
 	<?php include('./app/includes/head.php') ?>
-	<title>BMW i7</title>
+	<title>BMW <?=$auto['model']?> серии <?=$auto['name']?></title>
 </head>
 
 <body>
@@ -20,7 +22,7 @@
 				<img src="./assets/images/dest/svg/close.svg" alt="close">
 			</div>
 			
-			<h2 class="order__title">Оформление заказа на автомобиль <span>BMW i7</span></h2>
+			<h2 class="order__title">Оформление заказа на автомобиль <span>BMW <?=$auto['model']?> серии <?=$auto['name']?></span></h2>
 			
 			<form action="#" method="post" class="order-form">
 				<div class="order__date">
@@ -29,66 +31,79 @@
 						<div class="personal__block">
 							<h3>ФИО:</h3>
 							<div class="personal__fio">
-								<p name="last__name">Разумов</p>
-								<p name="first__name">Дмитрий</p>
-								<p name="surname">Александрович</p>
+								<p><?= $user['last_name']?></p>
+								<p><?= $user['first_name']?></p>
+								<p><?= $user['surname']?></p>
 							</div>
 						</div>
 						<div class="personal__block">
 							<h3>Дата рождения:</h3>
-							<p name="date_of_birth">02.06.2004</p>
+							<p><?= $user['date_birth']?></p>
 						</div>
 						<div class="personal__block">
 							<h3>Номер телефона:</h3>
-							<p name="phone">80447104585</p>
+							<p><?= $user['phone']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Логин:</h3>
+							<p><?= $user['login']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Email:</h3>
+							<p><?= $user['email']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Место жительства:</h3>
+							<p>г.<?= $user['city']?>, ул.<?= $user['streer']?>, д.<?= $user['house']?>, кв.<?= $user['apartment']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Серия и номер паспорта:</h3>
+							<p><?= $user['series']?><?= $user['number']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Кем выдан:</h3>
+							<p><?= $user['issued_by']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Когда выдан:</h3>
+							<p><?= $user['issued_when']?></p>
+						</div>
+						<div class="personal__block">
+							<h3>Срок действия:</h3>
+							<p><?= $user['validity']?></p>
 						</div>
 					</div>
-	
+
 					<div class="auto__date">
 						<h2 class="order__subtitle">Данные автомобиля:</h2>
 						<div class="auto__block">
 							<h3>Модель:</h3>
-							<p>i7</p>
+							<p>BMW <?=$auto['model']?> серии <?=$auto['name']?></p>
 						</div>
 						<div class="auto__block">
 							<h3>Коробка передач:</h3>
-							<p>Автоматическая</p>
+							<p><?=$auto['engine']?></p>
 						</div>
 						<div class="auto__block">
 							<h3>Цвет:</h3>
-							<p>Серый</p>
+							<p><?=$auto['color']?></p>
 						</div>
 						<div class="auto__block">
 							<h3>Год выпуска:</h3>
-							<p>2022</p>
+							<p><?=$auto['year']?></p>
+						</div>
+						<div class="auto__block">
+							<h3>Комплектация:</h3>
+							<p><?=$auto['complexion']?></p>
+						</div>
+						<div class="auto__block">
+							<h4>Перед оформлением заказа сверьтесь c правильностью данных или если что-то неверно, то вам следует зайти в личный кабинет и отредактировать</h4>
 						</div>
 					</div>
-	
-					<div class="complexion__date">
-						<h2 class="order__subtitle">Выберите комплектацию:</h2>
-						<select name="complexion">
-							<option value="standart">Базовая</option>
-							<option value="medium">Средняя</option>
-							<option value="max">Максимальная</option>
-						</select>
+					<div class="price__block price__summary">
+							<h3>Стоимость: </h3>
+							<p><?=$auto['price']?></p>
 					</div>
-	
-					<div class="price__date">
-						<h2 class="order__subtitle">Стоимость:</h2>
-						<div class="price__block">
-							<h3>Стоимость авто: </h3>
-							<p>120000</p>
-						</div>
-						<div class="price__block">
-							<h3>Стоимость комплектации: </h3>
-							<p>20000</p>
-						</div>
-						<div class="price__block price__summary">
-							<h3>Итого: </h3>
-							<p>140000</p>
-						</div>
-					</div>
-	
 				</div>
 				
 				<h3 class="order__title">Оформление заказа</h3>
@@ -118,16 +133,22 @@
 
 	<div class="dark-wrapper"></div>
 	<main>
-		<section class="single-auto">
+		<section class="single-auto" style="background: url(<?=BASE_URL . 'assets/images/dest/models/' . $auto['main_foto']?>) no-repeat center; background-size: cover;">
 			<div class="auto__bg-fon"></div>
 			<div class="container">
 				<div class="single-auto__container">
 					<div class="single-auto__desc">
 						<div class="single-auto__logo">
 							<img src="./assets/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
-							<h1 class="single-auto__title">BMW i7</h1>
+							<h1 class="single-auto__title">BMW <?=$auto['model']?> серии <?=$auto['name']?></h1>
 						</div>
-						<button class="button button__order__auto">Оформить авто</button>
+
+						<?php if($auto['status'] == 0):?>
+							<button disabled class="button button__order__auto" title="Нету в наличии">Оформить авто</button>
+						<?php else: ?>
+							<button class="button button__order__auto">Оформить авто</button>
+						<?php endif; ?>
+						
 					</div>
 					<p class="single-auto__p">С удовольствием за рулем!</p>
 				</div>
@@ -137,44 +158,37 @@
 		<section class="characteristic">
 			<div class="container">
 				<div class="characteristic__container">
-					<h2 class="characteristic__title">BMW i7</h2>
+					<h2 class="characteristic__title">BMW <?=$auto['model']?> серии <?=$auto['name']?></h2>
 					<ul class="characteristic__content">
-						<li><strong>Модель:</strong>i7</li>
-						<li><strong>Коробка передач:</strong> Автомат</li>
-						<li><strong>Цвет:</strong> Серый</li>
-						<li><strong>Двигатель:</strong> Электрический</li>
-						<li><strong>Запас хода:</strong>до 625 км</li>
-						<li><strong>Год выпуска:</strong> 2020</li>
-						<li><strong>Стоимость:</strong> 210000 $</li>
-						<li><strong>Наличе:</strong><span class="green">есть в наличии</span></li>
+						<li><strong>Модель:</strong><?=$auto['model']?></li>
+						<li><strong>Цвет:</strong> <?=$auto['color']?></li>
+						<li><strong>Двигатель:</strong> <?=$auto['engine']?></li>
+						<li><strong>Год выпуска:</strong> <?=$auto['year']?></li>
+						<li><strong>Комплектация:</strong> <?=$auto['complexion']?></li>
+						<li><strong>Стоимость:</strong> <?=$auto['price']?> $</li>
+
+						<?php if($auto['status'] == 0):?>
+							<li><strong>Наличе:</strong><span class="red">нету в наличии</span></li>
+						<?php else: ?>
+							<li><strong>Наличе:</strong><span class="green">есть в наличии</span></li>
+						<?php endif; ?>
+
 					</ul>
 				</div>
-				<img class="single-auto__image" src="./assets/images/dest/cars/I-7.webp" alt="salon BMW i7">
+				<img class="single-auto__image" src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
 			</div>
 		</section>
 
 		<section class="description">
 			<div class="container">
 				<div class="description__container">
-					<p>Первый полностью электрический BMW i7 сочетает в себе динамику электромобиля и разнообразные
-						информационно-развлекательные возможности, что позволяет получать незабываемые впечатления от поездки.
-					</p>
-					<p>Сценарий приветствия Great Entrance Moments.
-						Фары с хрустальными элементами и решетка радиатора BMW Iconic Glow с подсветкой.
-						Роскошная атмосфера салона и индивидуальные режимы My Modes.
-						Как в кинотеатре: дисплей BMW Theatre Screen с диагональю 31,3" в задней части салона.
-						Мощность 544 л.с.* и запас хода на электротяге до 625 км*</p>
-					<p>Мощность 544 л.с.* внушает чувство уверенности на дороге. Крутящий момент до 745 Нм* обеспечивает
-						максимально динамичный разгон. Разгон 0–100 км/ч всего за 4,7 с*.
-						Почти в полной тишине и без вредных выбросов благодаря инновационной концепции привода eDrive</p>
-					<p>Режимы My Modes позволяют Вам наслаждаться взаимодействием света, звука и микроклимата, оптимизированным
-						в соответствии с Вашим настроением. BMW IconicSounds Electric генерирует характерный для каждого режима
-						движения звук, записанный Хансом Циммером. Вас ждет еще очень много интересного: в новом BMW i7 каждая
-						поездка превратится в восхитительное событие.</p>
-					<p>Интеллектуальные и инновационные решения – сервисы BMW Connected предлагают широкий ряд полезных функций,
-						что позволяет Вам с легкостью справляться в новом BMW i7 со всеми задачами повседневной жизни. Гибкие
-						пакеты услуг обеспечивают идеальную связь и представляют самую актуальную информацию.</p>
-					<button class="button button__order">Оформить авто</button>
+
+					<?php if($auto['status'] == 0):?>
+							<button disabled class="button button__order" title="Нету в наличии">Оформить авто</button>
+						<?php else: ?>
+							<button class="button button__order">Оформить авто</button>
+					<?php endif; ?>
+	
 				</div>
 			</div>
 		</section>

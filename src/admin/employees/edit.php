@@ -28,7 +28,7 @@
 						</div>
 
 						<div class="panel__blocks">
-							<div class="form-error">
+							<div class="error">
 								<?php include("../../app/helps/errInfo.php")?>
 							</div>
 

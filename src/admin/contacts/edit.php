@@ -26,7 +26,7 @@
 						<h1 class="title-pages panel__title">Редактирование контактных данных</h1>
 						<div class="panel__blocks">
 
-							<div class="form-error">
+							<div class="error">
 								<?php include("../../app/helps/errInfo.php")?>
 							</div>
 

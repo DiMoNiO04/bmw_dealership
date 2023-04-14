@@ -56,6 +56,11 @@ li{
 		background-color: $borderButtons;
 		cursor: pointer;
 	}
+	&:disabled {
+		background: $gray;
+		border-color: $gray;
+		cursor: inherit;
+	}
 	@media screen and (max-width: 900px) {
 		@include sizes($width: 320px);
 	}
@@ -132,4 +137,9 @@ img{
 	span {
 		color: #970202;
 	}
+}
+
+.error{
+	color: $red;
+	@include fontSizes($size: 20px, $weight: 500, $style: italic);
 }

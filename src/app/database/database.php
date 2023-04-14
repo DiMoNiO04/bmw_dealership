@@ -170,6 +170,16 @@ function getModelsName($table1, $table2) {
 	return $query->fetchAll();
 }
 
+//Выборка записи с названием авто для сингл
+function selectAutoFromAutosWithModelsOnSingle($table1, $table2, $id) {
+	global $pdo;
+	$sql = "SELECT t1.*, t2.model, t2.main_foto FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id WHERE t1.id = $id"; 
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetch();
+}
+
 //Выборка клиентов 
 function getClients($table1, $table2, $table3, $table4) {
 	global $pdo;
@@ -237,5 +247,47 @@ function getEmployees($table1, $table2, $table3, $table4) {
 	$query->execute();
 	dbCheckErr($query); //Проверка запроса на ошибки
 	return $query->fetchAll();
+}
+
+function getCountModel($idModel) {
+	global $pdo;
+	$sql = "SELECT COUNT(id_model) AS count FROM auto JOIN models ON auto.id_model = models.id WHERE id_model = $idModel";
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query);
+	return $query->fetchAll();
+}
+
+//Выборка личных данных из сессии
+function getPersonalData($table1, $table2, $table3, $table4, $id) {
+	global $pdo;
+	$sql = "SELECT 
+		t1.id,
+		t1.last_name,
+		t1.first_name,
+		t1.surname,
+		t1.date_birth,
+		t1.phone,
+		t2.city,
+		t2.street,
+		t2.house,
+		t2.apartment,
+		t3.series,
+		t3.number,
+		t3.issued_by,
+		t3.issued_when,
+		t3.validity,
+		t4.login,
+		t4.email,
+		t4.date_regist
+	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_address = t2.id
+							JOIN $table3 AS t3 ON t1.id_passport = t3.id
+							JOIN $table4 AS t4 ON t1.id_auth = t4.id 
+	WHERE t4.id = $id";
+	
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetch();
 }
 ?>

@@ -24,7 +24,7 @@
 					<div class="panel__body">
 						<h1 class="title-pages panel__title">Добавление авто</h1>
 
-						<div class="form-error">
+						<div class="error">
 							<?php include("../../app/helps/errInfo.php")?>
 						</div>
 

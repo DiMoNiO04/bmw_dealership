@@ -22,7 +22,7 @@
 				<h1 class="form-auth__title">Авторизация</h1>
 				<p class="form-auth__desc">У вас еще нет аккаунта? Вы можете зарегистрироваться <a href="./reg.php">здесь</a></p>
 				
-				<div class="form-error">
+				<div class="error">
 					<?php include("./app/helps/errInfo.php")?>
 				</div>
 				

@@ -32,15 +32,20 @@
 							<p class="panel__empty">Автомобили в базе данных отсутствуют. Но вы можете добавить</p>
 						<?php else:?>
 
-							<?php include('../../app/includes/sidebar.php') ?>
+							<?php 
+								include('../../app/includes/sidebar.php');
+								$model = selectAll('auto', ['id_model' => $_GET['id']]); 
+								// tt($model);
+							?>
 
 							<div class="panel__blocks">
+								<div class="error"></div>
 								<?php foreach ($autoModelsName as $key => $auto): ?>
-									<div class="panel__block">
+									<div class="panel__block model__cars-js" model="<?= $auto['model']?>">
 										<h2 class="panel__subtitle"><?= $auto['model']?><?= $auto['name']; ?></h2>
 										
 										<?php if(!empty($auto['img'])): ?>
-											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
+											<img src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
 										<?php endif; ?>
 										
 										<div class="panel__item">
@@ -77,15 +82,15 @@
 										<?php endif; ?>
 
 										<div class="panel__buttons">
-											<a class="button panel__button-edit" href="edit.php?id=<?=$auto['id'];?>">Edit</a>
+											<a class="button panel__button-edit" href="edit.php?id=<?=$auto['id'];?>">Редактировать</a>
 
 											<?php if($auto['status'] == 0): ?>
-												<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$auto['id'];?>">Publish</a>
+												<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$auto['id'];?>">Опубликовать</a>
 											<?php else:?>
-												<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$auto['id'];?>">Unpublish</a>
+												<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$auto['id'];?>">Снять с публикации</a>
 											<?php endif; ?>
 
-											<a class="button panel__button-red" href="edit.php?del_id=<?=$auto['id'];?>">Delete</a>
+											<a class="button panel__button-red" href="edit.php?del_id=<?=$auto['id'];?>">Удалить</a>
 										</div>
 									</div>
 								<?php endforeach; ?>

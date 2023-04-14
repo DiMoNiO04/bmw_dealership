@@ -1,6 +1,12 @@
 <?php 
 	include ('path.php'); 
 	include ('./app/database/database.php');
+
+	if($_SESSION['role'] == 1) {
+		$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);
+	} else {
+		$user = getPersonalData('clients', 'clients_address', 'clients_passport', 'authorization', $_SESSION['id']);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -20,44 +26,68 @@
 		<section class="personal">
 			<div class="container">
 				<div class="personal__container">
-					<h1 class="personal__title">Пользователь №<span>123</span></h1>
+
+					<h1 class="personal__title">
+						<?php if($_SESSION['role'] == 0): ?>
+							Клиент №<span><?= $user['id']?></span>
+						<?php else: ?>
+							Сотрудник №<span><?= $user['id']?></span>
+						<?php endif; ?>
+					</h1>
+
 					<div class="personal__body">
 						<div class="personal__image">
 							<img src="./assets/images/dest/user.png" alt="personal__foto">
 						</div>
 						<div class="presonal__data">
 							<h2 class="personal__subtitle">Ваши персональные данные:</h2>
-							<div class="personal__date">
+							<div class="personal__data">
 								<h3>ФИО:</h3>
 								<div class="personal__fio">
-									<span name="last__name">Разумов</span>
-									<span name="first__name">Дмитрий</span>
-									<span name="surname">Александрович</span>
+									<span name="last__name"><?= $user['last_name']?></span>
+									<span name="first__name"><?= $user['first_name']?></span>
+									<span name="surname"><?= $user['surname']?></span>
 								</div>
 							</div>
 							<div class="personal__data">
 								<h3>Дата рождения:</h3>
-								<span name="date_of_birth">02.06.2004</span>
+								<span name="date_of_birth"><?= $user['date_birth']?></span>
 							</div>
 							<div class="personal__data">
 								<h3>Номер телефона:</h3>
-								<span name="phone">80447104585</span>
+								<span name="phone"><?= $user['phone']?></span>
 							</div>
 							<div class="personal__data">
 								<h3>Дата регистрации:</h3>
-								<span>05.10.2022</span>
+								<span><?= $user['date_regist']?></span>
 							</div>
 							<div class="personal__data">
-								<h3>Гражданство:</h3>
-								<span>Беларусь</span>
+								<h3>Место жительство:</h3>
+								<span>г.<?= $user['city']?>, ул.<?= $user['streer']?>, д.<?= $user['house']?>, кв.<?= $user['apartment']?></span>
+							</div>
+							<div class="personal__data">
+								<h3>Серия и номер паспорта:</h3>
+								<span><?= $user['series']?><?= $user['number']?></span>
+							</div>
+							<div class="personal__data">
+								<h3>Кем выдан:</h3>
+								<span><?= $user['issued_by']?></span>
+							</div>
+							<div class="personal__data">
+								<h3>Когда выдан:</h3>
+								<span><?= $user['issued_when']?></span>
+							</div>
+							<div class="personal__data">
+								<h3>Срок действия:</h3>
+								<span><?= $user['validity']?></span>
 							</div>
 							<div class="personal__data">
 								<h3>Логин:</h3>
-								<span>dimonio04</span>
+								<span><?= $user['email']?></span>
 							</div>
 							<div class="personal__data">
-								<h3>Почта:</h3>
-								<span>dima.razumov.940@mail.ru</span>
+								<h3>Email:</h3>
+								<span><?= $user['email']?></span>
 							</div>
 						</div>
 					</div>

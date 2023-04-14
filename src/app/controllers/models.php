@@ -21,7 +21,7 @@ $modelName = '';
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 
 	//Работа с изображением
-	treatmentImg();
+	treatmentImg("\assets\images\dest\models\\");
 
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
@@ -79,7 +79,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 
 	//Работа с изображением 
-	treatmentImg();
+	treatmentImg("\assets\images\dest\models\\");
 
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);

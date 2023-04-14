@@ -68,6 +68,8 @@
 }
 
 .personal__data{
+	display: flex;
+	column-gap: 6px;
 	h3{
 		@include fontSizes($size: 18px, $weight: 700);
 	}

@@ -26,8 +26,8 @@
 						<img src="./assets/images/dest/contacts-first.jpg" alt="contact__first">
 						<img src="./assets/images/dest/contacts-second.jpg" alt="contact__second">
 					</div>
+					
 					<ul class="contacts__list">
-						
 						<?php if(empty($contacts)):?>
 							<p class="panel__empty">Контакты в базе данных отсутствуют. Но вы можете добавить</p>
 						<?php else:?>
@@ -50,7 +50,7 @@
 							<?php endforeach; ?>
 						<?php endif;?>
 					</ul>
-					
+
 					<div class="contacts__address">
 						<div class="address__content">
 							<h2 class="address__title">Адрес автоцентра</h2>

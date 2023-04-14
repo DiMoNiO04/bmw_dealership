@@ -123,8 +123,3 @@
 		color: $darkRed;
 	}
 }
-
-.form-error{
-	color: $red;
-	@include fontSizes($size: 20px, $weight: 500, $style: italic);
-}

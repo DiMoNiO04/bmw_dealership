@@ -17,7 +17,7 @@ $employees = getEmployees('employees', 'employees_address', 'employees_passport'
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {
 
 	//Работа с изображением
-	treatmentImg();
+	treatmentImg("\assets\images\dest\employees\\");
 
 	//Забираем данные из формы в переменные
 	$lastName = trim($_POST['last_name']);
@@ -181,7 +181,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
 
 	//Работа с изображением 
-	treatmentImg();
+	treatmentImg("\assets\images\dest\employess\\");
 
 	//Получаем данные сотрудника из формы
 	$id = $_POST['id'];
