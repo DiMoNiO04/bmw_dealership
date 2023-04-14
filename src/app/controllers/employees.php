@@ -17,7 +17,7 @@ $employees = getEmployees('employees', 'employees_address', 'employees_passport'
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {
 
 	//Работа с изображением
-	treatmentImg("\assets\images\dest\employees\\");
+	treatmentImg("\assets\images\dest\\employees\\");
 
 	//Забираем данные из формы в переменные
 	$lastName = trim($_POST['last_name']);

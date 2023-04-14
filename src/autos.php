@@ -125,7 +125,7 @@
 
 								<?php if(getCountModel($model['id'])[0]['count'] != 0): ?>
 								
-									<h2 class="model__title"><?= $model['model'] ?></h2>
+									<h2 class="model__title" model="<?= $model['model'] ?>"><?= $model['model'] ?></h2>
 									<div class="model__cars model__cars-js" model="<?= $model['model'] ?>">
 
 									<?php foreach($autos as $auto): ?>
