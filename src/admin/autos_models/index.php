@@ -41,7 +41,7 @@
 											<img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
 										<?php endif; ?>
 
-											<?php if($model['status']): ?>
+											<?php if($model['counts'] > 0): ?>
 												<div class="panel__status green">
 													<h3>Наличие:</h3>
 													<p>Есть в наличии</p>
@@ -55,13 +55,6 @@
 
 											<div class="panel__buttons">
 												<a class="button panel__button-edit" href="edit.php?id=<?=$model['id']?>">Редактировать</a>
-
-												<?php if($model['status'] == 0): ?>
-													<a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$model['id'];?>">Опубликовать</a>
-												<?php else:?>
-													<a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$model['id'];?>">Снять с публикации</a>
-												<?php endif; ?>
-
 												<a class="button panel__button-red" href="edit.php?del_id=<?=$model['id']?>">Удалить</a>
 											</div>
 									</div>

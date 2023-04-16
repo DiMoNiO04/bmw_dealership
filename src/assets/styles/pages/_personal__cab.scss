@@ -146,10 +146,11 @@
 	@include sizes($width: 220px);
 	color: $red;
 	border: 2px solid $darkRed;
-	padding: 12px;
+	padding: 8px;
 	background: transparent;
 	font-weight: 700;
 	margin: auto 0 auto auto;
+	text-align: center;
 	&:hover{
 		background: $darkRed;
 		cursor: pointer;

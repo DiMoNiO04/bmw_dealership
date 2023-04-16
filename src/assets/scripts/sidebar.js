@@ -11,17 +11,23 @@ const showToggleCars = (model) => {
 	if(model == 'all') {
 		for(let i = 0; i < MODEL_CARS.length; i++) {
 			MODEL_CARS[i].style.display = 'flex';
-			MODELS_TITLE[i].style.display = 'block';
+			if(!location.href.includes('admin')) {
+				MODELS_TITLE[i].style.display = 'block';
+			}
 			isHave = true;
 		}	
 	} else {		
 		for(let i = 0; i < MODEL_CARS.length; i++) {
 			if(MODEL_CARS[i].getAttribute('model') != model) {
 				MODEL_CARS[i].style.display = 'none';
-				MODELS_TITLE[i].style.display = 'none';
+				if(!location.href.includes('admin')) {
+					MODELS_TITLE[i].style.display = 'none';
+				}
 			} else {
 				MODEL_CARS[i].style.display = 'flex';
-				MODELS_TITLE[i].style.display = 'block';
+				if(!location.href.includes('admin')) {
+					MODELS_TITLE[i].style.display = 'block';
+				}
 				isHave = true;
 			}
 		}

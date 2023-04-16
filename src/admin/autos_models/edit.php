@@ -40,16 +40,6 @@
 									<label for="file">Выберите главное фото модели (выбрано по умолчанию)</label>
 									<input name="img" type="file" id="file">
 								</div>
-								<div class="admin__form-block admin__form-block-st">
-									<label for="status">Наличие:</label>
-
-									<?php if($model['status'] == 0):?>
-										<input value="0" name="status" type="checkbox">
-									<?php else: ?>
-										<input value="1" name="status" type="checkbox" checked>
-									<?php endif; ?>
-									
-								</div>
 								<button name="model-edit" type="submit" class="button">Обновить</button>
 							</form>
 

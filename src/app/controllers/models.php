@@ -25,7 +25,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
-	$status = trim($_POST['status']);
 	
 	//Проверка валидность формы
 	if($modelName === '') {
@@ -38,18 +37,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 		if($existence['model'] === $modelName) {
 			array_push($errMsg, 'Данная модель авто уже существует!');
 		} else {
-
-			//Проверяем статус: выбран или нет
-			if(isset($_POST['status'])) {
-				$status = 1;
-			} else {
-				$status = 0;
-			}
 			
 			//Формируем массив для отправки
 			$model = [
 				'model' => $modelName,
-				'status' => $status,
 				'main_foto' => $_POST['img'],
 			];
 
@@ -73,7 +64,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 	$id = $model['id'];
 	$modelName = $model['model'];
 	$img = $model['main_foto'];
-	$status = $model['status'];
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
@@ -83,7 +73,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
-	$status = trim($_POST['status']);
 	$img = $_POST['img'];
 
 	//Проверка валидности формы
@@ -101,12 +90,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 			if(empty($img)) {
 				$model = [
 					'model' => $modelName,
-					'status' => $status
 				];	
 			} else {
 				$model = [
 					'model' => $modelName,
-					'status' => $status,
 					'main_foto' => $_POST['img'],
 				];	
 			}
@@ -116,18 +103,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
 			$modelId = update('models', $id, $model); //Обновляем данные
 			header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
 		}
-}
-
-
-//Изменение статуса модели
-if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
-	$id = $_GET['pub_id'];  //Получаем айди модели, статус которой хотим изменить
-	$status = $_GET['status']; //Получаем статус данной модели
-
-	$modelId = update('models', $id, ['status' => $status]); //Перезаписываем изменения
-
-	header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
-	exit();
 }
 
 //Удаление модели

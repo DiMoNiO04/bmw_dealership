@@ -1,7 +1,6 @@
 <?php 
 	include ('path.php'); 
-	include ('./app/database/database.php');
-
+	include "./app/controllers/auth.php";
 	if($_SESSION['role'] == 1) {
 		$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);
 	} else {
@@ -96,47 +95,49 @@
 			</div>
 		</section>
 
-		<section class="orders">
-			<div class="container">
-				<div class="orders__container">
-					<h2 class="personal__subtitle orders__subtitle">Ваши заказы:</h2>
-					<div class="orders__body">
-						<div class="order__titles">
-							<h2>Номер заказа</р>
-							<h2>Модель</h2>
-							<h2>Дата</h2>
-							<h2>Стоимость</h2>
+		<?php if($_SESSION['role'] == 0): ?>
+			<section class="orders">
+				<div class="container">
+					<div class="orders__container">
+						<h2 class="personal__subtitle orders__subtitle">Ваши заказы:</h2>
+						<div class="orders__body">
+							<div class="order__titles">
+								<h2>Номер заказа</р>
+								<h2>Модель</h2>
+								<h2>Дата</h2>
+								<h2>Стоимость</h2>
+							</div>
+							<div class="order">
+								<span>111</span>
+								<span>M5</span>
+								<span>02.05.2021</span>
+								<span>2000000</span>
+							</div>
+							<div class="order">
+								<span>111</span>
+								<span>M5</span>
+								<span>02.05.2021</span>
+								<span>2000000</span>
+							</div>
+							<div class="order">
+								<span>111</span>
+								<span>M5</span>
+								<span>02.05.2021</span>
+								<span>2000000</span>
+							</div>
 						</div>
-						<div class="order">
-							<span>111</span>
-							<span>M5</span>
-							<span>02.05.2021</span>
-							<span>2000000</span>
-						</div>
-						<div class="order">
-							<span>111</span>
-							<span>M5</span>
-							<span>02.05.2021</span>
-							<span>2000000</span>
-						</div>
-						<div class="order">
-							<span>111</span>
-							<span>M5</span>
-							<span>02.05.2021</span>
-							<span>2000000</span>
-						</div>
+						<button class="button">Оформить заказ</button>
 					</div>
-					<button class="button">Оформить заказ</button>
 				</div>
-			</div>
-		</section>
+			</section>
+		<?php endif; ?>
 
 		<section class="buttons">
 			<div class="container">
 				<div class="buttons__container">
-					<button class="button__personal">Изменить пароль</button>
-					<button class="button__personal">Удалить аккаунт</button>
-					<button class="button__personal">Выйти из аккаунта</button>
+					<a class="button__personal">Изменить пароль</a>
+					<a class="button__personal" href="personal__cab-user.php?del_id=<?= $_SESSION['id']?>">Удалить аккаунт</a>
+					<a href="../../logout.php" class="button__personal">Выйти из аккаунта</a>
 				</div>
 			</div>
 		</section>

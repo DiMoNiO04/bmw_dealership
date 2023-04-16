@@ -1,6 +1,6 @@
 <?php 
 include SITE_ROOT . "/app/database/database.php";
-include('../../app/helps/treatmentImage.php');
+include SITE_ROOT . '/app/helps/treatmentImage.php';
 
 
 $errMsg = [];
@@ -279,6 +279,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
 //Удаление сотрудника
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди сотрудника, которого хотим удалить
+	tt($id);
 	$idEmployee = selectOne('employees', ['id' => $id]); 
 
 	$idAuth = $idEmployee['id_auth']; //Получаем айди авторизации для данного сотрудника

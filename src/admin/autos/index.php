@@ -42,7 +42,7 @@
 								<div class="error"></div>
 								<?php foreach ($autoModelsName as $key => $auto): ?>
 									<div class="panel__block model__cars-js" model="<?= $auto['model']?>">
-										<h2 class="panel__subtitle"><?= $auto['model']?><?= $auto['name']; ?></h2>
+										<h2 class="panel__subtitle"><?= $auto['model']?> серии <?= $auto['name']; ?></h2>
 										
 										<?php if(!empty($auto['img'])): ?>
 											<img src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
