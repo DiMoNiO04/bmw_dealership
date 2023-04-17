@@ -41,6 +41,27 @@ function jsPopup() {
 	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
 }
 
+function jsValidatePassword() {
+	return src([ //Берем файлы из источников 
+		'src/assets/scripts/validatePassword.js'  //Пользовательские скрипты
+	])
+	.pipe(concat('validatePassword.min.js'))  //Конкатенируем в один файл
+	.pipe(uglify())  //Сжимаем JS
+	.pipe(dest('src/assets/js/')) //Выгружаем готовый файл в папку назначения
+	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
+}
+
+function jsPopupPersonalEdit() {
+	return src([ //Берем файлы из источников 
+		'src/assets/scripts/popup-personal-edit.js'  //Пользовательские скрипты
+	])
+	.pipe(concat('popup-personal-edit.min.js'))  //Конкатенируем в один файл
+	.pipe(uglify())  //Сжимаем JS
+	.pipe(dest('src/assets/js/')) //Выгружаем готовый файл в папку назначения
+	.pipe(browserSync.stream()) //Триггерим Browsersync для обновления страницы
+}
+
+
 function jsService() {
 	return src([ //Берем файлы из источников 
 		'src/assets/scripts/service.js'  //Пользовательские скрипты
@@ -126,6 +147,8 @@ function startwatch() {
 	watch(['src/assets/scripts/popup.js', '!src/assets/scripts/popup.min.js'], jsPopup);
 	watch(['src/assets/scripts/service.js', '!src/assets/scripts/service.min.js'], jsService);
 	watch(['src/assets/scripts/sidebar.js', '!src/assets/scripts/sidebar.min.js'], jsSidebar);
+	watch(['src/assets/scripts/sidebar.js', '!src/assets/scripts/validatePassword.min.js'], jsValidatePassword);
+	watch(['src/assets/scripts/sidebar.js', '!src/assets/scripts/popup-personal-edit.min.js'], jsPopupPersonalEdit);
 	watch('src/assets/**/*.html').on('change', browserSync.reload);
 	watch('src/assets/**/*.php').on('change', browserSync.reload);
 	watch('src/app/**/*.php').on('change', browserSync.reload);
@@ -137,13 +160,15 @@ function startwatch() {
 exports.browsersync = browsersync;
 exports.jsHeader = jsHeader;
 exports.jsPopup = jsPopup;
+exports.jsValidatePassword = jsValidatePassword;
+exports.jsPopupPersonalEdit = jsPopupPersonalEdit
 exports.jsService = jsService;
 exports.jsSidebar = jsSidebar;
 exports.styles = styles;
 exports.images = images;
 exports.cleanimg = cleanimg;
-exports.build = series(cleandist, styles, jsHeader, jsPopup, jsService, jsSidebar, images, buildcopy);
+exports.build = series(cleandist, styles, jsHeader, jsPopup,jsValidatePassword, jsService, jsSidebar, jsPopupPersonalEdit, images, buildcopy);
 
 
 //Экспортируем дефолтный таск с нужным набором функций
-exports.default = parallel(styles, jsHeader, jsPopup, jsService, jsSidebar, browsersync, startwatch);
+exports.default = parallel(styles, jsHeader, jsPopup, jsValidatePassword, jsPopupPersonalEdit, jsService, jsSidebar, browsersync, startwatch);

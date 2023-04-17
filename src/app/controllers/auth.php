@@ -10,6 +10,7 @@ $errMsg = [];
 $ACCESS = 1; 
 $NO_ACCESS = 0;
 $CLIENT = 0;
+$EMPLOYEE = 1;
 
 
 //Создаем сессию для авторизации
@@ -106,7 +107,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
 	} else {
 		$existence = selectOne('authorization', ['email' => $email]);
 		
-		if($existence['access'] == 0) {
+		if($existence['access'] == $NO_ACCESS) {
 			array_push($errMsg, "Данный аккаунт не имеет доступа (заблокирован)!");
 		} else {
 			if($existence && password_verify($password, $existence['password'])) {
@@ -121,11 +122,130 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
 	$email = '';
 }
 
-//Удаление сотрудника
+
+//Код редактирования персональных данных клиента (сотрудника)
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['personal-data-edit']))) {
+	
+	//Работа с изображением (проверка на клиент или админ)
+	if($_SESSION['role'] == $CLIENT) {
+		treatmentImg("\assets\images\dest\clients\\");
+	} else {
+		treatmentImg("\assets\images\dest\\employees\\");
+	}
+	
+	//Забираем данные из формы в переменные
+	$id = $_POST['id'];
+	$lastName = trim($_POST['last_name']);
+	$firstName = trim($_POST['first_name']);
+	$surname = trim($_POST['surname']);
+	$img = $_POST['img'];
+	$dateBirth = $_POST['date_birth'];
+	$phone = trim($_POST['phone']);
+	$city = trim($_POST['city']);
+	$street = trim($_POST['street']);
+	$house = trim($_POST['house']);
+	$apartment = trim($_POST['apartment']);
+	$series = trim($_POST['series']);
+	$number = trim($_POST['number']);
+	$issuedBy = trim($_POST['issued_by']);
+	$issuedWhen = trim($_POST['issued_when']);
+	$validity = trim($_POST['validity']);
+
+	//Проверка валидности формы
+	if($lastName  === '' || $firstName  === '') {
+		array_push($errMsg, 'Заполните все обяазтельные поля!');
+	} else {
+
+		//Формируем массив паспорта
+		$dataPassport = [
+			'series' => $series,
+			'number' => $number,
+			'issued_by' => $issuedBy,
+			'issued_when' => $issuedWhen,
+			'validity' => $validity 
+		];
+
+		//Формируем массив адресса
+		$dataAddress = [
+			'city' => $city,
+			'street' => $street,
+			'house' => $house,
+			'apartment' => $apartment 
+		];
+
+		//Формируем данные в таблицу клиентов (сотрудников)
+		if(empty($img)) {
+			$dataPersonal = [
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
+			];
+		} else {
+			$dataPersonal = [
+				'last_name' => $lastName,
+				'first_name' => $firstName,
+				'surname' => $surname,
+				'date_birth' => $dateBirth,
+				'phone' => $phone,
+				'img' => $_POST['img'] ,
+			];
+		}	
+
+		//Провека на клиента (сотрудника)
+		if($_SESSION['role'] == $CLIENT) { //Если клиент
+			$idClient = selectOne('clients', ['id_auth' => $id]); //Получаем данные клиента, которого хотим отредактировать
+			$idAddress = $idClient['id_address']; //Получаем айди записи адресса, которую хотим запись
+			$idPas = $idClient['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+	
+			//Обновляем данные клиента, которого отредактировали
+			update('clients', $idClient['id'], $dataPersonal);
+			update('clients_passport', $idPas, $dataPassport);
+			update('clients_address', $idAddress, $dataAddress);
+		} else { //Если сотрудник
+			$idEmployee = selectOne('employees', ['id_auth' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
+			$idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
+			$idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+	
+			//Обновляем данные сотрудника, которого отредактировали
+			update('employees', $idEmployee['id'], $dataPersonal);
+			update('employees_passport', $idPas, $dataPassport);
+			update('employees_address', $idAddress, $dataAddress);
+		}
+
+		header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу клиентов
+	}
+}
+
+
+//Код для изменения пароля
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['password-edit']))) {
+	
+	//Забираем данные из формы в переменные
+	$id = $_POST['id'];
+	$passwordF = $_POST['passF'];
+	
+	//Хешируем пароль
+	$password = password_hash($passwordF, PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+
+	//Формируем массив данных, которые хотим изменит
+	$data = [
+		'password' => $password
+	];
+	
+	//Обновляем пароль
+	update('authorization', $id, $data);
+}
+
+
+//Удаление сотрудника (клиента)
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	
 	$id = $_GET['del_id'];  //Получаем айди сотрудника, которого хотим удалить
-	if($_SESSION['role'] == 1) {
+	
+	//Проверям на клиента (сотрудника)
+	if($_SESSION['role'] == $EMPLOYEE) { //Если сотрудник
 		$idEmployee = selectOne('employees', ['id_auth' => $id]); 
 
 		$idAuth = $idEmployee['id_auth']; //Получаем айди авторизации для данного сотрудника
@@ -136,19 +256,19 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 		delete('employees_address', $idAddress); //Удаляем данные адресса
 		delete('employees_passport', $idPas); //Удаляем  данные паспорта
 		delete('employees', $id); //Удаляем сотрудника
-	} else {
+	} else { //Если клиент
 		$idClients = selectOne('clients', ['id_auth' => $id]); 
 
-		$idAuth = $idClients['id_auth']; //Получаем айди авторизации для данного сотрудника
-		$idAddress = $idClients['id_address']; //Получаем айди адресса для данного сотрудника
-		$idPas = $idClients['id_passport']; //Получаем айди паспорта для данного сотрудника
+		$idAuth = $idClients['id_auth']; //Получаем айди авторизации для данного клиента
+		$idAddress = $idClients['id_address']; //Получаем айди адресса для данного клиента
+		$idPas = $idClients['id_passport']; //Получаем айди паспорта для данного клиента
 	
 		delete('authorization', $idAuth); //Удаляем данные авторизации
 		delete('clients_address', $idAddress); //Удаляем данные адресса
 		delete('clients_passport', $idPas); //Удаляем  данные паспорта
-		delete('clients', $id); //Удаляем сотрудника
+		delete('clients', $id); //Удаляем клиента
 	}
 
-	header('location: ' . BASE_URL . "/logout.php"); //Возвращаем на страницу сотрудников
+	header('location: ' . BASE_URL . "/logout.php"); //Возвращаем на страницу
 }
 ?>

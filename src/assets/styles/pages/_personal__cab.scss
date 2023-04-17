@@ -67,6 +67,11 @@
 	}
 }
 
+.personal__date {
+	width: 95%;
+	margin: 0 auto;
+}
+
 .personal__data{
 	display: flex;
 	column-gap: 6px;
@@ -159,4 +164,8 @@
 		@include sizes($width: 190px);
 		padding: 8px;
 	}
+}
+
+.popup__password {
+	display: block;
 }

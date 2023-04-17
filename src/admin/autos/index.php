@@ -32,12 +32,6 @@
 							<p class="panel__empty">Автомобили в базе данных отсутствуют. Но вы можете добавить</p>
 						<?php else:?>
 
-							<?php 
-								include('../../app/includes/sidebar.php');
-								$model = selectAll('auto', ['id_model' => $_GET['id']]); 
-								// tt($model);
-							?>
-
 							<div class="panel__blocks">
 								<div class="error"></div>
 								<?php foreach ($autoModelsName as $key => $auto): ?>

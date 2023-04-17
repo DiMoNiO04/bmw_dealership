@@ -2,7 +2,11 @@
 	include ('path.php'); 
 	include ('./app/database/database.php');
 	$auto = selectAutoFromAutosWithModelsOnSingle('auto', 'models', $_GET['auto']);
-	$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);
+	if($_SESSION['role'] == 1) {
+		$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);
+	} else {
+		$user = getPersonalData('clients', 'clients_address', 'clients_passport', 'authorization', $_SESSION['id']);
+	}
 ?>
 
 <!DOCTYPE html>
@@ -18,16 +22,16 @@
 	<div class="popup popup__hidden">
 		<div class="popup__content">
 
-			<div class="order__close">
+			<div class="popup__close">
 				<img src="./assets/images/dest/svg/close.svg" alt="close">
 			</div>
 			
-			<h2 class="order__title">Оформление заказа на автомобиль <span>BMW <?=$auto['model']?> серии <?=$auto['name']?></span></h2>
+			<h2 class="popup__title">Оформление заказа на автомобиль <span>BMW <?=$auto['model']?> серии <?=$auto['name']?></span></h2>
 			
-			<form action="#" method="post" class="order-form">
-				<div class="order__date">
+			<form action="#" method="post" class="popup-form">
+				<div class="popup__date">
 					<div class="personal__date">
-						<h2 class="order__subtitle">Ваши персональные данные:</h2>
+						<h2 class="popup__subtitle">Ваши персональные данные:</h2>
 						<div class="personal__block">
 							<h3>ФИО:</h3>
 							<div class="personal__fio">
@@ -75,7 +79,7 @@
 					</div>
 
 					<div class="auto__date">
-						<h2 class="order__subtitle">Данные автомобиля:</h2>
+						<h2 class="popup__subtitle">Данные автомобиля:</h2>
 						<div class="auto__block">
 							<h3>Модель:</h3>
 							<p>BMW <?=$auto['model']?> серии <?=$auto['name']?></p>
@@ -106,24 +110,24 @@
 					</div>
 				</div>
 				
-				<h3 class="order__title">Оформление заказа</h3>
-				<div class="order__item">
+				<h3 class="popup__title">Оформление заказа</h3>
+				<div class="popup__item">
 					<label for="email" class="order__label">Ваша почта</label>
 					<input type="email" name="email" id="email" class="order__input" placeholder="Введите почту...">
 				</div>
-				<div class="order__item">
+				<div class="popup__item">
 					<label for="login" class="order__label">Ваш логин</label>
 					<input type="text" name="login" id="login" class="order__input" placeholder="Введите логин...">
 				</div>
-				<div class="order__item">
+				<div class="popup__item">
 					<label for="password-first" class="order__label">Введите пароль для оформления заказа</label>
 					<input type="password" name="password-first" class="order__input" id="password-first" placeholder="Введите пароль...">
 				</div>
-				<div class="order__item">
+				<div class="popup__item">
 					<label for="password-second" class="order__label">Повторите пароль для подтверждения заказа</label>
 					<input type="password" name="password-second" class="order__input" id="password-second" placeholder="Введите пароль...">
 				</div>
-				<button type="submit" class="button button__order-ok" name="button__order">Оформить заказ</button>
+				<button type="submit" class="button button__popup-ok" name="button__order">Оформить заказ</button>
 			</form>
 		</div>
 	</div>
