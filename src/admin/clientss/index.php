@@ -2,6 +2,10 @@
 	session_start();
 	include "../../path.php";
 	include "../../app/controllers/clients.php";
+
+	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-client'])) {
+		$clients = searchAdmin($_POST['search-client'], 'clients');
+	}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +29,14 @@
 					<?php include('../../app/includes/aside.php') ?>
 
 					<div class="panel__body">
-						<a class="button panel__button" href="<?= BASE_URL . "admin/clientss/create.php" ?>">Добавить</a>
+						<div class="panel__nav">
+							<a class="button panel__button" href="<?= BASE_URL . "admin/clientss/create.php" ?>">Добавить</a>
+
+							<form action="index.php" method="post" class="form__search">
+								<input type="text" name="search-client" class="search__input" placeholder="Поиск...">
+							</form>
+						</div>
+
 						<h1 class="title-pages panel__title">Клиенты</h1>
 						
 						<?php if(empty($clients)):?>

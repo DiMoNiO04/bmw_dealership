@@ -87,6 +87,10 @@
 	}
 }
 
+.panel__nav {
+	@include flexContainer($justify: space-between, $items: center);
+}
+
 .panel__empty {
 	@include fontSizes($size: 20px, $weight: 700, $style: italic);
 	margin: 0 auto;

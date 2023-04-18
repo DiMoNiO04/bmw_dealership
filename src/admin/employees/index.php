@@ -2,6 +2,11 @@
 	session_start();
 	include "../../path.php";
 	include "../../app/controllers/employees.php";
+
+	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-employee'])) {
+		$employees = searchAdmin($_POST['search-employee'], 'employees');
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +30,13 @@
 					<?php include('../../app/includes/aside.php') ?>
 
 					<div class="panel__body">
-						<a class="button panel__button" href="<?= BASE_URL . "admin/employees/create.php" ?>">Добавить</a>
+						<div class="panel__nav">
+							<a class="button panel__button" href="<?= BASE_URL . "admin/employees/create.php" ?>">Добавить</a>
+
+							<form action="index.php" method="post" class="form__search">
+								<input type="text" name="search-employee" class="search__input" placeholder="Поиск...">
+							</form>
+						</div>
 						<h1 class="title-pages panel__title">Сотрудники</h1>
 
 						<?php if(empty($employees)):?>

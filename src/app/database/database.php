@@ -290,4 +290,103 @@ function getPersonalData($table1, $table2, $table3, $table4, $id) {
 	dbCheckErr($query); //Проверка запроса на ошибки
 	return $query->fetch();
 }
+
+
+//Выборка личных данных из сессии
+function getColorsAutos() {
+	global $pdo;
+	$sql = "SELECT color FROM `auto`";
+	
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetchAll();
+}
+
+
+//Поиск авто
+function searchAutos($params, $paramsPrice, $paramsYear) {
+	global $pdo;
+
+	//Редактируем поиск цены
+	$i = 0;
+	$price = '';
+	if($paramsPrice['price__from'] == '' && $paramsPrice['price__to'] != '') {
+		$price = ' price' . ' < ' . $paramsPrice['price__to']; 
+	} elseif($paramsPrice['price__from'] != '' && $paramsPrice['price__to'] == '') {
+		$price = ' price' . ' > ' . $paramsPrice['price__from']; 
+	} elseif($paramsPrice['price__from'] != '' && $paramsPrice['price__to'] != '') {
+		$price = 'price ' . 'BETWEEN ' . $paramsPrice['price__from'] . ' AND ' . $paramsPrice['price__to'];   
+	}
+
+	//Редактируем поиск года выпуска
+	$year = '';
+	if($paramsYear['year__from'] == '' && $paramsYear['year__to'] != '') {
+		$year = ' year' . ' < ' . $paramsYear['year__to']; 
+	} elseif($paramsYear['year__from'] != '' && $paramsYear['year__to'] == '') {
+		$year = ' year' . ' > ' . $paramsYear['year__from']; 
+	} elseif($paramsYear['year__from'] != '' && $paramsYear['year__to'] != '') {
+		$year = 'year ' . 'BETWEEN ' . $paramsYear['year__from'] . ' AND ' . $paramsYear['year__to'];   
+	}
+
+	//Редактируем поиск остальных данных
+	$str = '';
+	$i = 0;
+	foreach($params as $key => $value) {
+		if(!empty($value) && $value != '' && $i == 0) {
+			$str = $str . '`' . $key .  '` = ' . "'" . $value . "'" . ' '; 
+			$i++;
+		} else if(!empty($value) && $value != '' && $i != 0) {
+			$str = $str . ' AND '  . '`' . $key .  '` = ' . "'" . $value . "'" . ' '; 
+		}
+	}
+
+	//Формируем итоговую строку запроса
+	if($price != '' && $year != '' && $str != '') {
+		$result = 'WHERE ' . $price . ' AND ' . $year . ' AND ' . $str;
+	} else if($price != '' && $year != '' && $str == '') {
+		$result = 'WHERE ' . $price . ' AND ' . $year;
+	} else if($price != '' && $year == '' && $str != '') {
+		$result = 'WHERE ' . $price . ' AND ' . $str;
+	} else if($price == '' && $year != '' && $str != '') {
+		$result = 'WHERE ' . $year . ' AND ' . $str;
+	} else if($price != '' && $year == '' && $str == '') {
+		$result = 'WHERE ' . $price;
+	} else if($price == '' && $year != '' && $str == '') {
+		$result = 'WHERE ' . $year;
+	} else if($price == '' && $year == '' && $str != '') {
+		$result = 'WHERE ' . $str;
+	}
+
+	//Формируем sql запрос
+	$sql = "SELECT 
+		auto.id,
+	 	auto.name,
+	 	auto.engine,
+	 	auto.year,
+	 	auto.price,
+	 	auto.color,
+	 	auto.complexion,
+	 	auto.img,
+	 	auto.status,
+	 	models.model 
+	 	FROM `auto` JOIN `models` ON auto.id_model = models.id $result";
+
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetchAll();
+}
+
+//Поиск в панели админа
+function searchAdmin($text, $table) {
+	$text = trim(strip_tags(stripcslashes(htmlspecialchars($text)))); //Проверка вводимой строки
+	global $pdo;
+	$sql = "SELECT * FROM $table WHERE surname LIKE '%$text%'"; //Формируем sql запрос
+
+	$query = $pdo->prepare($sql);
+	$query->execute();
+	dbCheckErr($query); //Проверка запроса на ошибки
+	return $query->fetchAll();
+}
 ?>
