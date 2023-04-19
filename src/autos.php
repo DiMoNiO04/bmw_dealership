@@ -5,14 +5,7 @@
 	$autos = getModelsName('auto', 'models');
 	$models = selectAll('models');
 	$complexion = ['Базовая', 'Средняя', 'Полная'];
-	$colorsSQL = getColorsAutos();
-	
-	$colors = [];
-	foreach($colorsSQL as $color) {
-		if(!in_array($color['color'], $colors)) {
-			array_push($colors, $color['color']);
-		}
-	}
+	$colors = getColorsAutos();
 ?>
 
 <!DOCTYPE html>
@@ -61,10 +54,10 @@
 									<select name="color" class="search__select">
 										<option selected>Цвет:</option>
 										<?php foreach($colors as $key => $color): ?>
-											<?php if($colors[$key] == $col): ?>
-												<option selected value="<?= $colors[$key]?>"><?= $colors[$key]?></option>
+											<?php if($colors[$key]['color'] == $col): ?>
+												<option selected value="<?= $colors[$key]['color']?>"><?= $colors[$key]['color']?></option>
 											<?php else: ?>
-												<option value="<?= $colors[$key]?>"><?= $colors[$key]?></option>
+												<option value="<?= $colors[$key]['color']?>"><?= $colors[$key]['color']?></option>
 											<?php endif; ?>
 										<?php endforeach; ?>
 									</select>

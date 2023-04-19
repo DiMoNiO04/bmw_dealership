@@ -12,7 +12,6 @@ $ADMIN = 1;
 
 $employees = getEmployees('employees', 'employees_address', 'employees_passport', 'authorization');
 
-
 //Добавление сотрудника из админки
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {
 

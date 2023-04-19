@@ -11,7 +11,7 @@ $NO_ACCESS = 0;
 $CLIENT = 0;
 
 
-$clients = getClients('clients', 'clients_address', 'clients_passport', 'authorization');
+$clients = selectAll('clientsview');
 
 
 //Добавление клиента из админки
