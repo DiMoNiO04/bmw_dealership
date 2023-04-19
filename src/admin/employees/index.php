@@ -4,7 +4,11 @@
 	include "../../app/controllers/employees.php";
 
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-employee'])) {
-		$employees = searchAdmin($_POST['search-employee'], 'employees');
+		$employees = searchAdmin($_POST['search-employee'], 'employeesView');
+
+		if(empty($employees)) {
+			array_push($errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+		}
 	}
 
 ?>
@@ -37,9 +41,16 @@
 								<input type="text" name="search-employee" class="search__input" placeholder="Поиск...">
 							</form>
 						</div>
-						<h1 class="title-pages panel__title">Сотрудники</h1>
 
-						<?php if(empty($employees)):?>
+						<div class="error">
+							<?php include("../../app/helps/errInfo.php")?>
+						</div>
+
+						<?php if(empty($errMsg)):?>
+							<h1 class="title-pages panel__title">Сотрудники</h1>
+						<?php endif; ?>
+
+						<?php if(empty($employees) && empty($errMsg)):?>
 							<p class="panel__empty">Сотрудники в базе данных отсутствуют. Но вы можете добавить</p>
 						<?php else:?>
 							<?php foreach($employees as $key => $employee): ?>

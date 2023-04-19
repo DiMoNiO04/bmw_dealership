@@ -4,7 +4,11 @@
 	include "../../app/controllers/clients.php";
 
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-client'])) {
-		$clients = searchAdmin($_POST['search-client'], 'clients');
+		$clients = searchAdmin($_POST['search-client'], 'clientsView');
+
+		if(empty($clients)) {
+			array_push($errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+		}
 	}
 ?>
 
@@ -37,9 +41,15 @@
 							</form>
 						</div>
 
-						<h1 class="title-pages panel__title">Клиенты</h1>
+						<div class="error">
+							<?php include("../../app/helps/errInfo.php")?>
+						</div>
+
+						<?php if(empty($errMsg)):?>
+							<h1 class="title-pages panel__title">Клиенты</h1>
+						<?php endif; ?>
 						
-						<?php if(empty($clients)):?>
+						<?php if(empty($clients) && empty($errMsg)):?>
 							<p class="panel__empty">Клиенты в базе данных отсутствуют. Но вы можете добавить</p>
 						<?php else:?>
 							<?php foreach($clients as $key => $client): ?>

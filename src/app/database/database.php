@@ -379,10 +379,24 @@ function searchAutos($params, $paramsPrice, $paramsYear) {
 }
 
 //Поиск в панели админа
-function searchAdmin($text, $table) {
-	$text = trim(strip_tags(stripcslashes(htmlspecialchars($text)))); //Проверка вводимой строки
+function searchAdmin($search, $table) {
+	$search = trim(strip_tags(stripcslashes(htmlspecialchars($search)))); //Проверка вводимой строки
 	global $pdo;
-	$sql = "SELECT * FROM $table WHERE surname LIKE '%$text%'"; //Формируем sql запрос
+	$sql = "SELECT * FROM $table WHERE 
+			last_name LIKE '%$search%' OR
+			first_name LIKE '%$search%'OR
+		 	surname LIKE '%$search%' OR
+			date_birth LIKE '%$search%' OR
+			job  LIKE '%$search%' OR
+			phone LIKE '%$search%' OR
+			city LIKE '%$search%' OR 
+			`number` LIKE '%$search%' OR
+			`login` LIKE '%$search%'  OR
+			email LIKE '%$search%' OR 
+			series LIKE '%$search%' OR
+			issued_by LIKE '%$search%' OR 
+			issued_when LIKE '%$search%' OR
+			validity	LIKE '%$search%'";  //Формируем sql запрос
 
 	$query = $pdo->prepare($sql);
 	$query->execute();
