@@ -110,7 +110,7 @@
 
 .order__titles h2{
 	font-size: 22px;
-	@include sizes($width: 25%);
+	max-width: 20%;
 	@media screen and (max-width: 1220px) {
 		font-size: 18px;
 		@include sizes($width: 20%);
@@ -125,7 +125,7 @@
 	border-bottom: 1px solid $gray;
 	span{
 		font-size: 20px;
-		@include sizes($width: 25%);
+		max-width: 20%;
 		padding: 10px;
 		@media screen and (max-width: 1220px) {
 			font-size: 16px;
@@ -168,4 +168,11 @@
 
 .popup__password {
 	display: block;
+}
+
+.button__order-delete {
+	width: 100px;
+	padding: 2px;
+	border-width: 1px;
+	margin: 0;
 }

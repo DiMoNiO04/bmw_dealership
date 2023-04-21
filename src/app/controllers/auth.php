@@ -113,7 +113,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
 			if($existence && password_verify($password, $existence['password'])) {
 				userAuth($existence); //Создаем сессию для авторизации
 			} else {
-				tt(password_verify($password, $existence['password']));
+				password_verify($password, $existence['password']);
 				array_push($errMsg, "Неправильный логин или пароль!");
 			}
 		}

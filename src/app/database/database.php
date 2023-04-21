@@ -201,21 +201,12 @@ function getModelsName($table1, $table2) {
 }
 
 
-//Выборка записи с названием авто для сингл
 function selectAutoFromAutosWithModelsOnSingle($table1, $table2, $id) {
-	global $pdo; //Глобальная переменная
-
-	//Формиуем sql запрос (Пример: SELECT t1.*, t2.model, t2.main_foto FROM auto AS t1 JOIN models AS t2 ON t1.id_model = t2.id WHERE t1.id = 102)
+	global $pdo;
 	$sql = "SELECT t1.*, t2.model, t2.main_foto FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id WHERE t1.id = $id"; 
-
-	//Подготовка sql запроса для отправки на сервер
 	$query = $pdo->prepare($sql);
 	$query->execute();
-
-	//Проверка запроса на ошибки
-	dbCheckErr($query);
-
-	//Возвращаем полученный результат
+	dbCheckErr($query); //Проверка запроса на ошибки
 	return $query->fetch();
 }
 

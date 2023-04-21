@@ -1,11 +1,21 @@
 <?php 
 	include ('path.php'); 
-	include "./app/controllers/auth.php";
+	//include "./app/controllers/auth.php";
+	include "./app/controllers/orders.php";
+
+	
+	$idSession = $_SESSION['id'];
+	$user = selectOne('authorization', ['id' => $idSession]);
+
 	if($_SESSION['role'] == 1) {
-		$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);
+		$idUser = selectOne('employees', ['id_auth' => $idSession])['id'];
+		$user = selectOne('employeesview', ['id' => $idUser]);
 	} else {
-		$user = getPersonalData('clients', 'clients_address', 'clients_passport', 'authorization', $_SESSION['id']);
+		$idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
+		$user = selectOne('clientsview', ['id' => $idUser]);
 	}
+
+	$orders = selectAll('ordersview', ['id_client' => $idUser]);
 ?>
 
 <!DOCTYPE html>
@@ -230,40 +240,37 @@
 		</section>
 
 		<?php if($_SESSION['role'] == 0): ?>
-			<section class="orders">
-				<div class="container">
-					<div class="orders__container">
-						<h2 class="personal__subtitle orders__subtitle">Ваши заказы:</h2>
-						<div class="orders__body">
-							<div class="order__titles">
-								<h2>Номер заказа</р>
-								<h2>Модель</h2>
-								<h2>Дата</h2>
-								<h2>Стоимость</h2>
+				<section class="orders">
+					<div class="container">
+						<div class="orders__container">
+						<?php if(!empty($orders)): ?>
+							<h2 class="personal__subtitle orders__subtitle">Ваши заказы:</h2>
+							<div class="orders__body">
+								<div class="order__titles">
+									<h2>Номер заказа</р>
+									<h2>Модель</h2>
+									<h2>Дата</h2>
+									<h2>Стоимость</h2>
+									<h2>Отменить</h2>
+								</div>
+
+								<?php foreach($orders as $order): ?>
+									<div class="order">
+										<span>№<?= $order['id'] ?></span>
+										<span><?= $order['model']?> <?= $order['name']?></span>
+										<span><?= $order['date']?></span>
+										<span><?= $order['price']?></span>
+										<a class="button__personal button__order-delete" href="personal__cab-user.php?del_order=<?= $order['id']?>">Отменить</a>
+									</div>
+								<?php endforeach; ?>
 							</div>
-							<div class="order">
-								<span>111</span>
-								<span>M5</span>
-								<span>02.05.2021</span>
-								<span>2000000</span>
-							</div>
-							<div class="order">
-								<span>111</span>
-								<span>M5</span>
-								<span>02.05.2021</span>
-								<span>2000000</span>
-							</div>
-							<div class="order">
-								<span>111</span>
-								<span>M5</span>
-								<span>02.05.2021</span>
-								<span>2000000</span>
-							</div>
+							<a href="./autos.php" class="button">Добавить заказ</a>
 						</div>
-						<button class="button">Оформить заказ</button>
+						<?php else: ?>
+							<p class="panel__empty">У вас еще нет заказов, но вы можете его сделать!</p>
+						<?php endif;?>
 					</div>
-				</div>
-			</section>
+				</section>
 		<?php endif; ?>
 
 		<section class="buttons">
