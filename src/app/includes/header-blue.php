@@ -1,3 +1,8 @@
+<?php 
+	include SITE_ROOT . '/path.php';
+	$job = selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
+?>
+
 	<header class="header header-blue">
 		<div class="container">
 			<div class="header__container header-blue__container">
@@ -23,7 +28,13 @@
 							<?php if(isset($_SESSION['id'])):?>
 								<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
 								<?php if($_SESSION['role']): ?>
-									<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+									
+									<?php if($job == 'Админ'):?>
+										<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+									<?php else: ?>
+										<li class="header__item"><a class="header__logout-link" href="../../admin/autos_models/index.php">Менеджер панель</a></li>
+									<?php endif; ?>
+								
 								<?php endif; ?>
 								<li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
 							<?php else: ?>
@@ -65,7 +76,13 @@
 						<?php if(isset($_SESSION['id'])):?>
 							<li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
 							<?php if($_SESSION['role']): ?>
-								<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+								
+								<?php if($job == 'Админ'):?>
+									<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+								<?php else: ?>
+									<li class="header__item"><a class="header__logout-link" href="../../admin/autos_models/index.php">Менеджер панель</a></li>
+								<?php endif; ?>
+
 							<?php endif; ?>
 							<li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
 						<?php else: ?>

@@ -1,3 +1,8 @@
+<?php 
+	include SITE_ROOT . '/path.php';
+	$job = selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
+?>
+
 <header class="header header-blue">
 		<div class="container">
 			<div class="header__container header-blue__container">
@@ -13,8 +18,15 @@
 					<div class="header__cab">
 						<button class="header__cab-button" href="#"><i class="fa-solid fa-user"></i><?php echo $_SESSION['login']; ?></button>
 						<ul class="header__logout">
-							<li class="header__item"><a class="header__logout-link" href="../../personal__cab-user.php">Личный кабинет</a></li>
-							<li class="header__item"><a class="header__logout-link" href="../../logout.php">Выход</a></li>
+								<li class="header__item"><a class="header__logout-link" href="../../personal__cab-user.php">Личный кабинет</a></li>
+								
+								<?php if($job == 'Админ'):?>
+									<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+								<?php else: ?>
+									<li class="header__item"><a class="header__logout-link" href="../../admin/autos_models/index.php">Менеджер панель</a></li>
+								<?php endif; ?>
+								
+								<li class="header__item"><a class="header__logout-link" href="../../logout.php">Выход</a></li>
 						</ul>
 					</div>
 					<a href="../../index.php" class="logo-bmw">
@@ -42,7 +54,13 @@
 
 						<ul class="header__logout">
 							<li class="header__item"><a class="header__logout-link" href="../../personal__cab-user.php">Личный кабинет</a></li>
-							<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+
+							<?php if($job == 'Админ'):?>
+								<li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+							<?php else: ?>
+								<li class="header__item"><a class="header__logout-link" href="../../admin/autos_models/index.php">Менеджер панель</a></li>
+							<?php endif; ?>
+
 							<li class="header__item"><a class="header__logout-link" href="../../logout.php">Выход</a></li>
 						</ul>
 					</div>

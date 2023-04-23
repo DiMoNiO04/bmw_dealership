@@ -232,6 +232,14 @@
 								<h3>Email:</h3>
 								<span><?= $user['email']?></span>
 							</div>
+
+							<?php if(isset($user['job'])):?>
+								<div class="personal__data">
+									<h3>Должность:</h3>
+									<span><?= $user['job']?></span>
+								</div>
+							<?php endif; ?>
+
 						</div>
 					</div>
 					<button class="button button__personal-data">Изменить персональные данные</button>
