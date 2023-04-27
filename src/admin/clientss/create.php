@@ -46,7 +46,7 @@
 										<input type="text" value="<?=$surname ?>" name="surname" id="surname" placeholder="Введите имя...">
 									</div>
 									<div class="form-reg__item">
-										<label for="dateBirth">Дата рождения</label>
+										<label for="dateBirth">Дата рождения<span>*</span></label>
 										<input type="date" value="<?=$dateBirth ?>" name="date_birth" id="dateBirth">
 									</div>
 									<div class="form-reg__item">
@@ -94,11 +94,11 @@
 										<input type="text" value="<?=$issuedBy ?>" name="issued_by" id="issued_by" placeholder="Введите кем выдан...">
 									</div>
 									<div class="form-reg__item">
-										<label for="issued_when">Когда выдан</label>
+										<label for="issued_when">Когда выдан<span>*</span></label>
 										<input type="date" value="<?=$issuedWhen ?>" name="issued_when" id="issued_when">
 									</div>
 									<div class="form-reg__item">
-										<label for="validity">Срок действия</label>
+										<label for="validity">Срок действия<span>*</span></label>
 										<input type="date" value="<?=$validity ?>" name="validity" id="validity">
 									</div>
 								</section>

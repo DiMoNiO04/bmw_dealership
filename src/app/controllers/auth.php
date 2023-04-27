@@ -41,6 +41,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 	$access = $ACCESS;
 	$role = $CLIENT;
 
+
 	//Проверка валидности формы
 	if($lastName === '' || $firstName === '' || $email === '' || $login === '' || $passwordF === '' || $passwordS === '') {
 		array_push($errMsg, 'Заполните все поля!');
@@ -69,20 +70,43 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 				'email' => $email
 			];
 
-			//Отправляем данные в таблицу авторизации
-			$id = insert('authorization', $dataAuth);
-			$id_auth = selectOne('authorization', ['id' => $id]);
-
-			//Формируем данные в таблицу клиентов
-			$dataPersonal = [
-				'last_name' => $lastName,
-				'first_name' => $firstName,
-				'id_auth' => $id,
+			//Формируем массив паспорта
+			$dataPassport = [
+				'series' => $series,
+				'number' => $number,
+				'issued_by' => $issuedBy
 			];
 
+			//Формируем массив адресса
+			$dataAddress = [
+				'city' => $city,
+				'street' => $street,
+				'house' => $house,
+				'apartment' => $apartment 
+			];
+
+			//Добавляем данные в базу данных
+			$idPassport = insert('clients_passport', $dataPassport);
+			$idAddress = insert('clients_address', $dataAddress);
+			$idAuth = insert('authorization', $dataAuth);
+			$id_auth = selectOne('authorization', ['id' => $idAuth]);
+
+				//Формируем данные в таблицу клиентов
+				$dataPersonal = [
+					'last_name' => $lastName,
+					'first_name' => $firstName,
+					'surname' => $surname,
+					'phone' => $phone,
+					'img' => $_POST['img'] ,
+					'id_address' => $idAddress,
+					'id_auth' => $idAuth,
+					'id_passport' => $idPassport
+				];
+
+			$id = $id_auth['id'];
+	
 			insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
 			$user = selectOne('authorization', ['id' => $id]);
-
 			userAuth($user); //Создаем сессию для авторизации
 		}
 	}
@@ -192,7 +216,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['personal-data-edit'])
 				'img' => $_POST['img'] ,
 			];
 		}	
-
+tt($id);
 		//Провека на клиента (сотрудника)
 		if($_SESSION['role'] == $CLIENT) { //Если клиент
 			$idClient = selectOne('clients', ['id_auth' => $id]); //Получаем данные клиента, которого хотим отредактировать

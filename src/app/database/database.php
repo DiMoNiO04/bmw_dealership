@@ -415,7 +415,6 @@ function searchAdmin($search, $table) {
 			first_name LIKE '%$search%'OR
 		 	surname LIKE '%$search%' OR
 			date_birth LIKE '%$search%' OR
-			job  LIKE '%$search%' OR
 			phone LIKE '%$search%' OR
 			city LIKE '%$search%' OR 
 			`number` LIKE '%$search%' OR

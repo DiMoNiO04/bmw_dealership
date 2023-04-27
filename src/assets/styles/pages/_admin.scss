@@ -17,7 +17,7 @@
 }
 
 .sidebar{
-	@include sizes(160px, 400px);
+	@include sizes(160px, 240px);
 	@include flexContainer($items: center);
 	background: $fiolet;
 	padding: 20px;

@@ -10,7 +10,7 @@ $ACCESS = 1;
 $NO_ACCESS = 0;
 $ADMIN = 1;
 
-$employees = getEmployees('employees', 'employees_address', 'employees_passport', 'authorization');
+$employees = selectAll('employeesview');
 
 //Добавление сотрудника из админки
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {

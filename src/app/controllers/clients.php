@@ -28,7 +28,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
 	$phone  = trim($_POST['phone']);
 
 	$city  = trim($_POST['city']);
-	$streetC = trim($_POST['street']);
+	$street = trim($_POST['street']);
 	$house = trim($_POST['house']);
 	$apartment = trim($_POST['apartment']);
 

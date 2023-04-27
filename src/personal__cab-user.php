@@ -1,12 +1,163 @@
 <?php 
 	include ('path.php'); 
-	//include "./app/controllers/auth.php";
-	include "./app/controllers/orders.php";
+	include "./app/controllers/auth.php";
 
+		
+	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['personal-edit']))) {
+
+		//Работа с изображением 
+		if($_SESSION['role'] == 1) {
+			treatmentImg("\assets\images\dest\employess\\");
+		} else {
+			treatmentImg("\assets\images\dest\clients\\");
+		}
+
+		//Получаем данные сотрудника из формы
+		$id = $_POST['id'];
+		$lastName = trim($_POST['last_name']);
+		$firstName = trim($_POST['first_name']);
+		$surname = trim($_POST['surname']);
+		$img = $_POST['img'];
+		$dateBirth = $_POST['date_birth'];
+		$phone = trim($_POST['phone']);
+		$city = trim($_POST['city']);
+		$street = trim($_POST['street']);
+		$house = trim($_POST['house']);
+		$apartment = trim($_POST['apartment']);
+		$series = trim($_POST['series']);
+		$number = trim($_POST['number']);
+		$issuedBy = trim($_POST['issued_by']);
+		$issuedWhen = trim($_POST['issued_when']);
+		$validity = trim($_POST['validity']);
+
+
+		//Проверка валидности формы
+		if($lastName  === '' || $firstName  === '') {
+			array_push($errMsg, 'Заполните все обяазтельные поля!');
+		} else {
+
+			//Проверка на доступ
+			if(isset($_POST['access'])) {
+				$access = $ACCESS;
+			} else {
+				$access = $NO_ACCESS;
+			}
+				
+			//Формируем массив для таблицы авторизации
+			$dataAuth = [
+				'access' => $access,
+			];
+
+			//Формируем массив паспорта
+			$dataPassport = [
+				'series' => $series,
+				'number' => $number,
+				'issued_by' => $issuedBy,
+				'issued_when' => $issuedWhen,
+				'validity' => $validity 
+			];
+
+			//Формируем массив адресса
+			$dataAddress = [
+				'city' => $city,
+				'street' => $street,
+				'house' => $house,
+				'apartment' => $apartment 
+			];
+
+			//Формируем данные в таблицу клиентов
+			if(empty($img)) {
+				$dataPersonal = [
+					'last_name' => $lastName,
+					'first_name' => $firstName,
+					'surname' => $surname,
+					'date_birth' => $dateBirth,
+					'phone' => $phone,
+				];
+			} else {
+				$dataPersonal = [
+					'last_name' => $lastName,
+					'first_name' => $firstName,
+					'surname' => $surname,
+					'date_birth' => $dateBirth,
+					'phone' => $phone,
+					'img' => $_POST['img'] ,
+				];
+			}
+
+			if($_SESSION['role'] == 1) {
+				$idEmployee = selectOne('employees', ['id_auth' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
+				$idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись
+				$idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
+				$idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
 	
+				//Обновляем данные сотрудника, которого отредактировали
+				update('employees', $idEmployee['id'], $dataPersonal);
+				update('employees_passport', $idPas, $dataPassport);
+				update('employees_address', $idAddress, $dataAddress);
+				update('authorization', $idAuth, $dataAuth);
+			} else {
+				$idClients = selectOne('clients', ['id_auth' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
+				$idAuth = $idClients['id_auth']; //Получаем айди записи авторизации, которую хотим запись
+				$idAddress = $idClients['id_address']; //Получаем айди записи адресса, которую хотим запись
+				$idPas = $idClients['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+	
+				//Обновляем данные сотрудника, которого отредактировали
+				update('clients', $idClients['id'], $dataPersonal);
+				update('clients_passport', $idPas, $dataPassport);
+				update('clients_address', $idAddress, $dataAddress);
+				update('authorization', $idAuth, $dataAuth);
+			}
+		}
+	} 
+
+
+	if($_SESSION['role'] == 0) {
+		//Добавление заказа пользотвателем
+		if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
+			
+			$email = trim($_POST['email']);
+			$login = trim($_POST['login']);
+			$passF = trim($_POST['password-first']);
+			$passS = trim($_POST['password-second']);
+
+			$idAuto = $_GET['auto'];
+			$idSession = $_SESSION['id'];
+			$roleSession = $_SESSION['role'];
+
+			$user = selectOne('authorization', ['id' => $idSession]);
+			$idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
+
+			if($login != $user['login'] || $email != $user['email'] || (!password_verify($passS, $user['password'])) || $passF != $passS) {
+				array_push($errMsg, "Не верно введены данные! \n Заказ не был оформлен! \n Повторите попытку!");
+			} else {
+
+				if($roleSession == 0) {
+					$params = [
+						'id_client' => $idUser,
+						'id_auto' => $idAuto
+					];
+				}
+
+				insert('orders', $params); //Отправляем данные в таблицу клиентов
+				header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу клиентов
+			}
+		}
+
+			//Удаление заказа(пользователем)
+		if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_order']))) {
+			$id = $_GET['del_order'];  //Получаем айди модели, которую хотим удалить
+			delete('orders', $id); //Удаляем
+			if($_SESSION['role'] == 0) {
+				header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу моделей
+			} else {
+				header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
+			}
+		}
+	}
+
 	$idSession = $_SESSION['id'];
 	$user = selectOne('authorization', ['id' => $idSession]);
-
 	if($_SESSION['role'] == 1) {
 		$idUser = selectOne('employees', ['id_auth' => $idSession])['id'];
 		$user = selectOne('employeesview', ['id' => $idUser]);
@@ -120,7 +271,7 @@
 							</div>
 							<div class="form-reg__item">
 								<label for="street">Улица</label>
-								<input type="text" value="<?=$user['city'] ?>" name="street" id="street" placeholder="Введите улицу...">
+								<input type="text" value="<?=$user['street'] ?>" name="street" id="street" placeholder="Введите улицу...">
 							</div>
 							<div class="form-reg__item">
 								<label for="house">Номер дома</label>
@@ -157,7 +308,7 @@
 						</section>
 					</div>
 				</div>
-				<button type="submit" class="button button__popup-ok" name="personal-data-edit">Сохранить</button>
+				<button type="submit" class="button button__popup-ok" name="personal-edit">Сохранить</button>
 			</form>
 
 		</div>
@@ -206,7 +357,7 @@
 							</div>
 							<div class="personal__data">
 								<h3>Место жительство:</h3>
-								<span>г.<?= $user['city']?>, ул.<?= $user['streer']?>, д.<?= $user['house']?>, кв.<?= $user['apartment']?></span>
+								<span>г.<?= $user['city']?>, ул.<?= $user['street']?>, д.<?= $user['house']?>, кв.<?= $user['apartment']?></span>
 							</div>
 							<div class="personal__data">
 								<h3>Серия и номер паспорта:</h3>
@@ -267,7 +418,7 @@
 										<span>№<?= $order['id'] ?></span>
 										<span><?= $order['model']?> <?= $order['name']?></span>
 										<span><?= $order['date']?></span>
-										<span><?= $order['price']?></span>
+										<span><?= $order['price']?>$</span>
 										<a class="button__personal button__order-delete" href="personal__cab-user.php?del_order=<?= $order['id']?>">Отменить</a>
 									</div>
 								<?php endforeach; ?>
