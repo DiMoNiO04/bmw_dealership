@@ -123,6 +123,7 @@
 .panel__blocks {
 	@include flexContainer($direction: column);
 	row-gap: 50px;
+	width: 100%;
 }
 
 .panel__block {

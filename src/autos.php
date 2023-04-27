@@ -98,6 +98,18 @@
 								</li>
 
 								<li class="search__block">
+									<h3>Состояние</h3>
+									<label class="custom-checkbox">
+										<input name="state" type="radio" value="Новое">
+										<span>Новое</span>
+									</label>
+									<label class="custom-checkbox">
+										<input name="state" type="radio" value="Бу">
+										<span>Бу</span>
+									</label>
+								</li>
+
+								<li class="search__block">
 									<h3>Год выпуска</h3>
 									<input type="number" min="2019" max="2023" name="year__from" id="year__from" value="<?= $yearFrom?>" class="search__input" placeholder="От">
 									<input type="number" min="2023" max="2023" name="year__to" id="year__to" value="<?= $yearTo?>" class="search__input" placeholder="До">

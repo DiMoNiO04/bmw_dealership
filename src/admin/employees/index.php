@@ -83,16 +83,7 @@
 											<h3>Кем выдан:</h3>
 											<p><?= $employee['issued_by']?></p>
 										</div>
-										<div class="panel__item">
-											<h3>Когда выдан:</h3>
-											<p><?= $employee['issued_when']?></p>
-										</div>
-										<div class="panel__item">
-											<h3>Срок действия:</h3>
-											<p><?= $employee['validity']?></p>
-										</div>
 										</br>
-
 										<div class="panel__item">
 											<h3>Логин:</h3>
 											<p><?= $employee['login']?></p>

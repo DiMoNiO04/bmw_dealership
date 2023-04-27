@@ -8,7 +8,7 @@ if(!$_SESSION) {
 }
 
 //Получаем все данные из таблицы models
-$contacts = selectAll('contacts');
+$contacts = selectAll('contactsview');
 
 //Переменные
 $errMsg = [];
@@ -23,28 +23,37 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-create']))) {
 	$phone = trim($_POST['phone']);
 	$workTime = trim($_POST['work_time']);
 	$email = trim($_POST['email']);
+	$street = trim($_POST['street']);
+	$city = trim($_POST['city']);
+	$house = trim($_POST['house']);
 	
-	//Проверка валидность формы
-	if($name === '' || $phone === '' || $workTime === '' || $email === '') {
-		array_push($errMsg, 'Заполните все обязательные поля!');
-	} else {
-			
-		//Формируем массив для отправки
-		$contact = [
-			'name' => $name,
-			'phone' => $phone,
-			'work_time' => $workTime,
-			'email' => $email
-		];
+	$contactAddress = [
+		'city' => $city,
+		'street' => $street,
+		'house' => $house
+	];
 
-		insert('contacts', $contact); //Отправляем данные в таблицу contacts
-		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
-	}
+	$idAddress = insert('contacts_address', $contactAddress); //Отправляем данные в таблицу contacts
+		
+	//Формируем массив для отправки
+	$contact = [
+		'name' => $name,
+		'phone' => $phone,
+		'work_time' => $workTime,
+		'email' => $email,
+		'id_address' => $idAddress
+	];
+
+	insert('contacts', $contact); //Отправляем данные в таблицу contacts
+	header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
 } else {
 	$name = '';
 	$phone = '';
 	$workTime = '';
 	$email = '';
+	$city = '';
+	$street = '';
+	$house = '';
 }
 
 
@@ -60,6 +69,13 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 	$phone = $contact['phone'];
 	$workTime = $contact['work_time'];
 	$email = $contact['email'];
+
+	$idAddress = $contact['id_address'];
+	$contactAddress = selectOne('contacts_address', ['id' => $idAddress]);
+
+	$city = $contactAddress['city'];
+	$street = $contactAddress['street'];
+	$house = $contactAddress['house'];
 }
 
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
@@ -70,29 +86,39 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
 	$phone = trim($_POST['phone']);
 	$workTime = trim($_POST['work_time']);
 	$email = trim($_POST['email']);
+	$city = trim($_POST['city']);
+	$street = trim($_POST['street']);
+	$house = trim($_POST['house']);
 	
-	//Проверка валидность формы
-	if($name === '' || $phone === '' || $workTime === '' || $email === '') {
-		array_push($errMsg, 'Заполните все обязательные поля!');
-	} else {
+	$contactAddress = [
+		'city' => $city,
+		'street' => $street,
+		'house' => $house
+	];
 			
-		//Формируем массив для отправки
-		$contact = [
-			'name' => $name,
-			'phone' => $phone,
-			'work_time' => $workTime,
-			'email' => $email
-		];
+	//Формируем массив для отправки
+	$contact = [
+		'name' => $name,
+		'phone' => $phone,
+		'work_time' => $workTime,
+		'email' => $email
+	];
 
-		update('contacts', $id, $contact); //Отправляем данные в таблицу contacts
-		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
-	}
+	$idContact = selectOne('contacts', ['id' => $id]);
+	$idAddress = $idContact['id_address'];
+
+	update('contacts_address', $idAddress, $contactAddress);
+	update('contacts', $id, $contact); //Отправляем данные в таблицу contacts
+	header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
 }
 
 //Удаление контакта
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди контакта, который хотим удалить
+	$idContact = selectOne('contacts', ['id' => $id]);
+	$idAddress = $idContact['id_address'];
 	delete('contacts', $id); //Удаляем
+	delete('contacts_address', $idAddress);
 	header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
 }
 ?>

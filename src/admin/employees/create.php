@@ -101,14 +101,6 @@
 										<label for="issued_by">Кем выдан</label>
 										<input type="text" value="<?=$issuedBy ?>" name="issued_by" id="issued_by" placeholder="Введите кем выдан...">
 									</div>
-									<div class="form-reg__item">
-										<label for="issued_when">Когда выдан<span>*</span></label>
-										<input type="date" value="<?=$issuedWhen ?>" name="issued_when" id="issued_when">
-									</div>
-									<div class="form-reg__item">
-										<label for="validity">Срок действия<span>*</span></label>
-										<input type="date" value="<?=$validity ?>" name="validity" id="validity">
-									</div>
 								</section>
 
 								<section class="form-reg__block">	

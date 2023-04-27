@@ -47,6 +47,10 @@
 										<h3>Email</h3>
 										<p><?= $contact['email']?></p>
 									</div>
+									<div class="panel__item">
+										<h3>Адресс</h3>
+										<p>г.<?= $contact['city']?> ул.<?= $contact['street']?> д.<?= $contact['house']?></p>
+									</div>
 									<div class="panel__buttons">
 										<a class="button panel__button-edit" href="edit.php?id=<?=$contact['id']?>">Редактировать</a>
 										<a class="button panel__button-red" href="edit.php?del_id=<?=$contact['id']?>">Удалить</a>

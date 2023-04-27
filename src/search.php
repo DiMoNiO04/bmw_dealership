@@ -13,6 +13,7 @@
 		$col = $_POST['color'];
 		$name = $_POST['name'];
 		$complex = $_POST['complexion'];
+		$state = $_POST['state'];
 
 		if($complex == 'Комплектация:') {
 			$complex = '';
@@ -37,7 +38,8 @@
 			'complexion' => $complex,
 			'color' => $col,
 			'status' => $status,
-			'engine' => $engine
+			'engine' => $engine,
+			'state' => $state
 		];
 
 		$autos = searchAutos($params, $paramsPrice, $paramsYear);
@@ -153,6 +155,38 @@
 										<label class="custom-checkbox">
 											<input name="engine" type="radio" value="Электрический">
 											<span>Электрический</span>
+										</label>
+									<?php endif; ?>
+								</li>
+
+								<li class="search__block">
+									<h3>Состояние</h3>
+									<?php if($state == 'Новое'):?>
+										<label class="custom-checkbox">
+											<input checked name="state" type="radio" value="Новое">
+											<span>Новое</span>
+										</label>
+										<label class="custom-checkbox">
+											<input name="state" type="radio" value="Бу">
+											<span>Бу</span>
+										</label>
+									<?php elseif($state == 'Бу'): ?>
+										<label class="custom-checkbox">
+											<input name="state" type="radio" value="Новое">
+											<span>Новое</span>
+										</label>
+										<label class="custom-checkbox">
+											<input checked name="state" type="radio" value="Бу">
+											<span>Бу</span>
+										</label>
+									<?php else: ?>
+										<label class="custom-checkbox">
+											<input name="state" type="radio" value="Новое">
+											<span>Новое</span>
+										</label>
+										<label class="custom-checkbox">
+											<input name="state" type="radio" value="Бу">
+											<span>Бу</span>
 										</label>
 									<?php endif; ?>
 								</li>

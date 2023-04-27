@@ -49,6 +49,18 @@
 									<label for="email">Email<span>*</span></label>
 									<input value="<?= $email?>" name="email" type="email" id="email" placeholder="Email" required>
 								</div>
+								<div class="admin__form-block">
+									<label for="city">Город<span>*</span></label>
+									<input value="<?= $city?>" name="city" type="text" id="city" placeholder="Город" required>
+								</div>
+								<div class="admin__form-block">
+									<label for="street">Улица<span>*</span></label>
+									<input value="<?= $street?>" name="street" type="text" id="street" placeholder="Улица" required>
+								</div>
+								<div class="admin__form-block">
+									<label for="house">Дом<span>*</span></label>
+									<input value="<?= $house?>" name="house" type="text" id="house" placeholder="Дом" required>
+								</div>
 								<button type="submit" name="contact-edit" class="button">Сохранить</button>
 							</form>
 

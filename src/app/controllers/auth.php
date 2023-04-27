@@ -43,9 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 
 
 	//Проверка валидности формы
-	if($lastName === '' || $firstName === '' || $email === '' || $login === '' || $passwordF === '' || $passwordS === '') {
-		array_push($errMsg, 'Заполните все поля!');
-	} elseif(mb_strlen($login, 'UTF8') < 3) {
+	if(mb_strlen($login, 'UTF8') < 3) {
 		array_push($errMsg, 'Логин должен быть более трех символов!');
 	} elseif($passwordF !== $passwordS) {
 		array_push($errMsg, 'Пароли в обеих полях должны соотвествовать!');
@@ -126,20 +124,16 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
 	$password = $_POST['password'];
 
 	//Проверка валидности формы
-	if($email === '' || $password === '') {
-		array_push($errMsg, "Не все поля заполнены!");
-	} else {
-		$existence = selectOne('authorization', ['email' => $email]);
+	$existence = selectOne('authorization', ['email' => $email]);
 		
-		if($existence['access'] == $NO_ACCESS) {
-			array_push($errMsg, "Данный аккаунт не имеет доступа (заблокирован)!");
+	if($existence['access'] == $NO_ACCESS) {
+		array_push($errMsg, "Данный аккаунт не имеет доступа (заблокирован)!");
+	} else {
+		if($existence && password_verify($password, $existence['password'])) {
+			userAuth($existence); //Создаем сессию для авторизации
 		} else {
-			if($existence && password_verify($password, $existence['password'])) {
-				userAuth($existence); //Создаем сессию для авторизации
-			} else {
-				password_verify($password, $existence['password']);
-				array_push($errMsg, "Неправильный логин или пароль!");
-			}
+			password_verify($password, $existence['password']);
+			array_push($errMsg, "Неправильный логин или пароль!");
 		}
 	}
 } else {

@@ -62,7 +62,10 @@
 											<h3>Цена:</h3>
 											<p><?= $auto['price']; ?> &#36 </p>
 										</div>
-
+										<div class="panel__item">
+											<h3>Состояние:</h3>
+											<p><?= $auto['state']; ?></p>
+										</div>
 										<?php if($auto['status'] == 0):?>
 											<div class="panel__item red">
 												<h3>Наличие:</h3>

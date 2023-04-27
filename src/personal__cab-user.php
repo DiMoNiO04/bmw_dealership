@@ -27,8 +27,6 @@
 		$series = trim($_POST['series']);
 		$number = trim($_POST['number']);
 		$issuedBy = trim($_POST['issued_by']);
-		$issuedWhen = trim($_POST['issued_when']);
-		$validity = trim($_POST['validity']);
 
 
 		//Проверка валидности формы
@@ -52,9 +50,7 @@
 			$dataPassport = [
 				'series' => $series,
 				'number' => $number,
-				'issued_by' => $issuedBy,
-				'issued_when' => $issuedWhen,
-				'validity' => $validity 
+				'issued_by' => $issuedBy
 			];
 
 			//Формируем массив адресса
@@ -166,7 +162,7 @@
 		$user = selectOne('clientsview', ['id' => $idUser]);
 	}
 
-	$orders = selectAll('ordersview', ['id_client' => $idUser]);
+	$orders = getOrders($idUser);
 ?>
 
 <!DOCTYPE html>
@@ -297,14 +293,6 @@
 								<label for="issued_by">Кем выдан</label>
 								<input type="text" value="<?=$user['issued_by'] ?>" name="issued_by" id="issued_by" placeholder="Введите кем выдан...">
 							</div>
-							<div class="form-reg__item">
-								<label for="issued_when">Когда выдан</label>
-								<input type="date" value="<?=$user['issued_when'] ?>" name="issued_when" id="issued_when">
-							</div>
-							<div class="form-reg__item">
-								<label for="validity">Срок действия</label>
-								<input type="date" value="<?=$user['validity'] ?>" name="validity" id="validity">
-							</div>
 						</section>
 					</div>
 				</div>
@@ -368,16 +356,8 @@
 								<span><?= $user['issued_by']?></span>
 							</div>
 							<div class="personal__data">
-								<h3>Когда выдан:</h3>
-								<span><?= $user['issued_when']?></span>
-							</div>
-							<div class="personal__data">
-								<h3>Срок действия:</h3>
-								<span><?= $user['validity']?></span>
-							</div>
-							<div class="personal__data">
 								<h3>Логин:</h3>
-								<span><?= $user['email']?></span>
+								<span><?= $user['login']?></span>
 							</div>
 							<div class="personal__data">
 								<h3>Email:</h3>
@@ -405,26 +385,79 @@
 						<?php if(!empty($orders)): ?>
 							<h2 class="personal__subtitle orders__subtitle">Ваши заказы:</h2>
 							<div class="orders__body">
-								<div class="order__titles">
-									<h2>Номер заказа</р>
-									<h2>Модель</h2>
-									<h2>Дата</h2>
-									<h2>Стоимость</h2>
-									<h2>Отменить</h2>
-								</div>
-
 								<?php foreach($orders as $order): ?>
-									<div class="order">
-										<span>№<?= $order['id'] ?></span>
-										<span><?= $order['model']?> <?= $order['name']?></span>
-										<span><?= $order['date']?></span>
-										<span><?= $order['price']?>$</span>
-										<a class="button__personal button__order-delete" href="personal__cab-user.php?del_order=<?= $order['id']?>">Отменить</a>
+								<div class="panel__blocks">
+								<div class="panel__block">
+									<h2 class="panel__subtitle">Заказ №<?= $order['id']; ?></h2>
+									<div class="panel__item">
+										<h3>Авто:</h3>
+										<p><?= $order['model']?> <?= $order['name']?></p>
 									</div>
-								<?php endforeach; ?>
+									<div class="panel__item">
+										<h3>Двигатель:</h3>
+										<p><?= $order['engine']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Год выпуска:</h3>
+										<p><?= $order['date']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Стоимость:</h3>
+										<p><?= $order['price']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Комплектация:</h3>
+										<p><?= $order['complexion']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Цвет:</h3>
+										<p><?= $order['color']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Состояние:</h3>
+										<p><?= $order['state']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Дата оформления:</h3>
+										<p><?= $order['date']?></p>
+									</div>
+									<br>
+									<div class="panel__item">
+										<h3>Менеджер:</h3>
+										<p><?= $order['last_name']?> <?= $order['first_name']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Номер телефона:</h3>
+										<p><?= $order['phone']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Email:</h3>
+										<p><?= $order['emailEmployee']?></p>
+									</div>
+									<br>
+									<div class="panel__item">
+										<h3>Контакты:</h3>
+										<p><?= $order['nameContact']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Email:</h3>
+										<p><?= $order['emailContact']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Номер телефона:</h3>
+										<p><?= $order['phoneContact']?></p>
+									</div>
+									<div class="panel__item">
+										<h3>Время работы:</h3>
+										<p><?= $order['work_time']?></p>
+									</div>
+									<a class="button__personal button__order-delete" href="personal__cab-user.php?del_order=<?= $order['id']?>">Отменить</a>
+								</div>					
 							</div>
+								<?php endforeach; ?>
 							<a href="./autos.php" class="button">Добавить заказ</a>
 						</div>
+						
 						<?php else: ?>
 							<p class="panel__empty">У вас еще нет заказов, но вы можете его сделать!</p>
 						<?php endif;?>

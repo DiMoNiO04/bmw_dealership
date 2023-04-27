@@ -61,6 +61,14 @@
 									</select>
 								</div>
 								<div class="admin__form-block">
+									<label for="state">Состояние<span>*</span></label>
+									<select name="state" id="state">
+										<option>Выберите cостояние:</option>
+										<option value="Новое">Новое</option>
+										<option value="Бу">Бу</option>
+									</select>
+								</div>
+								<div class="admin__form-block">
 									<label for="price">Цена (&#36)<span>*</span></label>
 									<input  value="<?= $price?>" name="price" type="number" min="50000" step="5000" name="price" placeholder="Цена &#36" required>
 								</div>

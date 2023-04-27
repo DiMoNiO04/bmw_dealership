@@ -83,14 +83,6 @@
 								<h3>Кем выдан:</h3>
 								<p><?= $user['issued_by']?></p>
 							</div>
-							<div class="personal__block">
-								<h3>Когда выдан:</h3>
-								<p><?= $user['issued_when']?></p>
-							</div>
-							<div class="personal__block">
-								<h3>Срок действия:</h3>
-								<p><?= $user['validity']?></p>
-							</div>
 						</div>
 					<?php else:?>
 						<p class="panel__empty">Для того чтобы совершить заказ, Вам необходимо войти в личный кабинет или зарегистрироваться</p>
@@ -113,6 +105,10 @@
 							<div class="auto__block">
 								<h3>Год выпуска:</h3>
 								<p><?=$auto['year']?></p>
+							</div>
+							<div class="auto__block">
+								<h3>Состояние:</h3>
+								<p><?=$auto['state']?></p>
 							</div>
 							<div class="auto__block">
 								<h3>Комплектация:</h3>
@@ -194,6 +190,7 @@
 						<li><strong>Двигатель:</strong> <?=$auto['engine']?></li>
 						<li><strong>Год выпуска:</strong> <?=$auto['year']?></li>
 						<li><strong>Комплектация:</strong> <?=$auto['complexion']?></li>
+						<li><strong>Состояние:</strong> <?=$auto['state']?></li>
 						<li><strong>Стоимость:</strong> <?=$auto['price']?> $</li>
 
 						<?php if($auto['status'] == 0):?>

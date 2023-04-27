@@ -26,28 +26,23 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
 	//Забираем данные из формы в переменные
 	$modelName = trim($_POST['modelName']);
 	
-	//Проверка валидность формы
-	if($modelName === '') {
-		array_push($errMsg, 'Заполните все обязательные поля!');
+	//Проверка на уникальность названия модели
+	$existence = selectOne('models', ['model' => $modelName]);
+
+	//Если данная модель существует
+	if($existence['model'] === $modelName) {
+		array_push($errMsg, 'Данная модель авто уже существует!');
 	} else {
-		//Проверка на уникальность названия модели
-		$existence = selectOne('models', ['model' => $modelName]);
+		
+		//Формируем массив для отправки
+		$model = [
+			'model' => $modelName,
+			'main_foto' => $_POST['img'],
+		];
 
-		//Если данная модель существует
-		if($existence['model'] === $modelName) {
-			array_push($errMsg, 'Данная модель авто уже существует!');
-		} else {
-			
-			//Формируем массив для отправки
-			$model = [
-				'model' => $modelName,
-				'main_foto' => $_POST['img'],
-			];
-
-			$id = insert('models', $model); //Отправляем данные в таблицу models
-			$model = selectOne('models', ['id' => $id]); //Получаем данные добавленной модели
-			header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
-		}
+		$id = insert('models', $model); //Отправляем данные в таблицу models
+		$model = selectOne('models', ['id' => $id]); //Получаем данные добавленной модели
+		header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
 	}
 } else {
 	$modelName = '';

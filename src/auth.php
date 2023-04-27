@@ -28,11 +28,11 @@
         
         <div class="form-auth__item">
           <label for="email">Email (при регистрации)</label>
-          <input type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email...">
+          <input type="email" value="<?=$email ?>" name="email" id="email" placeholder="Введите email..." required>
         </div>
         <div class="form-auth__item">
           <label for="password">Пароль</label>
-          <input type="password" name="password" id="password" placeholder="Введите пароль...">
+          <input type="password" name="password" id="password" placeholder="Введите пароль..." required>
         </div>
         <div class="form-auth__item form-auth__buttons">
           <button type="submit" name="button__auth">Войти</button>

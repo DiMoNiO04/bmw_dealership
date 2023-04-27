@@ -33,8 +33,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 	$series = trim($_POST['series']);
 	$number = trim($_POST['number']);
 	$issuedBy = trim($_POST['issued_by']);
-	$issuedWhen = trim($_POST['issued_when']);
-	$validity = trim($_POST['validity']);
 
 	$login = trim($_POST['login']);
 	$password = $_POST['password'];
@@ -45,9 +43,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 
 
 	//Проверка валидности формы
-	if($lastName  === '' || $firstName  === '' || $email  === '' || $login === '' || $password === '' || $email === '' || $job === '') {
-		array_push($errMsg, 'Заполните все обяазтельные поля!');
-	} elseif(mb_strlen($login, 'UTF8') < 3) {
+  if(mb_strlen($login, 'UTF8') < 3) {
 		array_push($errMsg, 'Логин должен быть более трех символов!');
 	} else {
 		//Проверка на уникальность логина и email
@@ -81,9 +77,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 			$dataPassport = [
 				'series' => $series,
 				'number' => $number,
-				'issued_by' => $issuedBy,
-				'issued_when' => $issuedWhen,
-				'validity' => $validity 
+				'issued_by' => $issuedBy
 			];
 
 			//Формируем массив для таблицы аддресса
@@ -132,8 +126,6 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create'])))
 	$series = '';
 	$number = '';
 	$issuedBy = '';
-	$issuedWhen = '';
-	$validity = '';
 	$login = '';
 	$password = '';
 	$email = '';
@@ -169,8 +161,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
 	$series = $employeePassport['series'];
 	$number = $employeePassport['number'];
 	$issuedBy = $employeePassport['issued_by'];
-	$issuedWhen = $employeePassport['issued_when'];
-	$validity = $employeePassport['validity'];
 	$login = $employeeAuth['login'];
 	$email = $employeeAuth['email'];
 	$access = $employeeAuth['access'];
@@ -198,80 +188,69 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
 	$series = trim($_POST['series']);
 	$number = trim($_POST['number']);
 	$issuedBy = trim($_POST['issued_by']);
-	$issuedWhen = trim($_POST['issued_when']);
-	$validity = trim($_POST['validity']);
 	$access = $_POST['access'];
 
-
-	//Проверка валидности формы
-	if($lastName  === '' || $firstName  === '') {
-		array_push($errMsg, 'Заполните все обяазтельные поля!');
+	//Проверка на доступ
+	if(isset($_POST['access'])) {
+		$access = $ACCESS;
 	} else {
-
-		//Проверка на доступ
-		if(isset($_POST['access'])) {
-			$access = $ACCESS;
-		} else {
-			$access = $NO_ACCESS;
-		}
-			
-		//Формируем массив для таблицы авторизации
-		$dataAuth = [
-			'access' => $access,
-		];
-
-		//Формируем массив паспорта
-		$dataPassport = [
-			'series' => $series,
-			'number' => $number,
-			'issued_by' => $issuedBy,
-			'issued_when' => $issuedWhen,
-			'validity' => $validity 
-		];
-
-		//Формируем массив адресса
-		$dataAddress = [
-			'city' => $city,
-			'street' => $street,
-			'house' => $house,
-			'apartment' => $apartment 
-		];
-
-		//Формируем данные в таблицу клиентов
-		if(empty($img)) {
-			$dataPersonal = [
-				'last_name' => $lastName,
-				'first_name' => $firstName,
-				'surname' => $surname,
-				'date_birth' => $dateBirth,
-				'phone' => $phone,
-				'job' => $job,
-			];
-		} else {
-			$dataPersonal = [
-				'last_name' => $lastName,
-				'first_name' => $firstName,
-				'surname' => $surname,
-				'date_birth' => $dateBirth,
-				'phone' => $phone,
-				'job' => $job,
-				'img' => $_POST['img'] ,
-			];
-		}
-
-		$idEmployee = selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
-		$idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись
-		$idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
-		$idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
-
-		//Обновляем данные сотрудника, которого отредактировали
-		update('employees', $id, $dataPersonal);
-		update('employees_passport', $idPas, $dataPassport);
-		update('employees_address', $idAddress, $dataAddress);
-		update('authorization', $idAuth, $dataAuth);
-
-		header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
+		$access = $NO_ACCESS;
 	}
+		
+	//Формируем массив для таблицы авторизации
+	$dataAuth = [
+		'access' => $access,
+	];
+
+	//Формируем массив паспорта
+	$dataPassport = [
+		'series' => $series,
+		'number' => $number,
+		'issued_by' => $issuedBy
+	];
+
+	//Формируем массив адресса
+	$dataAddress = [
+		'city' => $city,
+		'street' => $street,
+		'house' => $house,
+		'apartment' => $apartment 
+	];
+
+	//Формируем данные в таблицу клиентов
+	if(empty($img)) {
+		$dataPersonal = [
+			'last_name' => $lastName,
+			'first_name' => $firstName,
+			'surname' => $surname,
+			'date_birth' => $dateBirth,
+			'phone' => $phone,
+			'job' => $job,
+		];
+	} else {
+		$dataPersonal = [
+			'last_name' => $lastName,
+			'first_name' => $firstName,
+			'surname' => $surname,
+			'date_birth' => $dateBirth,
+			'phone' => $phone,
+			'job' => $job,
+			'img' => $_POST['img'] ,
+		];
+	}
+
+	$idEmployee = selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
+	$idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись
+	$idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
+	$idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+
+	//Обновляем данные сотрудника, которого отредактировали
+	update('employees', $id, $dataPersonal);
+	update('employees_passport', $idPas, $dataPassport);
+	update('employees_address', $idAddress, $dataAddress);
+	update('authorization', $idAuth, $dataAuth);
+
+	header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
 } 
 
 

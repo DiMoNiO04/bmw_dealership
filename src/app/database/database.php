@@ -186,6 +186,7 @@ function getModelsName($table1, $table2) {
 		t1.complexion,
 		t1.img,
 		t1.status,
+		t1.state,
 		t2.model 
 	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id"; 
 
@@ -249,8 +250,6 @@ function getPersonalData($table1, $table2, $table3, $table4, $id) {
 		t3.series,
 		t3.number,
 		t3.issued_by,
-		t3.issued_when,
-		t3.validity,
 		t4.login,
 		t4.email,
 		t4.date_regist
@@ -268,6 +267,49 @@ function getPersonalData($table1, $table2, $table3, $table4, $id) {
 
 	//Возвращаем полученный результат
 	return $query->fetch();
+}
+
+
+//Выборка заказов определенного клиента
+function getOrders($id) {
+	global $pdo; //Глобальная переменная
+
+	//Формируем sql запрос
+	$sql = "SELECT
+		t1.id, 
+		t1.date,
+		t2.last_name,
+		t2.first_name,
+		t2.phone,
+		t5.email AS emailEmployee,
+		t4.name AS nameContact,
+		t4.email AS emailContact,
+		t4.phone AS phoneContact,
+		t4.work_time,
+		t3.name,
+		t6.model,
+		t3.engine,
+		t3.year,
+		t3.price,
+		t3.color,
+		t3.complexion,
+		t3.state
+	FROM orders AS t1 JOIN employees AS t2 ON t1.id_employee = t2.id
+							JOIN `auto` AS t3 ON t1.id_auto = t3.id
+							JOIN contacts AS t4 ON t1.id_contact = t4.id 
+							JOIN authorization AS t5 ON t2.id_auth = t5.id 
+							JOIN models AS t6 ON t3.id_model = t6.id
+	WHERE t1.id_client = $id";
+	
+	//Подготовка sql запроса для отправки на сервер
+	$query = $pdo->prepare($sql);
+	$query->execute();
+
+	//Проверка запроса на ошибки
+	dbCheckErr($query);
+
+	//Возвращаем полученный результат
+	return $query->fetchAll();
 }
 
 
@@ -369,40 +411,6 @@ function searchAutos($params, $paramsPrice, $paramsYear) {
 	return $query->fetchAll();
 }
 
-//Выборка сотрудников
-function getEmployees($table1, $table2, $table3, $table4) {
-	global $pdo;
-	$sql = "SELECT 
-		t1.id,
-		t1.last_name,
-		t1.first_name,
-		t1.surname,
-		t1.date_birth,
-		t1.phone,
-		t1.img,
-		t1.job,
-		t2.city,
-		t2.street,
-		t2.house,
-		t2.apartment,
-		t3.series,
-		t3.number,
-		t3.issued_by,
-		t3.issued_when,
-		t3.validity,
-		t4.login,
-		t4.role,
-		t4.email,
-		t4.access,
-		t4.date_regist
-	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_address = t2.id
-							JOIN $table3 AS t3 ON t1.id_passport = t3.id
-							JOIN $table4 AS t4 ON t1.id_auth = t4.id"; 
-	$query = $pdo->prepare($sql);
-	$query->execute();
-	dbCheckErr($query); //Проверка запроса на ошибки
-	return $query->fetchAll();
-}
 
 //Поиск в панели админа по почти всем данным
 function searchAdmin($search, $table) {
@@ -421,9 +429,7 @@ function searchAdmin($search, $table) {
 			`login` LIKE '%$search%'  OR
 			email LIKE '%$search%' OR 
 			series LIKE '%$search%' OR
-			issued_by LIKE '%$search%' OR 
-			issued_when LIKE '%$search%' OR
-			validity	LIKE '%$search%'";
+			issued_by LIKE '%$search%'";
 
 	//Подготовка sql запроса для отправки на сервер
 	$query = $pdo->prepare($sql);
