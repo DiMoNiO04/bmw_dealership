@@ -136,13 +136,22 @@
 											<input name="engine" type="radio" value="Электрический">
 											<span>Электрический</span>
 										</label>
-									<?php else: ?>
+									<?php elseif($engine == 'Электрический'): ?>
 										<label class="custom-checkbox">
 											<input name="engine" type="radio" value="Бензиновый">
 											<span>Бензиновый</span>
 										</label>
 										<label class="custom-checkbox">
 											<input checked name="engine" type="radio" value="Электрический">
+											<span>Электрический</span>
+										</label>
+									<?php else: ?>
+										<label class="custom-checkbox">
+											<input name="engine" type="radio" value="Бензиновый">
+											<span>Бензиновый</span>
+										</label>
+										<label class="custom-checkbox">
+											<input name="engine" type="radio" value="Электрический">
 											<span>Электрический</span>
 										</label>
 									<?php endif; ?>

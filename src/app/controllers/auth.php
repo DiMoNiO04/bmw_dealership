@@ -255,7 +255,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['password-edit']))) {
 
 	//Формируем массив данных, которые хотим изменит
 	$data = [
-		'password' => $password
+		'password' => $password,
+		'access' => $ACCESS
 	];
 	
 	//Обновляем пароль

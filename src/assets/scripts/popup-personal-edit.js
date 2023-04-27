@@ -5,6 +5,7 @@ const PASSWORD_EDIT = document.querySelector('.personal-password__edit');
 const CLOSE_BUTTON_PERSONAL = document.querySelector('.popup__close-personal')
 const POPUP_PERSONAL = document.querySelector('.popup__personal-data')
 const PERSONAL_EDIT = document.querySelector('.button__personal-data')
+const BODY = document.body;
 
 
 const isContainsPopup = () =>  event.target.classList.contains('popup');
@@ -13,6 +14,7 @@ const isButton = () => event.target.classList.contains('button__popup-ok')
 const togglePopupDarkPassword = () => {
 	POPUP_PASSWORD.classList.toggle('popup__hidden')
 	DARK_CONTAINER.classList.toggle('dark__container__noactive')
+	BODY.classList.toggle('body__hidden');
 }
 
 CLOSE_BUTTON_PASSWORD.addEventListener('click', togglePopupDarkPassword);
@@ -29,6 +31,7 @@ POPUP_PASSWORD.addEventListener('click', (event) => {
 const togglePopupDarkPersonal = () => {
 	POPUP_PERSONAL.classList.toggle('popup__hidden')
 	DARK_CONTAINER.classList.toggle('dark__container__noactive')
+	BODY.classList.toggle('body__hidden');
 }
 
 CLOSE_BUTTON_PERSONAL.addEventListener('click', togglePopupDarkPersonal);
