@@ -25,16 +25,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
 	$user = selectOne('authorization', ['id' => $idSession]);
 	$idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
 
-	$employees = selectAll('employees');
-	$arrEmployees = [];
-	foreach($employees as $key => $employee){ //Разбираем данные
-		if($employee['job'] == 'Менеджер') {
-			array_push($arrEmployees, $employee['id']);
-		}
-	}
+	$arrEmployees = selectAll('managersview');
 
 	$randIndex = rand(0, count($arrEmployees) - 1);
-	$idEmployee = $arrEmployees[$randIndex];
+	$idEmployee = $arrEmployees[$randIndex]['id'];
 
 	if($login != $user['login'] || $email != $user['email'] || (!password_verify($passS, $user['password'])) || $passF != $passS) {
 		array_push($errMsg, "Не верно введены данные! \n Заказ не был оформлен! \n Повторите попытку!");

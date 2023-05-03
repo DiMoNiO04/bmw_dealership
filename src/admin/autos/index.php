@@ -77,7 +77,7 @@
 												<p>Есть в наличии</p>
 											</div>
 										<?php endif; ?>
-
+										
 										<div class="panel__buttons">
 											<a class="button panel__button-edit" href="edit.php?id=<?=$auto['id'];?>">Редактировать</a>
 

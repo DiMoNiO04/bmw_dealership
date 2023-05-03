@@ -49,6 +49,7 @@
 									<label for="color">Цвет<span>*</span></label>
 									<input  value="<?= $color?>" name="color" type="text" name="color" required>
 								</div>
+								
 								<div class="admin__form-block admin__form-block">
 									<label for="date">Год выпуска<span>*</span></label>
 									<input  value="<?= $year?>" name="year" type="number" max="2023" name="date" required>

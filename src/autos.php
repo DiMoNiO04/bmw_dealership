@@ -2,7 +2,7 @@
 	include ('path.php'); 
 	include ('./app/database/database.php');
 	
-	$autos = getModelsName('auto', 'models');
+	$autos = selectAll('autosview');
 	$models = selectAll('models');
 	$complexion = ['Базовая', 'Средняя', 'Полная'];
 	$colors = getColorsAutos();

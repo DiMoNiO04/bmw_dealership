@@ -171,37 +171,6 @@ function delete($table, $id) {
 }
 
 
-//Получаем записи авто , в которых имеется название модели
-function getModelsName($table1, $table2) {
-	global $pdo; //Глобальная переменная
-
-	//Формируем sql Запрос
-	$sql = "SELECT 
-		t1.id,
-		t1.name,
-		t1.engine,
-		t1.year,
-		t1.price,
-		t1.color,
-		t1.complexion,
-		t1.img,
-		t1.status,
-		t1.state,
-		t2.model 
-	FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id"; 
-
-	//Подготовка sql запроса для отправки на сервер
-	$query = $pdo->prepare($sql);
-	$query->execute();
-
-	//Проверка запроса на ошибки
-	dbCheckErr($query);
-
-	//Возвращаем полученный результат
-	return $query->fetchAll();
-}
-
-
 function selectAutoFromAutosWithModelsOnSingle($table1, $table2, $id) {
 	global $pdo;
 	$sql = "SELECT t1.*, t2.model, t2.main_foto FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id WHERE t1.id = $id"; 

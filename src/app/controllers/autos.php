@@ -10,7 +10,8 @@ if(!$_SESSION) {
 
 //Получаем все данные из таблицы models и auto
 $models = selectAll('models');
-$autoModelsName = getModelsName('auto', 'models');
+$autoModelsName = selectAll('autosview');
+
 
 //Переменные
 $errMsg = [];
