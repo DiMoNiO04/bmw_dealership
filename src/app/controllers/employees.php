@@ -259,15 +259,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди сотрудника, которого хотим удалить
 	$idEmployee = selectOne('employees', ['id' => $id]); 
 
-	$idAuth = $idEmployee['id_auth']; //Получаем айди авторизации для данного сотрудника
-	$idAddress = $idEmployee['id_address']; //Получаем айди адресса для данного сотрудника
-	$idPas = $idEmployee['id_passport']; //Получаем айди паспорта для данного сотрудника
-
-	delete('authorization', $idAuth); //Удаляем данные авторизации
-	delete('employees_address', $idAddress); //Удаляем данные адресса
-	delete('employees_passport', $idPas); //Удаляем  данные паспорта
 	delete('employees', $id); //Удаляем сотрудника
-
 	header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
 }
 

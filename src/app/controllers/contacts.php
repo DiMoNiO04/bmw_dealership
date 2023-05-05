@@ -115,10 +115,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
 //Удаление контакта
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди контакта, который хотим удалить
-	$idContact = selectOne('contacts', ['id' => $id]);
-	$idAddress = $idContact['id_address'];
 	delete('contacts', $id); //Удаляем
-	delete('contacts_address', $idAddress);
 	header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
 }
 ?>

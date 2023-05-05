@@ -269,15 +269,7 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди авто, которую хотим удалить
 	$idClient = selectOne('clients', ['id' => $id]);
 
-	$idAuth = $idClient['id_auth']; //Получаем айди записи авторизации, которую хотим запись
-	$idAddress = $idClient['id_address']; //Получаем айди записи адресса, которую хотим запись
-	$idPas = $idClient['id_passport']; //Получаем айди записи паспорта, которую хотим запись
-
-	delete('authorization', $idAuth); //Удаляем авторизацию
-	delete('clients_address', $idAddress); //Удаляем адресс
-	delete('clients_passport', $idPas); //Удаляем паспорт
 	delete('clients', $id); //Удаляем клиента
-
 	header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов
 }
 ?>
