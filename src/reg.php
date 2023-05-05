@@ -1,6 +1,7 @@
 <?php  
 			include ('path.php'); 
-			include("./app/controllers/auth.php");  
+			include("./app/controllers/user.php");  
+			$errMsg = $user -> errMsg;
 ?>
 
 

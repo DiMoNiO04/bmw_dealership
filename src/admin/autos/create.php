@@ -24,10 +24,6 @@
 					<div class="panel__body">
 						<h1 class="title-pages panel__title">Добавление авто</h1>
 
-						<div class="error">
-							<?php include("../../app/helps/errInfo.php")?>
-						</div>
-
 						<div class="panel__blocks">
 							<form  class="admin-form" action="create.php" method="post" enctype="multipart/form-data">
 								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>

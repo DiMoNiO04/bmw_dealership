@@ -2,44 +2,43 @@
 include SITE_ROOT . "/app/database/database.php";
 
 $errMsg = [];
-$idEmployee = '';
-$newAuto = 19;
-$oldAuto = 20;
 
 
-//Добавление заказа пользотвателем
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
+class Order {
 	
-	$email = trim($_POST['email']);
-	$login = trim($_POST['login']);
-	$passF = trim($_POST['password-first']);
-	$passS = trim($_POST['password-second']);
+	public $newAuto = 19;
+	public $oldAuto = 20;
+	public $client = 0;
+	public $new = 'Новое';
 
-	$idAuto = $_GET['auto'];
-	$auto = selectOne('auto', ['id' => $idAuto]);
-	$state = $auto['state'];
+	public function addOrderClient() {
+		$email = $_POST['email'];
+		$login = $_POST['login'];
+		$passF = $_POST['password-first'];
+		$passS = $_POST['password-second'];
 
-	$idSession = $_SESSION['id'];
-	$roleSession = $_SESSION['role'];
+		$idAuto = $_GET['auto'];
+		$auto = selectOne('auto', ['id' => $idAuto]);
+		$state = $auto['state'];
 
-	$user = selectOne('authorization', ['id' => $idSession]);
-	$idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
+		$idSession = $_SESSION['id'];
+		$roleSession = $_SESSION['role'];
 
-	$arrEmployees = selectAll('managersview');
+		$user = selectOne('authorization', ['id' => $idSession]);
+		$idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
 
-	$randIndex = rand(0, count($arrEmployees) - 1);
-	$idEmployee = $arrEmployees[$randIndex]['id'];
+		$arrEmployees = selectAll('managersview');
+		$randIndex = rand(0, count($arrEmployees) - 1);
+		$idEmployee = $arrEmployees[$randIndex]['id'];
 
-	if($login != $user['login'] || $email != $user['email'] || (!password_verify($passS, $user['password'])) || $passF != $passS) {
-		array_push($errMsg, "Не верно введены данные! \n Заказ не был оформлен! \n Повторите попытку!");
-	} else {
+		if($login != $user['login'] || $email != $user['email'] || (!password_verify($passS, $user['password'])) || $passF != $passS) {
+			array_push($this -> errMsg, "Не верно введены данные! \n Заказ не был оформлен! \n Повторите попытку!");
+		} else {
 
-		if($roleSession == 0) {
-
-			if($state == 'Новое') {
-				$idContact = $newAuto;
+			if($state == $this -> new) {
+				$idContact = $this -> newAuto;
 			} else {
-				$idContact = $oldAuto;
+				$idContact = $this -> oldAuto;
 			}
 
 			$params = [
@@ -48,54 +47,68 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
 				'id_contact' => $idContact,
 				'id_employee' => $idEmployee
 			];
+
+			insert('orders', $params); //Отправляем данные в таблицу клиентов
+			header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу клиентов
+		}
+	}
+
+	public function addOrderEmploee() {
+		$idClient = $_POST['client'];
+		$idAuto = $_POST['auto'];
+
+		$idSession = $_SESSION['id'];
+		$idEmployee = selectOne('employees', ['id_auth' => $idSession])['id'];
+
+		$auto = selectOne('auto', ['id' => $idAuto]);
+		$state = $auto['state'];
+
+		$clientFullData = selectAll('clientsview', ['id' => $idClient])[0];
+
+		if($state == $this -> new) {
+			$idContact = $this -> newAuto;
+		} else {
+			$idContact = $this -> oldAuto;
 		}
 
+		$params = [
+			'id_auto' => $idAuto,
+			'id_client' => $idClient,
+			'id_contact' => $idContact,
+			'id_employee' => $idEmployee
+		];
+
 		insert('orders', $params); //Отправляем данные в таблицу клиентов
-		header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу клиентов
+		header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
 	}
+
+	public function deleteOrder($id) {
+		delete('orders', $id); //Удаляем
+		if($_SESSION['role'] == $CLIENT) { //Если удалял заказ клиент
+			header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу моделей
+		} else {
+			header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
+		}
+	}
+
 }
 
+
+$order = new Order();
+
+//Добавление заказа пользотвателем
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
+	$order -> addOrderClient();
+}
 
 //Добавление заказа администратором
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['order-create']))) {
-	
-	$idClient = $_POST['client'];
-	$idAuto = $_POST['auto'];
-
-	$idSession = $_SESSION['id'];
-	$idEmployee = selectOne('employees', ['id_auth' => $idSession])['id'];
-
-	$auto = selectOne('auto', ['id' => $idAuto]);
-	$state = $auto['state'];
-
-	$clientFullData = selectAll('clientsview', ['id' => $idClient])[0];
-
-	if($state == 'Новое') {
-		$idContact = $newAuto;
-	} else {
-		$idContact = $oldAuto;
-	}
-
-	$params = [
-		'id_auto' => $idAuto,
-		'id_client' => $idClient,
-		'id_contact' => $idContact,
-		'id_employee' => $idEmployee
-	];
-
-	insert('orders', $params); //Отправляем данные в таблицу клиентов
-	header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
+	$order -> addOrderEmploee();
 }
-
 
 //Удаление заказа(пользователем)
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_order']))) {
 	$id = $_GET['del_order'];  //Получаем айди модели, которую хотим удалить
-	delete('orders', $id); //Удаляем
-	if($_SESSION['role'] == 0) {
-		header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу моделей
-	} else {
-		header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
-	}
+	$order -> deleteOrder($id);
 }
 ?>

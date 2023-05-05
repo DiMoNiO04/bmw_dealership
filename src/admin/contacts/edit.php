@@ -26,10 +26,6 @@
 						<h1 class="title-pages panel__title">Редактирование контактных данных</h1>
 						<div class="panel__blocks">
 
-							<div class="error">
-								<?php include("../../app/helps/errInfo.php")?>
-							</div>
-
 							<form  class="admin-form" action="create.php" method="post">
 								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<input name="id" type="hidden" value="<?=$id ?>">

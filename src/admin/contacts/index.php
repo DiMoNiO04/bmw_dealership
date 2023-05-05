@@ -2,6 +2,8 @@
 	session_start();
    include "../../path.php";
    include "../../app/controllers/contacts.php";
+	//  $contacts = new Contacts();
+	//  $contacts -> getContacts();
 ?>
 
 <!DOCTYPE html>

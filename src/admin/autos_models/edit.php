@@ -25,10 +25,6 @@
 						<h1 class="title-pages panel__title">Обновление модели авто</h1>
 						<div class="panel__blocks">
 
-						<div class="error">
-							<?php include("../../app/helps/errInfo.php")?>
-						</div>
-
 							<form class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">
 								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<input name="id" type="hidden" value="<?=$id ?>">

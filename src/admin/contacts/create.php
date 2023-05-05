@@ -26,10 +26,6 @@
 						<h1 class="title-pages panel__title">Добавление контактных данных</h1>
 						<div class="panel__blocks">
 
-							<div class="error">
-								<?php include("../../app/helps/errInfo.php")?>
-							</div>
-
 							<form  class="admin-form" action="create.php" method="post">
 								<p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 								<div class="admin__form-block">

@@ -1,6 +1,7 @@
 <?php 
 	include "../../path.php";
 	include "../../app/controllers/clients.php";
+	$errMsg = $client -> errMsg;
 ?>
 
 <!DOCTYPE html>

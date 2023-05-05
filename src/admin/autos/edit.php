@@ -24,10 +24,7 @@
 					<div class="panel__body">
 						<h1 class="title-pages panel__title">Редактирование авто</h1>
 
-						<div class="error">
-							<?php include("../../app/helps/errInfo.php")?>
-						</div>
-
+						
 						<div class="panel__blocks">
 
 							<form  class="admin-form" action="edit.php" method="post" enctype="multipart/form-data">						
@@ -63,7 +60,7 @@
 								</div>
 								<div class="admin__form-block admin__form-block">
 									<label for="price">Цена (&#36)<span>*</span></label>
-									<input  value="<?= $price?>" name="price" type="number" name="price" required>
+									<input  value="<?= $price - 3000?>" name="price" type="number" name="price" required>
 								</div>
 								<div class="admin__form-block">
 									<label for="file">Выберите фото авто (выбрано по умолчанию)</label>

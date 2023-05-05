@@ -1,6 +1,7 @@
 <?php 
 	include "../../path.php";
 	include "../../app/controllers/employees.php";
+	$errMsg = $employee -> errMsg;
 ?>
 
 <!DOCTYPE html>
@@ -55,8 +56,8 @@
 									</div>
 									<div class="admin__form-block">
 										<label for="job">Должность:</label>
-										<select name="job" id="job">
-											<option selected>Выберите должность:</option>
+										<select name="job" id="job" required>
+											<option value="" selected>Выберите должность:</option>
 											<option value="Менеджер">Менеджер</option>
 											<option value="Админ">Админ</option>
 										</select>

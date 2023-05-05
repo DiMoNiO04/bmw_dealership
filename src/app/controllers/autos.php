@@ -13,75 +13,106 @@ $models = selectAll('models');
 $autoModelsName = selectAll('autosview');
 
 
-//Переменные
-$errMsg = [];
-$id = '';
-$modelName = '';
-$name = '';
-$complexion = '';
-$color = '';
-$year = '';
-$engine = '';
-$power = '';
-$price = '';
-$status = '';
-$model = '';
-$state = '';
+class Auto {
 
+	public $AVAILABLE = 1;
+	public $NO_AVAILABLE = 0;
 
-//Код для создания автомобиля
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-create']))) {
+	public function addAuto() {
 
-	//Работа с изображением
-	treatmentImg("\assets\images\dest\cars\\");
+		//Работа с изображением
+		treatmentImg("\assets\images\dest\cars\\");
 
-	//Забираем данные из формы в переменные
-	$name = trim($_POST['name']);
-	$complexion = trim($_POST['complexion']);
-	$color = trim($_POST['color']);
-	$year = trim($_POST['year']);
-	$engine = trim($_POST['engine']);
-	$price = trim($_POST['price']);
-	$status = trim($_POST['status']);
-	$state = trim($_POST['state']);
-	$model = trim($_POST['model']);
-
-	//Проверяем статус: выбран или нет
-	if(isset($_POST['status'])) {
-		$status = 1;
-	} else {
-		$status = 0;
-	}
-		
-	//Формируем массив для отправки
-	$auto = [
-		'name' => $name,
-		'engine' => $engine,
-		'year' => $year,
-		'price' => $price,
-		'color' => $color,
-		'complexion' => $complexion,
-		'img' => $_POST['img'],
-		'status' => $status,
-		'state' => $state,
-		'id_model' => $model
-	];
+		//Проверяем статус: выбран или нет
+		$status = trim($_POST['status']);
+		if(isset($_POST['status'])) {
+			$status = $this -> AVAILABLE;
+		} else {
+			$status = $this -> $NO_AVAILABLE;
+		}
+			
+		//Формируем массив для отправки
+		$auto = [
+			'name' => trim($_POST['name']),
+			'engine' => trim($_POST['engine']),
+			'year' => trim($_POST['year']),
+			'price' => trim($_POST['price']),
+			'color' =>  trim($_POST['color']),
+			'complexion' => trim($_POST['complexion']),
+			'img' => $_POST['img'],
+			'status' => $status,
+			'state' => trim($_POST['state']),
+			'id_model' => trim($_POST['model'])
+		];
 
 		$auto = insert('auto', $auto); //Отправляем данные в таблицу auti
 		$auto = selectOne('auto', ['id' => $id]); //Получаем данные добавленной модели
 		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу автомобилей
-} else {
-	$name = '';
-	$complexion = '';
-	$color = '';
-	$year = '';
-	$engine = '';
-	$price = '';
-	$status = '';
-	$model = '';
-	$state = '';
+	}
+
+	public function updateAuto() {
+		//Работа с изображением 
+		treatmentImg("\assets\images\dest\cars\\");
+
+		//Проверяем статус: выбран или нет
+		$status = trim($_POST['status']);
+		if(isset($_POST['status'])) {
+			$status = $this -> AVAILABLE;
+		} else {
+			$status = $this -> $NO_AVAILABLE;
+		}
+		
+		//Формируем массив для отправки
+		if(empty($img)) {
+			$auto = [
+				'name' => trim($_POST['name']),
+				'engine' => trim($_POST['engine']),
+				'year' => trim($_POST['year']),
+				'price' => trim($_POST['price']),
+				'color' => trim($_POST['color']),
+				'complexion' => trim($_POST['complexion']),
+				'status' => $status,
+				'id_model' => trim($_POST['model'])
+			];
+		} else {
+			$auto = [
+				'name' => trim($_POST['name']),
+				'engine' => trim($_POST['engine']),
+				'year' => trim($_POST['year']),
+				'price' => trim($_POST['price']),
+				'color' => trim($_POST['color']),
+				'complexion' => trim($_POST['complexion']),
+				'img' => $_POST['img'],
+				'status' => $status,
+				'id_model' => trim($_POST['model'])
+			];
+		}
+
+		$id = $_POST['id']; //Получаем айди автомобиля, который хотим изменить
+		$auto = update('auto', $id, $auto); //Обновляем данные автомобиля
+		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу автомобилей
+	}
+
+	public function updateStatusAuto($id) {
+		$status = $_GET['status']; //Получаем статус автомобиля, который хотим измнитьб
+		$autoId = update('auto', $id, ['status' => $status]); //Перезаписываем полученную запись
+		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу моделей
+	}
+
+	public function deleteAuto($id) {
+		delete('auto', $id); //Удаляем авто
+		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу авто
+	}
+
 }
 
+
+$auto = new Auto();
+
+//Код для создания автомобиля
+if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-create']))) {
+	$auto -> addAuto();
+} 
 
 //Редактирование автомобиля
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
@@ -102,74 +133,20 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 	$model = $auto['id_model'];
 }
 
+//Код редактирования данных автомобиля
 if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-edit']))) {
-
-	//Работа с изображением 
-	treatmentImg("\assets\images\dest\cars\\");
-
-	$id = $_POST['id'];
-	$name = $_POST['name'];
-	$complexion = $_POST['complexion'];
-	$color = $_POST['color'];
-	$year = $_POST['year'];
-	$engine = $_POST['engine'];
-	$price = $_POST['price'];
-	$status = $_POST['status'];
-	$model = $_POST['model'];
-	$img = $_POST['img'];
-
-	//Проверяем статус: выбран или нет
-	if(isset($_POST['status'])) {
-		$status = 1;
-	} else {
-		$status = 0;
-	}
-	
-	//Формируем массив для отправки
-	if(empty($img)) {
-		$auto = [
-			'name' => $name,
-			'engine' => $engine,
-			'year' => $year,
-			'price' => $price,
-			'color' => $color,
-			'complexion' => $complexion,
-			'status' => $status,
-			'id_model' => $model
-		];
-	} else {
-		$auto = [
-			'name' => $name,
-			'engine' => $engine,
-			'year' => $year,
-			'price' => $price,
-			'color' => $color,
-			'complexion' => $complexion,
-			'img' => $_POST['img'],
-			'status' => $status,
-			'id_model' => $model
-		];
-	}
-
-	$auto = update('auto', $id, $auto);
-	header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу автомобилей
+	$auto -> updateAuto();
 }
 
 //Изменение статуса авто
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
 	$id = $_GET['pub_id'];  //Получаем айди автомобиля, который хотим измнить
-	$status = $_GET['status']; //Получаем статус автомобиля, который хотим измнитьб
-
-	$autoId = update('auto', $id, ['status' => $status]); //Перезаписываем полученную запись
-
-	header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу моделей
-	exit();
+	$auto -> updateStatusAuto($id);
 }
 
 //Удаление автомобиля
 if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
 	$id = $_GET['del_id'];  //Получаем айди авто, которую хотим удалить
-	delete('auto', $id); //Удаляем авто
-	header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу авто
+	$auto -> deleteAuto($id);
 }
 // ?>

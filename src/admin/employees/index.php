@@ -3,6 +3,7 @@
 	include "../../path.php";
 	include "../../app/controllers/employees.php";
 
+	$errMsg = $employee -> errMsg;
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-employee'])) {
 		$employees = searchAdmin($_POST['search-employee'], 'employeesView');
 

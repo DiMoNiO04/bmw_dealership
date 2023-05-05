@@ -3,6 +3,7 @@
 	include "../../path.php";
 	include "../../app/controllers/clients.php";
 
+	$errMsg = $client -> errMsg;
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-client'])) {
 		$clients = searchAdmin($_POST['search-client'], 'clientsView');
 
