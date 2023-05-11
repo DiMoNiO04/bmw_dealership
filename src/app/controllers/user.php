@@ -26,6 +26,7 @@ class User {
 		}
 	}
 
+	//Регистрация
 	public function registration() {
 			
 		//Забираем данные из формы в переменные
@@ -101,6 +102,7 @@ class User {
 		}
 	}
 
+	//Авторизация
 	public function authorization() {
 		//Забираем данные из формы в переменные
 		$email = trim($_POST['email']);
@@ -121,6 +123,7 @@ class User {
 		}
 	}
 
+	//Изменение пароля
 	public function editPassword($id) {
 		$passwordF = $_POST['passF'];
 		$password = password_hash($passwordF, PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
@@ -134,6 +137,7 @@ class User {
 		update('authorization', $id, $data); 		//Обновляем пароль
 	}
 
+	//Редактирование персональных данных
 	public function updateUser() {
 
 			//Работа с изображением 
@@ -216,6 +220,7 @@ class User {
 			}
 	} 
 
+	//Удаление аккаунта
 	public function deleteUser($id) {
 		//Проверям на клиента (сотрудника)
 		if($_SESSION['role'] == $this -> EMPLOYEE) { //Если сотрудник
@@ -245,6 +250,7 @@ class User {
 		header('location: ' . BASE_URL . "/logout.php"); //Возвращаем на страницу
 	} 
 
+	//Добавление заказа
 	public function addOrder() {
 		$email = trim($_POST['email']);
 		$login = trim($_POST['login']);
@@ -274,6 +280,7 @@ class User {
 		}
 	}
 
+	//Удаление заказа
 	public function deleteOrder($id) {
 		delete('orders', $id); //Удаляем
 		if($_SESSION['role'] == $this -> CLIENT) {

@@ -6,11 +6,13 @@ $errMsg = [];
 
 class Order {
 	
-	public $newAuto = 19;
-	public $oldAuto = 20;
-	public $client = 0;
-	public $new = 'Новое';
+	public $NEW_AUTO = 19;
+	public $OLD_AUTO = 20;
+	public $CLIENT = 0;
+	public $NEW = 'Новое';
+	public $errMsg = [];
 
+	//Добавление заказа клиентом
 	public function addOrderClient() {
 		$email = $_POST['email'];
 		$login = $_POST['login'];
@@ -36,9 +38,9 @@ class Order {
 		} else {
 
 			if($state == $this -> new) {
-				$idContact = $this -> newAuto;
+				$idContact = $this -> NEW_AUTO;
 			} else {
-				$idContact = $this -> oldAuto;
+				$idContact = $this -> OLD_AUTO;
 			}
 
 			$params = [
@@ -53,6 +55,7 @@ class Order {
 		}
 	}
 
+	//Добавление заказа сотрудником
 	public function addOrderEmploee() {
 		$idClient = $_POST['client'];
 		$idAuto = $_POST['auto'];
@@ -63,12 +66,12 @@ class Order {
 		$auto = selectOne('auto', ['id' => $idAuto]);
 		$state = $auto['state'];
 
-		$clientFullData = selectAll('clientsview', ['id' => $idClient])[0];
+		$CLIENTFullData = selectAll('clientsview', ['id' => $idClient])[0];
 
 		if($state == $this -> new) {
-			$idContact = $this -> newAuto;
+			$idContact = $this -> NEW_AUTO;
 		} else {
-			$idContact = $this -> oldAuto;
+			$idContact = $this -> OLD_AUTO;
 		}
 
 		$params = [
@@ -82,6 +85,7 @@ class Order {
 		header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
 	}
 
+	//Удаление заказа
 	public function deleteOrder($id) {
 		delete('orders', $id); //Удаляем
 		if($_SESSION['role'] == $CLIENT) { //Если удалял заказ клиент

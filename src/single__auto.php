@@ -19,6 +19,7 @@
 			}
 		}
 	}
+	$errMsg = $order -> errMsg;
 
 	$idAuto = $_GET['auto'];
 ?>
@@ -160,8 +161,8 @@
 				<div class="single-auto__container">
 					<div class="single-auto__desc">
 					<div class="error">
-					<?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
-				</div>
+						<?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
+					</div>
 						<div class="single-auto__logo">
 							<img src="./assets/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
 							<h1 class="single-auto__title">BMW <?=$auto['model']?> серии <?=$auto['name']?></h1>

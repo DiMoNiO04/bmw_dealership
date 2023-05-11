@@ -50,7 +50,7 @@
 				<section class="form-reg__block">
 					<h2>Данные для входа</h2>
 					<div class="form-reg__item">
-						<label for="login">Логин<span>*</span></label>
+						<label for="login">Логин (более 3-х символов)<span>*</span></label>
 						<input type="text" value="<?=$login ?>" name="login" id="login" placeholder="Введите логин..." required>
 					</div>
 					<div class="form-reg__item">

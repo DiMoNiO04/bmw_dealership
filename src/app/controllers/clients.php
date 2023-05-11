@@ -13,6 +13,7 @@ class Client {
 	public $CLIENT = 0;
 	public $errMsg = [];
 
+	//Добавление клиента
 	public function addClient() {
 		
 		//Работа с изображением
@@ -96,6 +97,7 @@ class Client {
 		}
 	}
 
+	//Редактирование клиента
 	public function updateClient() {
 			
 		//Работа с изображением 
@@ -164,6 +166,7 @@ class Client {
 		header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов
 	}
 
+	//Редактирование доступа клиента
 	public function updateStatusClient($id) {
 		$access = $_GET['access'];
 	
@@ -175,6 +178,7 @@ class Client {
 		header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов
 	}
 
+	//Удаление клиента
 	public function deleteClient($id) {
 		delete('clients', $id); //Удаляем клиента
 		header('location: ' . BASE_URL . "admin/clientss/index.php"); //Возвращаем на страницу клиентов

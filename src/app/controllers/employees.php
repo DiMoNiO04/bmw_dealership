@@ -12,6 +12,7 @@ class Employee {
 	public $ADMIN = 1;
 	public $errMsg = [];
 
+	//Добавление сотрудника
 	public function addEmployee() {
 		
 		//Работа с изображением
@@ -95,6 +96,7 @@ class Employee {
 		} 
 	}
 
+	//Редактирование сотрудника
 	public function updateEmployee() {
 		//Работа с изображением 
 		treatmentImg("\assets\images\dest\employess\\");
@@ -165,6 +167,7 @@ class Employee {
 		header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
 	}
 
+	//Редактирование доступа сотрудника
 	public function updateStatusEmployee($id) {
 		$access = $_GET['access'];
 	
@@ -176,6 +179,7 @@ class Employee {
 		header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников
 	}
 
+	//Удаление сотрудника
 	public function deleteEmployee($id) {
 		delete('employees', $id); //Удаляем сотрудника
 		header('location: ' . BASE_URL . "admin/employees/index.php"); //Возвращаем на страницу сотрудников

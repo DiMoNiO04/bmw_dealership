@@ -13,6 +13,7 @@ $contacts = selectAll('contactsview');  //Получаем все данные �
 
 class Contact {
 
+	//Добавление контакта
 	public function addContact() {
 		
 		//Формируем объект адрессных данных
@@ -35,6 +36,7 @@ class Contact {
 		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
 	}
 
+	//Редактирование контакта
 	public function updateContact() {
 
 		//Формируем массив адрессных данных
@@ -63,6 +65,7 @@ class Contact {
 		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
 	}
 
+	//Удаление контакта
 	public function deleteContact($id) {
 		delete('contacts', $id); //Удаляем
 		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов

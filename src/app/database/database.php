@@ -3,15 +3,6 @@
 session_start();
 require('connect.php');
 
-//Тестовая функция вывода
-function tt($value) {
-	echo '<pre>';
-	print_r($value);
-	echo '</pre>';
-	exit();
-}
-
-
 //Проверяем выполнение запроса к БД
 function dbCheckErr($query) {
 	$errInfo = $query->errorInfo(); //Получаем ошибки в массив

@@ -18,6 +18,7 @@ class Auto {
 	public $AVAILABLE = 1;
 	public $NO_AVAILABLE = 0;
 
+	//Добавление авто
 	public function addAuto() {
 
 		//Работа с изображением
@@ -50,6 +51,7 @@ class Auto {
 		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу автомобилей
 	}
 
+	//Редактирование авто
 	public function updateAuto() {
 		//Работа с изображением 
 		treatmentImg("\assets\images\dest\cars\\");
@@ -93,12 +95,14 @@ class Auto {
 		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу автомобилей
 	}
 
+	//Редактирование статуса авто
 	public function updateStatusAuto($id) {
 		$status = $_GET['status']; //Получаем статус автомобиля, который хотим измнитьб
 		$autoId = update('auto', $id, ['status' => $status]); //Перезаписываем полученную запись
 		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу моделей
 	}
 
+	//Удаление авто
 	public function deleteAuto($id) {
 		delete('auto', $id); //Удаляем авто
 		header('location: ' . BASE_URL . "admin/autos/index.php"); //Возвращаем на страницу авто

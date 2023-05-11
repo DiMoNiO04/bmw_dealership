@@ -13,6 +13,7 @@ $models = selectAll('models');
 
 class Model {
 
+	//Добавление модели
 	public function addModel() {
 		//Работа с изображением
 		treatmentImg("\assets\images\dest\models\\");
@@ -40,6 +41,7 @@ class Model {
 		}
 	}
 
+	//Редактирование модели
 	public function updateModel() {
 			
 		//Работа с изображением 
@@ -71,6 +73,7 @@ class Model {
 		header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
 	}
 
+	//Удаление модели
 	public function deleteModel($id) {
 		delete('models', $id); //Удаляем
 		header('location: ' . BASE_URL . "admin/autos_models/index.php"); //Возвращаем на страницу моделей
