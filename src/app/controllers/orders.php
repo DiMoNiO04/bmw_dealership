@@ -14,6 +14,7 @@ class Order {
 
 	//Добавление заказа клиентом
 	public function addOrderClient() {
+
 		$email = $_POST['email'];
 		$login = $_POST['login'];
 		$passF = $_POST['password-first'];
@@ -29,7 +30,7 @@ class Order {
 		$user = selectOne('authorization', ['id' => $idSession]);
 		$idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
 
-		$arrEmployees = selectAll('managersview');
+		$arrEmployees = selectAll('employees', ['job' => 'Менеджер']);
 		$randIndex = rand(0, count($arrEmployees) - 1);
 		$idEmployee = $arrEmployees[$randIndex]['id'];
 

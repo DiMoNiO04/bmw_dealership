@@ -11,6 +11,8 @@
 			array_push($errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
 		}
 	}
+
+	//$bestClients = getBestClients();
 ?>
 
 <!DOCTYPE html>
@@ -53,11 +55,20 @@
 						<?php if(empty($clients) && empty($errMsg)):?>
 							<p class="panel__empty">Клиенты в базе данных отсутствуют. Но вы можете добавить</p>
 						<?php else:?>
+							
 							<?php foreach($clients as $key => $client): ?>
 								<div class="panel__blocks">
 									<div class="panel__block">
-										<h2 class="panel__subtitle"><?= $client['last_name']?> <?= $client['first_name']; ?> <?= $client['surname']; ?></h2>
 										
+										<div class="panel__fio">
+											<?php for($i = 0; $i < $client['count_orders']; $i++): ?>
+												<div class="panel__stars">
+													<i class="fa-solid fa-star" title="У данного клиента <?= $client['count_orders']; ?> заказ (-а)"></i>
+												</div>
+											<?php endfor; ?>
+											<h2 class="panel__subtitle"><?= $client['last_name']?> <?= $client['first_name']; ?> <?= $client['surname']; ?></h2>
+										</div>
+
 										<?php if(!empty($client['img'])):?>
 											<img src="<?=BASE_URL . 'assets/images/dest/clients/' . $client['img'] ?>" alt="<?= $client['last_name']?>" class="panel__img panel__img-user">
 										<?php endif;?>

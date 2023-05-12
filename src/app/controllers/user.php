@@ -150,6 +150,8 @@ class User {
 			//Проверка на доступ
 			if(isset($_POST['access'])) {
 				$access = $this -> ACCESS;
+			} else if($_SESSION['access'] == $this -> ACCESS) {
+				$access = $this -> ACCESS;
 			} else {
 				$access = $this -> NO_ACCESS;
 			}

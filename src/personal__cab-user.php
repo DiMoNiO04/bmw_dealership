@@ -276,7 +276,7 @@
 									<br>
 									<div class="panel__item">
 										<h3>Менеджер:</h3>
-										<p><?= $order['last_name']?> <?= $order['first_name']?></p>
+										<p><?= $order['last_name']?> <?= $order['first_name']?> <?= $order['surname']?></p>
 									</div>
 									<div class="panel__item">
 										<h3>Номер телефона:</h3>

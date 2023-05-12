@@ -242,3 +242,14 @@
 	column-gap: 10px;
 	align-items: center;
 }
+
+.fa-star {
+	font-size: 24px;
+	color: #9b9717;
+}
+
+.panel__stars {
+	display: inline-flex;
+	flex-direction: row;
+	column-gap: 3px;
+}

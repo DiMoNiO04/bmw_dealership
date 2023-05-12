@@ -3,6 +3,13 @@
 session_start();
 require('connect.php');
 
+function tt($value) {
+	echo '<pre>';
+	print_r($value);
+	echo '</pre>';
+}
+
+
 //Проверяем выполнение запроса к БД
 function dbCheckErr($query) {
 	$errInfo = $query->errorInfo(); //Получаем ошибки в массив
@@ -401,4 +408,3 @@ function searchAdmin($search, $table) {
 	//Возвращаем полученный результат
 	return $query->fetchAll();
 }
-?>
