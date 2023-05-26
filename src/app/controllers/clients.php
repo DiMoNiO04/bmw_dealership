@@ -1,10 +1,6 @@
 <?php 
-include SITE_ROOT . "/app/database/database.php";
-include SITE_ROOT . '/app/helps/treatmentImage.php';
-
 
 $clients = selectAll('clientsview');
-
 
 class Client {
 
@@ -15,9 +11,6 @@ class Client {
 
 	//Добавление клиента
 	public function addClient() {
-		
-		//Работа с изображением
-		treatmentImg("\assets\images\dest\clients\\");
 
 		//Забираем данные из формы в переменные
 		$login = trim($_POST['login']);
@@ -85,7 +78,6 @@ class Client {
 					'surname' => trim($_POST['surname']),
 					'date_birth' => trim($_POST['date_birth']),
 					'phone' => trim($_POST['phone']),
-					'img' => $_POST['img'] ,
 					'id_address' => $idAddress,
 					'id_auth' => $idAuth,
 					'id_passport' => $idPassport
@@ -100,9 +92,6 @@ class Client {
 	//Редактирование клиента
 	public function updateClient() {
 			
-		//Работа с изображением 
-		treatmentImg("\assets\images\dest\clients\\");
-	
 		//Проверка на доступ
 		$access = $_POST['access'];
 		if(isset($_POST['access'])) {
@@ -132,24 +121,13 @@ class Client {
 		];
 
 		//Формируем данные в таблицу клиентов
-		if(empty($img)) {
-			$dataPersonal = [
-				'last_name' => trim($_POST['last_name']),
-				'first_name' => trim($_POST['first_name']),
-				'surname' => trim($_POST['surname']),
-				'date_birth' => $_POST['date_birth'],
-				'phone' => trim($_POST['phone'])
-			];
-		} else {
-			$dataPersonal = [
-				'last_name' => trim($_POST['last_name']),
-				'first_name' => trim($_POST['first_name']),
-				'surname' => trim($_POST['surname']),
-				'date_birth' => $_POST['date_birth'],
-				'phone' => trim($_POST['phone']),
-				'img' => $_POST['img']
-			];
-		}	
+		$dataPersonal = [
+			'last_name' => trim($_POST['last_name']),
+			'first_name' => trim($_POST['first_name']),
+			'surname' => trim($_POST['surname']),
+			'date_birth' => $_POST['date_birth'],
+			'phone' => trim($_POST['phone'])
+		];
 
 		$id = $_POST['id']; //Получаем данные клиента из формы
 		$idClient = selectOne('clients', ['id' => $id]); //Получаем данные клиента, которого хотим отредактировать
@@ -251,7 +229,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
 	$surname = $client['surname'];
 	$dateBirth = $client['date_birth'];
 	$phone = $client['phone'];
-	$img = $client['img'];
 	$city = $clientAddress['city'];
 	$street = $clientAddress['street'];
 	$house = $clientAddress['house'];

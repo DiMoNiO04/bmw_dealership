@@ -1,9 +1,6 @@
 <?php 
-include SITE_ROOT . "/app/database/database.php";
-include SITE_ROOT . '/app/helps/treatmentImage.php';
 
 $employees = selectAll('employeesview');
-
 
 class Employee {
 
@@ -14,9 +11,6 @@ class Employee {
 
 	//Добавление сотрудника
 	public function addEmployee() {
-		
-		//Работа с изображением
-		treatmentImg("\assets\images\dest\\employees\\");
 	
 		//Забираем данные из формы в переменные
 		$login = trim($_POST['login']);
@@ -84,7 +78,6 @@ class Employee {
 					'date_birth' => trim($_POST['date_birth']),
 					'phone' => trim($_POST['phone']),
 					'job' => $jobTitle,
-					'img' => $_POST['img'] ,
 					'id_address' => $idAddress,
 					'id_auth' => $idAuth,
 					'id_passport' => $idPassport
@@ -98,8 +91,6 @@ class Employee {
 
 	//Редактирование сотрудника
 	public function updateEmployee() {
-		//Работа с изображением 
-		treatmentImg("\assets\images\dest\employess\\");
 	
 		//Проверка на доступ
 		$access = $_POST['access'];
@@ -130,26 +121,14 @@ class Employee {
 		];
 	
 		//Формируем данные в таблицу клиентов
-		if(empty($img)) {
-			$dataPersonal = [
-				'last_name' => trim($_POST['last_name']),
-				'first_name' => trim($_POST['first_name']),
-				'surname' => trim($_POST['surname']),
-				'date_birth' => $_POST['date_birth'],
-				'phone' => trim($_POST['phone']),
-				'job' => $_POST['job'],
-			];
-		} else {
-			$dataPersonal = [
-				'last_name' => trim($_POST['last_name']),
-				'first_name' => trim($_POST['first_name']),
-				'surname' => trim($_POST['surname']),
-				'date_birth' => $_POST['date_birth'],
-				'phone' => trim($_POST['phone']),
-				'job' => $_POST['job'],
-				'img' => $_POST['img']
-			];
-		}
+		$dataPersonal = [
+			'last_name' => trim($_POST['last_name']),
+			'first_name' => trim($_POST['first_name']),
+			'surname' => trim($_POST['surname']),
+			'date_birth' => $_POST['date_birth'],
+			'phone' => trim($_POST['phone']),
+			'job' => $_POST['job'],
+		];
 
 		$id = $_POST['id']; //Получаем данные сотрудника из формы
 	
@@ -254,7 +233,6 @@ if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
 	$dateBirth = $employee['date_birth'];
 	$phone = $employee['phone'];
 	$job = $employee['job'];
-	$img = $employee['img'];
 	$city = $employeeAddress['city'];
 	$street = $employeeAddress['street'];
 	$house = $employeeAddress['house'];

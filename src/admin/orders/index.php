@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	include "../../path.php";
+	include SITE_ROOT . "/app/database/database.php";
 	include "../../app/controllers/orders.php";
 
 	$orders = selectAll('ordersview');

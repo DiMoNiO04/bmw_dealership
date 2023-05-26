@@ -1,9 +1,8 @@
 <?php 
 	session_start();
    include "../../path.php";
+	 include SITE_ROOT . "/app/database/database.php";
    include "../../app/controllers/contacts.php";
-	//  $contacts = new Contacts();
-	//  $contacts -> getContacts();
 ?>
 
 <!DOCTYPE html>

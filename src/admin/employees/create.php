@@ -1,5 +1,6 @@
 <?php 
 	include "../../path.php";
+	include SITE_ROOT . "/app/database/database.php";
 	include "../../app/controllers/employees.php";
 	$errMsg = $employee -> errMsg;
 ?>
@@ -61,10 +62,6 @@
 											<option value="Менеджер">Менеджер</option>
 											<option value="Админ">Админ</option>
 										</select>
-									</div>
-									<div class="form-reg__item">
-										<label for="img">Фото</label>
-										<input type="file" value="<?=$img ?>" name="img" id="img">
 									</div>
 								</section>
 

@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	include "../../path.php";
+	include SITE_ROOT . "/app/database/database.php";
 	include "../../app/controllers/clients.php";
 
 	$errMsg = $client -> errMsg;
@@ -11,8 +12,6 @@
 			array_push($errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
 		}
 	}
-
-	//$bestClients = getBestClients();
 ?>
 
 <!DOCTYPE html>
@@ -68,10 +67,6 @@
 											<?php endfor; ?>
 											<h2 class="panel__subtitle"><?= $client['last_name']?> <?= $client['first_name']; ?> <?= $client['surname']; ?></h2>
 										</div>
-
-										<?php if(!empty($client['img'])):?>
-											<img src="<?=BASE_URL . 'assets/images/dest/clients/' . $client['img'] ?>" alt="<?= $client['last_name']?>" class="panel__img panel__img-user">
-										<?php endif;?>
 										
 										<div class="panel__item">
 											<h3>Дата рождения:</h3>

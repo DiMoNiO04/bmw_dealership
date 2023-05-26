@@ -1,6 +1,7 @@
 <?php 
   include ('path.php'); 
-  include("./app/controllers/user.php"); 
+	include SITE_ROOT . "/app/database/database.php";
+	include("./app/controllers/user.php"); 
 	$errMsg = $user -> errMsg;
 ?>
 

@@ -1,6 +1,5 @@
 <?php
 
-include SITE_ROOT . "/app/database/database.php";
 include SITE_ROOT . "/app/helps/treatmentImage.php";
 
 //Если сессия закончилась, то возврат на страницу авторизации

@@ -1,6 +1,7 @@
 <?php 
 	session_start();
 	include "../../path.php";
+	include SITE_ROOT . "/app/database/database.php";
 	include "../../app/controllers/employees.php";
 
 	$errMsg = $employee -> errMsg;
@@ -58,10 +59,6 @@
 								<div class="panel__blocks">
 									<div class="panel__block">
 										<h2 class="panel__subtitle"><?= $employee['last_name']?> <?= $employee['first_name']; ?> <?= $employee['surname']; ?></h2>
-										
-										<?php if(!empty($employee['img'])): ?>
-											<img src="<?=BASE_URL . 'assets/images/dest/employees/' . $employee['img'] ?>" alt="<?= $employee['last_name']?>" class="panel__img panel__img-user">
-										<?php endif; ?>
 										
 										<div class="panel__item">
 											<h3>Дата рождения:</h3>

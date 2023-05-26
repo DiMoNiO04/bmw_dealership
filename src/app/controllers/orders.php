@@ -1,5 +1,4 @@
 <?php
-include SITE_ROOT . "/app/database/database.php";
 
 $errMsg = [];
 

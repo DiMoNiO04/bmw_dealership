@@ -1,5 +1,6 @@
 <?php 
 	include "../../path.php";
+	include SITE_ROOT . "/app/database/database.php";
 	include "../../app/controllers/orders.php";
 
 	$autos = selectAll('auto', ['status' => 1]);

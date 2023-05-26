@@ -1,6 +1,5 @@
 <?php
 
-include SITE_ROOT . "/app/database/database.php";
 
 //Если сессия закончилась, то возврат на страницу авторизации
 if(!$_SESSION) {

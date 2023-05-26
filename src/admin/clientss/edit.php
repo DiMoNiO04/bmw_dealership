@@ -1,5 +1,6 @@
 <?php 
 	include "../../path.php";
+	include SITE_ROOT . "/app/database/database.php";
 	include "../../app/controllers/clients.php";
 ?>
 
@@ -54,10 +55,6 @@
 									<div class="form-reg__item">
 										<label for="phone">Номер телефона</label>
 										<input type="tel" value="<?=$phone ?>" name="phone" id="phone" placeholder="Введите номер телефона...">
-									</div>
-									<div class="form-reg__item">
-										<label for="img">Фото (выбрано по умолчанию)</label>
-										<input type="file" value="<?=$img ?>" name="img" id="img">
 									</div>
 								</section>
 

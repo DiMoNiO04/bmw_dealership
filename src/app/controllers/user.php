@@ -1,9 +1,5 @@
 <?php 
 
-include SITE_ROOT . "/app/database/database.php";
-include SITE_ROOT . "/app/helps/treatmentImage.php";
-
-
 class User {
 
 	public $ACCESS = 1; 
@@ -88,7 +84,6 @@ class User {
 					'first_name' => trim($_POST['first_name']),
 					'surname' => $surname,
 					'phone' => $phone,
-					'img' => $_POST['img'] ,
 					'id_address' => $idAddress,
 					'id_auth' => $idAuth,
 					'id_passport' => $idPassport
@@ -140,13 +135,6 @@ class User {
 	//Редактирование персональных данных
 	public function updateUser() {
 
-			//Работа с изображением 
-			if($_SESSION['role'] == $this -> EMPLOYEE) {
-				treatmentImg("\assets\images\dest\employess\\");
-			} else {
-				treatmentImg("\assets\images\dest\clients\\");
-			}
-
 			//Проверка на доступ
 			if(isset($_POST['access'])) {
 				$access = $this -> ACCESS;
@@ -177,24 +165,13 @@ class User {
 			];
 	
 			//Формируем данные в таблицу клиентов
-			if(empty($img)) {
-				$dataPersonal = [
-					'last_name' => trim($_POST['last_name']),
-					'first_name' => trim($_POST['first_name']),
-					'surname' => trim($_POST['surname']),
-					'date_birth' => $_POST['date_birth'],
-					'phone' => trim($_POST['phone'])
-				];
-			} else {
-				$dataPersonal = [
-					'last_name' => trim($_POST['last_name']),
-					'first_name' => trim($_POST['first_name']),
-					'surname' => trim($_POST['surname']),
-					'date_birth' => $_POST['date_birth'],
-					'phone' => trim($_POST['phone']),
-					'img' => $_POST['img'] ,
-				];
-			}
+			$dataPersonal = [
+				'last_name' => trim($_POST['last_name']),
+				'first_name' => trim($_POST['first_name']),
+				'surname' => trim($_POST['surname']),
+				'date_birth' => $_POST['date_birth'],
+				'phone' => trim($_POST['phone'])
+			];
 	
 			$id = $_POST['id']; //Получаем данные сотрудника из формы
 			if($_SESSION['role'] == 1) {

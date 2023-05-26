@@ -1,6 +1,5 @@
 <?php
 
-include "../../app/database/database.php";
 include('../../app/helps/treatmentImage.php');
 
 //Если сессия закончилась, то возврат на страницу авторизации

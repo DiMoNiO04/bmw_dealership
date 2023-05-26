@@ -1,6 +1,8 @@
 <?php 
 	include ('path.php'); 
+	include SITE_ROOT . "/app/database/database.php";
 	include './app/controllers/orders.php';
+
 	$auto = selectAutoFromAutosWithModelsOnSingle('auto', 'models', $_GET['auto']);
 	if($_SESSION['role'] == 1 && isset($_SESSION['id'])) {
 		$user = getPersonalData('employees', 'employees_address', 'employees_passport', 'authorization', $_SESSION['id']);		
