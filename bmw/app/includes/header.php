@@ -1,6 +1,8 @@
 <?php 
 	include SITE_ROOT . '/path.php';
-	$job = selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
+	// include ('./app/database/database.php');
+	$db = new DataB();
+	$job = $db->selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
 ?>
 
 <header class="header">

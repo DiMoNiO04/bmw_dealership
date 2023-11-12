@@ -1,5 +1,6 @@
 <?php 
 
+
 class User {
 
 	public $ACCESS = 1; 
@@ -18,7 +19,7 @@ class User {
 		if($_SESSION['admin']) {
 			header('location:/admin/clientss/index.php');
 		} else {
-			header('location:/index.php');
+			header('location:/bmw/');
 		}
 	}
 
@@ -104,7 +105,8 @@ class User {
 		$password = $_POST['password'];
 
 		//Проверка валидности формы
-		$existence = selectOne('authorization', ['email' => $email]);
+		$db = new DataB();
+		$existence = $db->selectOne('authorization', ['email' => $email]);
 			
 		if($existence['access'] == $this -> NO_ACCESS) {
 			array_push($this -> errMsg, "Данный аккаунт не имеет доступа (заблокирован)!");

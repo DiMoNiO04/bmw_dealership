@@ -1,24 +1,29 @@
 <?php
 
-$driver = "mysql";
-$host = "localhost";
-$db_name = "bmv_dealership";
-$db_user = "root";
-$db_pass = "";
-$charset = "utf8";
-$options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
+$ERROR_CONNECT = "Ошибка подключения к базе данных";
 
-try {
-	$pdo = new PDO(
-		"$driver:host=$host; dbname=$db_name; charset=$charset",
-		$db_user, $db_pass, $options
-	);
-} catch(PDOException $i) {
-	die("Ошибка подключения к базе данных");
+class ConnectBD {
+
+  // Данные для подключения к БД
+  private $driver = "mysql";
+  private $host = "localhost";
+  private $db_name = "bmv_dealership";
+  private $db_user = "root";
+  private $db_pass = "";
+  private $charset = "utf8";
+  private $options = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+          PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC];
+
+  public function connectDB(): object {
+    try {
+      return new PDO(
+        "$this->driver:host=$this->host; dbname=$this->db_name; charset=$this->charset",
+        $this->db_user, $this->db_pass, $this->options
+      );
+    } catch(PDOException $i) {
+      die($ERROR_CONNECT);
+    } 
+  }
 }
-
-define('APP_PATH', __DIR__);
-echo(APP_PATH);
 
 ?>
