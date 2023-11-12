@@ -1,0 +1,74 @@
+.services__container {
+  @include flexContainer($direction: column);
+  margin-top: 90px;
+  padding: 130px 0;
+  color: $black;
+  row-gap: 40px;
+  @media screen and (max-width: 1070px) {
+    padding: 100px 0;
+  }
+  @media screen and (max-width: 768px) {
+    margin-top: 80px;
+    padding: 80px 0;
+    row-gap: 28px;
+  }
+}
+
+.services__content {
+  @include flexContainer($direction: column);
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+  row-gap: 16px;
+}
+
+.services__collapsible {
+  @include flexContainer($justify: space-between);
+  @include fontSizes($size: 24px, $weight: 700, $style: italic);
+  padding-bottom: 10px;
+  border: none;
+  background-color: transparent;
+  border-bottom: 1px solid $black;
+  text-transform: uppercase;
+  text-align: left;
+  @media screen and (max-width: 1070px) {
+    font-size: 20px;
+    column-gap: 40px;
+  }
+  @media screen and (max-width: 600px) {
+    font-size: 14px;
+  }
+}
+
+.services__section {
+  @include flexContainer($direction: column);
+  row-gap: 10px;
+  p {
+    text-indent: 12px;
+    @media screen and (max-width: 768px) {
+      text-indent: 8px;
+      font-size: 14px;
+    }
+  }
+  h3 {
+    @include fontSizes($size: 20px, $weight: 300, $style: italic);
+  }
+  span {
+    @include fontSizes($size: 20px, $weight: 700, $style: italic);
+    color: $gray;
+    text-decoration: underline;
+  }
+  ul {
+    padding-left: 40px;
+    li {
+      list-style-type: circle;
+      i {
+        padding-right: 8px;
+      }
+    }
+    @media screen and (max-width: 768px) {
+      padding-left: 30px;
+      font-size: 14px;
+    }
+  }
+}

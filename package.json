@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "format": "npx eslint ./bmw --fix && npx prettier . --write"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,11 @@
     "browser-sync": "^2.28.2",
     "compress-image": "^0.0.1",
     "compress-images": "^2.0.5",
+    "eslint": "^8.49.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "latest",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "latest",
     "gifsicle": "^5.3.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^8.0.0",
@@ -33,6 +38,10 @@
     "gulp-uglify-es": "^3.0.0",
     "jquery": "^3.6.3",
     "pngquant-bin": "^6.0.0",
+    "prettier": "^3.0.3",
     "sass": "^1.58.3"
+  },
+  "dependencies": {
+    "@prettier/plugin-php": "^0.21.0"
   }
 }

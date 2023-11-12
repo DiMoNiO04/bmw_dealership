@@ -1,0 +1,19 @@
+@import 'abstracts/mixins';
+@import 'abstracts/variables';
+
+@import 'base/fonts';
+@import 'base/normalize';
+
+@import 'layout/header';
+@import 'layout/footer';
+
+@import 'pages/about';
+@import 'pages/admin';
+@import 'pages/auth_reg';
+@import 'pages/auto';
+@import 'pages/contacts';
+@import 'pages/main';
+@import 'pages/personal__cab';
+@import 'pages/service';
+@import 'pages/single';
+@import 'pages/start';

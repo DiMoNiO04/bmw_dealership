@@ -1,3 +1,7 @@
 node_modules
 _cacache
 _locks
+anonymous-cli-metrics.json
+_npx
+_logs
+_update-notifier-last-checked
