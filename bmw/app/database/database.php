@@ -3,62 +3,25 @@
 session_start();
 require('connect.php');
 
-function tt($value) {
-	echo '<pre>';
-	print_r($value);
-	echo '</pre>';
-}
-
 
 class DataB {
 
-  // Получить pdo данные из Connect
-  private function getPdo(): object {
-    $connect = new ConnectBD();
-    return $connect->connectDB();
-  }
+  private function executeSql($sql): object {
 
-	  
-  //Добавление записи в таблицу 
-  public function insert($table, $params) {
-
-    $i = 0; //Если 0, то запятую в sql запросе не ставим
-    $coll = ''; //Ключи
-    $mask = ''; //Значения
-
-    //Разбираем параметры на данные для запроса (названия столбцов и значение)
-    foreach($params as $key => $value) {
-      if($i === 0) {
-        $coll = $coll . $key;
-        $mask = $mask . "'" . $value . "'";
-      } else {
-        $coll = $coll . ", $key";
-        $mask = $mask . ", '$value'";
-      }
-      $i++;
-    }
-
-    //Формируем sql запрос (Пример: INSERT INTO contacts (name, phone, work_time, email) VALUES ('Call-center', '80447104585', '8-21', 'call@autoidea.by'))
-    $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
+    // Глобальная переменная pdo из файла connect.php
+    global $pdo;
 
     //Подготовка sql запроса для отправки на сервер
-    // $query = $this->getPdo()->prepare($sql);
-    // $query->execute($params);
+    $query = $pdo->prepare($sql);
+    $query->execute();
 
-    // //Проверка запроса на ошибки
-    // $this->dbCheckErr($query);
-
-		$query = $this->getPdo()->prepare($sql);
-    $query->execute($params);
-
-		$this->dbCheckErr($query);
-		 $lastId = $this->getPdo()->lastInsertId();
-
-    return $lastId;
+    //Проверка запроса на ошибки
+    $this->dbCheckErr($query);
+    return $query;
   }
 
   //Проверяем выполнение запроса к БД
-  private function dbCheckErr($query):bool {
+  private function dbCheckErr($query): bool {
     $errInfo = $query->errorInfo(); //Получаем ошибки в массив
     if($errInfo[0] !== PDO::ERR_NONE){
       echo $errInfo[2]; //Вывод ошибки
@@ -88,15 +51,42 @@ class DataB {
       }
     }
 
-    //Подготовка sql запроса для отправки на сервер
-    $query =  $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetchAll();
+  }
+
+  //Добавление записи в таблицу 
+  public function insert($table, $params) {
+    global $pdo;
+
+    $i = 0; //Если 0, то запятую в sql запросе не ставим
+    $coll = ''; //Ключи
+    $mask = ''; //Значения
+
+    //Разбираем параметры на данные для запроса (названия столбцов и значение)
+    foreach($params as $key => $value) {
+      if($i === 0) {
+        $coll = $coll . $key;
+        $mask = $mask . "'" . $value . "'";
+      } else {
+        $coll = $coll . ", $key";
+        $mask = $mask . ", '$value'";
+      }
+      $i++;
+    }
+
+    //Формируем sql запрос (Пример: INSERT INTO contacts (name, phone, work_time, email) VALUES ('Call-center', '80447104585', '8-21', 'call@autoidea.by'))
+    $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
+
+    $query = $pdo->prepare($sql);
+    $query->execute($params);
+
+    $this->dbCheckErr($query);
+    $lastId = $pdo->lastInsertId();
+
+    return $lastId;
   }
 
   //Запрос на получение одной строки из одной выбранной таблицы
@@ -120,17 +110,11 @@ class DataB {
       }
     }
 
-    //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+   $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetch();
   }
-
 
   //Обноваление данных в таблице БД
   public function update($table, $id, $params) {
@@ -151,33 +135,22 @@ class DataB {
     //Формируем sql запрос (Пример: UPDATE contacts SET name = 'Отдел продаж автомобиля', phone = '+375447104585', work_time = 'Пн-Вс: 8:00 - 20:00', email = 'info@autoidea.by' WHERE id = 4)
     $sql = "UPDATE $table SET $str WHERE id = $id";
 
-    //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute($params);
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $this->executeSql($sql);
   }
 
   //Удаление данных из таблицы БД
   public function delete($table, $id) {
+    global $pdo;
 
     //Формируем sql запрос (Пример: DELETE FROM contacts WHERE id =4)
     $sql = "DELETE FROM $table WHERE id =" . $id;
 
-    //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
   }
 
   public function selectAutoFromAutosWithModelsOnSingle($table1, $table2, $id) {
     $sql = "SELECT t1.*, t2.model, t2.main_foto FROM $table1 AS t1 JOIN $table2 AS t2 ON t1.id_model = t2.id WHERE t1.id = $id"; 
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-    $this->dbCheckErr($query); //Проверка запроса на ошибки
+    $query = $this->executeSql($sql);
     return $query->fetch();
   }
 
@@ -187,12 +160,7 @@ class DataB {
     //Формируем sql запрос (Пример: SELECT COUNT(id_model) AS count FROM auto JOIN models ON auto.id_model = models.id WHERE id_model = 56)
     $sql = "SELECT COUNT(id_model) AS count FROM auto JOIN models ON auto.id_model = models.id WHERE id_model = $idModel";
     
-    //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetchAll();
@@ -224,12 +192,7 @@ class DataB {
                 JOIN $table4 AS t4 ON t1.id_auth = t4.id 
     WHERE t4.id = $id";
     
-    //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetch();
@@ -266,11 +229,7 @@ class DataB {
     WHERE t1.id_client = $id";
     
     //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetchAll();
@@ -283,11 +242,7 @@ class DataB {
     $sql = "SELECT DISTINCT color FROM `auto`";
     
     //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetchAll();
@@ -361,11 +316,7 @@ class DataB {
       FROM `auto` JOIN `models` ON auto.id_model = models.id $result";
 
     //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetchAll();
@@ -373,6 +324,7 @@ class DataB {
 
   //Поиск в панели админа по почти всем данным
   public function searchAdmin($search, $table) {
+
     $search = trim(strip_tags(stripcslashes(htmlspecialchars($search)))); //Проверка вводимой строки
 
     //Формируем sql запрос
@@ -390,11 +342,7 @@ class DataB {
         issued_by LIKE '%$search%'";
 
     //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute();
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
+    $query = $this->executeSql($sql);
 
     //Возвращаем полученный результат
     return $query->fetchAll();

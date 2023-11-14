@@ -81,7 +81,7 @@ class User {
 				$idAuth = $db->insert('authorization', $dataAuth);
 				$id_auth = $db->selectOne('authorization', ['id' => $idAuth]);
 
-				echo($idPassport);
+
 				// echo($idPassport);
 				//Формируем данные в таблицу клиентов
 				$dataPersonal = [
