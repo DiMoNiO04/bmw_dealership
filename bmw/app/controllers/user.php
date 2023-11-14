@@ -25,6 +25,8 @@ class User {
 
 	//Регистрация
 	public function registration() {
+
+		$db = new DataB();
 			
 		//Забираем данные из формы в переменные
 		$email = trim($_POST['email']);
@@ -39,8 +41,8 @@ class User {
 			array_push($this -> errMsg, 'Пароли в обеих полях должны соотвествовать!');
 		} else {
 			//Проверка на уникальность логина и email
-			$existenceLogin = selectOne('authorization', ['login' => $login]);
-			$existenceEmail = selectOne('authorization', ['email' => $email]);
+			$existenceLogin = $db->selectOne('authorization', ['login' => $login]);
+			$existenceEmail = $db->selectOne('authorization', ['email' => $email]);
 
 			if($existenceLogin['login'] === $login) {
 				array_push($this -> errMsg,  'Пользователь с таким логином уже зарегистрирован!');
@@ -73,12 +75,14 @@ class User {
 					'apartment' => $apartment 
 				];
 
-				//Добавляем данные в базу данных
-				$idPassport = insert('clients_passport', $dataPassport);
-				$idAddress = insert('clients_address', $dataAddress);
-				$idAuth = insert('authorization', $dataAuth);
-				$id_auth = selectOne('authorization', ['id' => $idAuth]);
+				// //Добавляем данные в базу данных
+				$idPassport = $db->insert('clients_passport', $dataPassport);
+				$idAddress = $db->insert('clients_address', $dataAddress);
+				$idAuth = $db->insert('authorization', $dataAuth);
+				$id_auth = $db->selectOne('authorization', ['id' => $idAuth]);
 
+				echo($idPassport);
+				// echo($idPassport);
 				//Формируем данные в таблицу клиентов
 				$dataPersonal = [
 					'last_name' => trim($_POST['last_name']),
@@ -91,8 +95,8 @@ class User {
 				];
 
 				$id = $id_auth['id'];
-				insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
-				$user = selectOne('authorization', ['id' => $id]);
+				$db->insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
+				$user = $db->selectOne('authorization', ['id' => $id]);
 				$this -> userAuth($user); //Создаем сессию для авторизации
 			}
 		}

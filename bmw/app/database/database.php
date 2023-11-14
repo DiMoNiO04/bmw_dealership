@@ -3,6 +3,12 @@
 session_start();
 require('connect.php');
 
+function tt($value) {
+	echo '<pre>';
+	print_r($value);
+	echo '</pre>';
+}
+
 
 class DataB {
 
@@ -10,6 +16,45 @@ class DataB {
   private function getPdo(): object {
     $connect = new ConnectBD();
     return $connect->connectDB();
+  }
+
+	  
+  //Добавление записи в таблицу 
+  public function insert($table, $params) {
+
+    $i = 0; //Если 0, то запятую в sql запросе не ставим
+    $coll = ''; //Ключи
+    $mask = ''; //Значения
+
+    //Разбираем параметры на данные для запроса (названия столбцов и значение)
+    foreach($params as $key => $value) {
+      if($i === 0) {
+        $coll = $coll . $key;
+        $mask = $mask . "'" . $value . "'";
+      } else {
+        $coll = $coll . ", $key";
+        $mask = $mask . ", '$value'";
+      }
+      $i++;
+    }
+
+    //Формируем sql запрос (Пример: INSERT INTO contacts (name, phone, work_time, email) VALUES ('Call-center', '80447104585', '8-21', 'call@autoidea.by'))
+    $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
+
+    //Подготовка sql запроса для отправки на сервер
+    // $query = $this->getPdo()->prepare($sql);
+    // $query->execute($params);
+
+    // //Проверка запроса на ошибки
+    // $this->dbCheckErr($query);
+
+		$query = $this->getPdo()->prepare($sql);
+    $query->execute($params);
+
+		$this->dbCheckErr($query);
+		 $lastId = $this->getPdo()->lastInsertId();
+
+    return $lastId;
   }
 
   //Проверяем выполнение запроса к БД
@@ -85,39 +130,7 @@ class DataB {
     //Возвращаем полученный результат
     return $query->fetch();
   }
-  
-  //Добавление записи в таблицу 
-  public function insert($table, $params) {
 
-    $i = 0; //Если 0, то запятую в sql запросе не ставим
-    $coll = ''; //Ключи
-    $mask = ''; //Значения
-
-    //Разбираем параметры на данные для запроса (названия столбцов и значение)
-    foreach($params as $key => $value) {
-      if($i === 0) {
-        $coll = $coll . $key;
-        $mask = $mask . "'" . $value . "'";
-      } else {
-        $coll = $coll . ", $key";
-        $mask = $mask . ", '$value'";
-      }
-      $i++;
-    }
-
-    //Формируем sql запрос (Пример: INSERT INTO contacts (name, phone, work_time, email) VALUES ('Call-center', '80447104585', '8-21', 'call@autoidea.by'))
-    $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
-
-    //Подготовка sql запроса для отправки на сервер
-    $query = $this->getPdo()->prepare($sql);
-    $query->execute($params);
-
-    //Проверка запроса на ошибки
-    $this->dbCheckErr($query);
-
-    //Возвращаем полученный результат
-    return $pdo->lastInsertId();
-  }
 
   //Обноваление данных в таблице БД
   public function update($table, $id, $params) {
