@@ -1,8 +1,13 @@
 <?php 
   include ('path.php'); 
 	include SITE_ROOT . "/app/database/database.php";
-	include("./app/controllers/user.php"); 
-	$errMsg = $user -> errMsg;
+	include("./app/controllers/User.php"); 
+
+	$user = new User();
+	$user->authorization();
+
+	$errMsg = $userActions -> errMsg;
+	
 ?>
 
 <!DOCTYPE html>
