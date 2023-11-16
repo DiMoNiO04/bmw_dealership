@@ -1,6 +1,6 @@
 <?php 
 	include ('path.php'); 
-	include("./app/database/database.php"); 
+	include("./app/database/Database.php"); 
 
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search__auto'])) {
 	

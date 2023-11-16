@@ -1,7 +1,7 @@
 <?php 
 
 session_start();
-require('connect.php');
+require('Connect.php');
 
 
 class DataB {

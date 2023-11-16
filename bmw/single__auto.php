@@ -1,6 +1,6 @@
 <?php 
 	include ('path.php'); 
-	include SITE_ROOT . "/app/database/database.php";
+	include SITE_ROOT . "/app/database/Database.php";
 	include './app/controllers/orders.php';
 
 	$auto = selectAutoFromAutosWithModelsOnSingle('auto', 'models', $_GET['auto']);

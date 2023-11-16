@@ -1,7 +1,7 @@
 <?php 
 	session_start();
 	include ('./path.php'); 
-	include ('./app/database/database.php');
+	include ('./app/database/Database.php');
 ?>
 
 <!DOCTYPE html>
