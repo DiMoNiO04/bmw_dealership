@@ -1,112 +1,59 @@
 <?php
 
+require('ContactsActions.php');
+$contactsActions = new ContactsActions();
 
-//Если сессия закончилась, то возврат на страницу авторизации
-if(!$_SESSION) {
-	header('location: ' . BASE_URL . 'auth.php');
-}
+class Contacts {
+  
+  public function addContact(): void {
+    global $contactsActions;
 
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-create']))) {
+      $contactsActions -> addContact();
+    } 
+  }
 
-$contacts = selectAll('contactsview');  //Получаем все данные из таблицы контактов
+  public function updateContact(): void {
+    global $contactsActions;
 
+    if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
+      $contactsActions -> updateContact();
+    }
+  }
 
-class Contact {
+  public function editContact(): array {
+    if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 
-	//Добавление контакта
-	public function addContact() {
-		
-		//Формируем объект адрессных данных
-		$contactAddress = [
-			'city' => trim($_POST['city']),
-			'street' => trim($_POST['street']),
-			'house' => trim($_POST['house'])
-		];
-			
-		//Формируем массив для отправки
-		$contact = [
-			'name' => trim($_POST['name']),
-			'phone' => trim($_POST['phone']),
-			'work_time' =>  trim($_POST['work_time']),
-			'email' => trim($_POST['email']),
-			'id_address' => insert('contacts_address', $contactAddress)
-		];
+      $db = new DataB();
 
-		insert('contacts', $contact); //Отправляем данные в таблицу contacts
-		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
-	}
+      $id = $_GET['id']; //Получаем айди контактных данных, которые хотим изменить 
+      $contact = $db->selectOne('contacts', ['id' => $id]); //Получаем все данные данного контакта, которую хотим изменить
 
-	//Редактирование контакта
-	public function updateContact() {
+      //Получаем данные контакта которые хотим изменить в переменные
+      $id = $contact['id'];
+      $name = $contact['name'];
+      $phone = $contact['phone'];
+      $workTime = $contact['work_time'];
+      $email = $contact['email'];
 
-		//Формируем массив адрессных данных
-		$contactAddress = [
-			'city' => trim($_POST['city']),
-			'street' => trim($_POST['street']),
-			'house' => trim($_POST['house'])
-		];
-				
-		//Формируем массив для отправки
-		$contact = [
-			'name' => trim($_POST['name']),
-			'phone' => trim($_POST['phone']),
-			'work_time' => trim($_POST['work_time']),
-			'email' => trim($_POST['email'])
-		];
-	
-		$id = $_POST['id']; //Получаем id контактных данных, которые хотим редактировать
+      //Получаем айди контактных данных
+      $contactAddress = $db->selectOne('contacts_address', ['id' => $contact['id_address']]);
+      $city = $contactAddress['city'];
+      $street = $contactAddress['street'];
+      $house = $contactAddress['house'];
 
-		//Получаем id адрессных данных, данного контакта
-		$idContact = selectOne('contacts', ['id' => $id]);
-		$idAddress = $idContact['id_address'];
-	
-		update('contacts_address', $idAddress, $contactAddress); //Отправляем данные в таблицу адреса контаков
-		update('contacts', $id, $contact); //Отправляем данные в таблицу contacts
-		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
-	}
+      $arrRes = [$id, $name, $phone, $workTime, $email, $city, $street, $house];
+      return $arrRes;
+    }
+  }
 
-	//Удаление контакта
-	public function deleteContact($id) {
-		delete('contacts', $id); //Удаляем
-		header('location: ' . BASE_URL . "admin/contacts/index.php"); //Возвращаем на страницу контактов
-	}
+  public function deleteContact(): void {
+    global $contactsActions;
 
-}
-
-
-$contact = new Contact();
-
-//Добавление новых контактов
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-create']))) {
-	$contact -> addContact();
-} 
-
-//Редактирование контактных данных
-if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
-	$id = $_GET['id']; //Получаем айди контактных данных, которые хотим изменить 
-	$contact = selectOne('contacts', ['id' => $id]); //Получаем все данные данного контакта, которую хотим изменить
-
-	//Получаем данные контакта которые хотим изменить в переменные
-	$id = $contact['id'];
-	$name = $contact['name'];
-	$phone = $contact['phone'];
-	$workTime = $contact['work_time'];
-	$email = $contact['email'];
-
-	//Получаем айди контактных данных
-	$contactAddress = selectOne('contacts_address', ['id' => $contact['id_address']]);
-	$city = $contactAddress['city'];
-	$street = $contactAddress['street'];
-	$house = $contactAddress['house'];
-}
-
-//Редактирование контактных данных
-if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
-	$contact -> updateContact();
-}
-
-//Удаление контактных данных
-if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
-	$id = $_GET['del_id'];  //Получаем айди контакта, который хотим удалить
-	$contact -> deleteContact($id);
+    if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
+      $id = $_GET['del_id'];  //Получаем айди контакта, который хотим удалить
+      $contactsActions -> deleteContact($id);
+    }
+  }
 }
 ?>

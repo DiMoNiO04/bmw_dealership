@@ -2,7 +2,10 @@
 	session_start();
   include "./path.php";
 	include SITE_ROOT . "/app/database/Database.php";
-  include "./app/controllers/contacts.php";
+  include "./app/controllers/Contacts.php";
+
+	$db = new DataB();
+	$contacts = $db->selectAll('contacts');
 ?>
 
 <!DOCTYPE html>
