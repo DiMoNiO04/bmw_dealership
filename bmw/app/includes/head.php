@@ -9,4 +9,4 @@
 <meta name="msapplication-TileColor" content="#da532c">
 <meta name="msapplication-config" content="./assets/images/dest/favicon/browserconfig.xml">
 <meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="./assets/css/style.min.css">
+<link rel="stylesheet" href="../.././assets/css/style.min.css">

@@ -1,6 +1,6 @@
 <?php 
 	include('../../path.php');
-	$job = selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
+	$job = $db->selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
 ?>
 
 <aside class="sidebar">

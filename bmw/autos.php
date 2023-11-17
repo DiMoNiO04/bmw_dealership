@@ -1,11 +1,13 @@
 <?php 
 	include ('path.php'); 
 	include ('./app/database/Database.php');
+
+	$db = new DataB();
 	
-	$autos = selectAll('autosview');
-	$models = selectAll('models');
+	$autos = $db->selectAll('autosview');
+	$models = $db->selectAll('models');
 	$complexion = ['Базовая', 'Средняя', 'Полная'];
-	$colors = getColorsAutos();
+	$colors = $db->getColorsAutos();
 ?>
 
 <!DOCTYPE html>
