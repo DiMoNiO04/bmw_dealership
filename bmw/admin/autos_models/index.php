@@ -9,6 +9,11 @@
 
    $model = new Model();
    $model->deleteModel();
+
+    //Если сессия закончилась, то возврат на страницу авторизации
+    if(!$_SESSION) {
+      header('location:/bmw/auth.php');
+    }
 ?>
 
 <!DOCTYPE html>

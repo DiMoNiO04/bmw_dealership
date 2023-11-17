@@ -1,5 +1,6 @@
 <?php 
-	$models = selectAll('models');
+	$db = new DataB();
+	$models = $db->selectAll('models');
 ?>
 
 <div class="auto__sidebar">

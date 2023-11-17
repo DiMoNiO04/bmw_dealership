@@ -2,6 +2,8 @@
 	include ('path.php'); 
 	include("./app/database/Database.php"); 
 
+	$db = new DataB();
+
 	if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search__auto'])) {
 	
 		$priceFrom = $_POST['price__from'];
@@ -42,7 +44,7 @@
 			'state' => $state
 		];
 
-		$autos = searchAutos($params, $paramsPrice, $paramsYear);
+		$autos = $db->searchAutos($params, $paramsPrice, $paramsYear);
 	}
 
 	$modelsSearch = [];
@@ -53,7 +55,7 @@
 	}
 
 	$complexion = ['Базовая', 'Средняя', 'Полная'];
-	$colors = getColorsAutos();
+	$colors = $db->getColorsAutos();
 ?>
 
 <!DOCTYPE html>
