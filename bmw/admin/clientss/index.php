@@ -4,18 +4,21 @@
   include SITE_ROOT . "/app/database/Database.php";
   include "../../app/controllers/Clients.php";
 
-  $errMsg = $clientsActions -> errMsg;
-
   $db = new DataB();
-  $clients = $db->selectAll('clientsview');
 
   $client = new Clients();
   $client->deleteClient();
   $client->editStatus();
 
-  if($client->searchClient()) {
-    $clients = $client->searchClient();
+  $clientsSearch = $client->searchClient();
+
+  if(empty($clientsSearch)) {
+    $clients = $db->selectAll('clientsview');
+  } else {
+    $clients = $clientsSearch;
   }
+
+  $errMsg = $clientsActions -> errMsg;
 ?>
 
 <!DOCTYPE html>

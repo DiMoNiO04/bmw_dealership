@@ -5,16 +5,18 @@ $userActions = new UserActions();
 
 
 class User {
-  public function authorization(): void {
+  public function authorization() {
     global $userActions;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
       $email = trim($_POST['email']);
       $userActions->authorization();
+
+      return $email;
     }
   }
 
-  public function registration(): void {
+  public function registration() {
     global $userActions;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
@@ -26,6 +28,13 @@ class User {
       $login = trim($_POST['login']);
 
       $userActions -> registration();
+
+      $arrRes = 
+      [
+        $lastName, $firstName, $email, $login
+      ];
+
+      return $arrRes;
     } 
   }
 
@@ -72,6 +81,25 @@ class User {
       $id = $_GET['del_order'];  //Получаем айди модели, которую хотим удалить
       $userActions -> deleteOrder($id);
     }
+  }
+
+  public function getSessionPerson(): array {
+    $db = new DataB();
+
+    $idSession = $_SESSION['id'];
+
+    $userPerson = $db->selectOne('authorization', ['id' => $idSession]);
+    if($_SESSION['role'] == 1) {
+      $idUser = $db->selectOne('employees', ['id_auth' => $idSession])['id'];
+      $userPerson = $db->selectOne('employeesview', ['id' => $idUser]);
+    } else {
+      $idUser = $db->selectOne('clients', ['id_auth' => $idSession])['id'];
+      $userPerson = $db->selectOne('clientsview', ['id' => $idUser]);
+    }
+
+    $arrRes = [ $idSession, $userPerson, $idUser ];
+
+    return $arrRes;
   }
 }
 ?>

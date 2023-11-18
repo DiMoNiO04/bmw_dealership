@@ -4,8 +4,6 @@
   include SITE_ROOT . "/app/database/Database.php";
   include "../../app/controllers/Employees.php";
 
-  $errMsg = $employessActions -> errMsg;
-
   $db = new DataB();
   $employees = $db->selectAll('employeesview');
 
@@ -15,7 +13,9 @@
 
   if($employee->searchEmployee()) {
     $employees = $employee->searchEmployee();
-  }
+  } 
+
+  $errMsg = $employessActions -> errMsg;
 ?>
 
 <!DOCTYPE html>

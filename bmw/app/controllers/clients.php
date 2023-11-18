@@ -113,13 +113,14 @@ class Clients {
   }
 
   public function searchClient(): ?array {
+    global $clientsActions;
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-client'])) {
       $clients = $db->searchAdmin($_POST['search-client'], 'clientsView');
 
       if(empty($clients)) {
-        array_push($errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($clientsActions -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 

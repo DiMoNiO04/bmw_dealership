@@ -234,6 +234,8 @@ class UserActions {
   } 
 
   public function addOrder(): void {
+    $db = new DataB();
+
     $email = trim($_POST['email']);
     $login = trim($_POST['login']);
     $passF = trim($_POST['password-first']);
@@ -243,8 +245,8 @@ class UserActions {
     $idSession = $_SESSION['id'];
     $roleSession = $_SESSION['role'];
 
-    $user = selectOne('authorization', ['id' => $idSession]);
-    $idUser = selectOne('clients', ['id_auth' => $idSession])['id'];
+    $user = $db->selectOne('authorization', ['id' => $idSession]);
+    $idUser = $db->selectOne('clients', ['id_auth' => $idSession])['id'];
 
     if($login != $user['login'] || $email != $user['email'] || (!password_verify($passS, $user['password'])) || $passF != $passS) {
       array_push($this -> errMsg, "Не верно введены данные! \n Заказ не был оформлен! \n Повторите попытку!");
@@ -257,18 +259,19 @@ class UserActions {
         ];
       }
 
-      insert('orders', $params); //Отправляем данные в таблицу клиентов
-      header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу клиентов
+      $db->insert('orders', $params); //Отправляем данные в таблицу клиентов
+      header('location:personal__cab-user.php'); //Возвращаем на страницу клиентов
     }
   }
 
   public function deleteOrder($id): void {
-    delete('orders', $id); //Удаляем
+    $db = new DataB();
+
+    $db->delete('orders', $id); //Удаляем
     if($_SESSION['role'] == $this -> CLIENT) {
-      header('location: ' . BASE_URL . "personal__cab-user.php"); //Возвращаем на страницу моделей
-    } else {
-      header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
-    }
+      header('location:personal__cab-user.php'); //Возвращаем на страницу моделей
+    } 
+    header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
   }
 }
 ?>

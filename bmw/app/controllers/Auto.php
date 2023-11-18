@@ -68,6 +68,62 @@ class Auto {
       $autoActions -> deleteAuto($id);
     }
   }
+
+  public function searchAuto() {
+      $db = new DataB();
+
+      if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search__auto'])) {
+    
+        $priceFrom = $_POST['price__from'];
+        $priceTo = $_POST['price__to'];
+        $yearFrom = $_POST['year__from'];
+        $yearTo = $_POST['year__to'];
+        $engine = $_POST['engine'];
+        $status = $_POST['status'];
+        $col = $_POST['color'];
+        $name = $_POST['name'];
+        $complex = $_POST['complexion'];
+        $state = $_POST['state'];
+
+
+        if($complex == 'Комплектация:') {
+          $complex = '';
+        }
+
+        if($col == 'Цвет:') {
+          $col = '';
+        }
+
+        $paramsPrice = [
+          'price__from' => $priceFrom,
+          'price__to' => $priceTo
+        ];
+
+        $paramsYear = [
+          'year__from' => $yearFrom,
+          'year__to' => $yearTo
+        ];
+
+        $params = [
+          'name' => $name,
+          'complexion' => $complex,
+          'color' => $col,
+          'status' => $status,
+          'engine' => $engine,
+          'state' => $state
+        ];
+
+        $arrRes = 
+        [
+          $priceFrom, $priceTo, $yearFrom, $yearTo, $engine,
+          $status, $col, $name, $complex, $state
+        ];
+
+        $autos = $db->searchAutos($params, $paramsPrice, $paramsYear);
+
+        return [$arrRes, $autos];
+      }
+  }
 }
 
 // ?>

@@ -7,19 +7,12 @@
   $user->deleteUser();
   $user->editPassword();
   $user->updateUser();
+  $user->deleteOrder();
   $errMsg = $userActions -> errMsg;
 
   $db = new DataB();
 
-  $idSession = $_SESSION['id'];
-  $userPerson = $db->selectOne('authorization', ['id' => $idSession]);
-  if($_SESSION['role'] == 1) {
-    $idUser = $db->selectOne('employees', ['id_auth' => $idSession])['id'];
-    $userPerson = $db->selectOne('employeesview', ['id' => $idUser]);
-  } else {
-    $idUser = $db->selectOne('clients', ['id_auth' => $idSession])['id'];
-    $userPerson = $db->selectOne('clientsview', ['id' => $idUser]);
-  }
+  [ $idSession, $userPerson, $idUser ] = $user->getSessionPerson();
 
   $orders = $db->getOrders($idUser);
 ?>

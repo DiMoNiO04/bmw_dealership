@@ -4,7 +4,7 @@
       include("./app/controllers/user.php");  
 
       $user = new User();
-      $user->registration();
+      [$lastName, $firstName, $email, $login] = $user->registration();
 
       $errMsg = $userActions -> errMsg;
 ?>

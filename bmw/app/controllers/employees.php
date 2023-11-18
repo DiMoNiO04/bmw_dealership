@@ -113,13 +113,14 @@ class Employees {
   }
 
   public function searchEmployee(): ?array {
+    global $employessActions;
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-employee'])) {
       $employees = $db->searchAdmin($_POST['search-employee'], 'employeesView');
 
       if(empty($employees)) {
-        array_push($employessActions-> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($employessActions -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 
