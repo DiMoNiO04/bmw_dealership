@@ -1,11 +1,10 @@
 <?php
 
-class AutoActions {
+class AutoController {
 
-  public $AVAILABLE = 1;
-  public $NO_AVAILABLE = 0;
+  private $AVAILABLE = 1;
+  private $NO_AVAILABLE = 0;
 
-  //Добавление авто
   public function addAuto(): void {
 
     $db = new DataB();
@@ -42,7 +41,6 @@ class AutoActions {
     header('location:index.php'); //Возвращаем на страницу автомобилей
   }
 
-  //Редактирование авто
   public function updateAuto(): void {
     $db = new DataB();
 
@@ -88,7 +86,6 @@ class AutoActions {
     header('location:index.php'); //Возвращаем на страницу автомобилей
   }
 
-  //Редактирование статуса авто
   public function updateStatusAuto($id): void {
     $db = new DataB();
     $status = $_GET['status']; //Получаем статус автомобиля, который хотим измнитьб
@@ -96,7 +93,6 @@ class AutoActions {
     header('location:index.php'); //Возвращаем на страницу моделей
   }
 
-  //Удаление авто
   public function deleteAuto($id): void {
     $db = new DataB();
     $db->delete('auto', $id); //Удаляем авто

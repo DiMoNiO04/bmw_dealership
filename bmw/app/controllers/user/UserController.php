@@ -1,6 +1,6 @@
 <?php 
 
-class UserActions {
+class UserController {
 
   public $ACCESS = 1; 
   public $NO_ACCESS = 0;

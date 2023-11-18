@@ -1,10 +1,10 @@
 <?php 
   session_start();
    include "../../path.php";
-   include SITE_ROOT . "/app/database/Database.php";
-   include "../../app/controllers/Contacts.php";
+   include SITE_ROOT . "/app/database/DataB.php";
+   include "../../app/controllers/contact/Contact.php";
 
-   $contact = new Contacts();
+   $contact = new Contact();
    $contact->deleteContact();
    $contact->updateContact();
    [$id, $name, $phone, $workTime, $email, $city, $street, $house] = $contact->editContact();

@@ -2,23 +2,23 @@
 
 include('../../app/helps/treatmentImage.php');
 
-require('ModelsActions.php');
-$modelsActions = new ModelsActions();
+require('ModelController.php');
+$modelController = new ModelController();
 
 class Model {
   public function addModel(): void {
-    global $modelsActions;
+    global $modelController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
-      $modelsActions -> addModel();
+      $modelController -> addModel();
     } 
   }
 
   public function updateModel(): void {
-    global $modelsActions;
+    global $modelController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
-      $modelsActions -> updateModel();
+      $modelController -> updateModel();
     }
   }
 
@@ -41,11 +41,11 @@ class Model {
   }
 
   public function deleteModel(): void {
-    global $modelsActions;
+    global $modelController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];  //Получаем айди модели, которую хотим удалить
-      $modelsActions->deleteModel($id);
+      $modelController->deleteModel($id);
     }
   }
 }

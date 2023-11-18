@@ -1,14 +1,14 @@
 <?php 
   include "../../path.php";
-  include SITE_ROOT . "/app/database/Database.php";
-  include "../../app/controllers/Orders.php";
+  include SITE_ROOT . "/app/database/DataB.php";
+  include "../../app/controllers/order/Order.php";
 
   $db = new DataB();
 
   $autos = $db->selectAll('auto', ['status' => 1]);
   $clients = $db->selectAll('clients');
 
-  $order = new Orders();
+  $order = new Order();
   $order->addOrderEmploee();
 ?>
 

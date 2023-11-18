@@ -1,23 +1,23 @@
 <?php
 
-require('ContactsActions.php');
-$contactsActions = new ContactsActions();
+require('ContactController.php');
+$contactController = new ContactController();
 
-class Contacts {
+class Contact {
   
   public function addContact(): void {
-    global $contactsActions;
+    global $contactController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-create']))) {
-      $contactsActions -> addContact();
+      $contactController -> addContact();
     } 
   }
 
   public function updateContact(): void {
-    global $contactsActions;
+    global $contactController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
-      $contactsActions -> updateContact();
+      $contactController -> updateContact();
     }
   }
 
@@ -48,11 +48,11 @@ class Contacts {
   }
 
   public function deleteContact(): void {
-    global $contactsActions;
+    global $contactController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];  //Получаем айди контакта, который хотим удалить
-      $contactsActions -> deleteContact($id);
+      $contactController -> deleteContact($id);
     }
   }
 }

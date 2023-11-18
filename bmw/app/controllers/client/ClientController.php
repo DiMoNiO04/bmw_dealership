@@ -1,13 +1,12 @@
 <?php 
 
-class ClientsActions {
+class ClientController {
 
-  public $ACCESS = 1;
-  public $NO_ACCESS = 0;
-  public $CLIENT = 0;
+  private $ACCESS = 1;
+  private $NO_ACCESS = 0;
+  private $CLIENT = 0;
   public $errMsg = [];
 
-  //Добавление клиента
   public function addClient(): void {
 
     $db = new DataB();
@@ -89,7 +88,6 @@ class ClientsActions {
     }
   }
 
-  //Редактирование клиента
   public function updateClient(): void {
 
     $db = new DataB();
@@ -146,7 +144,6 @@ class ClientsActions {
     header('location:index.php'); //Возвращаем на страницу клиентов
   }
 
-  //Редактирование доступа клиента
   public function updateStatusClient($id): void {
     $db = new DataB();
 
@@ -160,7 +157,6 @@ class ClientsActions {
     header('location:index.php'); //Возвращаем на страницу клиентов
   }
 
-  //Удаление клиента
   public function deleteClient($id): void {
     $db = new DataB();
 

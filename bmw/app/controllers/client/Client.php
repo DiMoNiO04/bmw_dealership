@@ -1,12 +1,12 @@
 <?php 
 
-require('ClientsActions.php');
-$clientsActions = new ClientsActions();
+require('ClientController.php');
+$clientController = new ClientController();
 
 
-class Clients {
+class Client {
 
-  public function addClient() {
+  public function addClient(): array {
     global $clientsActions;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
@@ -30,7 +30,7 @@ class Clients {
       $email = trim($_POST['email']);
       $jobTitle = $_POST['job'];
 
-      $clientsActions -> addClient();
+      $clientController-> addClient();
 
       $arrRes = 
       [
@@ -90,7 +90,7 @@ class Clients {
     global $clientsActions;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
-      $clientsActions -> updateClient();
+      $clientController-> updateClient();
     } 
   }
 
@@ -99,7 +99,7 @@ class Clients {
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
       $id = $_GET['pub_id'];  //Получаем айди клиента, доступ которого хотим измнить
-      $clientsActions -> updateStatusClient($id);
+      $clientController-> updateStatusClient($id);
     }
   }
 
@@ -108,7 +108,7 @@ class Clients {
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];  //Получаем айди авто, которую хотим удалить
-      $clientsActions -> deleteClient($id);
+      $clientController-> deleteClient($id);
     }
   }
 
@@ -120,7 +120,7 @@ class Clients {
       $clients = $db->searchAdmin($_POST['search-client'], 'clientsView');
 
       if(empty($clients)) {
-        array_push($clientsActions -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($clientController-> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 

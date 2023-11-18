@@ -1,13 +1,12 @@
 <?php
 
-class EmployeesActions {
+class EmployeeController {
 
-  public $ACCESS = 1;
-  public $NO_ACCESS = 0;
-  public $ADMIN = 1;
+  private $ACCESS = 1;
+  private $NO_ACCESS = 0;
+  private $ADMIN = 1;
   public $errMsg = [];
 
-  //Добавление сотрудника
   public function addEmployee(): void {
     $db = new DataB();
 
@@ -88,7 +87,6 @@ class EmployeesActions {
     } 
   }
 
-  //Редактирование сотрудника
   public function updateEmployee(): void {
   
     $db = new DataB();
@@ -147,7 +145,6 @@ class EmployeesActions {
     header('location:index.php'); //Возвращаем на страницу сотрудников
   }
 
-  //Редактирование доступа сотрудника
   public function updateStatusEmployee($id): void {
 
     $db = new DataB();
@@ -162,7 +159,6 @@ class EmployeesActions {
     header('location:index.php'); //Возвращаем на страницу сотрудников
   }
 
-  //Удаление сотрудника
   public function deleteEmployee($id): void {
     $db = new DataB();
 

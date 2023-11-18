@@ -1,14 +1,13 @@
 <?php
 
-class OrdersActions {
+class OrderController {
   
-  public $NEW_AUTO = 19;
-  public $OLD_AUTO = 20;
-  public $CLIENT = 0;
-  public $NEW = 'Новое';
+  private $NEW_AUTO = 19;
+  private $OLD_AUTO = 20;
+  private $CLIENT = 0;
+  private $NEW = 'Новое';
   public $errMsg = [];
 
-  //Добавление заказа клиентом
   public function addOrderClient(): void {
     $db = new DataB();
 
@@ -53,7 +52,6 @@ class OrdersActions {
     }
   }
 
-  //Добавление заказа сотрудником
   public function addOrderEmploee(): void {
     $db = new DataB();
 
@@ -87,7 +85,6 @@ class OrdersActions {
     header('location:index.php'); //Возвращаем на страницу моделей
   }
 
-  //Удаление заказа
   public function deleteOrder($id): void {
     $db = new DataB();
 

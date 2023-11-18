@@ -1,12 +1,12 @@
 <?php 
 
-require('EmployeesActions.php');
-$employessActions = new EmployeesActions();
+require('EmployeeController.php');
+$employeeController = new EmployeeController();
 
-class Employees {
+class Employee {
 
-  public function addEmployee() {
-    global $employessActions;
+  public function addEmployee(): array {
+    global $employeeController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {
       //Забираем данные из формы в переменные
@@ -29,7 +29,7 @@ class Employees {
       $email = trim($_POST['email']);
       $jobTitle = $_POST['job'];
 
-      $employessActions -> addEmployee();
+      $employeeController -> addEmployee();
 
       $arrRes = 
       [
@@ -87,40 +87,40 @@ class Employees {
   }
 
   public function updateEmployee(): void {
-    global $employessActions;
+    global $employeeController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
-      $employessActions -> updateEmployee();
+      $employeeController -> updateEmployee();
     } 
   }
 
   public function editStatus(): void {
-    global $employessActions;
+    global $employeeController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
       $id = $_GET['pub_id'];  //Получаем айди сотрудника, доступ которого хотим измнить
-      $employessActions -> updateStatusEmployee($id);
+      $employeeController -> updateStatusEmployee($id);
     }
   }
 
   public function deleteEmployee(): void {
-    global $employessActions;
+    global $employeeController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];  //Получаем айди сотрудника, которого хотим удалить
-      $employessActions -> deleteEmployee($id);
+      $employeeController -> deleteEmployee($id);
     }
   }
 
   public function searchEmployee(): ?array {
-    global $employessActions;
+    global $employeeController;
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-employee'])) {
       $employees = $db->searchAdmin($_POST['search-employee'], 'employeesView');
 
       if(empty($employees)) {
-        array_push($employessActions -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($employeeController -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 

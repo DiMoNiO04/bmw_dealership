@@ -1,8 +1,8 @@
 <?php 
    session_start();
    include "../../path.php";
-   include SITE_ROOT . "/app/database/Database.php";
-   include "../../app/controllers/Auto.php";
+   include SITE_ROOT . "/app/database/DataB.php";
+   include "../../app/controllers/auto/Auto.php";
 
    $db = new DataB();
    $autoModelsName = $db->selectAll('autosview');

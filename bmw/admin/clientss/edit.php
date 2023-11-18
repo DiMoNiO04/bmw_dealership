@@ -1,11 +1,11 @@
 <?php 
   include "../../path.php";
-  include SITE_ROOT . "/app/database/Database.php";
-  include "../../app/controllers/Clients.php";
+  include SITE_ROOT . "/app/database/DataB.php";
+  include "../../app/controllers/client/Client.php";
 
   $db = new DataB();
 
-  $client = new Clients();
+  $client = new Client();
   $client->updateClient();
 
   [

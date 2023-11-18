@@ -1,13 +1,13 @@
 <?php 
   session_start();
   include "../../path.php";
-  include SITE_ROOT . "/app/database/Database.php";
-  include "../../app/controllers/Contacts.php";
+  include SITE_ROOT . "/app/database/DataB.php";
+  include "../../app/controllers/contact/Contact.php";
 
   $db = new DataB();
   $contacts = $db->selectAll('contactsview');
 
-  $contact = new Contacts();
+  $contact = new Contact();
   $contact->deleteContact();
 
   //Если сессия закончилась, то возврат на страницу авторизации

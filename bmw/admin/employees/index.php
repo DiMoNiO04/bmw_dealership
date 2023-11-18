@@ -1,13 +1,13 @@
 <?php 
   session_start();
   include "../../path.php";
-  include SITE_ROOT . "/app/database/Database.php";
-  include "../../app/controllers/Employees.php";
+  include SITE_ROOT . "/app/database/DataB.php";
+  include "../../app/controllers/employee/Employee.php";
 
   $db = new DataB();
   $employees = $db->selectAll('employeesview');
 
-  $employee = new Employees();
+  $employee = new Employee();
   $employee->deleteEmployee();
   $employee->editStatus();
 
@@ -15,7 +15,7 @@
     $employees = $employee->searchEmployee();
   } 
 
-  $errMsg = $employessActions -> errMsg;
+  $errMsg = $employeeController -> errMsg;
 ?>
 
 <!DOCTYPE html>

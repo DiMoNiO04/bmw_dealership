@@ -1,7 +1,7 @@
 <?php  
       include ('path.php'); 
-      include SITE_ROOT . "/app/database/Database.php";
-      include("./app/controllers/user.php");  
+      include SITE_ROOT . "/app/database/DataB.php";
+      include("./app/controllers/user/User.php");  
 
       $user = new User();
       [$lastName, $firstName, $email, $login] = $user->registration();

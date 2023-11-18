@@ -1,13 +1,13 @@
 <?php 
   session_start();
   include "../../path.php";
-  include SITE_ROOT . "/app/database/Database.php";
-  include "../../app/controllers/Orders.php";
+  include SITE_ROOT . "/app/database/DataB.php";
+  include "../../app/controllers/order/Order.php";
 
   $db = new DataB();
   $orders = $db->selectAll('ordersview');
 
-  $order = new Orders();
+  $order = new Order();
   $order->deleteOrder();
 ?>
 

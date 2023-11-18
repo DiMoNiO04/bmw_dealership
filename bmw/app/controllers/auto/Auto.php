@@ -2,22 +2,22 @@
 
 include SITE_ROOT . "/app/helps/treatmentImage.php";
 
-require('AutoActions.php');
-$autoActions = new AutoActions();
+require('AutoController.php');
+$autoController = new AutoController();
 
 
 class Auto {
 
   public function addAuto(): void {
-    global $autoActions;
+    global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-create']))) {
-      $autoActions -> addAuto();
+      $autoController -> addAuto();
     } 
   }
 
   public function updateAuto() {
-    global $autoActions;
+    global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 
@@ -44,32 +44,32 @@ class Auto {
   }
 
   public function editAuto(): void {
-    global $autoActions;
+    global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-edit']))) {
-      $autoActions -> updateAuto();
+      $autoController -> updateAuto();
     }
   }
 
   public function editStatusAuto(): void {
-    global $autoActions;
+    global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
       $id = $_GET['pub_id'];  //Получаем айди автомобиля, который хотим измнить
-      $autoActions -> updateStatusAuto($id);
+      $autoController -> updateStatusAuto($id);
     }
   }
 
   public function deleteAuto(): void {
-    global $autoActions;
+    global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];  //Получаем айди авто, которую хотим удалить
-      $autoActions -> deleteAuto($id);
+      $autoController -> deleteAuto($id);
     }
   }
 
-  public function searchAuto() {
+  public function searchAuto(): ?array {
       $db = new DataB();
 
       if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search__auto'])) {

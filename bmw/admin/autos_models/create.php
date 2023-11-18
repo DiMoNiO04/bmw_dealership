@@ -1,7 +1,7 @@
 <?php 
   include "../../path.php";
-  include SITE_ROOT . "/app/database/database.php";
-  include "../../app/controllers/Models.php";
+  include SITE_ROOT . "/app/database/DataB.php";
+  include "../../app/controllers/model/Model.php";
 
   $model = new Model();
   $model->addModel();

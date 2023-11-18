@@ -1,32 +1,32 @@
 <?php
 
-require('OrdersActions.php');
-$ordersActions = new OrdersActions();
+require('OrderController.php');
+$orderController = new OrderController();
 
-class Orders {
+class Order {
 
   public function addOrderClient(): void {
-    global $ordersActions;
+    global $orderController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
-      $ordersActions -> addOrderClient();
+      $orderController -> addOrderClient();
     }
   }
 
   public function addOrderEmploee(): void {
-    global $ordersActions;
+    global $orderController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['order-create']))) {
-      $ordersActions -> addOrderEmploee();
+      $orderController -> addOrderEmploee();
     }
   }
 
   public function deleteOrder(): void {
-    global $ordersActions;
+    global $orderController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_order']))) {
       $id = $_GET['del_order'];  //Получаем айди модели, которую хотим удалить
-      $ordersActions -> deleteOrder($id);
+      $orderController -> deleteOrder($id);
     }
   }
 

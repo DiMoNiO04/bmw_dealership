@@ -1,8 +1,7 @@
 <?php
 
-class ContactsActions {
+class ContactController {
 
-  //Добавление контакта
   public function addContact(): void {
 
     $db = new DataB();
@@ -27,7 +26,6 @@ class ContactsActions {
     header('location:index.php'); //Возвращаем на страницу контактов
   }
 
-  //Редактирование контакта
   public function updateContact(): void {
     $db = new DataB();
 
@@ -57,7 +55,6 @@ class ContactsActions {
     header('location:index.php'); //Возвращаем на страницу контактов
   }
 
-  //Удаление контакта
   public function deleteContact($id): void {
     $db = new DataB();
     $db->delete('contacts', $id); //Удаляем

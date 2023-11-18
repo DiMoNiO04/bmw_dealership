@@ -1,8 +1,7 @@
 <?php
 
-class ModelsActions {
+class ModelController {
 
-  //Добавление модели
   public function addModel(): void {
     $db = new DataB();
 
@@ -32,7 +31,6 @@ class ModelsActions {
     }
   }
 
-  //Редактирование модели
   public function updateModel(): void {
     
     $db = new DataB();
@@ -66,7 +64,6 @@ class ModelsActions {
     header('location:index.php'); //Возвращаем на страницу моделей
   }
 
-  //Удаление модели
   public function deleteModel($id): void {
     $db = new DataB();
     $db->delete('models', $id); //Удаляем

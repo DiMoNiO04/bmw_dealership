@@ -1,7 +1,7 @@
 <?php 
   include ('path.php'); 
-  include("./app/database/Database.php"); 
-  include('./app/controllers/Auto.php');
+  include("./app/database/DataB.php"); 
+  include('./app/controllers/auto/Auto.php');
 
   $db = new DataB();
 
