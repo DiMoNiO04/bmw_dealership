@@ -4,7 +4,7 @@
   include "../../app/controllers/client/Client.php";
 
   $client = new Client();
-  [$lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment, $series, $number, $issuedBy, $login, $password, $email, $jobTitle] = $client->addClient();
+  [$lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment, $series, $number, $issuedBy, $login, $password, $email, $jobTitle] = $client->add();
 
   $errMsg = $clientController -> errMsg;
 ?>

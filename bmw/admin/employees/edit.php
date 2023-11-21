@@ -6,12 +6,12 @@
   $db = new DataB();
 
   $employee = new Employee();
-  $employee->updateEmployee();
+  $employee->update();
 
   [
     $lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment,
     $series, $number, $issuedBy, $login, $password, $email, $jobTitle
-  ] = $employee->editEmployee();
+  ] = $employee->edit();
 ?>
 
 <!DOCTYPE html>

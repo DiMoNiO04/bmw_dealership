@@ -23,20 +23,18 @@ class UserController {
   public function registration(): void {
 
     $db = new DataB();
-      
-    //Забираем данные из формы в переменные
+ 
     $email = trim($_POST['email']);
     $login = trim($_POST['login']);
     $passwordF = $_POST['password-first'];
     $passwordS = $_POST['password-second'];
 
-    //Проверка валидности формы
     if(mb_strlen($login, 'UTF8') < 3) {
       array_push($this -> errMsg, 'Логин должен быть более трех символов!');
     } elseif($passwordF !== $passwordS) {
       array_push($this -> errMsg, 'Пароли в обеих полях должны соотвествовать!');
     } else {
-      //Проверка на уникальность логина и email
+
       $existenceLogin = $db->selectOne('authorization', ['login' => $login]);
       $existenceEmail = $db->selectOne('authorization', ['email' => $email]);
 
@@ -45,9 +43,8 @@ class UserController {
       } elseif($existenceEmail['email'] === $email) {
         array_push($this -> errMsg, 'Пользователь с такой почтой уже зарегистрован!');
       }else {
-        $password = password_hash($passwordF, PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+        $password = password_hash($passwordF, PASSWORD_DEFAULT);
 
-        //Формируем массив для таблицы авторизации
         $dataAuth = [
           'login' => $login,
           'password' => $password,
@@ -56,14 +53,12 @@ class UserController {
           'email' => $email
         ];
 
-        //Формируем массив паспорта
         $dataPassport = [
           'series' => $series,
           'number' => $number,
           'issued_by' => $issuedBy
         ];
 
-        //Формируем массив адресса
         $dataAddress = [
           'city' => $city,
           'street' => $street,
@@ -71,13 +66,11 @@ class UserController {
           'apartment' => $apartment 
         ];
 
-        //Добавляем данные в базу данных
         $idPassport = $db->insert('clients_passport', $dataPassport);
         $idAddress = $db->insert('clients_address', $dataAddress);
         $idAuth = $db->insert('authorization', $dataAuth);
         $id_auth = $db->selectOne('authorization', ['id' => $idAuth]);
 
-        //Формируем данные в таблицу клиентов
         $dataPersonal = [
           'last_name' => trim($_POST['last_name']),
           'first_name' => trim($_POST['first_name']),
@@ -89,19 +82,18 @@ class UserController {
         ];
 
         $id = $id_auth['id'];
-        $db->insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
+        $db->insert('clients', $dataPersonal);
         $user = $db->selectOne('authorization', ['id' => $id]);
-        $this -> userAuth($user); //Создаем сессию для авторизации
+        $this -> userAuth($user); 
       }
     }
   }
 
   public function authorization(): void {
-    //Забираем данные из формы в переменные
+
     $email = trim($_POST['email']);
     $password = $_POST['password'];
 
-    //Проверка валидности формы
     $db = new DataB();
     $existence = $db->selectOne('authorization', ['email' => $email]);
       
@@ -109,7 +101,7 @@ class UserController {
       array_push($this -> errMsg, "Данный аккаунт не имеет доступа (заблокирован)!");
     } else {
       if($existence && password_verify($password, $existence['password'])) {
-        $this -> userAuth($existence); //Создаем сессию для авторизации
+        $this -> userAuth($existence);
       } 
       password_verify($password, $existence['password']);
       array_push($this -> errMsg, "Неправильный логин или пароль!");
@@ -121,22 +113,20 @@ class UserController {
     $db = new DataB();
 
     $passwordF = $_POST['passF'];
-    $password = password_hash($passwordF, PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+    $password = password_hash($passwordF, PASSWORD_DEFAULT);
   
-    //Формируем массив данных, которые хотим изменит
     $data = [
       'password' => $password,
       'access' => $this -> ACCESS
     ];
 
-    $db->update('authorization', $id, $data);//Обновляем пароль
+    $db->update('authorization', $id, $data);
   }
 
   public function updateUser(): void {
 
       $db = new DataB();
 
-      //Проверка на доступ
       if(isset($_POST['access'])) {
         $access = $this -> ACCESS;
       } else if($_SESSION['access'] == $this -> ACCESS) {
@@ -145,27 +135,23 @@ class UserController {
         $access = $this -> NO_ACCESS;
       }
           
-      //Формируем массив для таблицы авторизации
       $dataAuth = [
         'access' => $access,
       ];
   
-      //Формируем массив паспорта
       $dataPassport = [
         'series' => trim($_POST['series']),
         'number' => trim($_POST['number']),
         'issued_by' => trim($_POST['issued_by'])
       ];
   
-      //Формируем массив адресса
       $dataAddress = [
         'city' => trim($_POST['city']),
         'street' => trim($_POST['street']),
         'house' => trim($_POST['house']),
         'apartment' => trim($_POST['apartment']) 
       ];
-  
-      //Формируем данные в таблицу клиентов
+
       $dataPersonal = [
         'last_name' => trim($_POST['last_name']),
         'first_name' => trim($_POST['first_name']),
@@ -174,26 +160,24 @@ class UserController {
         'phone' => trim($_POST['phone'])
       ];
   
-      $id = $_POST['id']; //Получаем данные сотрудника из формы
+      $id = $_POST['id'];
 
       if($_SESSION['role'] == 1) {
-        $idEmployee = $db->selectOne('employees', ['id_auth' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
-        $idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись
-        $idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
-        $idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+        $idEmployee = $db->selectOne('employees', ['id_auth' => $id]);
+        $idAuth = $idEmployee['id_auth'];
+        $idAddress = $idEmployee['id_address'];
+        $idPas = $idEmployee['id_passport'];
     
-        //Обновляем данные сотрудника, которого отредактировали
         $db->update('employees', $idEmployee['id'], $dataPersonal);
         $db->update('employees_passport', $idPas, $dataPassport);
         $db->update('employees_address', $idAddress, $dataAddress);
         $db->update('authorization', $idAuth, $dataAuth);
       } else {
-        $idClients = $db->selectOne('clients', ['id_auth' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
-        $idAuth = $idClients['id_auth']; //Получаем айди записи авторизации, которую хотим запись
-        $idAddress = $idClients['id_address']; //Получаем айди записи адресса, которую хотим запись
-        $idPas = $idClients['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+        $idClients = $db->selectOne('clients', ['id_auth' => $id]);
+        $idAuth = $idClients['id_auth'];
+        $idAddress = $idClients['id_address'];
+        $idPas = $idClients['id_passport'];
   
-        //Обновляем данные сотрудника, которого отредактировали
         $db->update('clients', $idClients['id'], $dataPersonal);
         $db->update('clients_passport', $idPas, $dataPassport);
         $db->update('clients_address', $idAddress, $dataAddress);
@@ -205,32 +189,31 @@ class UserController {
 
     $db = new DataB();
 
-    //Проверям на клиента (сотрудника)
-    if($_SESSION['role'] == $this -> EMPLOYEE) { //Если сотрудник
+    if($_SESSION['role'] == $this -> EMPLOYEE) {
       $idEmployee = $db->selectOne('employees', ['id_auth' => $id]); 
 
-      $idAuth = $idEmployee['id_auth']; //Получаем айди авторизации для данного сотрудника
-      $idAddress = $idEmployee['id_address']; //Получаем айди адресса для данного сотрудника
-      $idPas = $idEmployee['id_passport']; //Получаем айди паспорта для данного сотрудника
+      $idAuth = $idEmployee['id_auth'];
+      $idAddress = $idEmployee['id_address'];
+      $idPas = $idEmployee['id_passport'];
     
-      $db->delete('authorization', $idAuth); //Удаляем данные авторизации
-      $db->delete('employees_address', $idAddress); //Удаляем данные адресса
-      $db->delete('employees_passport', $idPas); //Удаляем  данные паспорта
-      $db->delete('employees', $id); //Удаляем сотрудника
-    } else { //Если клиент
+      $db->delete('authorization', $idAuth);
+      $db->delete('employees_address', $idAddress);
+      $db->delete('employees_passport', $idPas);
+      $db->delete('employees', $id);
+    } else { 
       $idClients = $db->selectOne('clients', ['id_auth' => $id]); 
 
-      $idAuth = $idClients['id_auth']; //Получаем айди авторизации для данного клиента
-      $idAddress = $idClients['id_address']; //Получаем айди адресса для данного клиента
-      $idPas = $idClients['id_passport']; //Получаем айди паспорта для данного клиента
+      $idAuth = $idClients['id_auth'];
+      $idAddress = $idClients['id_address'];
+      $idPas = $idClients['id_passport'];
     
-      $db->delete('authorization', $idAuth); //Удаляем данные авторизации
-      $db->delete('clients_address', $idAddress); //Удаляем данные адресса
-      $db->delete('clients_passport', $idPas); //Удаляем  данные паспорта
-      $db->delete('clients', $id); //Удаляем клиента
+      $db->delete('authorization', $idAuth);
+      $db->delete('clients_address', $idAddress);
+      $db->delete('clients_passport', $idPas); 
+      $db->delete('clients', $id);
     }
 
-    header('location:/bmw/logout.php'); //Возвращаем на страницу
+    header('location:/bmw/logout.php');
   } 
 
   public function addOrder(): void {
@@ -259,19 +242,19 @@ class UserController {
         ];
       }
 
-      $db->insert('orders', $params); //Отправляем данные в таблицу клиентов
-      header('location:personal__cab-user.php'); //Возвращаем на страницу клиентов
+      $db->insert('orders', $params);
+      header('location:personal__cab-user.php');
     }
   }
 
   public function deleteOrder($id): void {
     $db = new DataB();
 
-    $db->delete('orders', $id); //Удаляем
+    $db->delete('orders', $id);
     if($_SESSION['role'] == $this -> CLIENT) {
-      header('location:personal__cab-user.php'); //Возвращаем на страницу моделей
+      header('location:personal__cab-user.php');
     } 
-    header('location: ' . BASE_URL . "admin/orders/index.php"); //Возвращаем на страницу моделей
+    header('location: ' . BASE_URL . "admin/orders/index.php");
   }
 }
 ?>

@@ -1,16 +1,17 @@
 <?php 
 
+require('D:\Programs\OSPanel\domains\dealership\bmw\app\controllers\person\Person.php');
 require('ClientController.php');
 $clientController = new ClientController();
 
 
-class Client {
+class Client extends Person {
 
-  public function addClient(): array {
-    global $clientsActions;
+  public function add() {
+    global $clientController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
-      //Забираем данные из формы в переменные
+      
       $lastName = trim($_POST['last_name']);
       $firstName = trim($_POST['first_name']);
       $surname = trim($_POST['surname']);
@@ -30,7 +31,7 @@ class Client {
       $email = trim($_POST['email']);
       $jobTitle = $_POST['job'];
 
-      $clientController-> addClient();
+      $clientController-> add();
 
       $arrRes = 
       [
@@ -42,23 +43,22 @@ class Client {
     } 
   }
 
-  public function editClient(): array {
+  public function edit(): array {
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {
   
-      $id = $_GET['edit_id']; //Получаем айди клиента, того кого хотим изменить 
-      $client = $db->selectOne('clients', ['id' => $id]); //Получаем все данные клиента, которого хотим изменить
+      $id = $_GET['edit_id']; 
+      $client = $db->selectOne('clients', ['id' => $id]);
       
-      $idAuth = $client['id_auth']; //Получаем айди данных авторизации клиента
-      $idAddress = $client['id_address']; //Получаем айди данных адреса клиента
-      $idPassport = $client['id_passport']; //Получаем айди данных паспорта клиента
+      $idAuth = $client['id_auth'];
+      $idAddress = $client['id_address'];
+      $idPassport = $client['id_passport'];
 
-      $clientAuth = $db->selectOne('authorization', ['id' => $idAuth]); //Получаем данные авторизации данного клиента
-      $clientAddress = $db->selectOne('clients_address', ['id' => $idAddress]); //Получаем данные адресса данного клиента
-      $clientPassport = $db->selectOne('clients_passport', ['id' => $idPassport]); //Получаем данные паспорта данного клиента
+      $clientAuth = $db->selectOne('authorization', ['id' => $idAuth]);
+      $clientAddress = $db->selectOne('clients_address', ['id' => $idAddress]);
+      $clientPassport = $db->selectOne('clients_passport', ['id' => $idPassport]);
       
-      //Получаем данные клиента которого хотим изменить в переменные
       $id = $client['id'];
       $lastName = $client['last_name'];
       $firstName = $client['first_name'];
@@ -86,41 +86,41 @@ class Client {
     }
   }
 
-  public function updateClient(): void {
-    global $clientsActions;
+  public function update(): void {
+    global $clientController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
-      $clientController-> updateClient();
+      $clientController-> update();
     } 
   }
 
   public function editStatus(): void {
-    global $clientsActions;
+    global $clientController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
-      $id = $_GET['pub_id'];  //Получаем айди клиента, доступ которого хотим измнить
-      $clientController-> updateStatusClient($id);
+      $id = $_GET['pub_id'];
+      $clientController-> updateStatus($id);
     }
   }
 
-  public function deleteClient(): void {
-    global $clientsActions;
+  public function delete(): void {
+    global $clientController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
-      $id = $_GET['del_id'];  //Получаем айди авто, которую хотим удалить
-      $clientController-> deleteClient($id);
+      $id = $_GET['del_id'];
+      $clientController-> delete($id);
     }
   }
 
-  public function searchClient(): ?array {
-    global $clientsActions;
+  public function search(): ?array {
+    global $clientController;
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-client'])) {
       $clients = $db->searchAdmin($_POST['search-client'], 'clientsView');
 
       if(empty($clients)) {
-        array_push($clientController-> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($clientController -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 

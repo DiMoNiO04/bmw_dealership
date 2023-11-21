@@ -7,7 +7,6 @@
    $contact = new Contact();
    $contact->addContact();
 
-  //Если сессия закончилась, то возврат на страницу авторизации
   if(!$_SESSION) {
     header('location: ' . BASE_URL . 'auth.php');
   }

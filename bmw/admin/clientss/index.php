@@ -5,18 +5,15 @@
   include "../../app/controllers/client/Client.php";
 
   $db = new DataB();
+	$clients = $db->selectAll('clientsview');
 
   $client = new Client();
-  $client->deleteClient();
+  $client->delete();
   $client->editStatus();
 
-  $clientsSearch = $client->searchClient();
-
-  if(empty($clientsSearch)) {
-    $clients = $db->selectAll('clientsview');
-  } else {
-    $clients = $clientsSearch;
-  }
+  if($client->search()) {
+    $clients = $client->search();
+  } 
 
   $errMsg = $clientController -> errMsg;
 ?>

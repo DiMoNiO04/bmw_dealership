@@ -4,7 +4,6 @@ $ERROR_CONNECT = "Ошибка подключения к базе данных";
 
 class ConnectBD {
 
-  // Данные для подключения к БД
   private $driver = "mysql";
   private $host = "localhost";
   private $db_name = "bmv_dealership";

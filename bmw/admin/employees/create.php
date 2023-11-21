@@ -7,7 +7,7 @@
   [
     $lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment,
     $series, $number, $issuedBy, $login, $password, $email, $jobTitle
-  ] = $employee->addEmployee();
+  ] = $employee->add();
 
   $errMsg = $employeeController -> errMsg;
 ?>

@@ -27,10 +27,9 @@ class Model {
 
       $db = new DataB();
       
-      $id = $_GET['id']; //Получаем айди модели , которую хотим изменить 
-      $model = $db->selectOne('models', ['id' => $id]); //Получаем все данные можели, которую хотим изменить
+      $id = $_GET['id'];
+      $model = $db->selectOne('models', ['id' => $id]);
 
-      //Получаем данные модели которую хотим изменить в переменные
       $id = $model['id'];
       $modelName = $model['model'];
       $img = $model['main_foto'];
@@ -44,7 +43,7 @@ class Model {
     global $modelController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
-      $id = $_GET['del_id'];  //Получаем айди модели, которую хотим удалить
+      $id = $_GET['del_id']; 
       $modelController->deleteModel($id);
     }
   }

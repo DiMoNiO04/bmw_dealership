@@ -6,7 +6,6 @@
   $model = new Model();
   $model->addModel();
 
-  //Если сессия закончилась, то возврат на страницу авторизации
   if(!$_SESSION) {
     header('location:/bmw/auth.php');
   }

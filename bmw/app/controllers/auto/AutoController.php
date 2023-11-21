@@ -9,10 +9,8 @@ class AutoController {
 
     $db = new DataB();
 
-    //Работа с изображением
     treatmentImg("\assets\images\dest\cars\\");
 
-    //Проверяем статус: выбран или нет
     $status = trim($_POST['status']);
     if(isset($_POST['status'])) {
       $status = $this -> AVAILABLE;
@@ -20,7 +18,6 @@ class AutoController {
       $status = $this -> $NO_AVAILABLE;
     }
       
-    //Формируем массив для отправки
     $auto = [
       'name' => trim($_POST['name']),
       'engine' => trim($_POST['engine']),
@@ -36,18 +33,16 @@ class AutoController {
 
     print_r($status);
 
-    $auto = $db->insert('auto', $auto); //Отправляем данные в таблицу auti
-    $auto = $db->selectOne('auto', ['id' => $id]); //Получаем данные добавленной модели
-    header('location:index.php'); //Возвращаем на страницу автомобилей
+    $auto = $db->insert('auto', $auto);
+    $auto = $db->selectOne('auto', ['id' => $id]);
+    header('location:index.php');
   }
 
   public function updateAuto(): void {
     $db = new DataB();
 
-    //Работа с изображением 
     treatmentImg("\assets\images\dest\cars\\");
 
-    //Проверяем статус: выбран или нет
     $status = trim($_POST['status']);
     if(isset($_POST['status'])) {
       $status = $this -> AVAILABLE;
@@ -55,7 +50,6 @@ class AutoController {
       $status = $this -> $NO_AVAILABLE;
     }
     
-    //Формируем массив для отправки
     if(empty($img)) {
       $auto = [
         'name' => trim($_POST['name']),
@@ -81,22 +75,22 @@ class AutoController {
       ];
     }
 
-    $id = $_POST['id']; //Получаем айди автомобиля, который хотим изменить
-    $auto = $db->update('auto', $id, $auto); //Обновляем данные автомобиля
-    header('location:index.php'); //Возвращаем на страницу автомобилей
+    $id = $_POST['id'];
+    $auto = $db->update('auto', $id, $auto);
+    header('location:index.php');
   }
 
   public function updateStatusAuto($id): void {
     $db = new DataB();
-    $status = $_GET['status']; //Получаем статус автомобиля, который хотим измнитьб
-    $autoId = $db->update('auto', $id, ['status' => $status]); //Перезаписываем полученную запись
-    header('location:index.php'); //Возвращаем на страницу моделей
+    $status = $_GET['status'];
+    $autoId = $db->update('auto', $id, ['status' => $status]);
+    header('location:index.php');
   }
 
   public function deleteAuto($id): void {
     $db = new DataB();
-    $db->delete('auto', $id); //Удаляем авто
-    header('location:index.php'); //Возвращаем на страницу авто
+    $db->delete('auto', $id);
+    header('location:index.php');
   }
 }
 

@@ -47,8 +47,8 @@ class OrderController {
         'id_employee' => $idEmployee
       ];
 
-      $db->insert('orders', $params); //Отправляем данные в таблицу клиентов
-      header('location:personal__cab-user.php'); //Возвращаем на страницу клиентов
+      $db->insert('orders', $params);
+      header('location:personal__cab-user.php');
     }
   }
 
@@ -81,18 +81,18 @@ class OrderController {
 
     print_r($params);
 
-    $db->insert('orders', $params); //Отправляем данные в таблицу клиентов
-    header('location:index.php'); //Возвращаем на страницу моделей
+    $db->insert('orders', $params);
+    header('location:index.php');
   }
 
   public function deleteOrder($id): void {
     $db = new DataB();
 
-    $db->delete('orders', $id); //Удаляем
-    if($_SESSION['role'] == $CLIENT) { //Если удалял заказ клиент
-      header('location:personal__cab-user.php'); //Возвращаем на страницу моделей
+    $db->delete('orders', $id);
+    if($_SESSION['role'] == $CLIENT) {
+      header('location:personal__cab-user.php');
     } else {
-      header('location:index.php'); //Возвращаем на страницу моделей
+      header('location:index.php');
     }
   }
 }

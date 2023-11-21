@@ -8,11 +8,11 @@
   $employees = $db->selectAll('employeesview');
 
   $employee = new Employee();
-  $employee->deleteEmployee();
+  $employee->delete();
   $employee->editStatus();
 
-  if($employee->searchEmployee()) {
-    $employees = $employee->searchEmployee();
+  if($employee->search()) {
+    $employees = $employee->search();
   } 
 
   $errMsg = $employeeController -> errMsg;

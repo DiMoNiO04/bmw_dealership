@@ -1,28 +1,22 @@
 <?php 
 
-class ClientController {
+require('D:\Programs\OSPanel\domains\dealership\bmw\app\controllers\person\PersonController.php');
 
-  private $ACCESS = 1;
-  private $NO_ACCESS = 0;
-  private $CLIENT = 0;
-  public $errMsg = [];
-
-  public function addClient(): void {
+class ClientController extends PersonController {
+	
+  public function add(): void {
 
     $db = new DataB();
 
-    //Забираем данные из формы в переменные
     $login = trim($_POST['login']);
     $password = $_POST['password'];
     $email = trim($_POST['email']);
     $access = $ACCESS;
     $role = $CLIENT;
 
-    //Проверка валидности формы
     if(mb_strlen($login, 'UTF8') < 3) {
       array_push($this -> errMsg, 'Логин должен быть более трех символов!');
     } else {
-      //Проверка на уникальность логина и email
       $existenceLogin = $db->selectOne('authorization', ['login' => $login]);
       $existenceEmail = $db->selectOne('authorization', ['email' => $email]);
 
@@ -31,16 +25,14 @@ class ClientController {
       } elseif($existenceEmail['email'] === $email) {
         array_push($this -> errMsg, 'Пользователь с такой почтой уже зарегистрован!');
       }else {
-        $password  = password_hash($password , PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+        $password  = password_hash($password , PASSWORD_DEFAULT);
 
-        //Проверка на доступ
         if(isset($_POST['access'])) {
           $access = $this -> ACCESS;
         } else {
           $access = $this -> NO_ACCESS;
         }
         
-        //Формируем массив для таблицы авторизации
         $dataAuth = [
           'login' => $login,
           'password' => $password,
@@ -49,14 +41,12 @@ class ClientController {
           'email' => $email 
         ];
 
-        //Формируем массив паспорта
         $dataPassport = [
           'series' => trim($_POST['series']),
           'number' => trim($_POST['number']),
           'issued_by' => trim($_POST['issued_by'])
         ];
 
-        //Формируем массив адресса
         $dataAddress = [
           'city' => trim($_POST['city']),
           'street' => trim($_POST['street']),
@@ -64,13 +54,11 @@ class ClientController {
           'apartment' => trim($_POST['apartment'])
         ];
 
-        //Добавляем данные в базу данных
         $idPassport = $db->insert('clients_passport', $dataPassport);
         $idAddress = $db->insert('clients_address', $dataAddress);
         $idAuth = $db->insert('authorization', $dataAuth);
         $id_auth = $db->selectOne('authorization', ['id' => $idAuth]);
 
-        //Формируем данные в таблицу клиентов
         $dataPersonal = [
           'last_name' => trim($_POST['last_name']),
           'first_name' => trim($_POST['first_name']),
@@ -82,17 +70,16 @@ class ClientController {
           'id_passport' => $idPassport
         ];
 
-        $db->insert('clients', $dataPersonal); //Отправляем данные в таблицу клиентов
-        header('location:index.php'); //Возвращаем на страницу клиентов
+        $db->insert('clients', $dataPersonal);
+        header('location:index.php');
       }
     }
   }
 
-  public function updateClient(): void {
+  public function update(): void {
 
     $db = new DataB();
       
-    //Проверка на доступ
     $access = $_POST['access'];
     if(isset($_POST['access'])) {
       $access = $this -> ACCESS;
@@ -100,19 +87,16 @@ class ClientController {
       $access = $this -> NO_ACCESS;
     }
       
-    //Формируем массив для таблицы авторизации
     $dataAuth = [
       'access' => $access,
     ];
 
-    //Формируем массив паспорта
     $dataPassport = [
       'series' => trim($_POST['series']),
       'number' => trim($_POST['number']),
       'issued_by' => trim($_POST['issued_by'])
     ];
 
-    //Формируем массив адресса
     $dataAddress = [
       'city' => trim($_POST['city']),
       'street' => trim($_POST['street']),
@@ -120,7 +104,6 @@ class ClientController {
       'apartment' => trim($_POST['apartment'])
     ];
 
-    //Формируем данные в таблицу клиентов
     $dataPersonal = [
       'last_name' => trim($_POST['last_name']),
       'first_name' => trim($_POST['first_name']),
@@ -129,39 +112,38 @@ class ClientController {
       'phone' => trim($_POST['phone'])
     ];
 
-    $id = $_POST['id']; //Получаем данные клиента из формы
-    $idClient = $db->selectOne('clients', ['id' => $id]); //Получаем данные клиента, которого хотим отредактировать
-    $idAuth = $idClient['id_auth']; //Получаем айди записи авторизации, которую хотим запись
-    $idAddress = $idClient['id_address']; //Получаем айди записи адресса, которую хотим запись
-    $idPas = $idClient['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+    $id = $_POST['id'];
+    $idClient = $db->selectOne('clients', ['id' => $id]);
+    $idAuth = $idClient['id_auth'];
+    $idAddress = $idClient['id_address']; 
+    $idPas = $idClient['id_passport']; 
 
-    //Обновляем данные клиента, которого отредактировали
     $db->update('clients', $id, $dataPersonal);
     $db->update('clients_passport', $idPas, $dataPassport);
     $db->update('clients_address', $idAddress, $dataAddress);
     $db->update('authorization', $idAuth, $dataAuth);
 
-    header('location:index.php'); //Возвращаем на страницу клиентов
+    header('location:index.php');
   }
 
-  public function updateStatusClient($id): void {
+  public function updateStatus($id): void {
     $db = new DataB();
 
     $access = $_GET['access'];
   
-    $сlient = $db->selectOne('clients', ['id' => $id]); //Получаем данные клиента, которого хоти изменитьь
-    $clientAuth = $db->selectOne('authorization', ['id' => $сlient['id_auth']]); //Получаем данные авторизации, которую хоти изменить
-    $idAuth = $clientAuth['id'];  //Получаем айди авторизации, которую хоти изменить
+    $сlient = $db->selectOne('clients', ['id' => $id]);
+    $clientAuth = $db->selectOne('authorization', ['id' => $сlient['id_auth']]);
+    $idAuth = $clientAuth['id'];
   
-    $db->update('authorization', $idAuth, ['access' => $access]); //Перезаписываем полученную запись
-    header('location:index.php'); //Возвращаем на страницу клиентов
+    $db->update('authorization', $idAuth, ['access' => $access]);
+    header('location:index.php');
   }
 
-  public function deleteClient($id): void {
+  public function delete($id): void {
     $db = new DataB();
 
-    $db->delete('clients', $id); //Удаляем клиента
-    header('location:index.php'); //Возвращаем на страницу клиентов
+    $db->delete('clients', $id);
+    header('location:index.php');
   }
 }
 

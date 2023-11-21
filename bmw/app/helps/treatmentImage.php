@@ -1,5 +1,4 @@
 <?php 
-//Работа с изображением
 function treatmentImg($folder) {
   if(!empty($_FILES['img']['name'])) {
     $imgName = time() . '_' . $_FILES['img']['name'];

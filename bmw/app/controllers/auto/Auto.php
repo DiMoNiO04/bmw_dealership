@@ -23,10 +23,9 @@ class Auto {
 
       $db = new DataB();
       
-      $id = $_GET['id']; //Получаем айди, того кого хотим изменить 
-      $auto = $db->selectOne('auto', ['id' => $id]); //Получаем все данные можели, которую хотим изменить
+      $id = $_GET['id'];
+      $auto = $db->selectOne('auto', ['id' => $id]);
 
-      //Получаем данные авто которого хотим изменить в переменные
       $id = $auto['id'];
       $name = $auto['name'];
       $complexion = $auto['complexion'];
@@ -55,7 +54,7 @@ class Auto {
     global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
-      $id = $_GET['pub_id'];  //Получаем айди автомобиля, который хотим измнить
+      $id = $_GET['pub_id'];
       $autoController -> updateStatusAuto($id);
     }
   }
@@ -64,7 +63,7 @@ class Auto {
     global $autoController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
-      $id = $_GET['del_id'];  //Получаем айди авто, которую хотим удалить
+      $id = $_GET['del_id'];
       $autoController -> deleteAuto($id);
     }
   }

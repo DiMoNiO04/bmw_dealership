@@ -7,44 +7,37 @@ require('ConnectBD.php');
 class DataB {
 
   private function executeSql($sql): object {
-
-    // Глобальная переменная pdo из файла connect.php
     global $pdo;
 
-    //Подготовка sql запроса для отправки на сервер
     $query = $pdo->prepare($sql);
     $query->execute();
 
-    //Проверка запроса на ошибки
     $this->dbCheckErr($query);
     return $query;
   }
 
-  //Проверяем выполнение запроса к БД
   private function dbCheckErr($query): bool {
-    $errInfo = $query->errorInfo(); //Получаем ошибки в массив
+    $errInfo = $query->errorInfo();
     if($errInfo[0] !== PDO::ERR_NONE){
-      echo $errInfo[2]; //Вывод ошибки
-      exit(); //Завершаем функцию
+      echo $errInfo[2];
+      exit();
     }
     return true;
   }
 
-  //Запрос на получение всех данных из одной таблицы
   public function selectAll($table, $params = []) {
 
-    //Формируем sql запрос (Пример: SELECT * FROM models)
     $sql = "SELECT * FROM $table"; 
 
-    if(!empty($params)) { //Если массив параметров не пустой, то разбираем данные
-      $i = 0; //Если i=0, то where иначе and
-      foreach($params as $key => $value){ //Разбираем данные
-        if(!is_numeric($value)) { //Если параметр строка, то оборачиваем ее в кавычки
+    if(!empty($params)) {
+      $i = 0; 
+      foreach($params as $key => $value){ 
+        if(!is_numeric($value)) {
           $value = "'" . $value . "'";
         }
-        if($i === 0) { //Если первый параметр добавляем впереди "WHERE
+        if($i === 0) { 
           $sql = $sql . " WHERE  $key = $value";
-        } else { //Если параметр не первый добавляем впередм "AND
+        } else { 
           $sql = $sql . " AND  $key = $value";
         }
         $i++;
@@ -53,19 +46,16 @@ class DataB {
 
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetchAll();
   }
-
-  //Добавление записи в таблицу 
+ 
   public function insert($table, $params) {
     global $pdo;
 
-    $i = 0; //Если 0, то запятую в sql запросе не ставим
-    $coll = ''; //Ключи
-    $mask = ''; //Значения
+    $i = 0; 
+    $coll = ''; 
+    $mask = '';
 
-    //Разбираем параметры на данные для запроса (названия столбцов и значение)
     foreach($params as $key => $value) {
       if($i === 0) {
         $coll = $coll . $key;
@@ -77,7 +67,6 @@ class DataB {
       $i++;
     }
 
-    //Формируем sql запрос (Пример: INSERT INTO contacts (name, phone, work_time, email) VALUES ('Call-center', '80447104585', '8-21', 'call@autoidea.by'))
     $sql = "INSERT INTO $table ($coll) VALUES ($mask)";
 
     $query = $pdo->prepare($sql);
@@ -89,21 +78,19 @@ class DataB {
     return $lastId;
   }
 
-  //Запрос на получение одной строки из одной выбранной таблицы
   public function selectOne($table, $params = []) {
 
-    //Формируем sql запрос (Пример: SELECT * FROM clients)
     $sql = "SELECT * FROM $table";
 
-    if(!empty($params)) { //Если массив параметров не пустой, то разбираем данные
-      $i = 0;  //Если i=0, то where иначе and
-      foreach($params as $key => $value){  //Разбираем данные
-        if(!is_numeric($value)) { //Если параметр строка, то оборачиваем ее в кавычки
+    if(!empty($params)) {
+      $i = 0; 
+      foreach($params as $key => $value){ 
+        if(!is_numeric($value)) {
           $value = "'" . $value . "'";
         }
-        if($i === 0) { //Если первый параметр добавляем впереди "WHERE
+        if($i === 0) { 
           $sql = $sql . " WHERE  $key = $value";
-        } else {  //Если параметр не первый добавляем впередм "AND
+        } else { 
           $sql = $sql . " AND  $key = $value";
         }
         $i++;
@@ -112,17 +99,14 @@ class DataB {
 
    $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetch();
   }
 
-  //Обноваление данных в таблице БД
   public function update($table, $id, $params) {
 
-    $i = 0; //Если 0, то запятую в sql запросе не ставим
-    $str = ''; //Ключи и параметры для обнолвения
+    $i = 0;
+    $str = '';
 
-    //Разбираем параметры на данные для запроса (названия столбцов и значение)
     foreach($params as $key => $value) { 
       if($i === 0) {
         $str = $str . $key . " = '" . $value . "'";
@@ -132,17 +116,14 @@ class DataB {
       $i++;
     }
 
-    //Формируем sql запрос (Пример: UPDATE contacts SET name = 'Отдел продаж автомобиля', phone = '+375447104585', work_time = 'Пн-Вс: 8:00 - 20:00', email = 'info@autoidea.by' WHERE id = 4)
     $sql = "UPDATE $table SET $str WHERE id = $id";
 
     $this->executeSql($sql);
   }
 
-  //Удаление данных из таблицы БД
   public function delete($table, $id) {
     global $pdo;
 
-    //Формируем sql запрос (Пример: DELETE FROM contacts WHERE id =4)
     $sql = "DELETE FROM $table WHERE id =" . $id;
 
     $query = $this->executeSql($sql);
@@ -154,22 +135,17 @@ class DataB {
     return $query->fetch();
   }
 
-  //Получить количество авто каждой модели
   public function getCountModel($idModel) {
 
-    //Формируем sql запрос (Пример: SELECT COUNT(id_model) AS count FROM auto JOIN models ON auto.id_model = models.id WHERE id_model = 56)
     $sql = "SELECT COUNT(id_model) AS count FROM auto JOIN models ON auto.id_model = models.id WHERE id_model = $idModel";
     
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetchAll();
   }
 
-  //Выборка личных данных из сессии (того кто сейчас авторизирован)
   public function getPersonalData($table1, $table2, $table3, $table4, $id) {
 
-    //Формируем sql запрос
     $sql = "SELECT 
       t1.id,
       t1.last_name,
@@ -194,14 +170,11 @@ class DataB {
     
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetch();
   }
 
-  //Выборка заказов определенного клиента
   public function getOrders($id) {
 
-    //Формируем sql запрос
     $sql = "SELECT
       t1.id, 
       t1.date,
@@ -228,30 +201,22 @@ class DataB {
                 JOIN models AS t6 ON t3.id_model = t6.id
     WHERE t1.id_client = $id";
     
-    //Подготовка sql запроса для отправки на сервер
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetchAll();
   }
 
-  //Получаем уникальные значения цветов автомобиля
   public function getColorsAutos() {
 
-    //Формируем sql запрос
     $sql = "SELECT DISTINCT color FROM `auto`";
     
-    //Подготовка sql запроса для отправки на сервер
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetchAll();
   }
 
-  //Поиск авто по выбранным критериям
   public function searchAutos($params, $paramsPrice, $paramsYear) {
 
-    //Получаем строку для поиска цены
     $i = 0;
     $price = '';
     if($paramsPrice['price__from'] == '' && $paramsPrice['price__to'] != '') { // Если введена только сумма "до" => price < 70000
@@ -262,7 +227,6 @@ class DataB {
       $price = 'price ' . 'BETWEEN ' . $paramsPrice['price__from'] . ' AND ' . $paramsPrice['price__to'];   
     }
 
-    //Полуаем строку для поиска года выпуска
     $year = '';
     if($paramsYear['year__from'] == '' && $paramsYear['year__to'] != '') { // Если введен год только "до" => year < 2022
       $year = ' year' . ' < ' . $paramsYear['year__to']; 
@@ -272,7 +236,6 @@ class DataB {
       $year = 'year ' . 'BETWEEN ' . $paramsYear['year__from'] . ' AND ' . $paramsYear['year__to'];   
     }
 
-    //Получаем строку для поиска остальных данных
     $str = '';
     $i = 0;
     foreach($params as $key => $value) {
@@ -284,7 +247,6 @@ class DataB {
       }
     }
 
-    //Формируем итоговую строку запроса (проверка для правильности написания "WHERE" и "AND")
     if($price != '' && $year != '' && $str != '') { //Если заполнены все поля 
       $result = 'WHERE ' . $price . ' AND ' . $year . ' AND ' . $str; //WHERE price BETWEEN 50000 AND 70000 AND year BETWEEN 2019 AND 2023 AND `name` = '7'  AND `complexion` = 'Средняя'  AND `color` = 'Серый'  AND `status` = '1'  AND `engine` = 'Бензиновый' 
     } else if($price != '' && $year != '' && $str == '') { //Если азполнены поля цены и гола, но не заполнены другие данные
@@ -301,7 +263,6 @@ class DataB {
       $result = 'WHERE ' . $str; //WHERE `complexion` = 'Полная'  AND `color` = 'Черный' 
     }
 
-    //Формируем sql запрос
     $sql = "SELECT 
       auto.id,
       auto.name,
@@ -315,19 +276,15 @@ class DataB {
       models.model 
       FROM `auto` JOIN `models` ON auto.id_model = models.id $result";
 
-    //Подготовка sql запроса для отправки на сервер
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetchAll();
   }
 
-  //Поиск в панели админа по почти всем данным
   public function searchAdmin($search, $table) {
 
-    $search = trim(strip_tags(stripcslashes(htmlspecialchars($search)))); //Проверка вводимой строки
+    $search = trim(strip_tags(stripcslashes(htmlspecialchars($search))));
 
-    //Формируем sql запрос
     $sql = "SELECT * FROM $table WHERE 
         last_name LIKE '%$search%' OR
         first_name LIKE '%$search%'OR
@@ -341,10 +298,8 @@ class DataB {
         series LIKE '%$search%' OR
         issued_by LIKE '%$search%'";
 
-    //Подготовка sql запроса для отправки на сервер
     $query = $this->executeSql($sql);
 
-    //Возвращаем полученный результат
     return $query->fetchAll();
   }
 }

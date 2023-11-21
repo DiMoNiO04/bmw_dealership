@@ -12,7 +12,6 @@
   $auto->deleteAuto();
   [$id, $name, $complexion, $color, $year, $engine, $price, $status, $img, $model] = 	$auto->updateAuto();
 
-  //Если сессия закончилась, то возврат на страницу авторизации
   if(!$_SESSION) {
     header('location: ' . BASE_URL . 'auth.php');
   }

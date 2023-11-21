@@ -26,17 +26,15 @@ class Contact {
 
       $db = new DataB();
 
-      $id = $_GET['id']; //Получаем айди контактных данных, которые хотим изменить 
-      $contact = $db->selectOne('contacts', ['id' => $id]); //Получаем все данные данного контакта, которую хотим изменить
+      $id = $_GET['id'];  
+      $contact = $db->selectOne('contacts', ['id' => $id]);
 
-      //Получаем данные контакта которые хотим изменить в переменные
       $id = $contact['id'];
       $name = $contact['name'];
       $phone = $contact['phone'];
       $workTime = $contact['work_time'];
       $email = $contact['email'];
 
-      //Получаем айди контактных данных
       $contactAddress = $db->selectOne('contacts_address', ['id' => $contact['id_address']]);
       $city = $contactAddress['city'];
       $street = $contactAddress['street'];
@@ -51,7 +49,7 @@ class Contact {
     global $contactController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
-      $id = $_GET['del_id'];  //Получаем айди контакта, который хотим удалить
+      $id = $_GET['del_id'];
       $contactController -> deleteContact($id);
     }
   }

@@ -6,12 +6,12 @@
   $db = new DataB();
 
   $client = new Client();
-  $client->updateClient();
+  $client->update();
 
   [
     $id, $lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house,
     $apartment, $series, $number, $issuedBy, $login, $email, $access
-  ] = $client->editClient();
+  ] = $client->edit();
 ?>
 
 <!DOCTYPE html>

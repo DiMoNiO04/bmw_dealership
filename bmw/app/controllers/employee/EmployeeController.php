@@ -1,26 +1,21 @@
 <?php
 
-class EmployeeController {
 
-  private $ACCESS = 1;
-  private $NO_ACCESS = 0;
-  private $ADMIN = 1;
-  public $errMsg = [];
+require('D:\Programs\OSPanel\domains\dealership\bmw\app\controllers\person\PersonController.php');
 
-  public function addEmployee(): void {
+class EmployeeController extends PersonController {
+
+  public function add(): void {
     $db = new DataB();
 
-    //Забираем данные из формы в переменные
     $login = trim($_POST['login']);
     $password = $_POST['password'];
     $email = trim($_POST['email']);
     $jobTitle = $_POST['job'];
 
-    //Проверка валидности формы
     if(mb_strlen($login, 'UTF8') < 3) {
       array_push($this -> errMsg, 'Логин должен быть более трех символов!');
     } else {
-      //Проверка на уникальность логина и email
       $existenceLogin = $db->selectOne('authorization', ['login' => $login]);
       $existenceEmail = $db->selectOne('authorization', ['email' => $email]);
 
@@ -29,16 +24,14 @@ class EmployeeController {
       } elseif($existenceEmail['email'] === $email) {
         array_push($this -> errMsg, 'Пользователь с такой почтой уже зарегистрован!');
       }else {
-        $password = password_hash($password , PASSWORD_DEFAULT); //Хешируем пароль перед отправкой в базу данных
+        $password = password_hash($password , PASSWORD_DEFAULT);
 
-        //Проверка на доступ
         if(isset($_POST['access'])) {
           $access = $this -> ACCESS;
         } else {
           $access = $this -> NO_ACCESS;
         }
         
-        //Формируем массив для таблицы авторизации
         $dataAuth = [
           'login' => $login,
           'password' => $password,
@@ -47,14 +40,12 @@ class EmployeeController {
           'email' => $email 
         ];
 
-        //Формируем массив для таблицы паспорта
         $dataPassport = [
           'series' => trim($_POST['series']),
           'number' => trim($_POST['number']),
           'issued_by' => trim($_POST['issued_by'])
         ];
 
-        //Формируем массив для таблицы аддресса
         $dataAddress = [
           'city' => trim($_POST['city']),
           'street' => trim($_POST['street']),
@@ -62,13 +53,11 @@ class EmployeeController {
           'apartment' => trim($_POST['apartment']) 
         ];
 
-        //Добавляем данные
         $idPassport = $db->insert('employees_passport', $dataPassport);
         $idAddress = $db->insert('employees_address', $dataAddress);
         $idAuth = $db->insert('authorization', $dataAuth);
         $id_auth = $db->selectOne('authorization', ['id' => $idAuth]);
 
-        //Формируем данные в таблицу сотрудников
         $dataPersonal = [
           'last_name' => trim($_POST['last_name']),
           'first_name' => trim($_POST['first_name']),
@@ -81,17 +70,16 @@ class EmployeeController {
           'id_passport' => $idPassport
         ];
 
-        $db->insert('employees', $dataPersonal); //Отправляем данные в таблицу сотрудников
-        header('location:index.php'); //Возвращаем на страницу сотрудников
+        $db->insert('employees', $dataPersonal);
+        header('location:index.php');
       }
     } 
   }
 
-  public function updateEmployee(): void {
+  public function update(): void {
   
     $db = new DataB();
 
-    //Проверка на доступ
     $access = $_POST['access'];
     if(isset($_POST['access'])) {
       $access = $this -> ACCESS;
@@ -99,19 +87,16 @@ class EmployeeController {
       $access = $this -> NO_ACCESS;
     }
       
-    //Формируем массив для таблицы авторизации
     $dataAuth = [
       'access' => $access,
     ];
   
-    //Формируем массив паспорта
     $dataPassport = [
       'series' => trim($_POST['series']),
       'number' => trim($_POST['number']),
       'issued_by' => trim($_POST['issued_by'])
     ];
   
-    //Формируем массив адресса
     $dataAddress = [
       'city' => trim($_POST['city']),
       'street' => trim($_POST['street']),
@@ -119,7 +104,6 @@ class EmployeeController {
       'apartment' => trim($_POST['apartment'])
     ];
   
-    //Формируем данные в таблицу клиентов
     $dataPersonal = [
       'last_name' => trim($_POST['last_name']),
       'first_name' => trim($_POST['first_name']),
@@ -129,41 +113,40 @@ class EmployeeController {
       'job' => $_POST['job'],
     ];
 
-    $id = $_POST['id']; //Получаем данные сотрудника из формы
+    $id = $_POST['id'];
   
-    $idEmployee = $db->selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хотим отредактировать
-    $idAuth = $idEmployee['id_auth']; //Получаем айди записи авторизации, которую хотим запись
-    $idAddress = $idEmployee['id_address']; //Получаем айди записи адресса, которую хотим запись
-    $idPas = $idEmployee['id_passport']; //Получаем айди записи паспорта, которую хотим запись
+    $idEmployee = $db->selectOne('employees', ['id' => $id]);
+    $idAuth = $idEmployee['id_auth'];
+    $idAddress = $idEmployee['id_address'];
+    $idPas = $idEmployee['id_passport'];
   
-    //Обновляем данные сотрудника, которого отредактировали
     $db->update('employees', $id, $dataPersonal);
     $db->update('employees_passport', $idPas, $dataPassport);
     $db->update('employees_address', $idAddress, $dataAddress);
     $db->update('authorization', $idAuth, $dataAuth);
   
-    header('location:index.php'); //Возвращаем на страницу сотрудников
+    header('location:index.php');
   }
 
-  public function updateStatusEmployee($id): void {
+  public function updateStatus($id): void {
 
     $db = new DataB();
 
     $access = $_GET['access'];
   
-    $employee = $db->selectOne('employees', ['id' => $id]); //Получаем данные сотрудника, которого хоти изменитьь
-    $employeeAuth = $db->selectOne('authorization', ['id' => $employee['id_auth']]); //Получаем данные авторизации, которую хоти изменить
-    $idAuth = $employeeAuth['id'];  //Получаем айди авторизации, которую хоти изменить
+    $employee = $db->selectOne('employees', ['id' => $id]);
+    $employeeAuth = $db->selectOne('authorization', ['id' => $employee['id_auth']]);
+    $idAuth = $employeeAuth['id']; 
 
-    $db->update('authorization', $idAuth, ['access' => $access]); //Перезаписываем полученную запись
-    header('location:index.php'); //Возвращаем на страницу сотрудников
+    $db->update('authorization', $idAuth, ['access' => $access]);
+    header('location:index.php');
   }
 
-  public function deleteEmployee($id): void {
+  public function delete($id): void {
     $db = new DataB();
 
-    $db->delete('employees', $id); //Удаляем сотрудника
-    header('location:index.php'); //Возвращаем на страницу сотрудников
+    $db->delete('employees', $id);
+    header('location:index.php');
   }
 
 }

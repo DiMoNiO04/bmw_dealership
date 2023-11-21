@@ -21,7 +21,6 @@ class User {
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 
-      //Забираем данные из формы в переменные
       $lastName = trim($_POST['last_name']);
       $firstName = trim($_POST['first_name']);
       $email = trim($_POST['email']);
@@ -59,7 +58,7 @@ class User {
     global $userController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
-      $id = $_GET['del_id'];  //Получаем айди пользователя, которого хотим удалить
+      $id = $_GET['del_id']; 
       $userController -> deleteUser($id);
     }
   }
@@ -78,7 +77,7 @@ class User {
     global $userController;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_order']))) {
-      $id = $_GET['del_order'];  //Получаем айди модели, которую хотим удалить
+      $id = $_GET['del_order']; 
       $userController -> deleteOrder($id);
     }
   }
