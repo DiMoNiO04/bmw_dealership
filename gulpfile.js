@@ -82,7 +82,7 @@ function jsSidebar() {
   ])
     .pipe(concat('sidebar.min.js')) //Конкатенируем в один файл
     .pipe(uglify()) //Сжимаем JS
-    .pipe(dest('src/assets/js/')) //Выгружаем готовый файл в папку назначения
+    .pipe(dest('bmw/assets/js/')) //Выгружаем готовый файл в папку назначения
     .pipe(browserSync.stream()); //Триггерим Browsersync для обновления страницы
 }
 

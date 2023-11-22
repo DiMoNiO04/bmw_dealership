@@ -1,5 +1,4 @@
 <?php 
-  include('../../path.php');
   $job = $db->selectOne('employees', ['id_auth' => $_SESSION['id']])['job'];
 ?>
 

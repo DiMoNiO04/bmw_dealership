@@ -1,20 +1,20 @@
 <?php 
   session_start();
   include ('./path.php'); 
-  include ('./app/database/DataB.php');
+  include (SITE_ROOT . '/app/database/DataB.php');
 ?>
 
 <!DOCTYPE html>
 <html lang="ru">
 
 <head>
-  <?php include('./app/includes/head.php') ?>
+ 	<?php include(SITE_ROOT . '/app/includes/head.php') ?>
   <title>Автосалон-BMW</title>
 </head>
 
 <body>
 
-  <?php include('./app/includes/header.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/header.php') ?>
 
   <div class="dark-wrapper"></div>
   <main>
@@ -144,9 +144,7 @@
   </main>
 
   <?php include('./app/includes/footer.php') ?>
-
-  <script src="https://kit.fontawesome.com/47a997ec54.js" crossorigin="anonymous"></script>
-  <script src="./assets/js/header.min.js"></script>
+	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>
