@@ -27,8 +27,8 @@
         <div class="contacts__container">
           <h1 class="title-pages">Контакты</h1>
           <div class="contacts__images">
-            <img src="../assets/images/dest/contacts-first.jpg" alt="contact__first">
-            <img src="../assets/images/dest/contacts-second.jpg" alt="contact__second">
+            <img src="<?= PATCH ?>/images/dest/contacts-first.jpg" alt="contact__first">
+            <img src="<?= PATCH ?>/images/dest/contacts-second.jpg" alt="contact__second">
           </div>
           
           <ul class="contacts__list">

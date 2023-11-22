@@ -7,7 +7,7 @@
 <html lang="ru">
 
 <head>
- 	<?php include('../app/includes/head.php') ?>
+ 	<?php include(SITE_ROOT . '/app/includes/head.php') ?>
   <title>О компании-BMW</title>
 </head>
 
@@ -55,15 +55,15 @@
           <ul class="company__links">
             <li class="company__link">
               <h2 class="link__title">Ознакомиться с услугами</h2>
-              <a class="button company-button" href="./service.php" title="Услуги">Подробнее</a>
+              <a class="button company-button" href="<?= BASE_URL ?>/service" title="Услуги">Подробнее</a>
             </li>
             <li class="company__link">
               <h2 class="link__title">Ознакомиться с контактами</h2>
-              <a class="button company-button" href="./contacts.php" title="Контакты">Подробнее</a>
+              <a class="button company-button" href="<?= BASE_URL ?>/contacts" title="Контакты">Подробнее</a>
             </li>
             <li class="company__link">
               <h2 class="link__title">Ознакомиться с автомобилимя</h2>
-              <a class="button company-button" href="./autos.php" title="Автомобили">Подробнее</a></button>
+              <a class="button company-button" href="<?= BASE_URL ?>/autos" title="Автомобили">Подробнее</a></button>
             </li>
           </ul>
           <div class="company__data">

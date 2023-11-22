@@ -43,7 +43,7 @@
         <div class="auto__container">
           <h2 class="title-pages">Выберите свой автомобиль</h2>
           <div class="auto__filtr">
-            <form method="post" action="search.php" class="form__search">
+            <form method="post" action="<?= BASE_URL ?>/search" class="form__search">
               <h2 class="search__title">Подберите авто по вашим запросам</h2>
               <ul class="search__container">
 
@@ -191,8 +191,8 @@
 
                   <?php foreach($autos as $auto): ?>
                     <?php if($auto['model'] === $model): ?>
-                      <a href="<?= BASE_URL . 'single__auto.php?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['model'] ?> серии <?= $auto['name'] ?>">
-                        <img src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
+                      <a href="<?= BASE_URL . 'auto/?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['model'] ?> серии <?= $auto['name'] ?>">
+                        <img src="<?=BASE_URL . '/images/dest/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
                         <h3>BMW <?= $auto['model']?> серии <?= $auto['name'] ?></h3>
                         <span><?= $auto['engine'] ?></span>
                       </a>

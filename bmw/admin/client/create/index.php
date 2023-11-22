@@ -1,5 +1,5 @@
 <?php 
-  include SITE_ROOT . "/path.php";
+  include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
   include SITE_ROOT . "/app/controllers/client/Client.php";
 
@@ -13,7 +13,7 @@
 <html lang="ru">
 
 <head>
- 	<?php include(SITE_ROOT . '/app/includes/head.php') ?>
+   <?php include(SITE_ROOT . '/app/includes/head.php') ?>
   <title>Админ панель: Клиенты</title>
 </head>
 
@@ -35,7 +35,7 @@
               <?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
             </div>
 
-              <form  class="admin-form" method="post" action="create.php" enctype="multipart/form-data">
+              <form  class="admin-form" method="post" action="<?= ADMIN_URL ?>/client/create/" enctype="multipart/form-data">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <section class="form-reg__block">	
                   <h2>Личные данные</h2>
@@ -128,7 +128,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

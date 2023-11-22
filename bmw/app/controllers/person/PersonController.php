@@ -7,7 +7,7 @@ abstract class PersonController {
   private $ADMIN = 1;
   public $errMsg = [];
 
-	protected function add(): void {}
+	protected function add() {}
 
 	protected function update(): void {}
 

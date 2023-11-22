@@ -9,10 +9,10 @@
       <div class="header__container header-blue__container">
         <nav class="header__menu">
           <ul class="header__list">
-            <li class="header__item"><a class="header__item-link" href="autos.php">Автомобили</a></li>
-            <li class="header__item"><a class="header__item-link" href="about.php">О компании</a></li>
-            <li class="header__item"><a class="header__item-link" href="service.php">Услуги</a></li>
-            <li class="header__item"><a class="header__item-link" href="contacts.php">Контакты</a></li>
+            <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/autos">Автомобили</a></li>
+            <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/about">О компании</a></li>
+            <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/service">Услуги</a></li>
+            <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/contacts">Контакты</a></li>
           </ul>
         </nav>
         <div class="header__active">
@@ -27,26 +27,26 @@
             <ul class="header__logout">
 
               <?php if(isset($_SESSION['id'])):?>
-                <li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
+                <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/profil">Личный кабинет</a></li>
                 <?php if($_SESSION['role']): ?>
                   
                   <?php if($job == 'Админ'):?>
-                    <li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+                    <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/admin">Админ панель</a></li>
                   <?php else: ?>
-                    <li class="header__item"><a class="header__logout-link" href="../../admin/autos_models/index.php">Менеджер панель</a></li>
+                    <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/admin">Менеджер панель</a></li>
                   <?php endif; ?>
                 
                 <?php endif; ?>
-                <li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
+                <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/logout">Выход</a></li>
               <?php else: ?>
-                <li class="header__item"><a class="header__logout-link" href="auth.php">Войти</a></li>
-                <li class="header__item"><a class="header__logout-link" href="reg.php">Зарегистрироваться</a></li>
+                <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/auth">Войти</a></li>
+                <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/reg">Зарегистрироваться</a></li>
               <?php endif; ?>
 
             </ul>
           </div>
-          <a href="index.php" class="logo-bmw">
-            <img src="../../assets/images/dest/svg/bmw_logo.svg" alt="Logo_BMW">
+          <a href="<?= BASE_URL ?>" class="logo-bmw">
+            <img src="<?= PATCH ?>/images/dest/svg/bmw_logo.svg" alt="Logo_BMW">
           </a>
           <div class="header__burger">
             <span class="header__burger-line"></span>
@@ -58,10 +58,10 @@
         <div class="burger__menu">
           <nav class="burger__menu-nav">
             <ul class="header__list">
-              <li class="header__item"><a class="header__item-link" href="autos.php">Автомобили</a></li>
-              <li class="header__item"><a class="header__item-link" href="about.php">О компании</a></li>
-              <li class="header__item"><a class="header__item-link" href="service.php">Услуги</a></li>
-              <li class="header__item"><a class="header__item-link" href="contacts.php">Контакты</a></li>
+							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/autos">Автомобили</a></li>
+							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/about">О компании</a></li>
+							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/service">Услуги</a></li>
+							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/contacts">Контакты</a></li>
             </ul>
           </nav>
           <div class="header__cab">
@@ -75,20 +75,20 @@
             <ul class="header__logout">
               
             <?php if(isset($_SESSION['id'])):?>
-              <li class="header__item"><a class="header__logout-link" href="personal__cab-user.php">Личный кабинет</a></li>
+              <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/profil">Личный кабинет</a></li>
               <?php if($_SESSION['role']): ?>
                 
                 <?php if($job == 'Админ'):?>
-                  <li class="header__item"><a class="header__logout-link" href="../../admin/clientss/index.php">Админ панель</a></li>
+                  <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/admin">Админ панель</a></li>
                 <?php else: ?>
-                  <li class="header__item"><a class="header__logout-link" href="../../admin/autos_models/index.php">Менеджер панель</a></li>
+                  <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/admin">Менеджер панель</a></li>
                 <?php endif; ?>
 
               <?php endif; ?>
-              <li class="header__item"><a class="header__logout-link" href="logout.php">Выход</a></li>
+              <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/logout">Выход</a></li>
             <?php else: ?>
-              <li class="header__item"><a class="header__logout-link" href="auth.php">Войти</a></li>
-              <li class="header__item"><a class="header__logout-link" href="reg.php">Зарегистрироваться</a></li>
+              <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/auth">Войти</a></li>
+              <li class="header__item"><a class="header__logout-link" href="<?= BASE_URL ?>/reg">Зарегистрироваться</a></li>
             <?php endif; ?>
 
             </ul>

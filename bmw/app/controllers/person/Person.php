@@ -3,7 +3,7 @@
 abstract class Person {
 	protected function add() {}
 
-  protected function edit(): array {}
+  protected function edit() {}
 
   protected function update(): void {}
 

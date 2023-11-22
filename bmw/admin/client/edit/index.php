@@ -1,11 +1,14 @@
 <?php 
-  include SITE_ROOT . "/path.php";
+  include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
   include SITE_ROOT . "/app/controllers/client/Client.php";
 
   $db = new DataB();
 
   $client = new Client();
+    $client->edit();
+  $client->delete();
+  $client->editStatus();
   $client->update();
 
   [
@@ -41,7 +44,7 @@
 
             <div class="panel__blocks">
 
-              <form  class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">
+              <form  class="admin-form" method="post" action="<?= ADMIN_URL ?>/client/edit/" enctype="multipart/form-data">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <input name="id" type="hidden" value="<?=$id ?>">
                 <section class="form-reg__block">	
@@ -134,7 +137,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

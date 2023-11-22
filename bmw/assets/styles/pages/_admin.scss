@@ -252,3 +252,18 @@
   flex-direction: row;
   column-gap: 3px;
 }
+
+.panel__container--admin {
+  flex-direction: column;
+  row-gap: 30px;
+  align-items: center;
+
+  .sidebar {
+    width: 50%;
+
+    &__items {
+      width: 100%;
+      text-align: center;
+    }
+  }
+}

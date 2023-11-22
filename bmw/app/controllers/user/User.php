@@ -16,7 +16,7 @@ class User {
     }
   }
 
-  public function registration(): ?array {
+  public function registration() {
     global $userController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {

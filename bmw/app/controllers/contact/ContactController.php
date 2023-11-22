@@ -21,7 +21,7 @@ class ContactController {
     ];
 
     $db->insert('contacts', $contact);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/contact');
   }
 
   public function updateContact(): void {
@@ -47,13 +47,13 @@ class ContactController {
   
     $db->update('contacts_address', $idAddress, $contactAddress);
     $db->update('contacts', $id, $contact);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/contact');
   }
 
   public function deleteContact($id): void {
     $db = new DataB();
     $db->delete('contacts', $id);
-    header('location:index.php'); 
+    header('location:' . ADMIN_URL . '/contact');
   }
 }
 

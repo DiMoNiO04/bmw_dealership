@@ -8,10 +8,9 @@
    $models = $db->selectAll('models');
 
    $model = new Model();
-   $model->deleteModel();
 
     if(!$_SESSION) {
-      header('location:/bmw/auth.php');
+      header('location:' . BASE_URL . '/auth');
     }
 ?>
 
@@ -36,7 +35,7 @@
         <?php include(SITE_ROOT . '/app/includes/aside.php') ?>
 
           <div class="panel__body">
-            <a class="button panel__button" href="<?= "http://dealership/bmw/admin/autos_models/create.php" ?>">Добавить</a>
+            <a class="button panel__button" href="<?= ADMIN_URL ?>/model/create/">Добавить</a>
             <h1 class="title-pages panel__title">Модели авто</h1>
 
             <div class="panel__blocks">
@@ -49,7 +48,7 @@
                     <h2 class="panel__subtitle"><?=$model['model']; ?></h2>
                     
                     <?php if(!empty($model['main_foto'])): ?>
-                      <img src="<?=BASE_URL . 'assets/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
+                      <img src="<?=BASE_URL . '/images/dest/models/' . $model['main_foto'] ?>" alt="<?=$model['model']; ?>" class="panel__img">
                     <?php endif; ?>
 
                       <?php if($model['counts'] > 0): ?>
@@ -65,8 +64,8 @@
                       <?php endif; ?>
 
                       <div class="panel__buttons">
-                        <a class="button panel__button-edit" href="edit.php?id=<?=$model['id']?>">Редактировать</a>
-                        <a class="button panel__button-red" href="edit.php?del_id=<?=$model['id']?>">Удалить</a>
+                        <a class="button panel__button-edit" href="<?= ADMIN_URL ?>/model/edit?id=<?=$model['id']?>">Редактировать</a>
+                        <a class="button panel__button-red" href="<?= ADMIN_URL ?>/model/edit?del_id=<?=$model['id']?>">Удалить</a>
                       </div>
                   </div>
                 <?php endforeach; ?>
@@ -79,7 +78,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

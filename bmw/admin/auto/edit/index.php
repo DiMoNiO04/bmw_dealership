@@ -41,7 +41,7 @@
             
             <div class="panel__blocks">
 
-              <form  class="admin-form" action="edit.php" method="post" enctype="multipart/form-data">						
+              <form  class="admin-form" action="<?= ADMIN_URL ?>/auto/edit/" method="post" enctype="multipart/form-data">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <input type="hidden" name="id" value="<?= $id ?>">
                 <div class="admin__form-block">
@@ -107,7 +107,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>М

@@ -6,10 +6,12 @@
   $model = new Model();
   $model->deleteModel();
   $model->updateModel();
+  $model->editModel();
+
   [$id, $modelName, $img] = $model->editModel();
 
   if(!$_SESSION) {
-    header('location:/bmw/auth.php');
+    header('location:' . BASE_URL . '/auth');
   }
 ?>
 
@@ -17,7 +19,7 @@
 <html lang="ru">
 
 <head>
-    	<?php include(SITE_ROOT . '/app/includes/head.php') ?>
+      <?php include(SITE_ROOT . '/app/includes/head.php') ?>
   <title>Админ панель: Модели</title>
 </head>
 
@@ -35,7 +37,7 @@
             <h1 class="title-pages panel__title">Обновление модели авто</h1>
             <div class="panel__blocks">
 
-              <form class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">
+              <form class="admin-form" method="post" action="<?= ADMIN_URL ?>/model/edit/" enctype="multipart/form-data">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <input name="id" type="hidden" value="<?=$id ?>">
                 <div class="admin__form-block">
@@ -57,7 +59,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

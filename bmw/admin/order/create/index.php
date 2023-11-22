@@ -1,5 +1,5 @@
 <?php 
-  include "../../path.php";
+  include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
   include SITE_ROOT . "/app/controllers/order/Order.php";
 
@@ -10,6 +10,8 @@
 
   $order = new Order();
   $order->addOrderEmploee();
+
+	$errMsg = $orderController -> errMsg;
 ?>
 
 <!DOCTYPE html>
@@ -38,7 +40,7 @@
               <?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
             </div>
 
-              <form class="admin-form" method="post" action="create.php">
+              <form class="admin-form" method="post" action="<?= ADMIN_URL ?>/order/create/">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <section class="form-reg__block">	
 

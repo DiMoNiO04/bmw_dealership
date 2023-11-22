@@ -1,16 +1,18 @@
 <?php 
   session_start();
-   include "../../path.php";
+   include "../../../path.php";
    include SITE_ROOT . "/app/database/DataB.php";
    include SITE_ROOT . "/app/controllers/contact/Contact.php";
 
    $contact = new Contact();
    $contact->deleteContact();
    $contact->updateContact();
+   $contact->editContact();
+
    [$id, $name, $phone, $workTime, $email, $city, $street, $house] = $contact->editContact();
 
   if(!$_SESSION) {
-    header('location: ' . BASE_URL . 'auth.php');
+    header('location: ' . BASE_URL . '/auth');
   }
 ?>
 
@@ -36,7 +38,7 @@
             <h1 class="title-pages panel__title">Редактирование контактных данных</h1>
             <div class="panel__blocks">
 
-              <form  class="admin-form" action="create.php" method="post">
+              <form  class="admin-form" action="<?= ADMIN_URL ?>/contact/edit/" method="post">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <input name="id" type="hidden" value="<?=$id ?>">
                 <div class="admin__form-block">
@@ -78,7 +80,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

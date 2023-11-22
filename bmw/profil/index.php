@@ -33,7 +33,7 @@
     <div class="popup__content">
 
       <div class="popup__close popup__close-password">
-        <img src="./assets/images/dest/svg/close.svg" alt="close">
+        <img src="<?= PATCH ?>/images/dest/svg/close.svg" alt="close">
       </div>
 
       <h2 class="popup__title">Изменение пароля</h2>
@@ -44,7 +44,7 @@
 
       <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 
-      <form action="personal__cab-user.php" method="post" class="popup-form password-form">
+      <form action="<?= BASE_URL ?>/profil" method="post" class="popup-form password-form">
         <div class="popup__date">
           <div class="personal__date">
             <input type="hidden" name="id" value="<?= $_SESSION['id'] ?>">
@@ -67,7 +67,7 @@
     <div class="popup__content">
 
       <div class="popup__close popup__close-personal">
-        <img src="./assets/images/dest/svg/close.svg" alt="close">
+        <img src="<?= PATCH ?>/images/dest/svg/close.svg" alt="close">
       </div>
 
       <h2 class="popup__title">Редактирование профиля</h2>
@@ -78,7 +78,7 @@
 
       <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
 
-      <form action="personal__cab-user.php" method="post" class="popup-form password-form" enctype="multipart/form-data">
+      <form action="<?= BASE_URL ?>/profil" method="post" class="popup-form password-form" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $_SESSION['id'] ?>">
         <div class="popup__date">
           <div class="personal__date">
@@ -167,7 +167,7 @@
 
           <div class="personal__body">
             <div class="personal__image">
-              <img src="./assets/images/dest/user.png" alt="personal__foto">
+              <img src="<?= PATCH ?>/images/dest/user.png" alt="personal__foto">
             </div>
             <div class="presonal__data">
               <h2 class="personal__subtitle">Ваши персональные данные:</h2>
@@ -299,11 +299,11 @@
                     <h3>Время работы:</h3>
                     <p><?= $order['work_time']?></p>
                   </div>
-                  <a class="button__personal button__order-delete" href="personal__cab-user.php?del_order=<?= $order['id']?>">Отменить</a>
+                  <a class="button__personal button__order-delete" href="<?= BASE_URL ?>/profil?del_order=<?= $order['id']?>">Отменить</a>
                 </div>					
               </div>
                 <?php endforeach; ?>
-              <a href="./autos.php" class="button">Добавить заказ</a>
+              <a href="<?= BASE_URL ?>/autos" class="button">Добавить заказ</a>
             </div>
             
             <?php else: ?>
@@ -317,8 +317,8 @@
       <div class="container">
         <div class="buttons__container">
           <a class="button__personal personal-password__edit">Изменить пароль</a>
-          <a class="button__personal" href="personal__cab-user.php?del_id=<?= $_SESSION['id']?>">Удалить аккаунт</a>
-          <a href="../../bmw/logout.php" class="button__personal">Выйти из аккаунта</a>
+          <a class="button__personal" href="<?= BASE_URL ?>profil/?del_id=<?= $_SESSION['id']?>">Удалить аккаунт</a>
+          <a href="<?= BASE_URL ?>/logout" class="button__personal">Выйти из аккаунта</a>
         </div>
       </div>
     </section>

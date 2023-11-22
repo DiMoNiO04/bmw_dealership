@@ -1,5 +1,7 @@
 <?php 
 
+include('../../../path.php');
+
 class LogOut {
 
   private function clearSession():void {
@@ -9,7 +11,7 @@ class LogOut {
   }
 
   private function redirectMain(): void {
-    header('location:/bmw/');
+    header('location:' . BASE_URL);
   }
 
   public function out(): void {

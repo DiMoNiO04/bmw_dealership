@@ -8,8 +8,6 @@
   $clients = $db->selectAll('clientsview');
 
   $client = new Client();
-  $client->delete();
-  $client->editStatus();
 
   if($client->search()) {
     $clients = $client->search();
@@ -40,15 +38,15 @@
 
           <div class="panel__body">
             <div class="panel__nav">
-              <a class="button panel__button" href="<?= BASE_URL . "admin/clientss/create.php" ?>">Добавить</a>
+              <a class="button panel__button" href="<?= ADMIN_URL ?>/client/create/">Добавить</a>
 
-              <form action="index.php" method="post" class="form__search">
+              <form action="<?= ADMIN_URL ?>/client/" method="post" class="form__search">
                 <input type="text" name="search-client" class="search__input" placeholder="Поиск...">
               </form>
             </div>
 
             <div class="error">
-              <?php include("../../app/helps/errInfo.php")?>
+              <?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
             </div>
 
             <?php if(empty($errMsg)):?>
@@ -121,15 +119,15 @@
                     <?php endif; ?>
 
                     <div class="panel__buttons">
-                      <a class="button panel__button-edit" href="edit.php?edit_id=<?= $client['id']?>">Редактировать</a>
+                      <a class="button panel__button-edit" href="<?= ADMIN_URL ?>/client/edit?edit_id=<?= $client['id']?>">Редактировать</a>
 
                       <?php if($client['access'] == 0):?>
-                        <a class="button panel__button-publish" href="index.php?access=1&pub_id=<?=$client['id'];?>">Доступ</a>
+                        <a class="button panel__button-publish" href="<?= ADMIN_URL ?>/client/edit?access=1&pub_id=<?=$client['id'];?>">Доступ</a>
                       <?php else: ?>
-                        <a class="button panel__button-publish" href="index.php?access=0&pub_id=<?=$client['id'];?>">Заблокировать</a>
+                        <a class="button panel__button-publish" href="<?= ADMIN_URL ?>/client/edit?access=0&pub_id=<?=$client['id'];?>">Заблокировать</a>
                       <?php endif; ?>
 
-                      <a class="button panel__button-red" href="index.php?del_id=<?= $client['id']?>">Удалить</a>
+                      <a class="button panel__button-red" href="<?= ADMIN_URL ?>/client/edit?del_id=<?= $client['id']?>">Удалить</a>
                     </div>
                   </div>
                 <?php endforeach; ?>
@@ -142,7 +140,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

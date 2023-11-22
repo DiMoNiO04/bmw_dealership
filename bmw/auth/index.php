@@ -26,7 +26,7 @@
     <div class="container">
       <form method="post" action="" class="form-auth">
         <h1 class="form-auth__title">Авторизация</h1>
-        <p class="form-auth__desc">У вас еще нет аккаунта? Вы можете зарегистрироваться <a href="./reg.php">здесь</a></p>
+        <p class="form-auth__desc">У вас еще нет аккаунта? Вы можете зарегистрироваться <a href="<?= BASE_URL ?>/reg">здесь</a></p>
         
         <div class="error">
           <?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
@@ -42,7 +42,7 @@
         </div>
         <div class="form-auth__item form-auth__buttons">
           <button type="submit" name="button__auth">Войти</button>
-          <a href="./reg.php">Зарегистрироваться</a>
+          <a href="<?= BASE_URL ?>/reg">Зарегистрироваться</a>
         </div>
       </form>
     </div>

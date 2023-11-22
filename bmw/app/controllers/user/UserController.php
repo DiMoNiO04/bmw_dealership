@@ -15,12 +15,12 @@ class UserController {
     $_SESSION['access'] = $arr['access'];
   
     if($_SESSION['admin']) {
-      header('location:/admin/clientss/index.php');
+      header('location:' . ADMIN_URL . '/client');
     } 
-    header('location:/bmw/');
+    header('location:' . BASE_URL);
   }
 
-  public function registration(): void {
+  public function registration() {
 
     $db = new DataB();
  
@@ -213,7 +213,7 @@ class UserController {
       $db->delete('clients', $id);
     }
 
-    header('location:/bmw/logout.php');
+    header('location:' . BASE_URL . '/logout');
   } 
 
   public function addOrder(): void {
@@ -243,7 +243,7 @@ class UserController {
       }
 
       $db->insert('orders', $params);
-      header('location:personal__cab-user.php');
+      header('location:' . BASE_URL . '/profil');
     }
   }
 
@@ -252,9 +252,9 @@ class UserController {
 
     $db->delete('orders', $id);
     if($_SESSION['role'] == $this -> CLIENT) {
-      header('location:personal__cab-user.php');
+      header('location:' . BASE_URL . '/profil');
     } 
-    header('location: ' . BASE_URL . "admin/orders/index.php");
+    header('location:' . ADMIN_URL . '/order');
   }
 }
 ?>

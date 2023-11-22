@@ -36,7 +36,7 @@
           <?php include(SITE_ROOT . '/app/includes/aside.php') ?>
 
           <div class="panel__body">
-            <a class="button panel__button" href="<?= BASE_URL . "admin/autos/create.php" ?>">Добавить</a>
+            <a class="button panel__button" href="<?= ADMIN_URL . "/auto/create/" ?>">Добавить</a>
             <h1 class="title-pages panel__title">Автомобили</h1>
           
             <?php if(empty($autoModelsName)):?>
@@ -50,7 +50,7 @@
                     <h2 class="panel__subtitle"><?= $auto['model']?> серии <?= $auto['name']; ?></h2>
                     
                     <?php if(!empty($auto['img'])): ?>
-                      <img src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
+                      <img src="<?=BASE_URL . '/images/dest/cars/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
                     <?php endif; ?>
                     
                     <div class="panel__item">
@@ -90,15 +90,15 @@
                     <?php endif; ?>
                     
                     <div class="panel__buttons">
-                      <a class="button panel__button-edit" href="edit.php?id=<?=$auto['id'];?>">Редактировать</a>
+                      <a class="button panel__button-edit" href="<?= ADMIN_URL ?>/auto/edit?id=<?=$auto['id'];?>">Редактировать</a>
 
                       <?php if($auto['status'] == 0): ?>
-                        <a class="button panel__button-publish" href="edit.php?status=1&pub_id=<?=$auto['id'];?>">Опубликовать</a>
+                        <a class="button panel__button-publish" href="<?= ADMIN_URL ?>/auto/edit?status=1&pub_id=<?=$auto['id'];?>">Опубликовать</a>
                       <?php else:?>
-                        <a class="button panel__button-publish" href="edit.php?status=0&pub_id=<?=$auto['id'];?>">Снять с публикации</a>
+                        <a class="button panel__button-publish" href="<?= ADMIN_URL ?>/auto/edit?status=0&pub_id=<?=$auto['id'];?>">Снять с публикации</a>
                       <?php endif; ?>
 
-                      <a class="button panel__button-red" href="edit.php?del_id=<?=$auto['id'];?>">Удалить</a>
+                      <a class="button panel__button-red" href="<?= ADMIN_URL ?>/auto/edit?del_id=<?=$auto['id'];?>">Удалить</a>
                     </div>
                   </div>
                 <?php endforeach; ?>
@@ -111,7 +111,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 
 </body>
 

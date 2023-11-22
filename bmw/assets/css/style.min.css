@@ -252,7 +252,7 @@ template {
 }
 @media screen and (max-width: 768px) {
   .header__container {
-    padding-top: 20px;
+    padding: 20px 0;
   }
   .header__container .header__menu {
     display: none;
@@ -1396,6 +1396,23 @@ template {
   -webkit-column-gap: 3px;
   -moz-column-gap: 3px;
   column-gap: 3px;
+}
+.panel__container--admin {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  row-gap: 30px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+.panel__container--admin .sidebar {
+  width: 50%;
+}
+.panel__container--admin .sidebar__items {
+  width: 100%;
+  text-align: center;
 }
 .form-auth,
 .form-reg {

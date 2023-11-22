@@ -22,7 +22,7 @@ class ModelController {
 
       $id = $db->insert('models', $model);
       $model = $db->selectOne('models', ['id' => $id]);
-      header('location:index.php');
+      header('location:' . ADMIN_URL . '/model');
     }
   }
 
@@ -52,13 +52,13 @@ class ModelController {
     $id = $_POST['id'];
 
     $modelId = $db->update('models', $id, $model);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/model');
   }
 
   public function deleteModel($id): void {
     $db = new DataB();
     $db->delete('models', $id);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/model');
   }
 }
 

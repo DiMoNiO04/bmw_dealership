@@ -35,7 +35,7 @@ class AutoController {
 
     $auto = $db->insert('auto', $auto);
     $auto = $db->selectOne('auto', ['id' => $id]);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/auto');
   }
 
   public function updateAuto(): void {
@@ -77,20 +77,20 @@ class AutoController {
 
     $id = $_POST['id'];
     $auto = $db->update('auto', $id, $auto);
-    header('location:index.php');
+     header('location:' . ADMIN_URL . '/auto');
   }
 
   public function updateStatusAuto($id): void {
     $db = new DataB();
     $status = $_GET['status'];
     $autoId = $db->update('auto', $id, ['status' => $status]);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/auto');
   }
 
   public function deleteAuto($id): void {
     $db = new DataB();
     $db->delete('auto', $id);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/auto');
   }
 }
 

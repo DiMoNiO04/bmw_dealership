@@ -8,8 +8,6 @@
   $employees = $db->selectAll('employeesview');
 
   $employee = new Employee();
-  $employee->delete();
-  $employee->editStatus();
 
   if($employee->search()) {
     $employees = $employee->search();
@@ -40,9 +38,9 @@
 
           <div class="panel__body">
             <div class="panel__nav">
-              <a class="button panel__button" href="<?= BASE_URL . "admin/employees/create.php" ?>">Добавить</a>
+              <a class="button panel__button" href="<?= ADMIN_URL ?>/employee/create/">Добавить</a>
 
-              <form action="index.php" method="post" class="form__search">
+              <form action="<?= ADMIN_URL ?>/employee/" method="post" class="form__search">
                 <input type="text" name="search-employee" class="search__input" placeholder="Поиск...">
               </form>
             </div>
@@ -115,15 +113,15 @@
                     <?php endif; ?>
 
                     <div class="panel__buttons">
-                      <a class="button panel__button-edit" href="edit.php?edit_id=<?= $employee['id']?>">Редактировать</a>
+                      <a class="button panel__button-edit" href="<?= ADMIN_URL ?>/employee/edit?edit_id=<?= $employee['id']?>">Редактировать</a>
 
                       <?php if($employee['access'] == 0):?>
-                        <a class="button panel__button-publish" href="index.php?access=1&pub_id=<?=$employee['id'];?>">Доступ</a>
+                        <a class="button panel__button-publish" href="<?= ADMIN_URL ?>/employee/edit?access=1&pub_id=<?=$employee['id'];?>">Доступ</a>
                       <?php else: ?>
-                        <a class="button panel__button-publish" href="index.php?access=0&pub_id=<?=$employee['id'];?>">Заблокировать</a>
+                        <a class="button panel__button-publish" href="<?= ADMIN_URL ?>/employee/edit?access=0&pub_id=<?=$employee['id'];?>">Заблокировать</a>
                       <?php endif; ?>
 
-                      <a class="button panel__button-red" href="index.php?del_id=<?= $employee['id']?>">Удалить</a>
+                      <a class="button panel__button-red" href="<?= ADMIN_URL ?>/employee/edit?del_id=<?= $employee['id']?>">Удалить</a>
                     </div>
 
                   </div>

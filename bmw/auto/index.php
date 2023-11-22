@@ -42,12 +42,12 @@
     <div class="popup__content">
 
       <div class="popup__close">
-        <img src="./assets/images/dest/svg/close.svg" alt="close">
+        <img src="<?= PATCH ?>/images/dest/svg/close.svg" alt="close">
       </div>
       
       <h2 class="popup__title">Оформление заказа на автомобиль <span>BMW <?=$auto['model']?> серии <?=$auto['name']?></span></h2>
 
-      <form action="single__auto.php?auto=<?= $idAuto?>" method="POST" class="popup-form">
+      <form action="<?= BASE_URL ?>/auto?auto=<?= $idAuto?>" method="POST" class="popup-form">
         <div class="popup__date">
           <?php if(!empty($user)): ?>
             <div class="personal__date">
@@ -168,7 +168,7 @@
             <?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
           </div>
             <div class="single-auto__logo">
-              <img src="./assets/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
+              <img src="<?= PATCH ?>/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
               <h1 class="single-auto__title">BMW <?=$auto['model']?> серии <?=$auto['name']?></h1>
             </div>
 
@@ -206,7 +206,7 @@
 
           </ul>
         </div>
-        <img class="single-auto__image" src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
+        <img class="single-auto__image" src="<?=BASE_URL . '/images/dest/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
       </div>
     </section>
 

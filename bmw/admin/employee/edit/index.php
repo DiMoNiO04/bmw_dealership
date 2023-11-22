@@ -1,5 +1,5 @@
 <?php 
-  include "../../path.php";
+  include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
   include SITE_ROOT . "/app/controllers/employee/Employee.php";
 
@@ -7,6 +7,8 @@
 
   $employee = new Employee();
   $employee->update();
+	$employee->delete();
+  $employee->editStatus();
 
   [
     $lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment,
@@ -38,7 +40,7 @@
               <p><?= $lastName?> <?= $firstName?> <?= $surname?></p>
             </div>
 
-              <form  class="admin-form" method="post" action="edit.php" enctype="multipart/form-data">
+              <form  class="admin-form" method="post" action="<?= ADMIN_URL ?>/employee/edit/" enctype="multipart/form-data">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <input name="id" type="hidden" value="<?=$id ?>">
                 <section class="form-reg__block">	

@@ -1,12 +1,12 @@
 <?php 
 
-require('D:\Programs\OSPanel\domains\dealership\bmw\app\controllers\person\Person.php');
+require(SITE_ROOT . '/app/controllers/person/Person.php');
 require('EmployeeController.php');
 $employeeController = new EmployeeController();
 
 class Employee extends Person {
 
-  public function add(): array {
+  public function add() {
     global $employeeController;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {

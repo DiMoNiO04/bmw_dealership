@@ -1,6 +1,6 @@
 <?php 
   session_start();
-   include SITE_ROOT . "/path.php";
+   include "../../../path.php";
    include SITE_ROOT . "/app/database/DataB.php";
    include SITE_ROOT . "/app/controllers/contact/Contact.php";
 
@@ -8,7 +8,7 @@
    $contact->addContact();
 
   if(!$_SESSION) {
-    header('location: ' . BASE_URL . 'auth.php');
+    header('location: ' . BASE_URL . '/auth');
   }
 ?>
 
@@ -34,7 +34,7 @@
             <h1 class="title-pages panel__title">Добавление контактных данных</h1>
             <div class="panel__blocks">
 
-              <form  class="admin-form" action="create.php" method="post">
+              <form  class="admin-form" action="<?= ADMIN_URL ?>/contact/create/" method="post">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <div class="admin__form-block">
                   <label for="name">Название<span>*</span></label>
@@ -75,7 +75,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>М

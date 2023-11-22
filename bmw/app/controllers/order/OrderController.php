@@ -48,7 +48,7 @@ class OrderController {
       ];
 
       $db->insert('orders', $params);
-      header('location:personal__cab-user.php');
+      header('location:' . BASE_URL . '/profil');
     }
   }
 
@@ -82,7 +82,7 @@ class OrderController {
     print_r($params);
 
     $db->insert('orders', $params);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/order');
   }
 
   public function deleteOrder($id): void {
@@ -90,9 +90,9 @@ class OrderController {
 
     $db->delete('orders', $id);
     if($_SESSION['role'] == $CLIENT) {
-      header('location:personal__cab-user.php');
+      header('location:' . BASE_URL . '/profil');
     } else {
-      header('location:index.php');
+       header('location:' . ADMIN_URL . '/order');
     }
   }
 }

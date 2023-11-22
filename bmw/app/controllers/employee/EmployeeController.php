@@ -1,11 +1,10 @@
 <?php
 
-
-require('D:\Programs\OSPanel\domains\dealership\bmw\app\controllers\person\PersonController.php');
+require(SITE_ROOT . '/app/controllers/person/PersonController.php');
 
 class EmployeeController extends PersonController {
 
-  public function add(): void {
+  public function add() {
     $db = new DataB();
 
     $login = trim($_POST['login']);
@@ -71,7 +70,7 @@ class EmployeeController extends PersonController {
         ];
 
         $db->insert('employees', $dataPersonal);
-        header('location:index.php');
+        header('location:' . ADMIN_URL . '/employee');
       }
     } 
   }
@@ -125,7 +124,7 @@ class EmployeeController extends PersonController {
     $db->update('employees_address', $idAddress, $dataAddress);
     $db->update('authorization', $idAuth, $dataAuth);
   
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/employee');
   }
 
   public function updateStatus($id): void {
@@ -139,14 +138,14 @@ class EmployeeController extends PersonController {
     $idAuth = $employeeAuth['id']; 
 
     $db->update('authorization', $idAuth, ['access' => $access]);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/employee');
   }
 
   public function delete($id): void {
     $db = new DataB();
 
     $db->delete('employees', $id);
-    header('location:index.php');
+    header('location:' . ADMIN_URL . '/employee');
   }
 
 }

@@ -32,7 +32,7 @@
           <?php include(SITE_ROOT . '/app/includes/aside.php') ?>
 
           <div class="panel__body">
-          <a class="button panel__button" href="<?= BASE_URL . "admin/orders/create.php" ?>">Добавить</a>
+          <a class="button panel__button" href="<?= ADMIN_URL . "/order/create/" ?>">Добавить</a>
             <h1 class="title-pages panel__title">Заказы</h1>
 
             
@@ -68,7 +68,7 @@
                     <p><?= $order['email']?></p>
                   </div>
                   <div class="panel__buttons">
-                    <a class="button panel__button-red" href="index.php?del_order=<?=$order['id'];?>">Удалить</a>
+                    <a class="button panel__button-red" href="<?= ADMIN_URL ?>/order/?del_order=<?=$order['id'];?>">Удалить</a>
                   </div>
                 </div>					
               </div>

@@ -6,7 +6,7 @@
       $user = new User();
       [$lastName, $firstName, $email, $login] = $user->registration();
 
-      $errMsg = $userActions -> errMsg;
+      $errMsg = $userController -> errMsg;
 ?>
 
 
@@ -25,10 +25,10 @@
   <div class="dark-wrapper"></div>
   <main>
     <div class="container">
-      <form method="post" class="form-reg" method="post" action="reg.php">
+      <form method="post" class="form-reg" method="post" action="<?= BASE_URL ?>/reg/index.php">
         <h1 class="form-reg__title">Регистрация</h1>
         <div class="form-reg__desc">
-          <p>У вас уже есть аккаунт? Вы можете авторизироваться <a href="./auth.php">здесь</a></p>
+          <p>У вас уже есть аккаунт? Вы можете авторизироваться <a href="<?= BASE_URL ?>/auth">здесь</a></p>
           <p><span>*</span> - обязательное поле для заполнения</p>
         </div>
 
@@ -70,7 +70,7 @@
         
           <div class="form-reg__item form-reg__buttons">
             <button type="submit" name="button__reg">Зарегистрироваться</button>
-            <a href="./auth.php">Войти</a>
+            <a href="<?= BASE_URL ?>/auth">Войти</a>
           </div>
       </form>
     </div>

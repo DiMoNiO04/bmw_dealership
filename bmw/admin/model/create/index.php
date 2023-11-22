@@ -7,7 +7,7 @@
   $model->addModel();
 
   if(!$_SESSION) {
-    header('location:/bmw/auth.php');
+    header('location:' . BASE_URL . '/auth');
   }
 ?>
 
@@ -33,7 +33,7 @@
             <h1 class="title-pages panel__title">Добавление модели авто</h1>
             <div class="panel__blocks">
 
-              <form  class="admin-form" method="post" action="create.php" enctype="multipart/form-data">
+              <form  class="admin-form" method="post" action="<?= ADMIN_URL ?>/model/create/" enctype="multipart/form-data">
                 <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
                 <div class="admin__form-block">
                   <label for="model">Модель<span>*</span></label>
@@ -54,7 +54,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>

@@ -29,7 +29,7 @@
         <div class="preview__container">
           <div class="auto__bg-fon"></div>
           <div class="preview__desc">
-            <img src="./assets/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
+            <img src="<?= PATCH ?>/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
             <h1 class="preview__title">Выберите автомобиль своей мечты</h1>
           </div>
         </div>
@@ -42,7 +42,7 @@
           <h2 class="title-pages">Выберите свой автомобиль</h2>
           
           <div class="auto__filtr">
-            <form method="post" action="search.php" class="form__search">
+            <form method="post" action="<?= BASE_URL ?>/search" class="form__search">
               <h2 class="search__title">Подберите авто по вашим запросам</h2>
               <ul class="search__container">
 
@@ -144,7 +144,7 @@
                     <?php foreach($autos as $auto): ?>
                       <?php if($auto['model'] === $model['model']): ?>
                         <a href="<?= '../auto?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['model'] ?> серии <?= $auto['name'] ?>">
-                          <img src="<?=BASE_URL . 'assets/images/dest/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
+                          <img src="<?=BASE_URL . '/images/dest/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
                           <h3>BMW <?= $auto['model']?> серии <?= $auto['name'] ?></h3>
                           <span><?= $auto['engine'] ?></span>
                         </a>

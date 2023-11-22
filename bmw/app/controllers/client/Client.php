@@ -1,6 +1,6 @@
 <?php 
 
-require('D:\Programs\OSPanel\domains\dealership\bmw\app\controllers\person\Person.php');
+require(SITE_ROOT . '/app/controllers/person/Person.php');
 require('ClientController.php');
 $clientController = new ClientController();
 
@@ -43,7 +43,7 @@ class Client extends Person {
     } 
   }
 
-  public function edit(): array {
+  public function edit() {
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['edit_id']))) {

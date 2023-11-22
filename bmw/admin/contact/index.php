@@ -8,10 +8,9 @@
   $contacts = $db->selectAll('contactsview');
 
   $contact = new Contact();
-  $contact->deleteContact();
 
   if(!$_SESSION) {
-    header('location: ' . BASE_URL . 'auth.php');
+    header('location: ' . BASE_URL . '/auth');
   }
 ?>
 
@@ -36,7 +35,7 @@
           <?php include(SITE_ROOT . '/app/includes/aside.php') ?>
 
           <div class="panel__body">
-            <a class="button panel__button" href="<?= BASE_URL . "admin/contacts/create.php" ?>">Добавить</a>
+            <a class="button panel__button" href="<?= ADMIN_URL ?>/contact/create/">Добавить</a>
             <h1 class="title-pages panel__title">Контакты</h1>
 
             <div class="panel__blocks">
@@ -63,8 +62,8 @@
                     <p>г.<?= $contact['city']?> ул.<?= $contact['street']?> д.<?= $contact['house']?></p>
                   </div>
                   <div class="panel__buttons">
-                    <a class="button panel__button-edit" href="edit.php?id=<?=$contact['id']?>">Редактировать</a>
-                    <a class="button panel__button-red" href="edit.php?del_id=<?=$contact['id']?>">Удалить</a>
+                    <a class="button panel__button-edit" href="<?= ADMIN_URL ?>/contact/edit?id=<?=$contact['id']?>">Редактировать</a>
+                    <a class="button panel__button-red" href="<?= ADMIN_URL ?>/contact/edit?del_id=<?=$contact['id']?>">Удалить</a>
                   </div>
                 </div>
               <?php endforeach; ?>
@@ -78,7 +77,7 @@
   </main>
 
   <?php include(SITE_ROOT . '/app/includes/footer.php') ?>
-	<?php include(SITE_ROOT . '/app/includes/script.php') ?>
+  <?php include(SITE_ROOT . '/app/includes/script.php') ?>
 </body>
 
 </html>
