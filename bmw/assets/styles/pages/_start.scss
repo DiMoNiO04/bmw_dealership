@@ -1,6 +1,6 @@
 //-----Section start, about, contact----------
 .start {
-  background: url(../images/dest/main.jpg) no-repeat center;
+  background: url(../images/main.jpg) no-repeat center;
   @include backgroundFirstSectionPage;
   &__container {
     @include flexContainer($justify: space-between, $items: baseline);
@@ -40,11 +40,11 @@
 }
 
 .contact {
-  background: url('../images/dest/contacts.jpg') no-repeat right;
+  background: url('../images/contacts.jpg') no-repeat right;
 }
 
 .about {
-  background: url('../images/dest/about.jpg') no-repeat center;
+  background: url('../images/about.jpg') no-repeat center;
 }
 
 .about,

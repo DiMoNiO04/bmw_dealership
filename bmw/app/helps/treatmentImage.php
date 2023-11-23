@@ -4,7 +4,7 @@ function treatmentImg($folder) {
     $imgName = time() . '_' . $_FILES['img']['name'];
     $fileTmpName = $_FILES['img']['tmp_name'];
     $fileType = $_FILES['img']['type'];
-    $destination = ROOT_PATH . $folder . $imgName;
+    $destination = PATCH . $folder . $imgName;
     echo $destination;
     if(strpos($fileType, 'image') === false) {
       die("Можно загружать только изображения");

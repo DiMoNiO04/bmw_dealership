@@ -1,5 +1,6 @@
 <?php
 
+
 class AutoController {
 
   private $AVAILABLE = 1;
@@ -9,7 +10,6 @@ class AutoController {
 
     $db = new DataB();
 
-    treatmentImg("\assets\images\dest\cars\\");
 
     $status = trim($_POST['status']);
     if(isset($_POST['status'])) {
@@ -25,7 +25,7 @@ class AutoController {
       'price' => trim($_POST['price']),
       'color' =>  trim($_POST['color']),
       'complexion' => trim($_POST['complexion']),
-      'img' => $_POST['img'],
+      'img' => $_FILES['img']['name'],
       'status' => $status,
       'state' => trim($_POST['state']),
       'id_model' => trim($_POST['model'])
@@ -41,8 +41,6 @@ class AutoController {
   public function updateAuto(): void {
     $db = new DataB();
 
-    treatmentImg("\assets\images\dest\cars\\");
-
     $status = trim($_POST['status']);
     if(isset($_POST['status'])) {
       $status = $this -> AVAILABLE;
@@ -50,7 +48,7 @@ class AutoController {
       $status = $this -> $NO_AVAILABLE;
     }
     
-    if(empty($img)) {
+    if(empty($_FILES['img']['name'])) {
       $auto = [
         'name' => trim($_POST['name']),
         'engine' => trim($_POST['engine']),
@@ -69,7 +67,7 @@ class AutoController {
         'price' => trim($_POST['price']),
         'color' => trim($_POST['color']),
         'complexion' => trim($_POST['complexion']),
-        'img' => $_POST['img'],
+        'img' => $_FILES['img']['name'],
         'status' => $status,
         'id_model' => trim($_POST['model'])
       ];

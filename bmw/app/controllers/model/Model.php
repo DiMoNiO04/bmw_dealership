@@ -1,7 +1,5 @@
 <?php
 
-include(SITE_ROOT . '/app/helps/treatmentImage.php');
-
 require('ModelController.php');
 $modelController = new ModelController();
 

@@ -3,7 +3,6 @@
 session_start();
 require('ConnectBD.php');
 
-
 class DataB {
 
   private function executeSql($sql): object {

@@ -1,7 +1,5 @@
 <?php
 
-include SITE_ROOT . "/app/helps/treatmentImage.php";
-
 require('AutoController.php');
 $autoController = new AutoController();
 
@@ -68,7 +66,7 @@ class Auto {
     }
   }
 
-  public function searchAuto(): ?array {
+  public function searchAuto() {
       $db = new DataB();
 
       if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search__auto'])) {

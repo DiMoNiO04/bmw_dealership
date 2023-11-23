@@ -42,7 +42,7 @@
     <div class="popup__content">
 
       <div class="popup__close">
-        <img src="<?= PATCH ?>/images/dest/svg/close.svg" alt="close">
+        <img src="<?= PATCH ?>/images/svg/close.svg" alt="close">
       </div>
       
       <h2 class="popup__title">Оформление заказа на автомобиль <span>BMW <?=$auto['model']?> серии <?=$auto['name']?></span></h2>
@@ -159,7 +159,7 @@
   <div class="dark-wrapper"></div>
   <main>
 
-    <section class="single-auto" style="background: url(<?=BASE_URL . 'assets/images/dest/models/' . $auto['main_foto']?>) no-repeat center; background-size: cover;">
+    <section class="single-auto" style="background: url(<?=BASE_URL . 'assets/images/models/' . $auto['main_foto']?>) no-repeat center; background-size: cover;">
       <div class="auto__bg-fon"></div>
       <div class="container">
         <div class="single-auto__container">
@@ -168,7 +168,7 @@
             <?php include(SITE_ROOT . "/app/helps/errInfo.php")?>
           </div>
             <div class="single-auto__logo">
-              <img src="<?= PATCH ?>/images/dest/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
+              <img src="<?= PATCH ?>/images/bmw-logo-2.png" alt="bmw-logo" class="logo-M2">
               <h1 class="single-auto__title">BMW <?=$auto['model']?> серии <?=$auto['name']?></h1>
             </div>
 
@@ -206,7 +206,7 @@
 
           </ul>
         </div>
-        <img class="single-auto__image" src="<?=BASE_URL . '/images/dest/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
+        <img class="single-auto__image" src="<?=BASE_URL . '/images/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
       </div>
     </section>
 

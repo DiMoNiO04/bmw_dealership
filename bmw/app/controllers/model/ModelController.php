@@ -5,8 +5,6 @@ class ModelController {
   public function addModel(): void {
     $db = new DataB();
 
-    treatmentImg("\assets\images\dest\models\\");
-
     $modelName = trim($_POST['modelName']);
     
     $existence = $db->selectOne('models', ['model' => $modelName]);
@@ -29,8 +27,6 @@ class ModelController {
   public function updateModel(): void {
     
     $db = new DataB();
-
-    treatmentImg("\assets\images\dest\models\\");
 
     if(isset($_POST['status'])) {
       $status = 1;

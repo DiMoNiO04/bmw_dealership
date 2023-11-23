@@ -33,7 +33,7 @@
     <div class="popup__content">
 
       <div class="popup__close popup__close-password">
-        <img src="<?= PATCH ?>/images/dest/svg/close.svg" alt="close">
+        <img src="<?= PATCH ?>/images/svg/close.svg" alt="close">
       </div>
 
       <h2 class="popup__title">Изменение пароля</h2>
@@ -67,7 +67,7 @@
     <div class="popup__content">
 
       <div class="popup__close popup__close-personal">
-        <img src="<?= PATCH ?>/images/dest/svg/close.svg" alt="close">
+        <img src="<?= PATCH ?>/images/svg/close.svg" alt="close">
       </div>
 
       <h2 class="popup__title">Редактирование профиля</h2>
@@ -167,7 +167,7 @@
 
           <div class="personal__body">
             <div class="personal__image">
-              <img src="<?= PATCH ?>/images/dest/user.png" alt="personal__foto">
+              <img src="<?= PATCH ?>/images/user.png" alt="personal__foto">
             </div>
             <div class="presonal__data">
               <h2 class="personal__subtitle">Ваши персональные данные:</h2>

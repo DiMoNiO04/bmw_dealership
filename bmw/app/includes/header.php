@@ -46,7 +46,7 @@
 
           </div>
           <a href="<?= BASE_URL ?>" class="logo-bmw">
-            <img src="<?= PATCH ?>/images/dest/svg/bmw_logo.svg" alt="Logo_BMW">
+            <img src="<?= PATCH ?>/images/svg/bmw_logo.svg" alt="Logo_BMW">
           </a>
           <div class="header__burger">
             <span class="header__burger-line"></span>

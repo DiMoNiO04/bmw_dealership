@@ -50,7 +50,7 @@
                     <h2 class="panel__subtitle"><?= $auto['model']?> серии <?= $auto['name']; ?></h2>
                     
                     <?php if(!empty($auto['img'])): ?>
-                      <img src="<?=BASE_URL . '/images/dest/cars/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
+                      <img src="<?=PATCH . '/images/cars/' . $auto['img'] ?>" alt="<?= $auto['name']; ?>" class="panel__img panel__img-sm">
                     <?php endif; ?>
                     
                     <div class="panel__item">

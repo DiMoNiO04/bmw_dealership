@@ -2,18 +2,19 @@
 
 abstract class PersonController {
 
-	private $ACCESS = 1;
-  private $NO_ACCESS = 0;
-  private $ADMIN = 1;
+  protected $ACCESS = 1;
+  protected $NO_ACCESS = 0;
+  protected $ADMIN = 1;
+	protected $CLIENT = 0;
   public $errMsg = [];
 
-	protected function add() {}
+  protected function add() {}
 
-	protected function update(): void {}
+  protected function update(): void {}
 
-	protected function updateStatus($id): void {}
+  protected function updateStatus($id): void {}
 
-	protected function delete($id): void {}
+  protected function delete($id): void {}
 
 }
 

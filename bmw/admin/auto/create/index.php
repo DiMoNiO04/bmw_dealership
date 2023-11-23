@@ -9,6 +9,8 @@
   $auto = new Auto();
   $auto->addAuto();
 
+				
+
   if(!$_SESSION) {
     header('location: ' . BASE_URL . '/auth');
   }
