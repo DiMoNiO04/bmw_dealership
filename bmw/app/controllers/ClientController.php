@@ -1,14 +1,15 @@
 <?php 
 
-require(SITE_ROOT . '/app/controllers/person/Person.php');
-require('ClientController.php');
-$clientController = new ClientController();
+
+require(SITE_ROOT . '/app/controllers/PersonController.php');
+require(SITE_ROOT . '/app/services/ClientService.php');
+$clientService = new ClientService();
 
 
-class Client extends Person {
+class ClientController extends PersonController {
 
   public function add() {
-    global $clientController;
+    global $clientService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-create']))) {
       
@@ -31,7 +32,7 @@ class Client extends Person {
       $email = trim($_POST['email']);
       $jobTitle = $_POST['job'];
 
-      $clientController-> add();
+      $clientService-> add();
 
       $arrRes = 
       [
@@ -87,40 +88,40 @@ class Client extends Person {
   }
 
   public function update(): void {
-    global $clientController;
+    global $clientService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['client-edit']))) {
-      $clientController-> update();
+      $clientService-> update();
     } 
   }
 
   public function editStatus(): void {
-    global $clientController;
+    global $clientService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
       $id = $_GET['pub_id'];
-      $clientController-> updateStatus($id);
+      $clientService-> updateStatus($id);
     }
   }
 
   public function delete(): void {
-    global $clientController;
+    global $clientService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];
-      $clientController-> delete($id);
+      $clientService-> delete($id);
     }
   }
 
   public function search(): ?array {
-    global $clientController;
+    global $clientService;
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-client'])) {
       $clients = $db->searchAdmin($_POST['search-client'], 'clientsView');
 
       if(empty($clients)) {
-        array_push($clientController -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($clientService -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 

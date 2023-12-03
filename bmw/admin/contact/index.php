@@ -2,12 +2,12 @@
   session_start();
   include "../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/contact/Contact.php";
+  include SITE_ROOT . "/app/controllers/ContactController.php";
 
   $db = new DataB();
   $contacts = $db->selectAll('contactsview');
 
-  $contact = new Contact();
+  $contact = new ContactController();
 
   if(!$_SESSION) {
     header('location: ' . BASE_URL . '/auth');

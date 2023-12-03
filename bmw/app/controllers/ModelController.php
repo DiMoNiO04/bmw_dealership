@@ -1,22 +1,22 @@
 <?php
 
-require('ModelController.php');
-$modelController = new ModelController();
+require(SITE_ROOT . '/app/services/ModelService.php');
+$modelService = new ModelService();
 
-class Model {
+class ModelController {
   public function addModel(): void {
-    global $modelController;
+    global $modelService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-create']))) {
-      $modelController -> addModel();
+      $modelService -> addModel();
     } 
   }
 
   public function updateModel(): void {
-    global $modelController;
+    global $modelService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['model-edit']))) {
-      $modelController -> updateModel();
+      $modelService -> updateModel();
     }
   }
 
@@ -38,11 +38,11 @@ class Model {
   }
 
   public function deleteModel(): void {
-    global $modelController;
+    global $modelService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id']; 
-      $modelController->deleteModel($id);
+      $modelService->deleteModel($id);
     }
   }
 }

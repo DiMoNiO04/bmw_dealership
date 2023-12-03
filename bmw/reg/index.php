@@ -1,9 +1,9 @@
 <?php  
       include ('../path.php'); 
       include SITE_ROOT . "/app/database/DataB.php";
-      include(SITE_ROOT . "/app/controllers/user/User.php");  
+      include(SITE_ROOT . "/app/controllers/UserController.php");  
 
-      $user = new User();
+      $user = new UserController();
       [$lastName, $firstName, $email, $login] = $user->registration();
 
       $errMsg = $userController -> errMsg;

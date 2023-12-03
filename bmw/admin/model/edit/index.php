@@ -1,9 +1,9 @@
 <?php 
   include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/model/Model.php";
+  include SITE_ROOT . "/app/controllers/ModelController.php";
 
-  $model = new Model();
+  $model = new ModelController();
   $model->deleteModel();
   $model->updateModel();
   $model->editModel();

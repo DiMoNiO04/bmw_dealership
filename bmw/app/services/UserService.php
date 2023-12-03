@@ -1,6 +1,6 @@
 <?php 
 
-class UserController {
+class UserService {
 
   public $ACCESS = 1; 
   public $NO_ACCESS = 0;

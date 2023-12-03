@@ -1,6 +1,6 @@
 <?php
 
-class ContactController {
+class ContactService {
 
   public function addContact(): void {
 

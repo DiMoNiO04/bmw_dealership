@@ -1,6 +1,6 @@
 <?php
 
-class OrderController {
+class OrderService {
   
   private $NEW_AUTO = 19;
   private $OLD_AUTO = 20;

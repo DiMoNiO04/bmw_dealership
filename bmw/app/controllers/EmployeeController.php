@@ -1,13 +1,14 @@
 <?php 
 
-require(SITE_ROOT . '/app/controllers/person/Person.php');
-require('EmployeeController.php');
-$employeeController = new EmployeeController();
 
-class Employee extends Person {
+require(SITE_ROOT . '/app/controllers/PersonController.php');
+require(SITE_ROOT . '/app/services/EmployeeService.php');
+$employeeService = new EmployeeService();
+
+class EmployeeController extends PersonController {
 
   public function add() {
-    global $employeeController;
+    global $employeeService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employees-create']))) {
  
@@ -30,7 +31,7 @@ class Employee extends Person {
       $email = trim($_POST['email']);
       $jobTitle = $_POST['job'];
 
-      $employeeController -> add();
+      $employeeService -> add();
 
       $arrRes = 
       [
@@ -87,40 +88,40 @@ class Employee extends Person {
   }
 
   public function update(): void {
-    global $employeeController;
+    global $employeeService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['employee-edit']))) {
-      $employeeController -> update();
+      $employeeService -> update();
     } 
   }
 
   public function editStatus(): void {
-    global $employeeController;
+    global $employeeService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
       $id = $_GET['pub_id']; 
-      $employeeController -> updateStatus($id);
+      $employeeService -> updateStatus($id);
     }
   }
 
   public function delete(): void {
-    global $employeeController;
+    global $employeeService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];
-      $employeeController -> delete($id);
+      $employeeService -> delete($id);
     }
   }
 
   public function search(): ?array {
-    global $employeeController;
+    global $employeeService;
     $db = new DataB();
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['search-employee'])) {
       $employees = $db->searchAdmin($_POST['search-employee'], 'employeesView');
 
       if(empty($employees)) {
-        array_push($employeeController -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
+        array_push($employeeService -> errMsg,  'По данному поиску ничего не найдено! Повторите поиск!');
       }
     }
 

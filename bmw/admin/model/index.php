@@ -2,12 +2,12 @@
   session_start();
    include "../../path.php";
    include SITE_ROOT . "/app/database/DataB.php";
-   include SITE_ROOT . "/app/controllers/model/Model.php";
+   include SITE_ROOT . "/app/controllers/ModelController.php";
 
    $db = new DataB();
    $models = $db->selectAll('models');
 
-   $model = new Model();
+   $model = new ModelController();
 
     if(!$_SESSION) {
       header('location:' . BASE_URL . '/auth');

@@ -1,7 +1,7 @@
 <?php
 
 
-class AutoController {
+class AutoService {
 
   private $AVAILABLE = 1;
   private $NO_AVAILABLE = 0;

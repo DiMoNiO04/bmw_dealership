@@ -2,18 +2,18 @@
   session_start();
   include "../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/employee/Employee.php";
+  include SITE_ROOT . "/app/controllers/EmployeeController.php";
 
   $db = new DataB();
   $employees = $db->selectAll('employeesview');
 
-  $employee = new Employee();
+  $employee = new EmployeeController();
 
   if($employee->search()) {
     $employees = $employee->search();
   } 
 
-  $errMsg = $employeeController -> errMsg;
+  $errMsg = $employeeService -> errMsg;
 ?>
 
 <!DOCTYPE html>

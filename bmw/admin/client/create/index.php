@@ -1,12 +1,12 @@
 <?php 
   include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/client/Client.php";
+  include SITE_ROOT . "/app/controllers/ClientController.php";
 
-  $client = new Client();
+  $client = new ClientController();
   [$lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment, $series, $number, $issuedBy, $login, $password, $email, $jobTitle] = $client->add();
 
-  $errMsg = $clientController -> errMsg;
+  $errMsg = $clientService -> errMsg;
 ?>
 
 <!DOCTYPE html>

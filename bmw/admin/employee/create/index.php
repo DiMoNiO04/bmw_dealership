@@ -1,15 +1,15 @@
 <?php 
   include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/employee/Employee.php";
+  include SITE_ROOT . "/app/controllers/EmployeeController.php";
 
-  $employee = new Employee();
+  $employee = new EmployeeController();
   [
     $lastName, $firstName, $surname, $dateBirth, $phone, $city, $street, $house, $apartment,
     $series, $number, $issuedBy, $login, $password, $email, $jobTitle
   ] = $employee->add();
 
-  $errMsg = $employeeController -> errMsg;
+  $errMsg = $employeeService -> errMsg;
 ?>
 
 <!DOCTYPE html>

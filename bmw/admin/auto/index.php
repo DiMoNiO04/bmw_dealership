@@ -2,12 +2,12 @@
    session_start();
    include "../../path.php";
    include SITE_ROOT . "/app/database/DataB.php";
-   include SITE_ROOT . "/app/controllers/auto/Auto.php";
+   include SITE_ROOT . "/app/controllers/AutoController.php";
 
    $db = new DataB();
    $autoModelsName = $db->selectAll('autosview');
 
-   $auto = new Auto();
+   $auto = new AutoController();
    $auto->deleteAuto();
 
   if(!$_SESSION) {

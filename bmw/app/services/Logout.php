@@ -1,6 +1,6 @@
 <?php 
 
-include('../../../path.php');
+include('../../path.php');
 
 class LogOut {
 

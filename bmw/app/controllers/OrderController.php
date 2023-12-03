@@ -1,32 +1,32 @@
 <?php
 
-require('OrderController.php');
-$orderController = new OrderController();
+require(SITE_ROOT . '/app/services/OrderService.php');
+$orderService = new OrderService();
 
-class Order {
+class OrderController {
 
   public function addOrderClient(): void {
-    global $orderController;
+    global $orderService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
-      $orderController -> addOrderClient();
+      $orderService -> addOrderClient();
     }
   }
 
   public function addOrderEmploee(): void {
-    global $orderController;
+    global $orderService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['order-create']))) {
-      $orderController -> addOrderEmploee();
+      $orderService -> addOrderEmploee();
     }
   }
 
   public function deleteOrder(): void {
-    global $orderController;
+    global $orderService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_order']))) {
       $id = $_GET['del_order']; 
-      $orderController -> deleteOrder($id);
+      $orderService -> deleteOrder($id);
     }
   }
 

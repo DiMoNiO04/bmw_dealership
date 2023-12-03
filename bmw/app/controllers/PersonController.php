@@ -1,6 +1,6 @@
 <?php
 
-abstract class Person {
+abstract class PersonController {
 	protected function add() {}
 
   protected function edit() {}

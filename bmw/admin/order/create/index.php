@@ -1,17 +1,17 @@
 <?php 
   include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/order/Order.php";
+  include SITE_ROOT . "/app/controllers/OrderController.php";
 
   $db = new DataB();
 
   $autos = $db->selectAll('auto', ['status' => 1]);
   $clients = $db->selectAll('clients');
 
-  $order = new Order();
+  $order = new OrderController();
   $order->addOrderEmploee();
 
-	$errMsg = $orderController -> errMsg;
+	$errMsg = $orderService -> errMsg;
 ?>
 
 <!DOCTYPE html>

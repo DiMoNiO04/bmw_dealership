@@ -1,11 +1,11 @@
 <?php 
   include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/client/Client.php";
+  include SITE_ROOT . "/app/controllers/ClientController.php";
 
   $db = new DataB();
 
-  $client = new Client();
+  $client = new ClientController();
     $client->edit();
   $client->delete();
   $client->editStatus();

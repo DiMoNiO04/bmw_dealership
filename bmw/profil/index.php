@@ -1,14 +1,14 @@
 <?php 
   include ('../path.php'); 
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/user/User.php";
+  include SITE_ROOT . "/app/controllers/UserController.php";
 
-  $user = new User();
+  $user = new UserController();
   $user->deleteUser();
   $user->editPassword();
   $user->updateUser();
   $user->deleteOrder();
-  $errMsg = $userController -> errMsg;
+  $errMsg = $userServices -> errMsg;
 
   $db = new DataB();
 

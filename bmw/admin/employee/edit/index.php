@@ -1,11 +1,11 @@
 <?php 
   include "../../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/employee/Employee.php";
+  include SITE_ROOT . "/app/controllers/EmployeeController.php";
 
   $db = new DataB();
 
-  $employee = new Employee();
+  $employee = new EmployeeController();
   $employee->update();
 	$employee->delete();
   $employee->editStatus();

@@ -2,18 +2,18 @@
   session_start();
   include "../../path.php";
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . "/app/controllers/client/Client.php";
+  include SITE_ROOT . "/app/controllers/ClientController.php";
 
   $db = new DataB();
   $clients = $db->selectAll('clientsview');
 
-  $client = new Client();
+  $client = new ClientController();
 
   if($client->search()) {
     $clients = $client->search();
   } 
 
-  $errMsg = $clientController -> errMsg;
+  $errMsg = $clientService -> errMsg;
 ?>
 
 <!DOCTYPE html>

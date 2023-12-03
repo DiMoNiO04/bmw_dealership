@@ -1,21 +1,21 @@
 <?php
 
-require('AutoController.php');
-$autoController = new AutoController();
+require(SITE_ROOT . '/app/services/AutoService.php');
+$autoService = new AutoService();
 
 
-class Auto {
+class AutoController {
 
   public function addAuto(): void {
-    global $autoController;
+    global $autoService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-create']))) {
-      $autoController -> addAuto();
+      $autoService -> addAuto();
     } 
   }
 
   public function updateAuto() {
-    global $autoController;
+    global $autoService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['id']))) {
 
@@ -41,28 +41,28 @@ class Auto {
   }
 
   public function editAuto(): void {
-    global $autoController;
+    global $autoService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['auto-edit']))) {
-      $autoController -> updateAuto();
+      $autoService -> updateAuto();
     }
   }
 
   public function editStatusAuto(): void {
-    global $autoController;
+    global $autoService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['pub_id']))) {
       $id = $_GET['pub_id'];
-      $autoController -> updateStatusAuto($id);
+      $autoService -> updateStatusAuto($id);
     }
   }
 
   public function deleteAuto(): void {
-    global $autoController;
+    global $autoService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];
-      $autoController -> deleteAuto($id);
+      $autoService -> deleteAuto($id);
     }
   }
 

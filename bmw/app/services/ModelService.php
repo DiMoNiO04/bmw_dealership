@@ -1,6 +1,6 @@
 <?php
 
-class ModelController {
+class ModelService {
 
   public function addModel(): void {
     $db = new DataB();

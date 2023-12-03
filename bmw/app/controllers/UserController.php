@@ -1,23 +1,23 @@
 <?php 
 
-require('UserController.php');
-$userController = new UserController();
+require(SITE_ROOT . '/app/services/UserService.php');
+$userService = new UserService();
 
 
-class User {
+class UserController {
   public function authorization() {
-    global $userController;
+    global $userService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__auth']))) {
       $email = trim($_POST['email']);
-      $userController->authorization();
+      $userService->authorization();
 
       return $email;
     }
   }
 
   public function registration() {
-    global $userController;
+    global $userService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button__reg']))) {
 
@@ -26,7 +26,7 @@ class User {
       $email = trim($_POST['email']);
       $login = trim($_POST['login']);
 
-      $userController -> registration();
+      $userService -> registration();
 
       $arrRes = 
       [
@@ -38,47 +38,47 @@ class User {
   }
 
   public function editPassword(): void {
-    global $userController;
+    global $userService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['password-edit']))) {
       $id = $_POST['id'];
-      $userController -> editPassword($id);
+      $userService -> editPassword($id);
     }
   }
 
   public function updateUser(): void {
-    global $userController;
+    global $userService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['personal-edit']))) {
-      $userController -> updateUser();
+      $userService -> updateUser();
     }
   }
 
   public function deleteUser(): void {
-    global $userController;
+    global $userService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id']; 
-      $userController -> deleteUser($id);
+      $userService -> deleteUser($id);
     }
   }
   
   public function addOrder(): void {
-    global $userController;
+    global $userService;
 
     if($_SESSION['role'] == 0) {
       if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['button-order']))) {
-        $userController -> addOrder();
+        $userService -> addOrder();
       }
     }
   }
 
   public function deleteOrder(): void {
-    global $userController;
+    global $userService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_order']))) {
       $id = $_GET['del_order']; 
-      $userController -> deleteOrder($id);
+      $userService -> deleteOrder($id);
     }
   }
 

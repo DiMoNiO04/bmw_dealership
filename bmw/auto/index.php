@@ -1,7 +1,7 @@
 <?php 
   include ('../path.php'); 
   include SITE_ROOT . "/app/database/DataB.php";
-  include SITE_ROOT . '/app/controllers/order/Order.php';
+  include SITE_ROOT . '/app/controllers/OrderController.php';
 
   $db = new DataB();
 
@@ -23,7 +23,7 @@
       }
     }
   }
-  $errMsg = $orderController -> errMsg;
+  $errMsg = $orderService -> errMsg;
 
   $idAuto = $_GET['auto'];
 ?>

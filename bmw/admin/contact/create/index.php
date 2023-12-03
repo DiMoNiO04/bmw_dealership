@@ -2,9 +2,9 @@
   session_start();
    include "../../../path.php";
    include SITE_ROOT . "/app/database/DataB.php";
-   include SITE_ROOT . "/app/controllers/contact/Contact.php";
+   include SITE_ROOT . "/app/controllers/ContactController.php";
 
-   $contact = new Contact();
+   $contact = new ContactController();
    $contact->addContact();
 
   if(!$_SESSION) {

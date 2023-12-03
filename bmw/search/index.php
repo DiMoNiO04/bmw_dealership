@@ -1,11 +1,11 @@
 <?php 
   include ('../path.php'); 
   include(SITE_ROOT . "/app/database/DataB.php"); 
-  include(SITE_ROOT . '/app/controllers/auto/Auto.php');
+  include(SITE_ROOT . '/app/controllers/AutoController.php');
 
   $db = new DataB();
 
-  $auto = new Auto();
+  $auto = new AutoController();
   [$arrAuto, $autos] = $auto->searchAuto();
 
 	print_r($autos);
@@ -196,7 +196,7 @@
                   <?php foreach($autos as $auto): ?>
                     <?php if($auto['model'] === $model): ?>
                       <a href="<?= BASE_URL . 'auto/?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['model'] ?> серии <?= $auto['name'] ?>">
-                        <img src="<?=BASE_URL . '/images/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
+                        <img src="<?=BASE_URL . '/assets/images/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
                         <h3>BMW <?= $auto['model']?> серии <?= $auto['name'] ?></h3>
                         <span><?= $auto['engine'] ?></span>
                       </a>

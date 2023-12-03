@@ -1,6 +1,6 @@
 <?php 
 
-abstract class PersonController {
+abstract class PersonService {
 
   protected $ACCESS = 1;
   protected $NO_ACCESS = 0;

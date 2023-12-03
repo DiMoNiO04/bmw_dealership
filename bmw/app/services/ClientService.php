@@ -1,16 +1,18 @@
-<?php
+<?php 
 
-require(SITE_ROOT . '/app/controllers/person/PersonController.php');
+require(SITE_ROOT . '/app/services/PersonService.php');
 
-class EmployeeController extends PersonController {
+class ClientService extends PersonService {
+  
+  public function add(): void {
 
-  public function add() {
     $db = new DataB();
 
     $login = trim($_POST['login']);
     $password = $_POST['password'];
     $email = trim($_POST['email']);
-    $jobTitle = $_POST['job'];
+    $access = $ACCESS;
+    $role = $CLIENT;
 
     if(mb_strlen($login, 'UTF8') < 3) {
       array_push($this -> errMsg, 'Логин должен быть более трех символов!');
@@ -23,7 +25,7 @@ class EmployeeController extends PersonController {
       } elseif($existenceEmail['email'] === $email) {
         array_push($this -> errMsg, 'Пользователь с такой почтой уже зарегистрован!');
       }else {
-        $password = password_hash($password , PASSWORD_DEFAULT);
+        $password  = password_hash($password , PASSWORD_DEFAULT);
 
         if(isset($_POST['access'])) {
           $access = $this -> ACCESS;
@@ -35,7 +37,7 @@ class EmployeeController extends PersonController {
           'login' => $login,
           'password' => $password,
           'access' => $access,
-          'role' => $this -> ADMIN,
+          'role' => $this -> CLIENT,
           'email' => $email 
         ];
 
@@ -49,11 +51,11 @@ class EmployeeController extends PersonController {
           'city' => trim($_POST['city']),
           'street' => trim($_POST['street']),
           'house' => trim($_POST['house']),
-          'apartment' => trim($_POST['apartment']) 
+          'apartment' => trim($_POST['apartment'])
         ];
 
-        $idPassport = $db->insert('employees_passport', $dataPassport);
-        $idAddress = $db->insert('employees_address', $dataAddress);
+        $idPassport = $db->insert('clients_passport', $dataPassport);
+        $idAddress = $db->insert('clients_address', $dataAddress);
         $idAuth = $db->insert('authorization', $dataAuth);
         $id_auth = $db->selectOne('authorization', ['id' => $idAuth]);
 
@@ -63,22 +65,21 @@ class EmployeeController extends PersonController {
           'surname' => trim($_POST['surname']),
           'date_birth' => trim($_POST['date_birth']),
           'phone' => trim($_POST['phone']),
-          'job' => $jobTitle,
           'id_address' => $idAddress,
           'id_auth' => $idAuth,
           'id_passport' => $idPassport
         ];
 
-        $db->insert('employees', $dataPersonal);
-        header('location:' . ADMIN_URL . '/employee');
+        $db->insert('clients', $dataPersonal);
+        header('location:' . ADMIN_URL . '/client');
       }
-    } 
+    }
   }
 
   public function update(): void {
-  
-    $db = new DataB();
 
+    $db = new DataB();
+      
     $access = $_POST['access'];
     if(isset($_POST['access'])) {
       $access = $this -> ACCESS;
@@ -89,65 +90,61 @@ class EmployeeController extends PersonController {
     $dataAuth = [
       'access' => $access,
     ];
-  
+
     $dataPassport = [
       'series' => trim($_POST['series']),
       'number' => trim($_POST['number']),
       'issued_by' => trim($_POST['issued_by'])
     ];
-  
+
     $dataAddress = [
       'city' => trim($_POST['city']),
       'street' => trim($_POST['street']),
       'house' => trim($_POST['house']),
       'apartment' => trim($_POST['apartment'])
     ];
-  
+
     $dataPersonal = [
       'last_name' => trim($_POST['last_name']),
       'first_name' => trim($_POST['first_name']),
       'surname' => trim($_POST['surname']),
       'date_birth' => $_POST['date_birth'],
-      'phone' => trim($_POST['phone']),
-      'job' => $_POST['job'],
+      'phone' => trim($_POST['phone'])
     ];
 
     $id = $_POST['id'];
-  
-    $idEmployee = $db->selectOne('employees', ['id' => $id]);
-    $idAuth = $idEmployee['id_auth'];
-    $idAddress = $idEmployee['id_address'];
-    $idPas = $idEmployee['id_passport'];
-  
-    $db->update('employees', $id, $dataPersonal);
-    $db->update('employees_passport', $idPas, $dataPassport);
-    $db->update('employees_address', $idAddress, $dataAddress);
+    $idClient = $db->selectOne('clients', ['id' => $id]);
+    $idAuth = $idClient['id_auth'];
+    $idAddress = $idClient['id_address']; 
+    $idPas = $idClient['id_passport']; 
+
+    $db->update('clients', $id, $dataPersonal);
+    $db->update('clients_passport', $idPas, $dataPassport);
+    $db->update('clients_address', $idAddress, $dataAddress);
     $db->update('authorization', $idAuth, $dataAuth);
-  
-    header('location:' . ADMIN_URL . '/employee');
+
+   header('location:' . ADMIN_URL . '/client');
   }
 
   public function updateStatus($id): void {
-
     $db = new DataB();
 
     $access = $_GET['access'];
   
-    $employee = $db->selectOne('employees', ['id' => $id]);
-    $employeeAuth = $db->selectOne('authorization', ['id' => $employee['id_auth']]);
-    $idAuth = $employeeAuth['id']; 
-
+    $сlient = $db->selectOne('clients', ['id' => $id]);
+    $clientAuth = $db->selectOne('authorization', ['id' => $сlient['id_auth']]);
+    $idAuth = $clientAuth['id'];
+  
     $db->update('authorization', $idAuth, ['access' => $access]);
-    header('location:' . ADMIN_URL . '/employee');
+    header('location:' . ADMIN_URL . '/client');
   }
 
   public function delete($id): void {
     $db = new DataB();
 
-    $db->delete('employees', $id);
-    header('location:' . ADMIN_URL . '/employee');
+    $db->delete('clients', $id);
+    header('location:' . ADMIN_URL . '/client');
   }
-
 }
 
 ?>

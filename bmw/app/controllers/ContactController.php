@@ -1,23 +1,23 @@
 <?php
 
-require('ContactController.php');
-$contactController = new ContactController();
+require(SITE_ROOT . '/app/services/ContactService.php');
+$contactService = new ContactService();
 
-class Contact {
+class ContactController {
   
   public function addContact(): void {
-    global $contactController;
+    global $contactService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-create']))) {
-      $contactController -> addContact();
+      $contactService -> addContact();
     } 
   }
 
   public function updateContact(): void {
-    global $contactController;
+    global $contactService;
 
     if($_SERVER['REQUEST_METHOD'] === 'POST' && isset(($_POST['contact-edit']))) {
-      $contactController -> updateContact();
+      $contactService -> updateContact();
     }
   }
 
@@ -46,11 +46,11 @@ class Contact {
   }
 
   public function deleteContact(): void {
-    global $contactController;
+    global $contactService;
 
     if($_SERVER['REQUEST_METHOD'] === 'GET' && isset(($_GET['del_id']))) {
       $id = $_GET['del_id'];
-      $contactController -> deleteContact($id);
+      $contactService -> deleteContact($id);
     }
   }
 }
