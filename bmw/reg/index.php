@@ -6,7 +6,7 @@
       $user = new UserController();
       [$lastName, $firstName, $email, $login] = $user->registration();
 
-      $errMsg = $userController -> errMsg;
+  $errMsg = $userService -> errMsg;
 ?>
 
 

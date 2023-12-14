@@ -8,7 +8,7 @@
   $user->editPassword();
   $user->updateUser();
   $user->deleteOrder();
-  $errMsg = $userServices -> errMsg;
+  $errMsg = $userService -> errMsg;
 
   $db = new DataB();
 
@@ -39,7 +39,7 @@
       <h2 class="popup__title">Изменение пароля</h2>
       
       <div class="error">
-        <?php include("./app/helps/errInfo.php")?>
+        <?php include(SITE_ROOT . "./app/helps/errInfo.php")?>
       </div>
 
       <p class="obligatory"><span>*</span> - обязательное поле для заполнения</p>
@@ -317,7 +317,7 @@
       <div class="container">
         <div class="buttons__container">
           <a class="button__personal personal-password__edit">Изменить пароль</a>
-          <a class="button__personal" href="<?= BASE_URL ?>profil/?del_id=<?= $_SESSION['id']?>">Удалить аккаунт</a>
+          <a class="button__personal" href="<?= BASE_URL ?>/profil/?del_id=<?= $_SESSION['id']?>">Удалить аккаунт</a>
           <a href="<?= BASE_URL ?>/logout" class="button__personal">Выйти из аккаунта</a>
         </div>
       </div>

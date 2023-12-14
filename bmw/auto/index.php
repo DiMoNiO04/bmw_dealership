@@ -159,7 +159,7 @@
   <div class="dark-wrapper"></div>
   <main>
 
-    <section class="single-auto" style="background: url(<?=BASE_URL . 'assets/images/models/' . $auto['main_foto']?>) no-repeat center; background-size: cover;">
+    <section class="single-auto" style="background: url(<?=BASE_URL . '/assets/images/models/' . $auto['main_foto']?>) no-repeat center; background-size: cover;">
       <div class="auto__bg-fon"></div>
       <div class="container">
         <div class="single-auto__container">
@@ -206,7 +206,7 @@
 
           </ul>
         </div>
-        <img class="single-auto__image" src="<?=BASE_URL . '/images/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
+        <img class="single-auto__image" src="<?=BASE_URL . '/assets/images/cars/' . $auto['img'] ?>" alt="<?=$auto['model']?><?=$auto['name']?>">
       </div>
     </section>
 

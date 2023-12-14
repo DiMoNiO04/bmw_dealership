@@ -10,8 +10,6 @@
         <nav class="header__menu">
           <ul class="header__list">
             <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/autos">Автомобили</a></li>
-            <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/about">О компании</a></li>
-            <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/service">Услуги</a></li>
             <li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/contacts">Контакты</a></li>
           </ul>
         </nav>
@@ -59,8 +57,6 @@
           <nav class="burger__menu-nav">
             <ul class="header__list">
 							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/autos">Автомобили</a></li>
-							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/about">О компании</a></li>
-							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/service">Услуги</a></li>
 							<li class="header__item"><a class="header__item-link" href="<?=BASE_URL ?>/contacts">Контакты</a></li>
             </ul>
           </nav>

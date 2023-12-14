@@ -195,7 +195,7 @@
 
                   <?php foreach($autos as $auto): ?>
                     <?php if($auto['model'] === $model): ?>
-                      <a href="<?= BASE_URL . 'auto/?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['model'] ?> серии <?= $auto['name'] ?>">
+                      <a href="<?= BASE_URL . '/auto/?auto=' . $auto['id']?>" class="model__car" title="Перейти BMW <?= $auto['model'] ?> серии <?= $auto['name'] ?>">
                         <img src="<?=BASE_URL . '/assets/images/cars/' . $auto['img'] ?>" alt="BMW <?= $auto['name'] ?>">
                         <h3>BMW <?= $auto['model']?> серии <?= $auto['name'] ?></h3>
                         <span><?= $auto['engine'] ?></span>
